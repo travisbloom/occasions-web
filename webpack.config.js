@@ -1,5 +1,6 @@
 const { resolve } = require('path');
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: [
@@ -64,9 +65,16 @@ module.exports = {
   },
 
   plugins: [
+    new webpack.DefinePlugin({
+        ENV: {
+            appServer: JSON.stringify('http://127.0.0.1:8000')
+        }
+    }),
     new webpack.HotModuleReplacementPlugin(),
     // enable HMR globally
-
+    new HtmlWebpackPlugin({
+        template: resolve(__dirname, 'src/index.ejs'),
+    }),
     new webpack.NamedModulesPlugin(),
     // prints more readable module names in the browser console on HMR updates
   ],
