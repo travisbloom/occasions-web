@@ -54,17 +54,20 @@ const formComponent = reduxForm({
     initialValues: { username: '', password: '' },
 })(CreateAccount)
 
-export default graphql(gql`
-  mutation createUser($input: CreateUserInput!) {
-    createUser(input: $input) {
-        user {
-            username
-            password
+export default graphql(
+    gql`
+      mutation createUser($input: CreateUserInput!) {
+        createUser(input: $input) {
+            user {
+                username
+                password
+            }
         }
-    }
-  }
-`, {
-    props: ({ mutate }) => ({
-        createUser: values => mutate({ variables: { input: values } }),
-    }),
-})(formComponent)
+      }
+    `,
+    {
+        props: ({ mutate }) => ({
+            createUser: values => mutate({ variables: { input: values } }),
+        }),
+    },
+)(formComponent)
