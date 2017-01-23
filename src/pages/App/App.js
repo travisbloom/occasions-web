@@ -1,27 +1,12 @@
-import React from 'react';
-import { graphql } from 'react-apollo';
-import gql from 'graphql-tag';
+import React from 'react'
+import { Grid } from 'react-bootstrap'
 
-const App = (props) => {
-    const {
-        data: {
-            loading,
-            currentUser
-        }
-    } = props;
-    if (loading) return <span>loading</span>;
-    return (
-        <div>
-          <h2>Hello, {currentUser.email}</h2>
-        </div>
-    )
-}
-const HellWorld = gql`
-  query CurrentUserForLayout {
-    currentUser {
-        email
-    }
-  }
-`;
+import CreateAccount from '../SignIn/CreateAccount'
 
-export default graphql(HellWorld)(App);
+const App = () => (
+    <Grid>
+        <CreateAccount />
+    </Grid>
+)
+
+export default App

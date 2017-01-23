@@ -1,81 +1,94 @@
-const { resolve } = require('path');
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { resolve } = require('path')
+const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-  entry: [
-    'react-hot-loader/patch',
+    entry: [
+        'bootstrap-loader',
+        'react-hot-loader/patch',
     // activate HMR for React
 
-    'webpack-dev-server/client?http://localhost:8080',
+        'webpack-dev-server/client?http://localhost:8080',
     // bundle the client for webpack-dev-server
     // and connect to the provided endpoint
 
-    'webpack/hot/only-dev-server',
+        'webpack/hot/only-dev-server',
     // bundle the client for hot reloading
     // only- means to only hot reload for successful updates
 
 
-    './index.js'
+        './index.js',
     // the entry point of our app
-  ],
-  output: {
-    filename: 'bundle.js',
+    ],
+    output: {
+        filename: 'bundle.js',
     // the output bundle
 
-    path: resolve(__dirname, 'dist'),
+        path: resolve(__dirname, 'dist'),
 
-    publicPath: '/'
+        publicPath: '/',
     // necessary for HMR to know where to load the hot update chunks
-  },
+    },
 
-  context: resolve(__dirname, 'src'),
+    context: resolve(__dirname, 'src'),
 
-  devtool: 'inline-source-map',
+    devtool: 'inline-source-map',
 
-  devServer: {
-    hot: true,
+    devServer: {
+        hot: true,
     // enable HMR on the server
 
-    contentBase: resolve(__dirname, 'dist'),
+        contentBase: resolve(__dirname, 'dist'),
     // match the output path
 
-    publicPath: '/'
+        publicPath: '/',
     // match the output `publicPath`
-  },
+    },
 
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        use: [
-          'babel-loader',
-        ],
-        exclude: /node_modules/
-      },
-      {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader?modules',
-          'postcss-loader',
-        ],
-      },
-    ],
-  },
+    module: {
+        rules: [
+            {
+                test: /\.js$/,
+                use: [
+                    'babel-loader',
+                ],
+                exclude: /node_modules/,
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    'style-loader',
+                    'css-loader?modules',
+                    'postcss-loader',
+                ],
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                    'style-loader',
+                    'css-loader?modules',
+                    'postcss-loader',
+                    'sass-loader',
+                ],
+            },
+            { test: /\.(woff2?|svg)$/, use: 'url-loader?limit=10000' },
+            { test: /\.(ttf|eot)$/, use: 'file-loader' },
 
-  plugins: [
-    new webpack.DefinePlugin({
-        ENV: {
-            appServer: JSON.stringify('http://127.0.0.1:8000')
-        }
-    }),
-    new webpack.HotModuleReplacementPlugin(),
+        ],
+    },
+
+    plugins: [
+        new webpack.DefinePlugin({
+            ENV: {
+                appServer: JSON.stringify('http://127.0.0.1:8000'),
+            },
+        }),
+        new webpack.HotModuleReplacementPlugin(),
     // enable HMR globally
-    new HtmlWebpackPlugin({
-        template: resolve(__dirname, 'src/index.ejs'),
-    }),
-    new webpack.NamedModulesPlugin(),
+        new HtmlWebpackPlugin({
+            template: resolve(__dirname, 'src/index.ejs'),
+        }),
+        new webpack.NamedModulesPlugin(),
     // prints more readable module names in the browser console on HMR updates
-  ],
-};
+    ],
+}
