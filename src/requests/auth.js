@@ -14,7 +14,7 @@ const saveTokensToLocalStorage = (response) => {
 
 const getTokensFromLocalStorage = () => {
     try {
-        const { accessToken, expiresAt, refreshToken } = JSON.parse(localStorage.get('tokens'))
+        const { accessToken, expiresAt, refreshToken } = JSON.parse(localStorage.getItem('tokens'))
         if (accessToken && expiresAt && moment(expiresAt).isAfter(moment())) {
             return { accessToken, refreshToken }
         }
@@ -70,7 +70,7 @@ export const getAccessToken = () => {
         return Promise.resolve(accessToken)
     }
     if (!refreshToken) {
-        return Promise.reject(refreshToken)
+        return Promise.reject()
     }
     return refreshTokens(refreshToken)
 }

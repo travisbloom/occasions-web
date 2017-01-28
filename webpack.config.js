@@ -43,6 +43,9 @@ module.exports = {
 
         publicPath: '/',
     // match the output `publicPath`
+        historyApiFallback: {
+            index: '/',
+        },
     },
 
     module: {

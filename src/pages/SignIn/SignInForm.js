@@ -2,26 +2,30 @@
 
 import React from 'react'
 import { reduxForm } from 'redux-form'
-import { graphql } from 'react-apollo'
+import { graphql, compose } from 'react-apollo'
+import { withRouter } from 'react-router'
 import gql from 'graphql-tag'
 
 import { FormField, Input, Button, Row, Col, Errors } from '../../components'
 import { formatReduxFormErrors } from '../../utilities/errors'
 import { signIn } from '../../requests/auth'
+import urls from '../../urls'
 
 class CreateAccountForm extends React.Component {
+
+    onSuccess = () => this.props.router.push(urls.home())
 
     createAccount = (values) => {
         const { createUser } = this.props
         return (
             createUser(values)
-                .then(response => console.log(response))
+                .then(this.onSuccess)
                 .catch(formatReduxFormErrors)
         )
     }
 
     signIn = ({ username, password }) => (
-        signIn(username, password)
+        signIn(username, password).then(this.onSuccess).catch(formatReduxFormErrors)
     )
 
     render() {
@@ -70,32 +74,32 @@ class CreateAccountForm extends React.Component {
     }
 }
 
-
-const formComponent = reduxForm({
-    form: 'CreateAccountForm',
-    initialValues: { username: '', password: '' },
-})(CreateAccountForm)
-
-export default graphql(
-    gql`
-      mutation createUser($input: CreateUserInput!) {
-        createUser(input: $input) {
-            user {
-                username,
-                accessTokens {
-                  edges {
-                    node {
-                      id
-                    }
-                  }
+const query = gql`
+  mutation createUser($input: CreateUserInput!) {
+    createUser(input: $input) {
+        user {
+            username,
+            accessTokens {
+              edges {
+                node {
+                  id
+                }
               }
-            }
+          }
         }
-      }
-    `,
-    {
+    }
+  }
+`
+
+export default compose(
+    graphql(query, {
         props: ({ mutate }) => ({
             createUser: values => mutate({ variables: { input: values } }),
         }),
-    },
-)(formComponent)
+    }),
+    reduxForm({
+        form: 'CreateAccountForm',
+        initialValues: { username: '', password: '' },
+    }),
+    withRouter,
+)(CreateAccountForm)

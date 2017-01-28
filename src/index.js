@@ -10,6 +10,7 @@ import { Router, browserHistory } from 'react-router'
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 
 import routes from './routes'
+import urls from './urls'
 import { getAccessToken } from './requests/auth'
 import debug from './utilities/debug'
 import createStore from './createStore'
@@ -28,11 +29,12 @@ networkInterface.use([{
             if (!req.options.headers) {
                 req.options.headers = {}
             }
-            req.options.headers.authorization = accessToken
+            req.options.headers.Authorization = `Bearer ${accessToken}`
             next()
         })
         .catch(() => {
             debug('Failed to fetch tokens')
+            browserHistory.push(urls.signIn())
         })
     },
 }])
@@ -62,7 +64,7 @@ render(routes)
 
 /* eslint-disable global-require */
 if (module.hot) {
-    module.hot.accept('./Routes', () => {
+    module.hot.accept('./routes', () => {
         const newRoutes = require('./routes').default
         render(newRoutes)
     })
