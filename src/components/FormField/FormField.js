@@ -10,10 +10,11 @@ const componentRenderer = ({
     helpText,
     meta: { error, touched },
     input,
+    ...props
 }) => (
     <div className="form-group">
         {label && <label htmlFor={name}>{label}</label>}
-        {renderedComponent({ ...input, name })}
+        {renderedComponent({ ...input, ...props, name })}
         {helpText && <div className="help-block">{helpText}</div>}
         {touched && error && <Errors stackChildren>{error}</Errors>}
     </div>

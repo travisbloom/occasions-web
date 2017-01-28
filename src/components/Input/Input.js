@@ -1,8 +1,8 @@
 import React from 'react'
 import classNames from 'classnames'
 
-const Input = props => (
-    <input {...props} className={classNames('form-control', props.className)} />
+const Input = ({ className, ...props }) => (
+    <input {...props} className={classNames('form-control', className)} />
 )
 
 export default Input

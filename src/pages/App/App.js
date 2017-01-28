@@ -1,12 +1,18 @@
+// @flow
+
 import React from 'react'
 import { Grid } from 'react-bootstrap'
 
-import CreateAccount from '../SignIn/CreateAccount'
+class App extends React.Component {
 
-const App = () => (
-    <Grid>
-        <CreateAccount />
-    </Grid>
-)
+    render() {
+        const { children } = this.props
+        return (
+            <Grid>
+                {children}
+            </Grid>
+        )
+    }
+}
 
 export default App

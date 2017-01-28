@@ -8,7 +8,7 @@
     "jest": true
   },
   "globals": {
-      "ENV": true
+      "GLOBAL_ENV": true
   },
   "parser": "babel-eslint",
   "extends": "airbnb",

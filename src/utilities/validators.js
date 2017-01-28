@@ -6,7 +6,7 @@ import {
     hasLengthGreaterThan,
 } from 'revalidate'
 
-export const email = composeValidators(
+const email = composeValidators(
     isRequired,
     createValidator(
         message => value => (
@@ -16,11 +16,11 @@ export const email = composeValidators(
     ),
 )('email')
 
-export const addressLine1 = composeValidators(isRequired, hasLengthGreaterThan(3))(
+const addressLine1 = composeValidators(isRequired, hasLengthGreaterThan(3))(
     'address line 1',
 )
 
-export const zipCode = composeValidators(
+const zipCode = composeValidators(
     isRequired,
     createValidator(
         message => value => (
@@ -30,9 +30,16 @@ export const zipCode = composeValidators(
     ),
 )('zip code')
 
-export const address = (parentName = 'address') =>
+const address = (parentName = 'address') =>
     combineValidators({
         [`${parentName}.addressLine1`]: addressLine1,
         [`${parentName}.zipCode`]: zipCode,
         [`${parentName}.state`]: isRequired('state'),
     })
+
+export default {
+    address,
+    zipCode,
+    addressLine1,
+    email,
+}

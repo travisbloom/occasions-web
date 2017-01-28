@@ -1,3 +1,4 @@
+import { isString } from 'lodash'
 import { SubmissionError } from 'redux-form'
 
 export const responseHasErrors = response => !!response.graphQLErrors
@@ -7,6 +8,10 @@ export const formatGeneralAPIErrors = (response) => {
     return response.graphQLErrors.reduce((accum, { message, data }) => {
         if (!data) {
             accum.push(message)
+            return accum
+        }
+        if (isString(data)) {
+            accum.push(data)
             return accum
         }
         Object.keys(data).forEach((key) => {
@@ -25,6 +30,10 @@ export const formatReduxFormErrors = (response) => {
             accum._error = accum._error.concat(message)
             return accum
         }
+        if (isString(data)) {
+            accum._error = accum._error.concat(data)
+            return accum
+        }
         Object.keys(data).forEach((key) => {
             if (!accum[key]) {
                 accum[key] = []
@@ -33,7 +42,7 @@ export const formatReduxFormErrors = (response) => {
         })
         return accum
     }, { _error: [] })
-
+    console.log({ errors })
     throw new SubmissionError(errors)
 }
 /* eslint-enable no-underscore-dangle, no-param-reassign */
