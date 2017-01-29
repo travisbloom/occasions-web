@@ -1,11 +1,13 @@
 import React from 'react'
 
+import { View } from '../'
+
 const formatStackedChildren = children => React.Children.map(children, node => (
-    <div>{node}</div>
+    <View>{node}</View>
 ))
 
 const Errors = ({ children, stackChildren }) => (
-    <div style={{ color: 'red' }}>{stackChildren ? formatStackedChildren(children) : children}</div>
+    <View style={{ color: 'red' }}>{stackChildren ? formatStackedChildren(children) : children}</View>
 )
 
 Errors.propTypes = {

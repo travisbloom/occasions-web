@@ -1,10 +1,10 @@
 import React from 'react'
 
-import { FormField, Input, Col, Row, Select, Tooltip, OverlayTrigger } from '../'
+import { FormField, Input, Col, Row, Select, Tooltip, OverlayTrigger, View } from '../'
 import STATES from '../../constants/states'
 
 const AddressForm = ({ parentName }) => (
-    <div>
+    <View>
         <FormField
             autoComplete="address-line1"
             name={`${parentName}.addressLine1`}
@@ -53,7 +53,7 @@ const AddressForm = ({ parentName }) => (
                 </OverlayTrigger>
             </Col>
         </Row>
-    </div>
+    </View>
 )
 
 export default AddressForm

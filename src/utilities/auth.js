@@ -64,6 +64,11 @@ const refreshTokens = refreshToken => (
     })
 )
 
+export const hasAccessToken = () => {
+    const { accessToken } = getTokensFromLocalStorage()
+    return !!accessToken
+}
+
 export const getAccessToken = () => {
     const { accessToken, refreshToken } = getTokensFromLocalStorage()
     if (accessToken) {

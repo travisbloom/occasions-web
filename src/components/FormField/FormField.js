@@ -1,7 +1,7 @@
 import { Field } from 'redux-form'
 import React from 'react'
 
-import { Errors } from '../'
+import { Errors, View } from '../'
 
 const componentRenderer = ({
     name,
@@ -12,12 +12,12 @@ const componentRenderer = ({
     input,
     ...props
 }) => (
-    <div className="form-group">
+    <View className="form-group">
         {label && <label htmlFor={name}>{label}</label>}
         {renderedComponent({ ...input, ...props, name })}
-        {helpText && <div className="help-block">{helpText}</div>}
+        {helpText && <View className="help-block">{helpText}</View>}
         {touched && error && <Errors stackChildren>{error}</Errors>}
-    </div>
+    </View>
 )
 
 const FormField = ({ name, component, ...props }) => (

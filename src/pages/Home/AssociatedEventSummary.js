@@ -1,7 +1,8 @@
 import React from 'react'
-import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import { propType } from 'graphql-anywhere'
+
+import { Panel, View } from '../../components'
 
 const fragment = gql`
     fragment AssociatedEventSummary on AssociatedEventNode {
@@ -33,13 +34,17 @@ class AssociatedEventSummary extends React.Component {
     static propTypes = {
         associatedEvent: propType(fragment).isRequired,
     };
+
     render() {
         const { associatedEvent } = this.props
+
         return (
-            <div key={associatedEvent.id}>
-                <div>{associatedEvent.receivingPerson.fullName}</div>
-                <div>{associatedEvent.event.name} {associatedEvent.event.eventType}</div>
-            </div>
+            <Panel
+                header={<View>foo</View>}
+            >
+                <View>{associatedEvent.receivingPerson.fullName}</View>
+                <View>{associatedEvent.event.name} {associatedEvent.event.eventType}</View>
+            </Panel>
         )
     }
 }

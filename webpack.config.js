@@ -61,9 +61,16 @@ module.exports = {
                 test: /\.css$/,
                 use: [
                     'style-loader',
-                    'css-loader?modules',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            localIdentName: '[name]-[local]-[hash:base64]',
+                            modules: true,
+                        },
+                    },
                     'postcss-loader',
                 ],
+                include: /flexboxgrid/,
             },
             {
                 test: /\.scss$/,
@@ -74,8 +81,14 @@ module.exports = {
                     'sass-loader',
                 ],
             },
-            { test: /\.(woff2?|svg)$/, use: 'url-loader?limit=10000' },
-            { test: /\.(ttf|eot)$/, use: 'file-loader' },
+            {
+                test: /\.(woff2?|svg)$/,
+                use: 'url-loader?limit=10000',
+            },
+            {
+                test: /\.(ttf|eot|jpg)$/,
+                use: 'file-loader',
+            },
 
         ],
     },

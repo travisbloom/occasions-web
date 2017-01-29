@@ -23,7 +23,7 @@ class Header extends React.Component {
 
         return React.createElement(
             el[size],
-            { style: { color: 'rend' }, ...props },
+            { style: { margin: '0 0' }, ...props },
             children,
         )
     }

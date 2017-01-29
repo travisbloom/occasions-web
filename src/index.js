@@ -11,7 +11,7 @@ import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 
 import routes from './routes'
 import urls from './urls'
-import { getAccessToken } from './requests/auth'
+import { getAccessToken } from './utilities/auth'
 import debug from './utilities/debug'
 import createStore from './createStore'
 

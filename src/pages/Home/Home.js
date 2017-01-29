@@ -3,7 +3,7 @@ import React from 'react'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
-import { Header } from '../../components'
+import { Header, View } from '../../components'
 
 import AssociatedEventSummary from './AssociatedEventSummary'
 
@@ -19,11 +19,11 @@ class Home extends React.Component {
         if (!currentUser) return null
 
         return (
-            <div>
+            <View>
                 {currentUser.person.createdEvents.edges.map(({ node }) =>
                     <AssociatedEventSummary key={node.id} associatedEvent={node} />,
                 )}
-            </div>
+            </View>
         )
     }
 
@@ -33,12 +33,13 @@ class Home extends React.Component {
                 currentUser,
                 loading,
             },
+            style,
         } = this.props
         return (
-            <div>
+            <View style={style} padding>
                 <Header size="largest">HELLO {currentUser && currentUser.username}!</Header>
                 {this.renderContent()}
-            </div>
+            </View>
         )
     }
 }
@@ -51,6 +52,7 @@ query Home {
       createdEvents {
         edges {
           node {
+            id
             ...AssociatedEventSummary
           }
         }

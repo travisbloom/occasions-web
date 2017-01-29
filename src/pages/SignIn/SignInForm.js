@@ -6,9 +6,9 @@ import { graphql, compose } from 'react-apollo'
 import { withRouter } from 'react-router'
 import gql from 'graphql-tag'
 
-import { FormField, Input, Button, Row, Col, Errors } from '../../components'
+import { FormField, Input, Button, Row, Errors, View, OverlayTrigger, Tooltip } from '../../components'
 import { formatReduxFormErrors } from '../../utilities/errors'
-import { signIn } from '../../requests/auth'
+import { signIn } from '../../utilities/auth'
 import urls from '../../urls'
 
 class CreateAccountForm extends React.Component {
@@ -19,7 +19,7 @@ class CreateAccountForm extends React.Component {
         const { createUser } = this.props
         return (
             createUser(values)
-                .then(this.onSuccess)
+                .then(this.onSuccess) // TODO add access token to local storage
                 .catch(formatReduxFormErrors)
         )
     }
@@ -32,16 +32,24 @@ class CreateAccountForm extends React.Component {
         const { handleSubmit, submitting, pristine, error } = this.props
 
         return (
-            <div>
+            <View>
                 <form onSubmit={handleSubmit(this.signIn)}>
                     <FormField
-                        label="Email"
+                        label={
+                            <OverlayTrigger
+                                overlay={
+                                    <Tooltip id="we-hate-spam-email">
+                                        {'We hate spam email as much as you do.'}
+                                        {' Occasions sends delightfully infrequent emails only when you have an upcoming occasion.'}
+                                    </Tooltip>
+                                }
+                            >
+                                <View inline>Email</View>
+                            </OverlayTrigger>
+                        }
                         type="email"
                         name="username"
                         component={Input}
-                        helpText={
-                                'We hate spam email as much as you do. Occasions sends delightfully infrequent emails only when you have an upcoming occasion.'
-                            }
                     />
                     <FormField
                         label="Password"
@@ -50,26 +58,26 @@ class CreateAccountForm extends React.Component {
                         component={Input}
                     />
                     <Errors>{error}</Errors>
-                    <Row>
-                        <Col xs={5} style={{ textAlign: 'right' }}>
-                            <Button disabled={submitting || pristine} type="submit">
-                                Sign In
-                            </Button>
-                        </Col>
-                        <Col xs={2} style={{ textAlign: 'center' }}>
+                    <Row center="xs">
+                        <Button
+                            style={{ width: '160px' }}
+                            disabled={submitting || pristine}
+                            type="submit"
+                        >
+                            Sign In
+                        </Button>
+                        <View margin>
                             Or
-                        </Col>
-                        <Col xs={5}>
-                            <Button
-                                disabled={submitting || pristine}
-                                onClick={handleSubmit(this.createAccount)}
-                            >
-                                Create An Account
-                            </Button>
-                        </Col>
+                        </View>
+                        <Button
+                            disabled={submitting || pristine}
+                            onClick={handleSubmit(this.createAccount)}
+                        >
+                            Create An Account
+                        </Button>
                     </Row>
                 </form>
-            </div>
+            </View>
         )
     }
 }
