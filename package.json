@@ -81,7 +81,7 @@
       "<rootDir>/node_modules"
     ],
     "globals": {
-      "GLOBAL_ENV": {}
+      "APP_ENV": {}
     },
     "testPathDirs": [
       "<rootDir>/src"

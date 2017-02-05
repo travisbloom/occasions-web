@@ -3,9 +3,8 @@ import { SubmissionError } from 'redux-form'
 
 export const responseHasErrors = response => !!response.graphQLErrors
 
-export const formatGeneralAPIErrors = (response) => {
-    if (!responseHasErrors(response)) return null
-    return response.graphQLErrors.reduce((accum, { message, data }) => {
+export const formatRemoteErrors = errors => (
+    errors.reduce((accum, { message, data }) => {
         if (!data) {
             accum.push(message)
             return accum
@@ -19,6 +18,11 @@ export const formatGeneralAPIErrors = (response) => {
         })
         return accum
     }, [])
+)
+
+export const formatGeneralAPIErrors = (response) => {
+    if (!responseHasErrors(response)) return null
+    return formatRemoteErrors(response.graphQLErrors)
 }
 
 /* eslint-disable no-underscore-dangle, no-param-reassign */

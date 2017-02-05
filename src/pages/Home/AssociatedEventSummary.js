@@ -29,7 +29,6 @@ const fragment = gql`
         }
         event {
           id
-          eventType
           name
           dateStart
           timeStart

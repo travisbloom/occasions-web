@@ -38,7 +38,7 @@ const getTokens = () => {
 }
 
 export const signIn = (username, password) => (
-    request(`${GLOBAL_ENV.appServer}/auth/token`, {
+    request(`${APP_ENV.appServer}/auth/token`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -46,8 +46,8 @@ export const signIn = (username, password) => (
         body: JSON.stringify({
             username,
             password,
-            client_id: GLOBAL_ENV.clientId,
-            client_secret: GLOBAL_ENV.clientSecret,
+            client_id: APP_ENV.clientId,
+            client_secret: APP_ENV.clientSecret,
             grant_type: 'password',
         }),
     })
@@ -58,15 +58,15 @@ export const signIn = (username, password) => (
 )
 
 const refreshAccessToken = refreshToken => (
-    request(`${GLOBAL_ENV.appServer}/auth/token`, {
+    request(`${APP_ENV.appServer}/auth/token`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
             refresh_token: refreshToken,
-            client_id: GLOBAL_ENV.clientId,
-            client_secret: GLOBAL_ENV.clientSecret,
+            client_id: APP_ENV.clientId,
+            client_secret: APP_ENV.clientSecret,
             grant_type: 'refresh_token',
         }),
     })
@@ -98,15 +98,15 @@ export const revokeTokens = () => {
     if (!refreshToken) {
         return Promise.resolve()
     }
-    return request(`${GLOBAL_ENV.appServer}/auth/revoke-token`, {
+    return request(`${APP_ENV.appServer}/auth/revoke-token`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
             token: refreshToken,
-            client_id: GLOBAL_ENV.clientId,
-            client_secret: GLOBAL_ENV.clientSecret,
+            client_id: APP_ENV.clientId,
+            client_secret: APP_ENV.clientSecret,
         }),
     })
     .then(() => {

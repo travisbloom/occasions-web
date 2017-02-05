@@ -1,10 +1,13 @@
 import React from 'react'
 import { RouteTransition } from 'react-router-transition'
 import presets from 'react-router-transition/src/presets'
-import { graphql } from 'react-apollo'
+import { graphql, compose } from 'react-apollo'
+import { connect } from 'react-redux'
 import gql from 'graphql-tag'
 
-import { View, Navbar } from '../../components'
+import { View, Navbar, Alert } from '../../components'
+import { closeError } from '../../actions/alerts'
+
 
 class App extends React.Component {
 
@@ -20,11 +23,22 @@ class App extends React.Component {
     slideLeft = styles => this.mapStyles(presets.slideLeft.mapStyles(styles))
 
     render() {
-        const { children, location, data: { currentUser } } = this.props
+        const { children, location, data: { currentUser }, errors } = this.props
 
         return (
             <View>
                 <Navbar currentUser={currentUser} />
+                <View style={{ position: 'fixed', bottom: 0, width: '100%' }} padding>
+                    {errors.map((err, index) =>
+                        <Alert
+                            onDismiss={() => this.props.closeError(index)}
+                            bsStyle="danger"
+                            key={index}
+                        >
+                            {err}
+                        </Alert>,
+                    )}
+                </View>
                 {children}
             </View>
         )
@@ -41,4 +55,7 @@ currentUser {
 }
 `
 
-export default graphql(query)(App)
+export default compose(
+    graphql(query),
+    connect(({ alerts: { errors } }) => ({ errors }), { closeError }),
+)(App)

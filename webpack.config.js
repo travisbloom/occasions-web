@@ -96,7 +96,7 @@ module.exports = {
     plugins: [
         new webpack.DefinePlugin({
             process: { env: { NODE_ENV: JSON.stringify('development') } },
-            GLOBAL_ENV: {
+            APP_ENV: {
                 appServer: JSON.stringify('http://127.0.0.1:8000'),
                 clientId: JSON.stringify('3L9z7BIawOqy0vHkgaG05IfJptVlAtDBdvR5JLxQ'),
                 clientSecret: JSON.stringify('BODfx6hbSs2ZzAerh6nmrdS979rz1tJ4oxxC354OGusz0dPXBvohznQID7ToKavDH9bpWdReMmoQzwstvr0DbzKuob4W0iNtu9sApGv3yKeurOwtqRwN1SBKxASLDdSt'),

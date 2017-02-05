@@ -4,6 +4,7 @@ import { routerReducer } from 'react-router-redux'
 import thunk from 'redux-thunk'
 
 import user from './reducers/user'
+import alerts from './reducers/alerts'
 
 export default ({ apolloClient, initialState = {} }) => {
     const store = createStore(
@@ -12,6 +13,7 @@ export default ({ apolloClient, initialState = {} }) => {
           routing: routerReducer,
           form: reduxFormReducer,
           user,
+          alerts,
       }),
       initialState,
       compose(

@@ -4,15 +4,12 @@ import 'babel-polyfill'
 import { AppContainer } from 'react-hot-loader'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import ApolloClient, { createNetworkInterface, toIdValue } from 'apollo-client'
 import { ApolloProvider } from 'react-apollo'
 import { Router, browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 
 import routes from './routes'
-import urls from './urls'
-import { getAccessToken, hasAccessToken } from './utilities/auth'
-import debug from './utilities/debug'
+import { hasAccessToken } from './utilities/auth'
 import createStore from './createStore'
 import buildApolloClient from './buildApolloClient'
 
@@ -31,6 +28,7 @@ const store = createStore({
     apolloClient,
     initialState: { user: { isLoggedIn: hasAccessToken() } },
 })
+
 // Create an enhanced history that syncs navigation events with the store
 const history = syncHistoryWithStore(browserHistory, store)
 

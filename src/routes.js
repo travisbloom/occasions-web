@@ -6,6 +6,7 @@ import App from './pages/App/App'
 import SignIn from './pages/SignIn/SignIn'
 import MarketingHome from './pages/MarketingHome/MarketingHome'
 import AssociatedEventDetails from './pages/AssociatedEventDetails/AssociatedEventDetails'
+import PurchaseProduct from './pages/PurchaseProduct/PurchaseProduct'
 
 import { hasAccessToken } from './utilities/auth'
 import urls from './urls'
@@ -31,9 +32,14 @@ export default (
         <Route path="welcome" component={MarketingHome} />
         <Route path="a" component={App}>
             <Route path="home" component={Home} />
-            <Route path="yourEvents/:id" component={AssociatedEventDetails} />
+            <Route path="yourEvents/:associatedEventId">
+                <IndexRoute component={AssociatedEventDetails} />
+                <Route path=":productId" component={PurchaseProduct} />
+            </Route>
         </Route>
         <IndexRoute onEnter={redirectUserBasedOnAuth} />
-        <Route path="*" onEnter={redirectUserBasedOnAuth} />
+        {process.env.NODE_ENV === 'production' &&
+            <Route path="*" onEnter={redirectUserBasedOnAuth} />
+        }
     </Route>
 )

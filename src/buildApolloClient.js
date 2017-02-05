@@ -6,7 +6,7 @@ import debug from './utilities/debug'
 
 export default ({ history }) => {
     const networkInterface = createNetworkInterface({
-        uri: `${GLOBAL_ENV.appServer}/graphql`,
+        uri: `${APP_ENV.appServer}/graphql`,
         opts: {
             credentials: 'same-origin',
         },

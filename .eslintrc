@@ -8,7 +8,7 @@
     "jest": true
   },
   "globals": {
-      "GLOBAL_ENV": true
+      "APP_ENV": true
   },
   "parser": "babel-eslint",
   "extends": "airbnb",
@@ -18,6 +18,7 @@
       "max-len": [1, 90, {"ignoreStrings": true}],
       "react/jsx-indent-props": [1, 4],
       "react/jsx-indent": [1, 4],
+      "no-underscore-dangle": [1, { "allow": ["__typename"] }],
       "react/prop-types": 0,
       "react/jsx-filename-extension": 0,
       "react/prefer-stateless-function": 0,

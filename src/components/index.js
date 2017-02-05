@@ -9,6 +9,7 @@ export { Link } from 'react-router'
 export { Row, Col, Grid } from 'react-flexbox-grid'
 
 export { default as AddressForm } from './AddressForm/AddressForm'
+export { default as Alert } from './Alert/Alert'
 export { default as Button } from './Button/Button'
 export { default as Errors } from './Errors/Errors'
 export { default as FormField } from './FormField/FormField'
