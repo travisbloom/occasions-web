@@ -31,6 +31,7 @@ class App extends React.Component {
                 <View style={{ position: 'fixed', bottom: 0, width: '100%' }} padding>
                     {errors.map((err, index) =>
                         <Alert
+                            style={{ marginBottom: '10px' }}
                             onDismiss={() => this.props.closeError(index)}
                             bsStyle="danger"
                             key={index}

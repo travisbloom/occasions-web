@@ -7,6 +7,9 @@ const API_RESPONSE = {
             data: {
                 password: ['first password error'],
                 username: ['first username error', 'second username error'],
+                nestedObject: {
+                    nestedObjectProperty: ['first nestedObjectProperty error'],
+                },
             },
         },
         {
@@ -27,6 +30,7 @@ it('formatGeneralAPIErrors will accurately transform returned error responses', 
         'first password error',
         'first username error',
         'second username error',
+        'first nestedObjectProperty error',
         'second password error',
         'third username error',
         'a general form error',
@@ -41,6 +45,9 @@ it('formatReduxFormErrors will accurately transform returned error responses', (
             _error: ['a general form error'],
             password: ['first password error', 'second password error'],
             username: ['first username error', 'second username error', 'third username error'],
+            nestedObject: {
+                nestedObjectProperty: ['first nestedObjectProperty error'],
+            },
         })
     }
 })

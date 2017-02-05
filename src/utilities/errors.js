@@ -1,7 +1,18 @@
-import { isString } from 'lodash'
+import { isString, isPlainObject } from 'lodash'
 import { SubmissionError } from 'redux-form'
 
 export const responseHasErrors = response => !!response.graphQLErrors
+
+
+const flattenErrorObject = (data, accum) => {
+    if (isPlainObject(data)) {
+        Object.keys(data).forEach((nestedKey) => {
+            flattenErrorObject(data[nestedKey], accum)
+        })
+    } else {
+        data.forEach(keyMessage => accum.push(keyMessage))
+    }
+}
 
 export const formatRemoteErrors = errors => (
     errors.reduce((accum, { message, data }) => {
@@ -13,9 +24,7 @@ export const formatRemoteErrors = errors => (
             accum.push(data)
             return accum
         }
-        Object.keys(data).forEach((key) => {
-            data[key].forEach(keyMessage => accum.push(keyMessage))
-        })
+        flattenErrorObject(data, accum)
         return accum
     }, [])
 )
@@ -25,10 +34,27 @@ export const formatGeneralAPIErrors = (response) => {
     return formatRemoteErrors(response.graphQLErrors)
 }
 
+
 /* eslint-disable no-underscore-dangle, no-param-reassign */
+
+const generateErrorObject = (data, accum, key) => {
+    if (isPlainObject(data)) {
+        if (key) {
+            accum[key] = {}
+        }
+        Object.keys(data).forEach((nestedKey) => {
+            generateErrorObject(data[nestedKey], key ? accum[key] : accum, nestedKey)
+        })
+    } else {
+        if (!accum[key]) {
+            accum[key] = []
+        }
+        accum[key] = accum[key].concat(data)
+    }
+}
+
 export const formatReduxFormErrors = (response) => {
     if (!responseHasErrors(response)) return null
-
     const errors = response.graphQLErrors.reduce((accum, { message, data }) => {
         if (!data) {
             accum._error = accum._error.concat(message)
@@ -38,14 +64,13 @@ export const formatReduxFormErrors = (response) => {
             accum._error = accum._error.concat(data)
             return accum
         }
-        Object.keys(data).forEach((key) => {
-            if (!accum[key]) {
-                accum[key] = []
-            }
-            accum[key] = accum[key].concat(data[key])
-        })
+        generateErrorObject(data, accum)
         return accum
     }, { _error: [] })
+
+    if (!errors._error.length) {
+        delete errors._error
+    }
 
     throw new SubmissionError(errors)
 }

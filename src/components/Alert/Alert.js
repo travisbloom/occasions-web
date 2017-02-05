@@ -17,6 +17,8 @@ class Alert extends React.Component {
 
     static defaultProps = {
         stackChildren: false,
+        unHideWithChildren: false,
+        dismissable: false,
     }
 
     constructor(props) {

@@ -7,13 +7,13 @@ const AddressForm = () => (
     <View>
         <FormField
             autoComplete="address-line1"
-            name={'addressLine1'}
+            name={'streetAddressLine1'}
             label="Address Line 1"
             component={Input}
         />
         <FormField
             autoComplete="address-line2"
-            name={'addressLine2'}
+            name={'streetAddressLine2'}
             label="Address Line 2"
             component={Input}
         />
@@ -26,7 +26,15 @@ const AddressForm = () => (
                     options={STATES}
                 />
             </Col>
-            <Col sm={3} xs={6}>
+            <Col sm={6} xs={12}>
+                <FormField
+                    autoComplete="city"
+                    name={'city'}
+                    label="City"
+                    component={Input}
+                />
+            </Col>
+            <Col xs={6}>
                 <FormField
                     autoComplete="postal-code"
                     name={'postalCode'}
@@ -34,7 +42,7 @@ const AddressForm = () => (
                     component={Input}
                 />
             </Col>
-            <Col sm={3} xs={6}>
+            <Col xs={6}>
                 <OverlayTrigger
                     placement="top"
                     overlay={

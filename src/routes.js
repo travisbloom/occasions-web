@@ -9,12 +9,15 @@ import AssociatedEventDetails from './pages/AssociatedEventDetails/AssociatedEve
 import PurchaseProduct from './pages/PurchaseProduct/PurchaseProduct'
 
 import { hasAccessToken } from './utilities/auth'
+import debug from './utilities/debug'
 import urls from './urls'
 
 const redirectUserBasedOnAuth = (nextState, replace) => {
     if (hasAccessToken()) {
+        debug('redirecting logged in user to home')
         replace(urls.home())
     } else {
+        debug('redirecting logged out user to marketing home')
         replace(urls.marketingHome())
     }
 }

@@ -15,15 +15,20 @@ class PurchaseProduct extends React.Component {
             data: {
                 associatedEvent,
                 product,
+                refetch,
             },
             style,
         } = this.props
+
         if (!associatedEvent) return <span>allllmost</span>
         return (
             <View style={style} padding>
                 <Header size="largest">{product.name}</Header>
                 <Header size="larger">For {associatedEvent.receivingPerson.fullName}</Header>
-                <PurchaseProductForm associatedEvent={associatedEvent} />
+                <PurchaseProductForm
+                    refetch={refetch}
+                    associatedEvent={associatedEvent}
+                />
             </View>
         )
     }
@@ -34,9 +39,11 @@ query PurchaseProduct($associatedEventId: ID!, $productSlug: ID!) {
     associatedEvent(id: $associatedEventId) {
         receivingPerson {
           fullName
+          pk
           associatedLocations {
               edges {
                   node {
+                      id
                       location {
                           displayName
                       }

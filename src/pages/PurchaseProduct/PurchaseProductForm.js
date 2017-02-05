@@ -16,26 +16,50 @@ class PurchaseProductForm extends React.Component {
 
     constructor(props) {
         super(props)
-
-        const locations = props.associatedEvent.receivingPerson.associatedLocations.edges
-
-        this.locationOptions = locations.map(({
-            node: { location },
-        }) => ({
-            label: location.displayName,
-            value: location.id,
-        }))
-
         this.state = {
             isAddingNewAddress: false,
         }
     }
 
+    onAddNewAddress = ({ data }) => {
+        const { refetch, change } = this.props
+        const newAssociatedLocation = data.createAssociatedLocation.associatedLocation
+        return (
+            refetch()
+                .then(() => change('locationId', {
+                    label: newAssociatedLocation.location.displayName,
+                    value: newAssociatedLocation.id,
+                }))
+                .then(this.onToggleNewAddressForm)
+        )
+    }
+
     onToggleNewAddressForm = () => this.setState(prevState => ({
         isAddingNewAddress: !prevState.isAddingNewAddress,
+        intialAddressFormValues: !prevState.isAddingNewAddress ? {
+            personId: this.props.associatedEvent.receivingPerson.pk,
+            location: {
+                streetAddressLine1: '',
+                streetAddressLine2: '',
+                city: '',
+                state: '',
+                postalCode: '',
+            },
+        } : null,
     }))
 
+
     onSuccess = () => this.props.router.push(urls.home())
+
+    getLocationOptions = () => {
+        const locations = this.props.associatedEvent.receivingPerson.associatedLocations.edges
+        return locations.map(({
+            node: { location, id },
+        }) => ({
+            label: location.displayName,
+            value: id,
+        }))
+    }
 
     purchaseProduct = (values) => {
         const { purchaseProduct } = this.props
@@ -47,15 +71,16 @@ class PurchaseProductForm extends React.Component {
     }
 
     render() {
-        const { isAddingNewAddress } = this.state
+        const { isAddingNewAddress, intialAddressFormValues } = this.state
         const { handleSubmit, submitting, pristine, error, associatedEvent } = this.props
 
         return (
             <View>
                 <NewAddressForm
+                    initialValues={intialAddressFormValues}
                     show={isAddingNewAddress}
                     onHide={this.onToggleNewAddressForm}
-                    onComplete={this.onToggleNewAddressForm}
+                    onComplete={this.onAddNewAddress}
                     person={associatedEvent.receivingPerson}
                 />
                 <form onSubmit={handleSubmit(this.purchaseProduct)}>
@@ -65,7 +90,7 @@ class PurchaseProductForm extends React.Component {
                             <FormField
                                 name="locationId"
                                 component={Select}
-                                options={this.locationOptions}
+                                options={this.getLocationOptions()}
                             />
                         </Col>
                         <Col xs={4}>
@@ -74,12 +99,6 @@ class PurchaseProductForm extends React.Component {
                             </Button>
                         </Col>
                     </Row>
-                    <FormField
-                        label="Password"
-                        type="password"
-                        name="password"
-                        component={Input}
-                    />
                     <Alert
                         dismissable
                         unHideWithChildren

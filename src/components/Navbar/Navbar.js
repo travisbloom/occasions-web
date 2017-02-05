@@ -12,7 +12,6 @@ class AppNav extends React.Component {
 
     logOut = () => {
         const { router, logOutUser } = this.props
-        console.log(this.props)
         logOutUser().then(() => router.push(urls.signIn()))
     }
 

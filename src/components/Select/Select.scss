@@ -1,4 +1,5 @@
 @import "../../styles/theme/_variables";
+
 :global {
     // control options
     $select-input-bg:                  $input-bg !default;
@@ -62,4 +63,11 @@
     $select-item-disabled-border-color: darken($select-item-disabled-bg, 10%) !default;
 
     @import "~react-select/scss/components.scss";
+
+    .Select-clear-zone {
+        background-color: $input-bg;
+    }
+    .Select-arrow-zone {
+        background-color: $input-bg;
+    }
 }

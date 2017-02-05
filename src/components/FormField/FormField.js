@@ -3,7 +3,7 @@ import React from 'react'
 
 import { Errors, View } from '../'
 
-const BaseField = ({ ...props, name, label, error, touched, helpText, RenderedComponent }) => (
+const BaseField = ({ name, label, error, touched, helpText, RenderedComponent, ...props }) => (
     <View className="form-group">
         {label && <label htmlFor={name}>{label}</label>}
         <RenderedComponent name={name} {...props} />

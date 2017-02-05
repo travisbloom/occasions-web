@@ -15,10 +15,18 @@ import buildApolloClient from './buildApolloClient'
 
 /* eslint-disable global-require */
 if (process.env.NODE_ENV !== 'production') {
-    const moment = require('moment').default
-    const _ = require('lodash').default
+    const moment = require('moment')
+    const _ = require('lodash')
     window.moment = moment
     window._ = _
+    window.mockExpireAccessToken = () => {
+        const { accessToken, refreshToken } = JSON.parse(localStorage.getItem('tokens'))
+        localStorage.setItem('tokens', JSON.stringify({
+            accessToken,
+            refreshToken,
+            expiresAt: window.moment().subtract(1, 'hours').toISOString(),
+        }))
+    }
 }
 /* eslint-enable global-require */
 

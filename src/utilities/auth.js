@@ -18,7 +18,11 @@ const saveTokensToLocalStorage = (response) => {
 const getTokensFromLocalStorage = () => {
     try {
         const { accessToken, expiresAt, refreshToken } = JSON.parse(localStorage.getItem('tokens'))
-        if (accessToken && expiresAt && moment(expiresAt).isAfter(moment())) {
+        const isExpired = !expiresAt || !moment(expiresAt).isAfter(moment())
+        if (isExpired) {
+            debug('Tokens expired')
+        }
+        if (accessToken && !isExpired) {
             return { accessToken, refreshToken }
         }
         return { refreshToken }
@@ -57,25 +61,35 @@ export const signIn = (username, password) => (
     })
 )
 
-const refreshAccessToken = refreshToken => (
-    request(`${APP_ENV.appServer}/auth/token`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            refresh_token: refreshToken,
-            client_id: APP_ENV.clientId,
-            client_secret: APP_ENV.clientSecret,
-            grant_type: 'refresh_token',
-        }),
-    })
-    .then((response) => {
-        debug('Tokens refreshed')
-        saveTokensToLocalStorage(response)
-        return response.access_token
-    })
-)
+let currentRefreshRequest
+const refreshAccessToken = (refreshToken) => {
+    if (currentRefreshRequest) return currentRefreshRequest
+    currentRefreshRequest = (
+        request(`${APP_ENV.appServer}/auth/token`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                refresh_token: refreshToken,
+                client_id: APP_ENV.clientId,
+                client_secret: APP_ENV.clientSecret,
+                grant_type: 'refresh_token',
+            }),
+        })
+        .then((response) => {
+            debug('Tokens refreshed')
+            currentRefreshRequest = null
+            saveTokensToLocalStorage(response)
+            return response.access_token
+        })
+        .catch((err) => {
+            currentRefreshRequest = null
+            throw err
+        })
+    )
+    return currentRefreshRequest
+}
 
 export const hasAccessToken = () => {
     const { accessToken } = getTokens()

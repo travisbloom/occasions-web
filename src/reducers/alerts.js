@@ -7,6 +7,17 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch (action.type) {
+    case ('APOLLO_QUERY_ERROR'): {
+        const message = action.error && action.error.message
+        if (!message) return state
+        return {
+            ...state,
+            errors: [
+                ...state.errors,
+                message,
+            ],
+        }
+    }
     case ('APOLLO_QUERY_RESULT'):
         if (!action.result.errors) return state
         return {

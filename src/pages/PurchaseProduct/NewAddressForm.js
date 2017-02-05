@@ -12,10 +12,17 @@ import { formatReduxFormErrors } from '../../utilities/errors'
 class NewAddressForm extends React.Component {
 
     createNewAssociatedLocation = (values) => {
-        const { createNewAssociatedLocation, onHide } = this.props
+        const { createNewAssociatedLocation, onComplete } = this.props
+        const formattedPayload = {
+            ...values,
+            location: {
+                ...values.location,
+                state: values.location.state ? values.location.state.value : '',
+            },
+        }
         return (
-            createNewAssociatedLocation(values)
-                .then(onHide)
+            createNewAssociatedLocation(formattedPayload)
+                .then(onComplete)
                 .catch(formatReduxFormErrors)
         )
     }
@@ -27,7 +34,7 @@ class NewAddressForm extends React.Component {
             <Modal show={show} onHide={onHide}>
                 <form onSubmit={handleSubmit(this.createNewAssociatedLocation)}>
                     <Modal.Header>
-                    Create New Address For {person.fullName}
+                        Create New Address For {person.fullName}
                     </Modal.Header>
                     <Modal.Body>
                         <View padding>
@@ -63,17 +70,13 @@ class NewAddressForm extends React.Component {
 }
 
 const query = gql`
-  mutation createUser($input: CreateUserInput!) {
-    createUser(input: $input) {
-        personLocation {
-            username,
-            accessTokens {
-              edges {
-                node {
-                  id
-                }
-              }
-          }
+  mutation createAssociatedLocation($input: CreateAssociatedLocationInput!) {
+    createAssociatedLocation(input: $input) {
+        associatedLocation {
+            id
+            location {
+                displayName
+            }
         }
     }
   }
