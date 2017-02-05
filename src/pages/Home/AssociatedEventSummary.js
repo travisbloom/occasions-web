@@ -1,19 +1,25 @@
 import React from 'react'
 import gql from 'graphql-tag'
 import { propType } from 'graphql-anywhere'
+import { withRouter } from 'react-router'
 
 import { Panel, View } from '../../components'
+import urls from '../../urls'
 
 const fragment = gql`
     fragment AssociatedEventSummary on AssociatedEventNode {
+        id
         receivingPerson {
+          id
           fullName
         }
         transactions {
           edges {
             node {
+              id
               costUsd
               product {
+                id
                 name
                 mainImageUrl
                 description
@@ -22,6 +28,7 @@ const fragment = gql`
           }
         }
         event {
+          id
           eventType
           name
           dateStart
@@ -35,11 +42,17 @@ class AssociatedEventSummary extends React.Component {
         associatedEvent: propType(fragment).isRequired,
     };
 
+    transitionToDetailsPage = () => {
+        const { associatedEvent, router } = this.props
+        router.push(urls.associatedEventDetails(associatedEvent.id))
+    }
+
     render() {
         const { associatedEvent } = this.props
 
         return (
             <Panel
+                onClick={this.transitionToDetailsPage}
                 header={<View>foo</View>}
             >
                 <View>{associatedEvent.receivingPerson.fullName}</View>
@@ -53,4 +66,4 @@ AssociatedEventSummary.fragments = {
     associatedEvent: fragment,
 }
 
-export default AssociatedEventSummary
+export default withRouter(AssociatedEventSummary)

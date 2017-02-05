@@ -2,6 +2,8 @@ import moment from 'moment'
 import request from '../utilities/request'
 import debug from '../utilities/debug'
 
+let cachedAuth
+
 const saveTokensToLocalStorage = (response) => {
     const tokens = {
         accessToken: response.access_token,
@@ -9,6 +11,7 @@ const saveTokensToLocalStorage = (response) => {
         expiresAt: moment().add(response.expires_in, 'seconds').toISOString(),
     }
     localStorage.setItem('tokens', JSON.stringify(tokens))
+    cachedAuth = tokens
     debug('Tokens saved to local storage', tokens)
 }
 
@@ -22,6 +25,16 @@ const getTokensFromLocalStorage = () => {
     } catch (e) {
         return {}
     }
+}
+
+const getTokens = () => {
+    if (cachedAuth) {
+        const { accessToken, expiresAt, refreshToken } = cachedAuth
+        if (accessToken && expiresAt && moment(expiresAt).isAfter(moment())) {
+            return { accessToken, refreshToken }
+        }
+    }
+    return getTokensFromLocalStorage()
 }
 
 export const signIn = (username, password) => (
@@ -44,7 +57,7 @@ export const signIn = (username, password) => (
     })
 )
 
-const refreshTokens = refreshToken => (
+const refreshAccessToken = refreshToken => (
     request(`${GLOBAL_ENV.appServer}/auth/token`, {
         method: 'POST',
         headers: {
@@ -65,17 +78,38 @@ const refreshTokens = refreshToken => (
 )
 
 export const hasAccessToken = () => {
-    const { accessToken } = getTokensFromLocalStorage()
+    const { accessToken } = getTokens()
     return !!accessToken
 }
 
 export const getAccessToken = () => {
-    const { accessToken, refreshToken } = getTokensFromLocalStorage()
+    const { accessToken, refreshToken } = getTokens()
     if (accessToken) {
         return Promise.resolve(accessToken)
     }
     if (!refreshToken) {
         return Promise.reject()
     }
-    return refreshTokens(refreshToken)
+    return refreshAccessToken(refreshToken)
+}
+
+export const revokeTokens = () => {
+    const { refreshToken } = getTokens()
+    if (!refreshToken) {
+        return Promise.resolve()
+    }
+    return request(`${GLOBAL_ENV.appServer}/auth/revoke-token`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            token: refreshToken,
+            client_id: GLOBAL_ENV.clientId,
+            client_secret: GLOBAL_ENV.clientSecret,
+        }),
+    })
+    .then(() => {
+        debug('Tokens revoked')
+    })
 }

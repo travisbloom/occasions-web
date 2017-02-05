@@ -4,48 +4,33 @@ import 'babel-polyfill'
 import { AppContainer } from 'react-hot-loader'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import ApolloClient, { createNetworkInterface } from 'apollo-client'
+import ApolloClient, { createNetworkInterface, toIdValue } from 'apollo-client'
 import { ApolloProvider } from 'react-apollo'
 import { Router, browserHistory } from 'react-router'
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
+import { syncHistoryWithStore } from 'react-router-redux'
 
 import routes from './routes'
 import urls from './urls'
-import { getAccessToken } from './utilities/auth'
+import { getAccessToken, hasAccessToken } from './utilities/auth'
 import debug from './utilities/debug'
 import createStore from './createStore'
+import buildApolloClient from './buildApolloClient'
 
-const networkInterface = createNetworkInterface({
-    uri: `${GLOBAL_ENV.appServer}/graphql`,
-    opts: {
-        credentials: 'same-origin',
-    },
+/* eslint-disable global-require */
+if (process.env.NODE_ENV !== 'production') {
+    const moment = require('moment').default
+    const _ = require('lodash').default
+    window.moment = moment
+    window._ = _
+}
+/* eslint-enable global-require */
+
+const apolloClient = buildApolloClient({ history: browserHistory })
+
+const store = createStore({
+    apolloClient,
+    initialState: { user: { isLoggedIn: hasAccessToken() } },
 })
-
-/* eslint-disable no-param-reassign */
-networkInterface.use([{
-    applyMiddleware(req, next) {
-        getAccessToken().then((accessToken) => {
-            if (!req.options.headers) {
-                req.options.headers = {}
-            }
-            req.options.headers.Authorization = `Bearer ${accessToken}`
-            next()
-        })
-        .catch(() => {
-            debug('Failed to fetch tokens')
-            browserHistory.push(urls.signIn())
-        })
-    },
-}])
-/* eslint-enable no-param-reassign */
-
-
-const apolloClient = new ApolloClient({
-    networkInterface,
-})
-
-const store = createStore({ apolloClient, routerReducer })
 // Create an enhanced history that syncs navigation events with the store
 const history = syncHistoryWithStore(browserHistory, store)
 

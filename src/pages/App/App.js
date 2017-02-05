@@ -1,8 +1,10 @@
 import React from 'react'
 import { RouteTransition } from 'react-router-transition'
 import presets from 'react-router-transition/src/presets'
+import { graphql } from 'react-apollo'
+import gql from 'graphql-tag'
 
-import { View } from '../../components'
+import { View, Navbar } from '../../components'
 
 class App extends React.Component {
 
@@ -18,10 +20,25 @@ class App extends React.Component {
     slideLeft = styles => this.mapStyles(presets.slideLeft.mapStyles(styles))
 
     render() {
-        const { children, location } = this.props
+        const { children, location, data: { currentUser } } = this.props
 
-        return children
+        return (
+            <View>
+                <Navbar currentUser={currentUser} />
+                {children}
+            </View>
+        )
     }
 }
 
-export default App
+const query = gql`
+query Home {
+currentUser {
+    person {
+      fullName
+    }
+  }
+}
+`
+
+export default graphql(query)(App)

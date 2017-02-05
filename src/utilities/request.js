@@ -8,7 +8,15 @@ const checkStatus = (response) => {
     error.response = response
     throw error
 }
-const parseJSON = response => response.json()
+
+const NO_CONTENT_STATUS = 204
+
+const parseJSON = (response) => {
+    if (response.status === NO_CONTENT_STATUS) {
+        return null
+    }
+    return response.json()
+}
 
 /* eslint-disable no-console */
 export default (...args) => (

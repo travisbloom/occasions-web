@@ -42,7 +42,7 @@ export const formatReduxFormErrors = (response) => {
         })
         return accum
     }, { _error: [] })
-    console.log({ errors })
+
     throw new SubmissionError(errors)
 }
 /* eslint-enable no-underscore-dangle, no-param-reassign */

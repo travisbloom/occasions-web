@@ -17,11 +17,15 @@ const toSpacingValue = (type : defaultSizing) => {
     }
 }
 
-const generateStyes = ({ margin, padding, style }) => ({
-    ...style,
-    margin: toSpacingValue(margin) || style.margin,
-    padding: toSpacingValue(padding) || style.padding,
-})
+
+const generateStyes = ({ margin, padding, style }) => {
+    if (!margin && !padding) return style
+    return {
+        ...style,
+        margin: toSpacingValue(margin) || style.margin,
+        padding: toSpacingValue(padding) || style.padding,
+    }
+}
 
 type Props = {
     inline: boolean,

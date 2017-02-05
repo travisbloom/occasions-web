@@ -39,6 +39,13 @@ class Home extends React.Component {
             <View style={style} padding>
                 <Header size="largest">HELLO {currentUser && currentUser.username}!</Header>
                 {this.renderContent()}
+                {this.renderContent()}
+                {this.renderContent()}
+                {this.renderContent()}
+                {this.renderContent()}
+                {this.renderContent()}
+                {this.renderContent()}
+                {this.renderContent()}
             </View>
         )
     }
