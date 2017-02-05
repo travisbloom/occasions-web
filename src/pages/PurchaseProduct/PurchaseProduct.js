@@ -6,6 +6,8 @@ import gql from 'graphql-tag'
 import { View, Header, Panel, Row, Col } from '../../components'
 import { EventDate } from '../../fragmentComponents'
 
+import PurchaseProductForm from './PurchaseProductForm'
+
 class PurchaseProduct extends React.Component {
 
     render() {
@@ -20,32 +22,44 @@ class PurchaseProduct extends React.Component {
         return (
             <View style={style} padding>
                 <Header size="largest">{product.name}</Header>
+                <Header size="larger">For {associatedEvent.receivingPerson.fullName}</Header>
+                <PurchaseProductForm associatedEvent={associatedEvent} />
             </View>
         )
     }
 }
 
 const query = gql`
-query PurchaseProduct($associatedEventId: ID!, $productId: ID!) {
+query PurchaseProduct($associatedEventId: ID!, $productSlug: ID!) {
     associatedEvent(id: $associatedEventId) {
         receivingPerson {
           fullName
+          associatedLocations {
+              edges {
+                  node {
+                      location {
+                          displayName
+                      }
+                  }
+              }
+          }
         }
         event {
           name
           ...EventDate
         }
     }
-    product(id: $productId) {
+    product(slug: $productSlug) {
         name
         id
+        slug
         costUsd
         description
         eventTypes {
             edges {
                 node {
                     name
-                    description
+                    displayName
                 }
             }
         }
@@ -55,7 +69,7 @@ ${EventDate.fragments.event}
 `
 
 export default graphql(query, {
-    options: ({ params: { associatedEventId, productId } }) => ({
-        variables: { associatedEventId, productId },
+    options: ({ params: { associatedEventId, productSlug } }) => ({
+        variables: { associatedEventId, productSlug },
     }),
 })(PurchaseProduct)

@@ -34,7 +34,7 @@ export default (
             <Route path="home" component={Home} />
             <Route path="yourEvents/:associatedEventId">
                 <IndexRoute component={AssociatedEventDetails} />
-                <Route path=":productId" component={PurchaseProduct} />
+                <Route path=":productSlug" component={PurchaseProduct} />
             </Route>
         </Route>
         <IndexRoute onEnter={redirectUserBasedOnAuth} />

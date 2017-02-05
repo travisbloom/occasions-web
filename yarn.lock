@@ -4668,6 +4668,10 @@ react-bootstrap@^0.30.7:
     uncontrollable "^4.0.1"
     warning "^3.0.0"
 
+react-collapse@^2.3.3:
+  version "2.3.3"
+  resolved "https://registry.yarnpkg.com/react-collapse/-/react-collapse-2.3.3.tgz#68c70f1fceeaf375e3599b95710cc51e5dd339a3"
+
 react-deep-force-update@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/react-deep-force-update/-/react-deep-force-update-2.0.1.tgz#4f7f6c12c3e7de42f345992a3c518236fa1ecad3"
@@ -4683,6 +4687,10 @@ react-deep-force-update@^2.0.1:
 react-flexbox-grid@^0.10.2:
   version "0.10.2"
   resolved "https://registry.yarnpkg.com/react-flexbox-grid/-/react-flexbox-grid-0.10.2.tgz#9de9b5d0b065adbb3b3b7e26033515abf9a9a2b4"
+
+react-height@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/react-height/-/react-height-2.2.0.tgz#c65de6a7f7245c848f5ec9d3087f0758b90d7a0b"
 
 react-hot-loader@3.0.0-beta.6:
   version "3.0.0-beta.6"

@@ -31,7 +31,7 @@ class AssociatedEventDetails extends React.Component {
                             <Col xs={8} lg={10}>{node.description}</Col>
                             <Col xs={4} lg={2}>
                                 <LinkContainer
-                                    to={urls.purchaseProduct(associatedEvent.id, node.id)}
+                                    to={urls.purchaseProduct(associatedEvent.id, node.slug)}
                                 >
                                     <Button
                                         block
@@ -76,6 +76,7 @@ query AssociatedEventDetails($associatedEventId: ID!) {
                 name
                 description
                 id
+                slug
               }
             }
           }
