@@ -15,10 +15,8 @@ import buildApolloClient from './buildApolloClient'
 
 /* eslint-disable global-require */
 if (process.env.NODE_ENV !== 'production') {
-    const moment = require('moment')
-    const _ = require('lodash')
-    window.moment = moment
-    window._ = _
+    window.moment = require('moment')
+    window._ = require('lodash')
     window.mockExpireAccessToken = () => {
         const { accessToken, refreshToken } = JSON.parse(localStorage.getItem('tokens'))
         localStorage.setItem('tokens', JSON.stringify({
@@ -47,8 +45,8 @@ const render = (passedRoutes) => {
                 <Router history={history} routes={passedRoutes} />
             </ApolloProvider>
         </AppContainer>,
-    document.getElementById('root'),
-  )
+        document.getElementById('root'),
+    )
 }
 
 render(routes)

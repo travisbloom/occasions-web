@@ -75,6 +75,7 @@ const query = gql`
         associatedLocation {
             id
             location {
+                id
                 displayName
             }
         }

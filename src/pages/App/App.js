@@ -5,9 +5,11 @@ import { graphql, compose } from 'react-apollo'
 import { connect } from 'react-redux'
 import gql from 'graphql-tag'
 
-import { View, Navbar, Alert } from '../../components'
+import { View, Alert, Grid } from '../../components'
 import { closeError } from '../../actions/alerts'
 
+import Navbar from './Navbar'
+import Tabs from './Tabs'
 
 class App extends React.Component {
 
@@ -28,7 +30,10 @@ class App extends React.Component {
         return (
             <View>
                 <Navbar currentUser={currentUser} />
-                <View style={{ position: 'fixed', bottom: 0, width: '100%' }} padding>
+                <View
+                    style={{ position: 'fixed', bottom: `${Tabs.height}px`, width: '100%' }}
+                    padding
+                >
                     {errors.map((err, index) =>
                         <Alert
                             style={{ marginBottom: '10px' }}
@@ -40,14 +45,17 @@ class App extends React.Component {
                         </Alert>,
                     )}
                 </View>
-                {children}
+                <Grid style={{ marginTop: `${Navbar.height}px`, marginBottom: `${Tabs.height}px` }}>
+                    {children}
+                </Grid>
+                <Tabs />
             </View>
         )
     }
 }
 
 const query = gql`
-query Home {
+query App {
 currentUser {
     person {
       fullName

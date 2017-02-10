@@ -13,7 +13,7 @@ import urls from '../../urls'
 
 class CreateAccountForm extends React.Component {
 
-    onSuccess = () => this.props.router.push(urls.home())
+    onSuccess = () => this.props.router.push(urls.associatedEventsList())
 
     createAccount = (values) => {
         const { createUser } = this.props

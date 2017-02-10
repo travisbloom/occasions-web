@@ -54,13 +54,16 @@ query AssociatedEventDetails($associatedEventId: ID!) {
   associatedEvent(id: $associatedEventId) {
       id
       receivingPerson {
+        id
         fullName
       }
       transactions {
         edges {
           node {
+            id
             costUsd
             product {
+              id
               name
               mainImageUrl
               description
@@ -69,6 +72,7 @@ query AssociatedEventDetails($associatedEventId: ID!) {
         }
       }
       event {
+        id
         name
         relatedProducts {
             edges {

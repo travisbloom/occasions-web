@@ -66,6 +66,7 @@
     "react-router-redux": "^4.0.7",
     "react-router-transition": "^0.0.6",
     "react-select": "^1.0.0-rc.2",
+    "react-stripe-checkout": "^2.2.5",
     "redux": "^3.6.0",
     "redux-devtools": "^3.3.2",
     "redux-form": "^6.4.3",

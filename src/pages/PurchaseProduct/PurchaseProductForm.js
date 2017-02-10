@@ -1,10 +1,11 @@
 // @flow
 
 import React from 'react'
-import { reduxForm } from 'redux-form'
+import { reduxForm, Form } from 'redux-form'
 import { graphql, compose } from 'react-apollo'
 import { withRouter } from 'react-router'
 import gql from 'graphql-tag'
+import StripeCheckout from 'react-stripe-checkout'
 
 import { FormField, Input, Button, Row, Alert, View, Header, Select, Col } from '../../components'
 import { formatReduxFormErrors } from '../../utilities/errors'
@@ -48,31 +49,80 @@ class PurchaseProductForm extends React.Component {
         } : null,
     }))
 
-
-    onSuccess = () => this.props.router.push(urls.home())
+    onToken = (values) => {
+        const { createStripeUser, submit } = this.props
+        createStripeUser(values).then(submit)
+    }
 
     getLocationOptions = () => {
         const locations = this.props.associatedEvent.receivingPerson.associatedLocations.edges
         return locations.map(({
-            node: { location, id },
+            node: { location, pk },
         }) => ({
             label: location.displayName,
-            value: id,
+            value: pk,
         }))
     }
 
     purchaseProduct = (values) => {
-        const { purchaseProduct } = this.props
+        const { purchaseProduct, router } = this.props
+        const variables = {
+            ...values,
+            associatedLocationId: (
+                values.associatedLocationId ? values.associatedLocationId.value : null
+            ),
+        }
         return (
-            purchaseProduct(values)
-                .then(this.onSuccess)
+            purchaseProduct(variables)
+                .then(({ data: { createTransaction: { transaction } } }) =>
+                    router.push(urls.transactionDetails(transaction.id)),
+                )
                 .catch(formatReduxFormErrors)
+        )
+    }
+
+    handleSubmit = (values) => {
+        const { currentUser } = this.props
+        if (currentUser.hasStripeUser) {
+            return this.purchaseProduct(values)
+        }
+        return Promise.resolve()
+    }
+
+    renderCheckoutButton = () => {
+        const { submitting, pristine, product, currentUser } = this.props
+        const button = (
+            <Button
+                disabled={submitting || pristine}
+                bsStyle="info"
+                type="submit"
+            >
+                Purchase Card
+            </Button>
+        )
+        if (currentUser.hasStripeUser) {
+            return button
+        }
+        return (
+            <StripeCheckout
+                token={this.onToken}
+                currency="USD"
+                product={product.costUsd}
+                name={product.name}
+                description={product.description}
+                email={currentUser.email}
+                zipCode
+                allowRememberMe
+                stripeKey={'pk_test_VQtPlmj5VhEm9xOlrRJIDxWG'}
+            >
+                {button}
+            </StripeCheckout>
         )
     }
 
     render() {
         const { isAddingNewAddress, intialAddressFormValues } = this.state
-        const { handleSubmit, submitting, pristine, error, associatedEvent } = this.props
+        const { handleSubmit, error, associatedEvent } = this.props
 
         return (
             <View>
@@ -83,12 +133,12 @@ class PurchaseProductForm extends React.Component {
                     onComplete={this.onAddNewAddress}
                     person={associatedEvent.receivingPerson}
                 />
-                <form onSubmit={handleSubmit(this.purchaseProduct)}>
-                    <Header>Where Should We Send This Card?</Header>
+                <Header>Where Should We Send This Card?</Header>
+                <Form onSubmit={handleSubmit(this.handleSubmit)}>
                     <Row>
                         <Col xs={8}>
                             <FormField
-                                name="locationId"
+                                name="associatedLocationId"
                                 component={Select}
                                 options={this.getLocationOptions()}
                             />
@@ -99,6 +149,12 @@ class PurchaseProductForm extends React.Component {
                             </Button>
                         </Col>
                     </Row>
+                    <FormField
+                        name="productNotes"
+                        component={Input}
+                        textarea
+                    />
+                    {this.renderCheckoutButton()}
                     <Alert
                         dismissable
                         unHideWithChildren
@@ -107,23 +163,15 @@ class PurchaseProductForm extends React.Component {
                     >
                         {error}
                     </Alert>
-                    <Row center="xs">
-                        <Button
-                            disabled={submitting || pristine}
-                            type="submit"
-                        >
-                            Purchase Card
-                        </Button>
-                    </Row>
-                </form>
+                </Form>
             </View>
         )
     }
 }
 
-const query = gql`
-  mutation createUser($input: CreateUserInput!) {
-    createUser(input: $input) {
+const createStripeUserQuery = gql`
+  mutation createStripeUser($input: CreateStripeUserInput!) {
+    createStripeUser(input: $input) {
         user {
             username,
             accessTokens {
@@ -138,8 +186,37 @@ const query = gql`
   }
 `
 
+const createTransactionQuery = gql`
+mutation createTransactionQuery($input: CreateTransactionInput!) {
+    createTransaction(input: $input) {
+      transaction {
+        id
+        costUsd
+        product {
+          id
+          name
+        }
+        associatedLocation {
+          id
+          location {
+            id
+            displayName
+          }
+        }
+        stripeTransactionId
+        productNotes
+      }
+    }
+}
+`
+
 export default compose(
-    graphql(query, {
+    graphql(createStripeUserQuery, {
+        props: ({ mutate }) => ({
+            createStripeUser: values => mutate({ variables: { input: values } }),
+        }),
+    }),
+    graphql(createTransactionQuery, {
         props: ({ mutate }) => ({
             purchaseProduct: values => mutate({ variables: { input: values } }),
         }),

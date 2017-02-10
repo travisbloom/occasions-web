@@ -15,6 +15,7 @@ class PurchaseProduct extends React.Component {
             data: {
                 associatedEvent,
                 product,
+                currentUser,
                 refetch,
             },
             style,
@@ -26,8 +27,16 @@ class PurchaseProduct extends React.Component {
                 <Header size="largest">{product.name}</Header>
                 <Header size="larger">For {associatedEvent.receivingPerson.fullName}</Header>
                 <PurchaseProductForm
+                    initialValues={{
+                        receivingPersonId: associatedEvent.receivingPerson.pk,
+                        productId: product.slug,
+                        productNotes: '',
+                        associatedEventId: associatedEvent.pk,
+                    }}
                     refetch={refetch}
                     associatedEvent={associatedEvent}
+                    product={product}
+                    currentUser={currentUser}
                 />
             </View>
         )
@@ -36,15 +45,29 @@ class PurchaseProduct extends React.Component {
 
 const query = gql`
 query PurchaseProduct($associatedEventId: ID!, $productSlug: ID!) {
+    currentUser {
+      email
+      hasStripeUser
+      id
+      person {
+        id
+        fullName
+      }
+    }
     associatedEvent(id: $associatedEventId) {
+        pk
+        id
         receivingPerson {
           fullName
           pk
+          id
           associatedLocations {
               edges {
                   node {
                       id
+                      pk
                       location {
+                          id
                           displayName
                       }
                   }
@@ -65,6 +88,7 @@ query PurchaseProduct($associatedEventId: ID!, $productSlug: ID!) {
         eventTypes {
             edges {
                 node {
+                    id
                     name
                     displayName
                 }

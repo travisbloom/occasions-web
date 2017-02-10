@@ -33,12 +33,12 @@ export default ({ history }) => {
     const dataIdFromObject = result => result.id
 
     return new ApolloClient({
-        // dataIdFromObject,
+        dataIdFromObject,
         networkInterface,
-        // customResolvers: {
-        //     Query: {
-        //         associatedEvent: (_, { id }) => toIdValue(dataIdFromObject({ id })),
-        //     },
-        // },
+        customResolvers: {
+            Query: {
+                associatedEvent: (_, { id }) => toIdValue(dataIdFromObject({ id })),
+            },
+        },
     })
 }

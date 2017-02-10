@@ -21,7 +21,7 @@ class AppNav extends React.Component {
             <Navbar fluid>
                 <Navbar.Header>
                     <Navbar.Brand>
-                        <Link to="/">Occasions</Link>
+                        <Link to={urls.associatedEventsList()}>Occasions</Link>
                     </Navbar.Brand>
                     <Navbar.Toggle />
                 </Navbar.Header>
@@ -40,6 +40,8 @@ class AppNav extends React.Component {
         )
     }
 }
+
+Navbar.height = 60
 
 export default compose(
     withRouter,

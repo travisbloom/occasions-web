@@ -36,6 +36,7 @@ module.exports = {
 
     devServer: {
         hot: true,
+        https: true,
     // enable HMR on the server
 
         contentBase: resolve(__dirname, 'dist'),

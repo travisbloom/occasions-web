@@ -1,16 +1,18 @@
 const AUTHENTICATED_ROUTES = '/a'
 const signIn = () => '/signIn'
 const marketingHome = () => '/welcome'
-const home = () => `${AUTHENTICATED_ROUTES}/home`
+const associatedEventsList = () => `${AUTHENTICATED_ROUTES}/yourEvents`
 const associatedEventDetails = id => `${AUTHENTICATED_ROUTES}/yourEvents/${id}`
 const purchaseProduct = (eventId, productSlug) => (
     `${AUTHENTICATED_ROUTES}/yourEvents/${eventId}/${productSlug}`
 )
+const transactionDetails = id => `${AUTHENTICATED_ROUTES}/yourGifts/${id}`
 
 export default {
     signIn,
-    home,
+    associatedEventsList,
     marketingHome,
     associatedEventDetails,
     purchaseProduct,
+    transactionDetails,
 }

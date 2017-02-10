@@ -7,6 +7,7 @@ import { FormattedDate } from '../../components'
 
 const fragment = gql`
     fragment EventDate on EventNode {
+        id
         dateStart
         timeStart
         isReoccuringYearly
@@ -26,13 +27,13 @@ class EventDate extends React.Component {
                 // TODO
                 return null
             }
-            return <span><FormattedDate date={dateStart} format={'MMM Do'} /></span>
+            return <span><FormattedDate date={dateStart} /></span>
         }
         if (timeStart) {
             // TODO
             return null
         }
-        return <span><FormattedDate date={dateStart} format={'MMM Do, \'YY'} /></span>
+        return <span><FormattedDate date={dateStart} showYear /></span>
     }
 }
 

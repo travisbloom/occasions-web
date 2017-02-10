@@ -35,7 +35,7 @@ class MarketingHome extends React.Component {
         return (
             <View>
                 <View className={css(styles.hero, styles.firstHero)}>
-                    <LinkContainer to={this.isLoggedIn ? urls.home() : urls.signIn()}>
+                    <LinkContainer to={this.isLoggedIn ? urls.associatedEventsList() : urls.signIn()}>
                         <Button className={css(styles.signInLink)} bsStyle="info">
                             {this.isLoggedIn ? 'Home' : 'Sign In'}
                         </Button>

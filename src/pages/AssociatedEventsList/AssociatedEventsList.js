@@ -7,7 +7,7 @@ import { Header, View } from '../../components'
 
 import AssociatedEventSummary from './AssociatedEventSummary'
 
-class Home extends React.Component {
+class AssociatedEventsList extends React.Component {
 
     renderContent = () => {
         const {
@@ -52,9 +52,11 @@ class Home extends React.Component {
 }
 
 const query = gql`
-query Home {
+query AssociatedEventsList {
   currentUser {
+    id
     person {
+      id
       fullName
       createdEvents {
         edges {
@@ -70,4 +72,4 @@ query Home {
 ${AssociatedEventSummary.fragments.associatedEvent}
 `
 
-export default graphql(query)(Home)
+export default graphql(query)(AssociatedEventsList)
