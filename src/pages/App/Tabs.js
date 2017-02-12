@@ -44,14 +44,22 @@ const styles = StyleSheet.create({
     base: {
         position: 'fixed',
         bottom: 0,
+        left: 0,
+        right: 0,
         width: '100%',
         height: `${Tabs.height}px`,
-        fontSize: '40px',
         padding: '6px 0',
         backgroundColor: styleVars.colorWhite,
         borderTop: `1px solid ${styleVars.colorPrimary}`,
+        [`@media (min-width: ${styleVars.screenSmMin})`]: {
+            width: '49rem',
+            margin: '0 auto',
+            borderLeft: `1px solid ${styleVars.colorPrimary}`,
+            borderRight: `1px solid ${styleVars.colorPrimary}`,
+        },
     },
     tab: {
+        fontSize: '40px',
         textAlign: 'center',
     },
 })

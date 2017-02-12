@@ -45,7 +45,7 @@ export default {
     spacing: 10,
     spacingLarge: 18,
 
-    screenSmMin: 768,
-    screenMdMin: 992,
-    screenLgMin: 1200,
+    screenSmMin: '48em',
+    screenMdMin: '64em',
+    screenLgMin: '75em',
 }

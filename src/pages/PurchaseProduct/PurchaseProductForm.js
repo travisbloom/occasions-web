@@ -136,15 +136,15 @@ class PurchaseProductForm extends React.Component {
                 <Header>Where Should We Send This Card?</Header>
                 <Form onSubmit={handleSubmit(this.handleSubmit)}>
                     <Row>
-                        <Col xs={8}>
+                        <Col xs={12} sm={7} md={8}>
                             <FormField
                                 name="associatedLocationId"
                                 component={Select}
                                 options={this.getLocationOptions()}
                             />
                         </Col>
-                        <Col xs={4}>
-                            <Button onClick={this.onToggleNewAddressForm}>
+                        <Col xs={6} xsOffset={3} sm={5} md={4}>
+                            <Button block onClick={this.onToggleNewAddressForm}>
                                 Add New Location
                             </Button>
                         </Col>

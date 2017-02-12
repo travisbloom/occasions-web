@@ -1,5 +1,5 @@
 import React from 'react'
-import { RouteTransition } from 'react-router-transition'
+// import { RouteTransition } from 'react-router-transition'
 import presets from 'react-router-transition/src/presets'
 import { graphql, compose } from 'react-apollo'
 import { connect } from 'react-redux'
@@ -13,6 +13,33 @@ import Tabs from './Tabs'
 
 class App extends React.Component {
 
+    state = {
+        hasBackButton: false,
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.location.pathname === this.props.location.pathname) return
+        const routeDepthDiff = nextProps.routes.length - this.props.routes.length
+        const shorterRouteStack = routeDepthDiff < 0 ? nextProps.routes : this.props.routes
+        const longerRouteStack = routeDepthDiff > 0 ? nextProps.routes : this.props.routes
+        const sameRoutePaths = shorterRouteStack.every(({ path }, index) => (
+            index < shorterRouteStack.lengt - 1 ? path === longerRouteStack[index].path : true
+        ))
+        if (!sameRoutePaths) {
+            if (this.state.hasBackButton) {
+                this.setState({ hasBackButton: false })
+            }
+        } else {
+            const secondToLastRoute = nextProps.routes[nextProps.routes.length - 3]
+            const isNestedRoute = secondToLastRoute.path !== 'a'
+            if (isNestedRoute && !this.state.hasBackButton) {
+                this.setState({ hasBackButton: true })
+            } else if (!isNestedRoute && this.state.hasBackButton) {
+                this.setState({ hasBackButton: false })
+            }
+        }
+    }
+
     mapStyles = styles => ({
         ...styles,
         position: 'absolute',
@@ -25,11 +52,14 @@ class App extends React.Component {
     slideLeft = styles => this.mapStyles(presets.slideLeft.mapStyles(styles))
 
     render() {
-        const { children, location, data: { currentUser }, errors } = this.props
+        const { children, data: { currentUser }, errors } = this.props
 
         return (
             <View>
-                <Navbar currentUser={currentUser} />
+                <Navbar
+                    hasBackButton={this.state.hasBackButton}
+                    currentUser={currentUser}
+                />
                 <View
                     style={{ position: 'fixed', bottom: `${Tabs.height}px`, width: '100%' }}
                     padding
@@ -45,7 +75,12 @@ class App extends React.Component {
                         </Alert>,
                     )}
                 </View>
-                <Grid style={{ marginTop: `${Navbar.height}px`, marginBottom: `${Tabs.height}px` }}>
+                <Grid
+                    style={{
+                        marginTop: `${Navbar.height}px`,
+                        marginBottom: `${Tabs.height}px`,
+                    }}
+                >
                     {children}
                 </Grid>
                 <Tabs />

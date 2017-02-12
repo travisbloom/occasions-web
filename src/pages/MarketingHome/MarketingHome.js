@@ -104,9 +104,6 @@ const styles = StyleSheet.create({
         color: styleVars.colorWhite,
         backgroundImage: `url(${heroImage})`,
         textAlign: 'center',
-        // '@media (max-width: 1600px)': {
-        //     backgroundColor: 'red',
-        // },
     },
     firstHero: {
         minHeight: '100vh',
