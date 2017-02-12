@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react'
-import { reduxForm } from 'redux-form'
+import { reduxForm, SubmissionError } from 'redux-form'
 
 import { graphql, compose, withApollo } from 'react-apollo'
 import { withRouter } from 'react-router'
@@ -30,7 +30,13 @@ class CreateAccountForm extends React.Component {
     }
 
     signIn = ({ username, password }) => (
-        signIn(username, password).then(this.onSuccess).catch(formatReduxFormErrors)
+        signIn(username, password)
+            .then(this.onSuccess)
+            .catch(() => {
+                throw new SubmissionError({
+                    _error: 'Invalid username and password.',
+                })
+            })
     )
 
     render() {
