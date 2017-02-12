@@ -30,7 +30,11 @@ export default ({ history }) => {
             })
             .catch(() => {
                 debug('Failed to fetch tokens')
-                history.push(urls.signIn())
+                if (window.location.pathname === urls.signIn()) {
+                    next()
+                } else {
+                    history.push(urls.signIn())
+                }
             })
         },
     }])
