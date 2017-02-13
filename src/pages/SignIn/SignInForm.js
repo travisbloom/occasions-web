@@ -7,7 +7,7 @@ import { graphql, compose, withApollo } from 'react-apollo'
 import { withRouter } from 'react-router'
 import gql from 'graphql-tag'
 
-import { FormField, Input, Button, Row, Errors, View, OverlayTrigger, Tooltip } from '../../components'
+import { ReduxFormField, TextInput, Button, Row, Errors, View, OverlayTrigger, Tooltip } from '../../components'
 import { formatReduxFormErrors } from '../../utilities/errors'
 import { signIn } from '../../utilities/auth'
 import urls from '../../urls'
@@ -45,7 +45,7 @@ class CreateAccountForm extends React.Component {
         return (
             <View>
                 <form onSubmit={handleSubmit(this.signIn)}>
-                    <FormField
+                    <ReduxFormField
                         label={
                             <OverlayTrigger
                                 overlay={
@@ -60,13 +60,13 @@ class CreateAccountForm extends React.Component {
                         }
                         type="email"
                         name="username"
-                        component={Input}
+                        component={TextInput}
                     />
-                    <FormField
+                    <ReduxFormField
                         label="Password"
                         type="password"
                         name="password"
-                        component={Input}
+                        component={TextInput}
                     />
                     <Errors>{error}</Errors>
                     <Row center="xs">

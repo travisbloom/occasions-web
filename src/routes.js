@@ -8,6 +8,7 @@ import MarketingHome from './pages/MarketingHome/MarketingHome'
 import AssociatedEventDetails from './pages/AssociatedEventDetails/AssociatedEventDetails'
 import PurchaseProduct from './pages/PurchaseProduct/PurchaseProduct'
 import TransactionDetails from './pages/TransactionDetails/TransactionDetails'
+import CreateAssociatedEvent from './pages/CreateAssociatedEvent/CreateAssociatedEvent'
 
 import { hasAccessToken } from './utilities/auth'
 import debug from './utilities/debug'
@@ -30,6 +31,7 @@ export default (
         <Route path="a" component={App}>
             <Route path="yourEvents">
                 <IndexRoute component={AssociatedEventsList} />
+                <Route path="new" component={CreateAssociatedEvent} />
                 <Route path=":associatedEventId">
                     <IndexRoute component={AssociatedEventDetails} />
                     <Route path=":productSlug" component={PurchaseProduct} />

@@ -1,25 +1,26 @@
 import React from 'react'
+import { noop } from 'lodash'
 
-import { FormField, Input, Col, Row, Select, Tooltip, OverlayTrigger, View } from '../'
+import { ReduxFormField, TextInput, Col, Row, Select, Tooltip, OverlayTrigger, View, FormField } from '../'
 import STATES from '../../constants/states'
 
 const AddressForm = () => (
     <View>
-        <FormField
+        <ReduxFormField
             autoComplete="address-line1"
             name={'streetAddressLine1'}
             label="Address Line 1"
-            component={Input}
+            component={TextInput}
         />
-        <FormField
+        <ReduxFormField
             autoComplete="address-line2"
             name={'streetAddressLine2'}
             label="Address Line 2"
-            component={Input}
+            component={TextInput}
         />
         <Row>
             <Col sm={6} xs={12}>
-                <FormField
+                <ReduxFormField
                     name={'state'}
                     label="State"
                     component={Select}
@@ -27,19 +28,19 @@ const AddressForm = () => (
                 />
             </Col>
             <Col sm={6} xs={12}>
-                <FormField
+                <ReduxFormField
                     autoComplete="city"
                     name={'city'}
                     label="City"
-                    component={Input}
+                    component={TextInput}
                 />
             </Col>
             <Col xs={6}>
-                <FormField
+                <ReduxFormField
                     autoComplete="postal-code"
                     name={'postalCode'}
                     label="Zip Code"
-                    component={Input}
+                    component={TextInput}
                 />
             </Col>
             <Col xs={6}>
@@ -51,14 +52,9 @@ const AddressForm = () => (
                         </Tooltip>
                     }
                 >
-                    <FormField
-                        isNotReduxForm
-                        name={'country'}
-                        disabled
-                        label="Country"
-                        component={Input}
-                        defaultValue="USA"
-                    />
+                    <FormField label="Country">
+                        <TextInput value="USA" disabled onChange={noop} />
+                    </FormField>
                 </OverlayTrigger>
             </Col>
         </Row>

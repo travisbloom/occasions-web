@@ -7,7 +7,7 @@ import { withRouter } from 'react-router'
 import gql from 'graphql-tag'
 import StripeCheckout from 'react-stripe-checkout'
 
-import { FormField, Input, Button, Row, Alert, View, Header, Select, Col } from '../../components'
+import { ReduxFormField, TextInput, Button, Row, Alert, View, Header, Select, Col } from '../../components'
 import { formatReduxFormErrors } from '../../utilities/errors'
 import urls from '../../urls'
 
@@ -137,7 +137,7 @@ class PurchaseProductForm extends React.Component {
                 <Form onSubmit={handleSubmit(this.handleSubmit)}>
                     <Row>
                         <Col xs={12} sm={7} md={8}>
-                            <FormField
+                            <ReduxFormField
                                 name="associatedLocationId"
                                 component={Select}
                                 options={this.getLocationOptions()}
@@ -149,9 +149,9 @@ class PurchaseProductForm extends React.Component {
                             </Button>
                         </Col>
                     </Row>
-                    <FormField
+                    <ReduxFormField
                         name="productNotes"
-                        component={Input}
+                        component={TextInput}
                         textarea
                     />
                     {this.renderCheckoutButton()}

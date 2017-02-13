@@ -1,13 +1,12 @@
-// @flow
 import React from 'react'
-import type { Children } from 'react'
 import { isBoolean } from 'lodash'
+import classNames from 'classnames'
 
+import styles from './View.scss'
 import styleVars from '../../styles'
 
-type defaultSizing = 'small' | 'medium' | 'large' | boolean
 
-const toSpacingValue = (type : defaultSizing) => {
+const toSpacingValue = (type) => {
     const usedType = isBoolean(type) ? 'medium' : type
     switch (usedType) {
     case ('small') : return `${styleVars.spacingSmall}px`
@@ -18,28 +17,28 @@ const toSpacingValue = (type : defaultSizing) => {
 }
 
 
-const generateStyes = ({ margin, padding, style }) => {
-    if (!margin && !padding) return style
+const generateStyes = ({ margin, padding, style, inline }) => {
+    if (!margin && !padding && !inline) return style
     return {
         ...style,
+        display: inline ? 'inline-block' : 'inherit',
         margin: toSpacingValue(margin) || style.margin,
         padding: toSpacingValue(padding) || style.padding,
     }
 }
 
-type Props = {
-    inline: boolean,
-    margin: defaultSizing,
-    padding: defaultSizing,
-    style: Object,
-    children: Children
-}
-
-const View = ({ inline, margin, padding, style, children, ...props } : Props) => {
-    const passedStyles = generateStyes({ margin, padding, style })
+const View = ({ inline, className, margin, marginChildren, padding, style, children, ...props }) => {
+    const generatedStyleObj = generateStyes({ margin, padding, style, inline })
     return React.createElement(
         inline ? 'span' : 'div',
-        { style: passedStyles, ...props },
+        {
+            style: generatedStyleObj,
+            className: classNames(
+                marginChildren && styles.marginChildren,
+                className,
+            ),
+            ...props,
+        },
         children,
     )
 }
@@ -47,5 +46,6 @@ const View = ({ inline, margin, padding, style, children, ...props } : Props) =>
 View.defaultProps = {
     style: {},
 }
+
 
 export default View

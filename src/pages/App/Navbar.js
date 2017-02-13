@@ -22,7 +22,7 @@ class AppNav extends React.Component {
         const { currentUser } = this.props
 
         return (
-            <Navbar fluid>
+            <Navbar fluid style={{ marginBottom: 0 }}>
                 <Navbar.Header>
                     <Navbar.Brand>
                         <Link to={urls.associatedEventsList()}>Occasions</Link>

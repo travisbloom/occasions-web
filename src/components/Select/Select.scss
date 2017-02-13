@@ -70,4 +70,12 @@
     .Select-arrow-zone {
         background-color: $input-bg;
     }
+    .Select.Select--single.is-searchable.is-focused {
+        .Select-value-label {
+            opacity: .4;
+        }
+    }
+    @keyframes :global(Select-animation-spin) {
+        to { transform: rotate(1turn); }
+    }
 }

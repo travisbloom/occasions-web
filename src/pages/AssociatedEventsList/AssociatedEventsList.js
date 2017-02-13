@@ -3,17 +3,18 @@ import React from 'react'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
-import { Header, View } from '../../components'
+import { View, Button, LinkContainer } from '../../components'
+import urls from '../../urls'
 
 import AssociatedEventSummary from './AssociatedEventSummary'
 
 class AssociatedEventsList extends React.Component {
 
-    renderContent = () => {
+    renderEvents = () => {
         const {
             data: {
                 currentUser,
-                loading,
+                // loading,
             },
         } = this.props
         if (!currentUser) return null
@@ -29,23 +30,17 @@ class AssociatedEventsList extends React.Component {
 
     render() {
         const {
-            data: {
-                currentUser,
-                loading,
-            },
             style,
         } = this.props
         return (
-            <View style={style} padding>
-                <Header size="largest">HELLO {currentUser && currentUser.username}!</Header>
-                {this.renderContent()}
-                {this.renderContent()}
-                {this.renderContent()}
-                {this.renderContent()}
-                {this.renderContent()}
-                {this.renderContent()}
-                {this.renderContent()}
-                {this.renderContent()}
+            <View marginChildren padding>
+                <View>
+                    <LinkContainer to={urls.createAssociatedEvent()}>
+                        <Button block bsStyle="info">Add An Event</Button>
+                    </LinkContainer>
+                </View>
+                {this.renderEvents()}
+                {this.renderEvents()}
             </View>
         )
     }

@@ -3,7 +3,8 @@ import gql from 'graphql-tag'
 import { propType } from 'graphql-anywhere'
 import { withRouter } from 'react-router'
 
-import { Panel, View } from '../../components'
+import { Panel, View, Row, Col } from '../../components'
+import { EventDate } from '../../fragmentComponents'
 import urls from '../../urls'
 
 const fragment = gql`
@@ -17,23 +18,16 @@ const fragment = gql`
           edges {
             node {
               id
-              costUsd
-              product {
-                id
-                name
-                mainImageUrl
-                description
-              }
             }
           }
         }
         event {
           id
           name
-          dateStart
-          timeStart
+          ...EventDate
         }
     }
+    ${EventDate.fragments.event}
 `
 
 class AssociatedEventSummary extends React.Component {
@@ -52,10 +46,19 @@ class AssociatedEventSummary extends React.Component {
         return (
             <Panel
                 onClick={this.transitionToDetailsPage}
-                header={<View>foo</View>}
+                header={<View>{associatedEvent.receivingPerson.fullName} - {associatedEvent.event.name}</View>}
             >
-                <View>{associatedEvent.receivingPerson.fullName}</View>
-                <View>{associatedEvent.event.name} {associatedEvent.event.eventType}</View>
+                <Row>
+                    <Col xs={6}>
+                        <View>{associatedEvent.receivingPerson.fullName}</View>
+                        <View><EventDate event={associatedEvent.event} /></View>
+                    </Col>
+                    <Col xs={6}>
+                        {associatedEvent.transactions.edges.length ?
+                            'Purchased Stuff' : 'Buy Stuff'
+                        }
+                    </Col>
+                </Row>
             </Panel>
         )
     }
