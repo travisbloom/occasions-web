@@ -5,7 +5,7 @@ import { ReduxFormField, TextInput, Col, Row, Select, Tooltip, OverlayTrigger, V
 import STATES from '../../constants/states'
 
 const AddressForm = () => (
-    <View>
+    <View marginChildren>
         <ReduxFormField
             autoComplete="address-line1"
             name={'streetAddressLine1'}

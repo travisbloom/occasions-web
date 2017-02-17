@@ -3,7 +3,7 @@ import React from 'react'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
-import { View, Header, Panel, Row, Col } from '../../components'
+import { View, Header } from '../../components'
 import { EventDate } from '../../fragmentComponents'
 
 import PurchaseProductForm from './PurchaseProductForm'

@@ -18,7 +18,7 @@ class AssociatedEventDetails extends React.Component {
         } = this.props
         if (!associatedEvent) return <span>allllmost</span>
         return (
-            <View style={style} padding>
+            <View style={style} padding marginChildren>
                 <Header size="largest">{associatedEvent.receivingPerson.fullName}</Header>
                 <Header size="larger">{associatedEvent.event.name}</Header>
                 <Header size="larger"><EventDate event={associatedEvent.event} /></Header>

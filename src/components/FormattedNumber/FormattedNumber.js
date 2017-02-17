@@ -5,7 +5,7 @@ const FormattedNumber = ({ number, currency, ...props }) => (
     <span {...props}>
         {currency && '$'}{`${number}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
     </span>
-    )
+)
 
 FormattedNumber.propTypes = {
     number: React.PropTypes.number.isRequired,

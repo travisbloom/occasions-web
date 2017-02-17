@@ -20,7 +20,7 @@ class AssociatedEventsList extends React.Component {
         if (!currentUser) return null
 
         return (
-            <View>
+            <View marginChildren>
                 {currentUser.person.createdEvents.edges.map(({ node }) =>
                     <AssociatedEventSummary key={node.id} associatedEvent={node} />,
                 )}
@@ -29,9 +29,6 @@ class AssociatedEventsList extends React.Component {
     }
 
     render() {
-        const {
-            style,
-        } = this.props
         return (
             <View marginChildren padding>
                 <View>

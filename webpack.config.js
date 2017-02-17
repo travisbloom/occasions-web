@@ -6,19 +6,9 @@ module.exports = {
     entry: [
         'bootstrap-loader',
         'react-hot-loader/patch',
-    // activate HMR for React
-
         'webpack-dev-server/client?http://localhost:8080',
-    // bundle the client for webpack-dev-server
-    // and connect to the provided endpoint
-
         'webpack/hot/only-dev-server',
-    // bundle the client for hot reloading
-    // only- means to only hot reload for successful updates
-
-
         './index.js',
-    // the entry point of our app
     ],
     output: {
         filename: 'bundle.js',
@@ -98,6 +88,7 @@ module.exports = {
         new webpack.DefinePlugin({
             process: { env: { NODE_ENV: JSON.stringify('development') } },
             APP_ENV: {
+                stripeClientId: JSON.stringify('pk_test_VQtPlmj5VhEm9xOlrRJIDxWG'),
                 appServer: JSON.stringify('http://127.0.0.1:8000'),
                 clientId: JSON.stringify('uJZMHlRFcTHcBYnBctHhrfZQhfv6gg5jbqfgqiR1'),
                 clientSecret: JSON.stringify('W9GY47vMMlEftgr3zGP0HjRHlx0LSC09HTrVTG1F3ioadyrzNx2DxmfyPK7DZjoQmR7a8jxzo8o5lNdAOHp8iEeDU0ihce25D9pXiZerVTe1FSCunr3OYwes1Rj9XXhi'),

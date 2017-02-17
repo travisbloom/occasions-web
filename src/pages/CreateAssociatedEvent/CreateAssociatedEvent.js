@@ -1,69 +1,59 @@
 // @flow
 import React from 'react'
-import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
 
-import { View, Header, Panel, Row, Col } from '../../components'
+import { View, Link } from '../../components'
 
-import CreateAssociatedEventForm from './CreateAssociatedEventForm'
+import AssignReceivingPersonPage from './AssignReceivingPersonPage'
+import CreateEventPage from './CreateEventPage'
+import ConfirmationPage from './ConfirmationPage'
 
 class CreateAssociatedEvent extends React.Component {
 
+    state = { page: 1 }
+
+    nextPage = () => this.setState({ page: this.state.page + 1 })
+
+    previousPage = () => this.setState({ page: this.state.page - 1 })
+
+    renderPage = () => {
+        const { page } = this.state
+        switch (page) {
+        case 1:
+            return (
+                <AssignReceivingPersonPage onSubmit={this.nextPage} />
+            )
+        case 2:
+            return (
+                <CreateEventPage onSubmit={this.nextPage} />
+            )
+        }
+        return <ConfirmationPage />
+    }
+
+    renderBackLanguage = () => {
+        const { page } = this.state
+        switch (page) {
+        case 1: return null
+        case 2: return 'Select Receiving Person'
+        }
+        return 'Select Event'
+    }
+
     render() {
         const {
-            data: {
-                products,
-                currentUser,
-            },
+
             style,
         } = this.props
 
-        if (!products) return <span>allllmost</span>
         return (
-            <View style={style} padding>
-                <CreateAssociatedEventForm
-                    products={products}
-                    currentUser={currentUser}
-                />
+            <View style={style} padding >
+                <View>
+                    <Link onClick={this.previousPage}>{this.renderBackLanguage()}</Link>
+                </View>
+                {this.renderPage()}
             </View>
         )
     }
 }
 
-const query = gql`
-query CreateAssociatedEvent {
-    currentUser {
-      id
-      person {
-        id
-        fullName
-      }
-    }
-    products {
-        edges {
-            node {
-                name
-                id
-                slug
-                costUsd
-                description
-                eventTypes {
-                    edges {
-                        node {
-                            id
-                            name
-                            displayName
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-`
-
-export default graphql(query, {
-    options: () => ({
-        variables: { },
-    }),
-})(CreateAssociatedEvent)
+export default CreateAssociatedEvent

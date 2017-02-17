@@ -2,13 +2,18 @@
 import React from 'react'
 import { graphql, compose, withApollo } from 'react-apollo'
 import gql from 'graphql-tag'
+import _ from 'lodash'
 
-import { View, Header, Panel, Label, Row, Col, TextInput, FormField, Select } from '../../components'
+import { View, Label, Row, Col, TextInput, FormField, Select } from '../../components'
 import { searchEventTypes } from '../../utilities/search'
 
 import EventsList from './EventsList'
 
 class EventsCatalog extends React.Component {
+
+    static propTypes = {
+        onSelectEvent: React.PropTypes.func.isRequired,
+    }
 
     state = {
         eventSearchValue: '',
@@ -19,6 +24,16 @@ class EventsCatalog extends React.Component {
 
     handleEventTypeOnChange = selectedEventTypes => this.setState({ selectedEventTypes })
 
+    handleClickedLabel = eventType => this.setState(state => ({
+        selectedEventTypes: _.xorWith(
+            state.selectedEventTypes, [{
+                label: eventType.displayName,
+                value: eventType.pk,
+            }],
+            _.isEqual,
+        ),
+    }))
+
     render() {
         const { selectedEventTypes, eventSearchValue } = this.state
         const {
@@ -26,14 +41,14 @@ class EventsCatalog extends React.Component {
             data: {
                 eventTypes,
             },
-            style,
+            onSelectEvent,
         } = this.props
 
         return (
-            <View style={style} padding>
-                <View style={{ overflowX: 'auto', whiteSpace: 'nowrap' }} marginChildren>
+            <View marginChildren>
+                <View style={{ overflowX: 'auto', whiteSpace: 'nowrap' }} marginChildrenRight>
                     {eventTypes && eventTypes.edges.map(({ node: eventType }) =>
-                        <View padding inline key={eventType.id}>
+                        <View inline key={eventType.id} onClick={() => this.handleClickedLabel(eventType)}>
                             <Label
                                 bsStyle={
                                 selectedEventTypes.find(({ value }) => value === eventType.pk) ?
@@ -67,6 +82,7 @@ class EventsCatalog extends React.Component {
                     </Col>
                 </Row>
                 <EventsList
+                    onSelectEvent={onSelectEvent}
                     eventSearchValue={eventSearchValue}
                     selectedEventTypes={selectedEventTypes}
                 />
@@ -77,7 +93,7 @@ class EventsCatalog extends React.Component {
 
 const query = gql`
 query EventTypes {
-  eventTypes(first: 3) {
+  eventTypes(first: 30) {
     edges {
       node {
         id

@@ -3,7 +3,8 @@ import React from 'react'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
-import { View } from '../../components'
+import { Panel, View, Button } from '../../components'
+import { EventDate } from '../../fragmentComponents'
 
 class EventsList extends React.Component {
 
@@ -13,15 +14,16 @@ class EventsList extends React.Component {
                 events,
             },
             style,
+            onSelectEvent,
         } = this.props
 
         if (!events) return <span>allllmost</span>
         return (
-            <View style={style} padding>
+            <View style={style} marginChildren>
                 {events.edges.map(({ node: event }) =>
-                    <View key={event.id}>
-                        {event.name}
-                    </View>,
+                    <Panel key={event.id} header={event.name}>
+                        <Button onClick={() => onSelectEvent(event)}>Select</Button>
+                    </Panel>,
                 )}
             </View>
         )
@@ -30,16 +32,19 @@ class EventsList extends React.Component {
 
 const query = gql`
 query EventsList($eventSearchValue: String, $selectedEventTypeIds: [ID]) {
-  events(eventTypesIdIn: $selectedEventTypeIds, search: $eventSearchValue) {
+  events(eventTypesPkIn: $selectedEventTypeIds, search: $eventSearchValue) {
     edges {
       node {
         id
+        pk
         name
         slug
+        ...EventDate
       }
     }
   }
 }
+${EventDate.fragments.event}
 `
 
 export default graphql(query, {

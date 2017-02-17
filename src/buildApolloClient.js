@@ -4,11 +4,13 @@ import urls from './urls'
 import { getAccessToken, hasAccessToken } from './utilities/auth'
 import debug from './utilities/debug'
 
+/* eslint-disable no-underscore-dangle */
 class NetworkInterface extends HTTPFetchNetworkInterface {
     setUri(uri) {
         this._uri = uri
     }
 }
+/* eslint-enable no-underscore-dangle */
 
 export default ({ history }) => {
     const networkInterface = new NetworkInterface(
@@ -26,10 +28,11 @@ export default ({ history }) => {
                     req.options.headers = {}
                 }
                 req.options.headers.Authorization = `Bearer ${accessToken}`
+                debug('Apollo request', req)
                 next()
             })
             .catch(() => {
-                debug('Failed to fetch tokens')
+                debug('Apollo failed to fetch tokens')
                 if (window.location.pathname === urls.signIn()) {
                     next()
                 } else {

@@ -1,4 +1,3 @@
-import moment from 'moment'
 import React from 'react'
 import gql from 'graphql-tag'
 import { propType } from 'graphql-anywhere'
@@ -17,8 +16,7 @@ const fragment = gql`
 class EventDate extends React.Component {
     static propTypes = {
         event: propType(fragment).isRequired,
-    };
-
+    }
 
     render() {
         const { event: { isReoccuringYearly, timeStart, dateStart } } = this.props

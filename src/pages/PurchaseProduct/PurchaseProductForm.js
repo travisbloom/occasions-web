@@ -113,7 +113,7 @@ class PurchaseProductForm extends React.Component {
                 email={currentUser.email}
                 zipCode
                 allowRememberMe
-                stripeKey={'pk_test_VQtPlmj5VhEm9xOlrRJIDxWG'}
+                stripeKey={APP_ENV.stripeClientId}
             >
                 {button}
             </StripeCheckout>
@@ -143,7 +143,7 @@ class PurchaseProductForm extends React.Component {
                                 options={this.getLocationOptions()}
                             />
                         </Col>
-                        <Col xs={6} xsOffset={3} sm={5} md={4}>
+                        <Col xs={12} sm={5} md={4}>
                             <Button block onClick={this.onToggleNewAddressForm}>
                                 Add New Location
                             </Button>

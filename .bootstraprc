@@ -46,8 +46,8 @@ extractStyles: false
 #
 # appStyles: ./path/to/your/app/styles/endpoint.scss
 
-preBootstrapCustomizations: ./src/styles/theme/_variables.scss
-appStyles: ./src/styles/theme/theme.scss
+preBootstrapCustomizations: ./src/styles/bootstrapTheme/_variables.scss
+appStyles: ./src/styles/bootstrapTheme/theme.scss
 
 
 ### Bootstrap styles

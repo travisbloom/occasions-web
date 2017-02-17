@@ -1,9 +1,8 @@
 import { Navbar, Nav, NavDropdown, MenuItem } from 'react-bootstrap'
-import { withApollo } from 'react-apollo'
+import { withApollo, compose } from 'react-apollo'
 import { Link, withRouter } from 'react-router'
 import React from 'react'
 import { connect } from 'react-redux'
-import { compose } from 'react-apollo'
 
 import urls from '../../urls'
 import { logOut } from '../../actions/user'
