@@ -27,12 +27,12 @@ const API_RESPONSE = {
 
 it('formatGeneralAPIErrors will accurately transform returned error responses', () => {
     expect(formatGeneralAPIErrors(API_RESPONSE)).toEqual([
-        'first password error',
-        'first username error',
-        'second username error',
-        'first nestedObjectProperty error',
-        'second password error',
-        'third username error',
+        'Error on field password: first password error',
+        'Error on field username: first username error',
+        'Error on field username: second username error',
+        'Error on field nestedObjectProperty: first nestedObjectProperty error',
+        'Error on field password: second password error',
+        'Error on field username: third username error',
         'a general form error',
     ])
 })

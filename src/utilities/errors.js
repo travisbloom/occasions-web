@@ -4,13 +4,13 @@ import { SubmissionError } from 'redux-form'
 export const responseHasErrors = response => !!response.graphQLErrors
 
 
-const flattenErrorObject = (data, accum) => {
+const flattenErrorObject = (data, accum, key) => {
     if (isPlainObject(data)) {
         Object.keys(data).forEach((nestedKey) => {
-            flattenErrorObject(data[nestedKey], accum)
+            flattenErrorObject(data[nestedKey], accum, nestedKey)
         })
     } else {
-        data.forEach(keyMessage => accum.push(keyMessage))
+        data.forEach(keyMessage => accum.push(`Error on field ${key}: ${keyMessage}`))
     }
 }
 
@@ -51,6 +51,10 @@ const generateErrorObject = (data, accum, key) => {
         }
         accum[key] = accum[key].concat(data)
     }
+}
+
+export const formatGeneralReduxFormErrors = (response) => {
+    throw new SubmissionError({ _error: formatGeneralAPIErrors(response) })
 }
 
 export const formatReduxFormErrors = (response) => {

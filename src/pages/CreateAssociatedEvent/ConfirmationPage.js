@@ -9,7 +9,7 @@ import gql from 'graphql-tag'
 
 import { Alert, View, Panel, Button } from '../../components'
 import { EventDate } from '../../fragmentComponents'
-import { formatReduxFormErrors } from '../../utilities/errors'
+import { formatGeneralReduxFormErrors } from '../../utilities/errors'
 import urls from '../../urls'
 
 class ConfirmationPage extends React.Component {
@@ -26,7 +26,7 @@ class ConfirmationPage extends React.Component {
                 .then(({ data: { createAssociatedEvent: { associatedEvent } } }) =>
                     router.push(urls.associatedEventDetails(associatedEvent.id)),
                 )
-                .catch(formatReduxFormErrors)
+                .catch(formatGeneralReduxFormErrors)
         )
     }
 
@@ -34,7 +34,7 @@ class ConfirmationPage extends React.Component {
 
     render() {
         const { handleSubmit, error, formValues } = this.props
-
+        console.log({ error })
         return (
             <Form onSubmit={handleSubmit(this.handleSubmit)}>
                 <View marginChildren>

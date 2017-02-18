@@ -12,12 +12,8 @@ module.exports = {
     ],
     output: {
         filename: 'bundle.js',
-    // the output bundle
-
         path: resolve(__dirname, 'dist'),
-
         publicPath: '/',
-    // necessary for HMR to know where to load the hot update chunks
     },
 
     context: resolve(__dirname, 'src'),
@@ -26,14 +22,9 @@ module.exports = {
 
     devServer: {
         hot: true,
-        https: true,
-    // enable HMR on the server
-
+        https: true, // needed by Stripe
         contentBase: resolve(__dirname, 'dist'),
-    // match the output path
-
         publicPath: '/',
-    // match the output `publicPath`
         historyApiFallback: {
             index: '/',
         },
@@ -95,11 +86,9 @@ module.exports = {
             },
         }),
         new webpack.HotModuleReplacementPlugin(),
-    // enable HMR globally
         new HtmlWebpackPlugin({
             template: resolve(__dirname, 'src/index.ejs'),
         }),
         new webpack.NamedModulesPlugin(),
-    // prints more readable module names in the browser console on HMR updates
     ],
 }
