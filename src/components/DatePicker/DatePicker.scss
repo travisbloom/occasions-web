@@ -1,0 +1,46 @@
+:global {
+    @import "../../styles/bootstrapTheme/variables.scss";
+    $react-dates-width-input: 130px;
+    $react-dates-width-arrow: 24px;
+    $react-dates-width-tooltip-arrow: 20px;
+    $react-dates-width-day-picker: 300px;
+    $react-dates-spacing-vertical-picker: $input-height-base;
+
+    $react-dates-color-primary: #brand-success;
+    $react-dates-color-primary-dark: #00514a;
+    $react-dates-color-primary-shade-1: #33dacd;
+    $react-dates-color-primary-shade-2: #66e2da;
+    $react-dates-color-primary-shade-3: #80e8e0;
+    $react-dates-color-primary-shade-4: #b2f1ec;
+    $react-dates-color-secondary: #brand-primary;
+    $react-dates-color-white: #fff;
+    $react-dates-color-gray: #565a5c;
+    $react-dates-color-gray-dark: darken($react-dates-color-gray, 10.5%);
+    $react-dates-color-gray-light: lighten($react-dates-color-gray, 17.8%);   // #82888a
+    $react-dates-color-gray-lighter: lighten($react-dates-color-gray, 45%);     // #cacccd
+    $react-dates-color-highlighted: #ffe8bc;
+
+    $react-dates-color-border: #dbdbdb;
+    $react-dates-color-border-light: #dce0e0;
+    $react-dates-color-border-medium: #c4c4c4;
+    $react-dates-color-placeholder-text: #757575;
+    $react-dates-color-text: #484848;
+    $react-dates-color-text-focus: #007a87;
+    $react-dates-color-focus: #99ede6;
+    @import '~react-dates/css/styles.scss';
+    .SingleDatePicker {
+        .SingleDatePickerInput {
+            border: 2px solid $input-border;
+            border-radius: $border-radius-base;
+        }
+        .DateInput {
+            font-weight: normal;
+            font-size: $font-size-base;
+            line-height: $line-height-computed;
+            padding: $padding-base-vertical - 4px $padding-base-horizontal - 8px;
+        }
+        .DateInput__display-text {
+
+        }
+    }
+}

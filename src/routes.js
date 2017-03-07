@@ -9,6 +9,7 @@ import AssociatedEventDetails from './pages/AssociatedEventDetails/AssociatedEve
 import PurchaseProduct from './pages/PurchaseProduct/PurchaseProduct'
 import TransactionDetails from './pages/TransactionDetails/TransactionDetails'
 import CreateAssociatedEvent from './pages/CreateAssociatedEvent/CreateAssociatedEvent'
+import CreatePerson from './pages/CreatePerson/CreatePerson'
 
 import { hasAccessToken } from './utilities/auth'
 import debug from './utilities/debug'
@@ -39,6 +40,9 @@ export default (
             </Route>
             <Route path="yourGifts">
                 <Route path=":transactionId" component={TransactionDetails} />
+            </Route>
+            <Route path="yourContacts">
+                <Route path="new" component={CreatePerson} />
             </Route>
         </Route>
         <IndexRoute onEnter={redirectUserBasedOnAuth} />

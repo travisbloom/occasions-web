@@ -30,7 +30,7 @@ class AssociatedEventDetails extends React.Component {
                         </Col>
                         <Col xs={4}>Cost:</Col>
                         <Col xs={8}>
-                            <FormattedNumber number={transaction.costUsd} />
+                            <FormattedNumber currency number={transaction.costUsd} />
                         </Col>
                         <Col xs={4}>Shipping Info:</Col>
                         <Col xs={8}>

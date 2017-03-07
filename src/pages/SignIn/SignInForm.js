@@ -59,10 +59,12 @@ class CreateAccountForm extends React.Component {
                             </OverlayTrigger>
                         }
                         type="email"
+                        autoComplete="email"
                         name="username"
                         component={TextInput}
                     />
                     <ReduxFormField
+                        autoComplete="password"
                         label="Password"
                         type="password"
                         name="password"

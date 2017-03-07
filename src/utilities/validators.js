@@ -2,9 +2,14 @@ import {
     createValidator,
     composeValidators,
     combineValidators,
-    isRequired,
     hasLengthGreaterThan,
 } from 'revalidate'
+import { upperFirst } from 'lodash'
+
+const isRequired = createValidator(
+    message => value => [undefined, null, ''].includes(value) ? message : null,
+    field => `${upperFirst(field)} is required`,
+)
 
 const email = composeValidators(
     isRequired,
@@ -16,11 +21,12 @@ const email = composeValidators(
     ),
 )('email')
 
-const addressLine1 = composeValidators(isRequired, hasLengthGreaterThan(3))(
-    'address line 1',
-)
+const streetAddressLine1 = composeValidators(
+    isRequired,
+    hasLengthGreaterThan(3),
+)('street address')
 
-const zipCode = composeValidators(
+const postalCode = composeValidators(
     isRequired,
     createValidator(
         message => value => (
@@ -30,16 +36,25 @@ const zipCode = composeValidators(
     ),
 )('zip code')
 
-const address = (parentName = 'address') =>
-    combineValidators({
-        [`${parentName}.addressLine1`]: addressLine1,
-        [`${parentName}.zipCode`]: zipCode,
-        [`${parentName}.state`]: isRequired('state'),
-    })
+const state = isRequired('state')
+
+const city = isRequired('city')
+
+const location = combineValidators({
+    // streetAddressLine1,
+    postalCode,
+    state,
+    city,
+})
 
 export default {
-    address,
-    zipCode,
-    addressLine1,
+    location,
+    postalCode,
+    streetAddressLine1,
     email,
+    createValidator,
+    composeValidators,
+    combineValidators,
+    hasLengthGreaterThan,
+    isRequired,
 }

@@ -8,6 +8,7 @@ const purchaseProduct = (eventId, productSlug) => (
     `${AUTHENTICATED_ROUTES}/yourEvents/${eventId}/${productSlug}`
 )
 const transactionDetails = id => `${AUTHENTICATED_ROUTES}/yourGifts/${id}`
+const createPerson = () => `${AUTHENTICATED_ROUTES}/yourContacts/new`
 
 export default {
     signIn,
@@ -17,4 +18,5 @@ export default {
     associatedEventDetails,
     purchaseProduct,
     transactionDetails,
+    createPerson,
 }

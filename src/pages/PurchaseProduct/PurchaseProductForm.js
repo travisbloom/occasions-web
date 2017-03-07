@@ -11,7 +11,7 @@ import { ReduxFormField, TextInput, Button, Row, Alert, View, Header, Select, Co
 import { formatReduxFormErrors } from '../../utilities/errors'
 import urls from '../../urls'
 
-import NewAddressForm from './NewAddressForm'
+import { NewAddressForm } from '../../containers'
 
 class PurchaseProductForm extends React.Component {
 
