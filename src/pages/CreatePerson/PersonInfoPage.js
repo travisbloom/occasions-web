@@ -3,8 +3,7 @@
 import React from 'react'
 import { reduxForm } from 'redux-form'
 
-import { View, Link, ReduxFormField, TextInput, Button, DatePicker } from '../../components'
-import urls from '../../urls'
+import { View, ReduxFormField, TextInput, Button, DatePicker } from '../../components'
 
 import validate from './validate'
 

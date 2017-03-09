@@ -35,7 +35,7 @@ const state = isRequired('state')
 const city = isRequired('city')
 
 const location = combineValidators({
-    // streetAddressLine1,
+    streetAddressLine1,
     postalCode,
     state,
     city,

@@ -13,12 +13,13 @@ class NetworkInterface extends HTTPFetchNetworkInterface {
 /* eslint-enable no-underscore-dangle */
 
 export default ({ history }) => {
-    const networkInterface = new NetworkInterface(
-        hasAccessToken() ? `${APP_ENV.appServer}/graphql` : `${APP_ENV.appServer}/graphql_public`,
-        {
-            credentials: 'same-origin',
-        },
-    )
+    const gqlUrl = hasAccessToken()
+        ? `${APP_ENV.appServer}/graphql`
+        : `${APP_ENV.appServer}/graphql_public`
+
+    const networkInterface = new NetworkInterface(gqlUrl, {
+        credentials: 'same-origin',
+    })
 
     /* eslint-disable no-param-reassign */
     networkInterface.use([
