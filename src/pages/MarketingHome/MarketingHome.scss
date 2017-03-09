@@ -1,0 +1,30 @@
+@import "../../styles/variables";
+
+.hero {
+    min-height: auto;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-align: center;
+    align-items: center;
+    color: $color-white;
+    text-align: center;
+}
+.firstHero {
+    min-height: 100vh;
+    margin: 0 auto;
+}
+.firstHeroContent {
+    margin: 0 auto;
+    text-align: center;
+}
+.secondHero {
+    width: 100%;
+    min-height: 75vh;
+}
+.signInLink {
+    position: absolute;
+    background-color: transparent;
+    top: $spacing;
+    right: $spacing;
+}

@@ -1,15 +1,11 @@
 import { Label as RBLabel } from 'react-bootstrap'
-import { StyleSheet, css } from 'aphrodite'
 import React from 'react'
+import classNames from 'classnames'
+
+import styles from './Label.scss'
 
 const Label = ({ className, ...props }) => (
-    <RBLabel className={css(styles.base, className)} {...props} />
+    <RBLabel className={classNames(styles.base, className)} {...props} />
 )
-
-const styles = StyleSheet.create({
-    base: {
-        fontSize: 'inherit',
-    },
-})
 
 export default Label

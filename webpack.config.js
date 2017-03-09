@@ -2,6 +2,8 @@ const { resolve } = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
+const clientSecret = 'W9GY47vMMlEftgr3zGP0HjRHlx0LSC09HTrVTG1F3ioadyrzNx2DxmfyPK7DZjoQmR7a8jxzo8o5lNdAOHp8iEeDU0ihce25D9pXiZerVTe1FSCunr3OYwes1Rj9XXhi'
+
 module.exports = {
     entry: [
         'bootstrap-loader',
@@ -11,15 +13,13 @@ module.exports = {
         './index.js',
     ],
     output: {
-        filename: 'bundle.js',
+        filename: '[name].js',
         path: resolve(__dirname, 'dist'),
         publicPath: '/',
     },
-
+    cache: true,
     context: resolve(__dirname, 'src'),
-
-    devtool: 'inline-source-map',
-
+    devtool: 'eval-source-map',
     devServer: {
         hot: true,
         https: true, // needed by Stripe
@@ -74,9 +74,13 @@ module.exports = {
                 stripeClientId: JSON.stringify('pk_test_VQtPlmj5VhEm9xOlrRJIDxWG'),
                 appServer: JSON.stringify('http://127.0.0.1:8000'),
                 clientId: JSON.stringify('uJZMHlRFcTHcBYnBctHhrfZQhfv6gg5jbqfgqiR1'),
-                clientSecret: JSON.stringify(
-                    'W9GY47vMMlEftgr3zGP0HjRHlx0LSC09HTrVTG1F3ioadyrzNx2DxmfyPK7DZjoQmR7a8jxzo8o5lNdAOHp8iEeDU0ihce25D9pXiZerVTe1FSCunr3OYwes1Rj9XXhi',
-                ),
+                clientSecret: JSON.stringify(clientSecret),
+            },
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendor',
+            minChunks(module) {
+                return module.context && module.context.indexOf('node_modules') !== -1
             },
         }),
         new webpack.HotModuleReplacementPlugin(),

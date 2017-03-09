@@ -4,8 +4,9 @@
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "BABEL_ENV=dev webpack-dev-server",
     "test": "jest",
+    "lint": "eslint ./src",
     "format": "prettier-eslint --write \"src/**/*.js\"",
     "flow": "flow; test $? -eq 0 -o $? -eq 2"
   },
@@ -15,7 +16,6 @@
     "webpack": "^2.2.1"
   },
   "dependencies": {
-    "aphrodite": "^1.1.0",
     "apollo-client": "^0.8.5",
     "autoprefixer": "^6.7.2",
     "babel-core": "^6.23.0",
@@ -24,6 +24,7 @@
     "babel-loader": "^6.2.10",
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
     "babel-polyfill": "^6.23.0",
+    "babel-preset-env": "^1.2.1",
     "babel-preset-es2015": "^6.22.0",
     "babel-preset-react": "^6.23.0",
     "babel-preset-stage-2": "^6.22.0",
@@ -33,11 +34,12 @@
     "css-loader": "^0.26.1",
     "eslint": "^3.15.0",
     "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-css-modules": "^2.6.1",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.9.0",
     "exports-loader": "^0.6.3",
-    "extract-text-webpack-plugin": "2.0.0-rc.3",
+    "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.10.0",
     "flexboxgrid": "^6.3.1",
     "flow-bin": "^0.39.0",

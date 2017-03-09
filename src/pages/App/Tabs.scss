@@ -1,0 +1,27 @@
+@import "../../styles/variables";
+
+$height-tabs: 60px;
+
+.base {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: $height-tabs;
+    padding: 6px 0;
+    background-color: $color-white;
+    border-top: 1px solid $color-primary;
+}
+
+@media (min-width: $screen-sm-min) {
+    width: 49rem;
+    margin: 0 auto;
+    border-left: 1px solid $color-primary;
+    border-right: 1px solid $color-primary;
+}
+
+.tab {
+    font-size: 40px;
+    text-align: center;
+}

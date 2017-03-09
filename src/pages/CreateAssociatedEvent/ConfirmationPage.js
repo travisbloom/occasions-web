@@ -30,7 +30,7 @@ class ConfirmationPage extends React.Component {
 
     render() {
         const { handleSubmit, error, formValues } = this.props
-        console.log({ error })
+
         return (
             <Form onSubmit={handleSubmit(this.handleSubmit)}>
                 <View marginChildren>

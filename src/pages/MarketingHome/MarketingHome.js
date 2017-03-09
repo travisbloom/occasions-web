@@ -1,7 +1,6 @@
 // @flow
 import React from 'react'
-import { StyleSheet, css } from 'aphrodite'
-
+import classNames from 'classnames'
 import {
     Header,
     View,
@@ -14,10 +13,10 @@ import {
     Button,
     LinkContainer,
 } from '../../components'
-import styleVars from '../../styles'
 import { hasAccessToken } from '../../utilities/auth'
 import urls from '../../urls'
 
+import styles from './MarketingHome.scss'
 import heroImage from './heroImage.jpg'
 
 const CollapsableArrow = () => (
@@ -43,15 +42,18 @@ class MarketingHome extends React.Component {
     render() {
         return (
             <View>
-                <View className={css(styles.hero, styles.firstHero)}>
+                <View
+                    style={{ backgroundImage: `url(${heroImage})` }}
+                    className={classNames(styles.hero, styles.firstHero)}
+                >
                     <LinkContainer
                         to={this.isLoggedIn ? urls.associatedEventsList() : urls.signIn()}
                     >
-                        <Button className={css(styles.signInLink)} bsStyle="info">
+                        <Button className={classNames(styles.signInLink)} bsStyle="info">
                             {this.isLoggedIn ? 'Home' : 'Sign In'}
                         </Button>
                     </LinkContainer>
-                    <View className={css(styles.firstHeroContent)}>
+                    <View className={classNames(styles.firstHeroContent)}>
                         <Header size="largest">
                             Occasions
                         </Header>
@@ -63,8 +65,11 @@ class MarketingHome extends React.Component {
                         </Header>
                     </View>
                 </View>
-                <View className={css(styles.hero, styles.secondHero)}>
-                    <Grid fluid className={css(styles.secondHeroContent)}>
+                <View
+                    style={{ backgroundImage: `url(${heroImage})` }}
+                    className={classNames(styles.hero, styles.secondHero)}
+                >
+                    <Grid fluid>
                         <Row between="sm" middle="sm">
                             <Col md={3} xs={12}>
                                 <Header size="larger">
@@ -90,8 +95,11 @@ class MarketingHome extends React.Component {
                         </Row>
                     </Grid>
                 </View>
-                <View className={css(styles.hero, styles.firstHero)}>
-                    <View className={css(styles.firstHeroContent)}>
+                <View
+                    style={{ backgroundImage: `url(${heroImage})` }}
+                    className={classNames(styles.hero, styles.firstHero)}
+                >
+                    <View className={classNames(styles.firstHeroContent)}>
                         <Header size="larger">
                             <View style={{ maxWidth: '515px' }}>
                                 <LinkContainer to={urls.signIn()}>
@@ -107,37 +115,5 @@ class MarketingHome extends React.Component {
         )
     }
 }
-
-const styles = StyleSheet.create({
-    hero: {
-        minHeight: 'auto',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        display: 'flex',
-        flexAlign: 'center',
-        alignItems: 'center',
-        color: styleVars.colorWhite,
-        backgroundImage: `url(${heroImage})`,
-        textAlign: 'center',
-    },
-    firstHero: {
-        minHeight: '100vh',
-        margin: '0 auto',
-    },
-    firstHeroContent: {
-        margin: '0 auto',
-        textAlign: 'center',
-    },
-    secondHero: {
-        width: '100%',
-        minHeight: '75vh',
-    },
-    signInLink: {
-        position: 'absolute',
-        backgroundColor: 'transparent',
-        top: `${styleVars.spacing}px`,
-        right: `${styleVars.spacing}px`,
-    },
-})
 
 export default MarketingHome

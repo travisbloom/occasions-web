@@ -30,7 +30,8 @@ class CreateAccountForm extends React.Component {
 
     createAccount = (values) => {
         const { createUser } = this.props
-        return createUser(values).then(this.onSuccess).catch(formatReduxFormErrors) // TODO add access token to local storage
+        // TODO add access token to local storage
+        return createUser(values).then(this.onSuccess).catch(formatReduxFormErrors)
     };
 
     signIn = ({ username, password }) =>
