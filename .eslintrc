@@ -11,7 +11,6 @@
       "APP_ENV": true
   },
   "parser": "babel-eslint",
-  "extends": "airbnb",
   "rules": {
       "semi": [1, "never"],
       "indent": [1, 4],
@@ -27,5 +26,12 @@
       "default-case": 0,
       "import/prefer-default-export": 0,
       "no-confusing-arrow": 0
-  }
+  },
+  "plugins": [
+    "css-modules"
+  ],
+  "extends": [
+    "airbnb",
+    "plugin:css-modules/recommended"
+  ]
 }

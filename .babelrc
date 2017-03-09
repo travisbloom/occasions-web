@@ -11,6 +11,18 @@
   "env": {
      "test": {
        "plugins": ["transform-es2015-modules-commonjs"]
-     }
+     },
+     "dev": {
+        "presets": [
+            ["env", {
+              "modules": false,
+              "useBuiltIns": true,
+              "targets": {
+                "browsers": ["last 2 Chrome versions"]
+              }
+            }],
+            "react"
+        ],
+      }
    }
 }
