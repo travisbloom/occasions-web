@@ -12,19 +12,21 @@ import Navbar from './Navbar'
 import Tabs from './Tabs'
 
 class App extends React.Component {
-
     state = {
         hasBackButton: false,
-    }
+    };
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.location.pathname === this.props.location.pathname) return
+        if (nextProps.location.pathname === this.props.location.pathname) {
+            return
+        }
         const routeDepthDiff = nextProps.routes.length - this.props.routes.length
         const shorterRouteStack = routeDepthDiff < 0 ? nextProps.routes : this.props.routes
         const longerRouteStack = routeDepthDiff > 0 ? nextProps.routes : this.props.routes
-        const sameRoutePaths = shorterRouteStack.every(({ path }, index) => (
-            index < shorterRouteStack.lengt - 1 ? path === longerRouteStack[index].path : true
-        ))
+        const sameRoutePaths = shorterRouteStack.every(
+            ({ path }, index) =>
+                index < shorterRouteStack.lengt - 1 ? path === longerRouteStack[index].path : true,
+        )
         if (!sameRoutePaths) {
             if (this.state.hasBackButton) {
                 this.setState({ hasBackButton: false })
@@ -45,26 +47,27 @@ class App extends React.Component {
         position: 'absolute',
         height: '100%',
         width: '100%',
-    })
+    });
 
-    slideRight = styles => this.mapStyles(presets.slideRight.mapStyles(styles))
+    slideRight = styles => this.mapStyles(presets.slideRight.mapStyles(styles));
 
-    slideLeft = styles => this.mapStyles(presets.slideLeft.mapStyles(styles))
+    slideLeft = styles => this.mapStyles(presets.slideLeft.mapStyles(styles));
 
     render() {
         const { children, data: { currentUser }, errors } = this.props
 
         return (
             <View>
-                <Navbar
-                    hasBackButton={this.state.hasBackButton}
-                    currentUser={currentUser}
-                />
+                <Navbar hasBackButton={this.state.hasBackButton} currentUser={currentUser} />
                 <View
-                    style={{ position: 'fixed', bottom: `${Tabs.height}px`, width: '100%' }}
+                    style={{
+                        position: 'fixed',
+                        bottom: `${Tabs.height}px`,
+                        width: '100%',
+                    }}
                     padding
                 >
-                    {errors.map((err, index) =>
+                    {errors.map((err, index) => (
                         <Alert
                             style={{ marginBottom: '10px' }}
                             onDismiss={() => this.props.closeError(index)}
@@ -72,8 +75,8 @@ class App extends React.Component {
                             key={index}
                         >
                             {err}
-                        </Alert>,
-                    )}
+                        </Alert>
+                    ))}
                 </View>
                 <Grid
                     style={{

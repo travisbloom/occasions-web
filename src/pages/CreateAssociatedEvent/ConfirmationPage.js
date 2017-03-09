@@ -13,7 +13,6 @@ import { formatGeneralReduxFormErrors } from '../../utilities/errors'
 import urls from '../../urls'
 
 class ConfirmationPage extends React.Component {
-
     handleSubmit = ({ eventId, event, receivingPersonId }) => {
         const { createAssociatedEvent, router } = this.props
         const input = {
@@ -21,16 +20,13 @@ class ConfirmationPage extends React.Component {
             event: eventId ? null : event,
             receivingPersonId: receivingPersonId ? receivingPersonId.value : null,
         }
-        return (
-            createAssociatedEvent(input)
-                .then(({ data: { createAssociatedEvent: { associatedEvent } } }) =>
-                    router.push(urls.associatedEventDetails(associatedEvent.id)),
-                )
-                .catch(formatGeneralReduxFormErrors)
-        )
-    }
+        return createAssociatedEvent(input)
+            .then(({ data: { createAssociatedEvent: { associatedEvent } } }) =>
+                router.push(urls.associatedEventDetails(associatedEvent.id)))
+            .catch(formatGeneralReduxFormErrors)
+    };
 
-    handleSelectEvent = event => this.props.change('eventId', event.pk)
+    handleSelectEvent = event => this.props.change('eventId', event.pk);
 
     render() {
         const { handleSubmit, error, formValues } = this.props
@@ -43,12 +39,7 @@ class ConfirmationPage extends React.Component {
                         <View><EventDate event={formValues.event} /></View>
                     </Panel>
                     <Button type="submit" block>Create Event</Button>
-                    <Alert
-                        dismissable
-                        unHideWithChildren
-                        stackChildren
-                        bsStyle="danger"
-                    >
+                    <Alert dismissable unHideWithChildren stackChildren bsStyle="danger">
                         {error}
                     </Alert>
                 </View>

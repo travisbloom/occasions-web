@@ -4,11 +4,12 @@ const initialState = { isLoggedIn: null }
 
 export default (state = initialState, action) => {
     switch (action.type) {
-    case (LOG_OUT):
+    case LOG_OUT:
         return {
             ...state,
             isLoggedIn: false,
         }
-    default: return state
+    default:
+        return state
     }
 }

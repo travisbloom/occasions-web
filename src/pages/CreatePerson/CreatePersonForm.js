@@ -20,56 +20,51 @@ class CreatePersonForm extends React.Component {
     state = {
         page: 1,
         addressIndex: 0,
-    }
+    };
 
-    nextPage = () => this.setState({ page: this.state.page + 1 })
+    nextPage = () => this.setState({ page: this.state.page + 1 });
 
-    previousPage = () => this.setState({ page: this.state.page - 1 })
+    previousPage = () => this.setState({ page: this.state.page - 1 });
 
     handleSubmit = (values) => {
         const { createPerson, onSuccess } = this.props
-        createPerson(values)
-            .then(onSuccess)
-            .catch(formatReduxFormErrors)
-    }
+        createPerson(values).then(onSuccess).catch(formatReduxFormErrors)
+    };
 
     onAddAddress = () => this.setState(state => ({
         page: 2,
         addressIndex: state.addressIndex + 1,
-    }))
+    }));
 
     renderPage = () => {
         const { page, addressIndex } = this.state
         switch (page) {
         case 2:
-            return (
-                <PersonInfoPage onSubmit={this.nextPage} />
-            )
+            return <PersonInfoPage onSubmit={this.nextPage} />
         case 1:
-            return (
-                <AddAddressPage addressIndex={addressIndex} onSubmit={this.nextPage} />
-            )
+            return <AddAddressPage addressIndex={addressIndex} onSubmit={this.nextPage} />
         }
         return <ConfirmationPage onAddAddress={this.onAddAddress} />
-    }
+    };
 
     renderBackLanguage = () => {
         const { page } = this.state
         switch (page) {
-        case 1: return null
-        case 2: return 'Select Receiving Person'
+        case 1:
+            return null
+        case 2:
+            return 'Select Receiving Person'
         }
         return 'Select Event'
-    }
+    };
 
     render() {
         const {
-
             style,
         } = this.props
 
         return (
-            <View style={style} padding >
+            <View style={style} padding>
                 <View>
                     <Link onClick={this.previousPage}>{this.renderBackLanguage()}</Link>
                 </View>

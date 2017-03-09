@@ -7,7 +7,6 @@ import { Panel, View, Button } from '../../components'
 import { EventDate } from '../../fragmentComponents'
 
 class EventsList extends React.Component {
-
     render() {
         const {
             data: {
@@ -20,11 +19,11 @@ class EventsList extends React.Component {
         if (!events) return <span>allllmost</span>
         return (
             <View style={style} marginChildren>
-                {events.edges.map(({ node: event }) =>
+                {events.edges.map(({ node: event }) => (
                     <Panel key={event.id} header={event.name}>
                         <Button onClick={() => onSelectEvent(event)}>Select</Button>
-                    </Panel>,
-                )}
+                    </Panel>
+                ))}
             </View>
         )
     }

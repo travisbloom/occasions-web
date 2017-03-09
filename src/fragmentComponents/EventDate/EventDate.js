@@ -16,10 +16,12 @@ const fragment = gql`
 class EventDate extends React.Component {
     static propTypes = {
         event: propType(fragment).isRequired,
-    }
+    };
 
     render() {
-        const { event: { isReoccuringYearly, timeStart, dateStart } } = this.props
+        const {
+            event: { isReoccuringYearly, timeStart, dateStart },
+        } = this.props
         if (isReoccuringYearly) {
             if (timeStart) {
                 // TODO

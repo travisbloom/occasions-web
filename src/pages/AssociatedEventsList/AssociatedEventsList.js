@@ -9,7 +9,6 @@ import urls from '../../urls'
 import AssociatedEventSummary from './AssociatedEventSummary'
 
 class AssociatedEventsList extends React.Component {
-
     renderEvents = () => {
         const {
             data: {
@@ -21,12 +20,12 @@ class AssociatedEventsList extends React.Component {
 
         return (
             <View marginChildren>
-                {currentUser.person.createdEvents.edges.map(({ node }) =>
-                    <AssociatedEventSummary key={node.id} associatedEvent={node} />,
-                )}
+                {currentUser.person.createdEvents.edges.map(({ node }) => (
+                    <AssociatedEventSummary key={node.id} associatedEvent={node} />
+                ))}
             </View>
         )
-    }
+    };
 
     render() {
         return (

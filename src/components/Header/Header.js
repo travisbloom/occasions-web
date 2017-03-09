@@ -1,14 +1,13 @@
 import React from 'react'
 
-
 class Header extends React.Component {
     static propTypes = {
         size: React.PropTypes.oneOf(['smaller', 'small', 'medium', 'large', 'larger', 'largest']),
-    }
+    };
 
     static defaultProps = {
         size: 'medium',
-    }
+    };
 
     render() {
         const { size, children, ...props } = this.props
@@ -21,13 +20,8 @@ class Header extends React.Component {
             smaller: 'h6',
         }
 
-        return React.createElement(
-            el[size],
-            props,
-            children,
-        )
+        return React.createElement(el[size], props, children)
     }
-
 }
 
 export default Header

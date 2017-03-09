@@ -2,7 +2,18 @@
 import React from 'react'
 import { StyleSheet, css } from 'aphrodite'
 
-import { Header, View, LineBreak, MediaQuery, Row, Col, Icon, Grid, Button, LinkContainer } from '../../components'
+import {
+    Header,
+    View,
+    LineBreak,
+    MediaQuery,
+    Row,
+    Col,
+    Icon,
+    Grid,
+    Button,
+    LinkContainer,
+} from '../../components'
 import styleVars from '../../styles'
 import { hasAccessToken } from '../../utilities/auth'
 import urls from '../../urls'
@@ -12,20 +23,18 @@ import heroImage from './heroImage.jpg'
 const CollapsableArrow = () => (
     <Header size="larger">
         <MediaQuery md>
-            {matches => (
-                matches ?
-                    <Icon
+            {matches =>
+                matches
+                    ? <Icon
                         type="arrow-right"
                         style={{ display: 'inline-block', marginLeft: '8px' }}
-                    /> :
-                    <View margin="large"><Icon type="arrow-down" /></View>
-            )}
+                    />
+                    : <View margin="large"><Icon type="arrow-down" /></View>}
         </MediaQuery>
     </Header>
 )
 
 class MarketingHome extends React.Component {
-
     constructor(props) {
         super(props)
         this.isLoggedIn = hasAccessToken()
@@ -35,7 +44,9 @@ class MarketingHome extends React.Component {
         return (
             <View>
                 <View className={css(styles.hero, styles.firstHero)}>
-                    <LinkContainer to={this.isLoggedIn ? urls.associatedEventsList() : urls.signIn()}>
+                    <LinkContainer
+                        to={this.isLoggedIn ? urls.associatedEventsList() : urls.signIn()}
+                    >
                         <Button className={css(styles.signInLink)} bsStyle="info">
                             {this.isLoggedIn ? 'Home' : 'Sign In'}
                         </Button>
@@ -46,7 +57,9 @@ class MarketingHome extends React.Component {
                         </Header>
                         <LineBreak />
                         <Header size="larger" style={{ maxWidth: '515px' }}>
-                            {'Effortlessly send postcards cards to your friends, loved ones, and family.'}
+                            {
+                                'Effortlessly send postcards cards to your friends, loved ones, and family.'
+                            }
                         </Header>
                     </View>
                 </View>
@@ -82,7 +95,9 @@ class MarketingHome extends React.Component {
                         <Header size="larger">
                             <View style={{ maxWidth: '515px' }}>
                                 <LinkContainer to={urls.signIn()}>
-                                    <Button bsSize="large" bsStyle="primary">{'Sign Up Now'}</Button>
+                                    <Button bsSize="large" bsStyle="primary">
+                                        {'Sign Up Now'}
+                                    </Button>
                                 </LinkContainer>
                             </View>
                         </Header>

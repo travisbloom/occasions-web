@@ -9,7 +9,6 @@ import { EventDate } from '../../fragmentComponents'
 import PurchaseProductForm from './PurchaseProductForm'
 
 class PurchaseProduct extends React.Component {
-
     render() {
         const {
             data: {
@@ -25,7 +24,9 @@ class PurchaseProduct extends React.Component {
         return (
             <View style={style} padding>
                 <Header size="largest">{product.name}</Header>
-                <Header size="larger">For {associatedEvent.receivingPerson.fullName}</Header>
+                <Header size="larger">
+                    For {associatedEvent.receivingPerson.fullName}
+                </Header>
                 <PurchaseProductForm
                     initialValues={{
                         receivingPersonId: associatedEvent.receivingPerson.pk,

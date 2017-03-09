@@ -7,15 +7,13 @@ import { connect } from 'react-redux'
 import urls from '../../urls'
 import { logOut } from '../../actions/user'
 
-
 class AppNav extends React.Component {
-
     logOut = () => {
         const { router, logOutUser, client } = this.props
         logOutUser()
-        .then(() => client.networkInterface.setUri(`${APP_ENV.appServer}/graphql_public`))
-        .then(() => router.push(urls.signIn()))
-    }
+            .then(() => client.networkInterface.setUri(`${APP_ENV.appServer}/graphql_public`))
+            .then(() => router.push(urls.signIn()))
+    };
 
     render() {
         const { currentUser } = this.props
@@ -35,7 +33,9 @@ class AppNav extends React.Component {
                             title={currentUser ? currentUser.person.fullName : ''}
                             id="main-login-dropdown"
                         >
-                            <MenuItem onClick={this.logOut} eventKey={3.1}>Log Out</MenuItem>
+                            <MenuItem onClick={this.logOut} eventKey={3.1}>
+                                Log Out
+                            </MenuItem>
                         </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>
@@ -46,8 +46,4 @@ class AppNav extends React.Component {
 
 Navbar.height = 60
 
-export default compose(
-    withApollo,
-    withRouter,
-    connect(null, { logOutUser: logOut }),
-)(AppNav)
+export default compose(withApollo, withRouter, connect(null, { logOutUser: logOut }))(AppNav)

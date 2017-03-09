@@ -38,7 +38,7 @@ class AssociatedEventSummary extends React.Component {
     transitionToDetailsPage = () => {
         const { associatedEvent, router } = this.props
         router.push(urls.associatedEventDetails(associatedEvent.id))
-    }
+    };
 
     render() {
         const { associatedEvent } = this.props
@@ -46,7 +46,11 @@ class AssociatedEventSummary extends React.Component {
         return (
             <Panel
                 onClick={this.transitionToDetailsPage}
-                header={<View>{associatedEvent.receivingPerson.fullName} - {associatedEvent.event.name}</View>}
+                header={
+                    <View>
+                        {associatedEvent.receivingPerson.fullName} - {associatedEvent.event.name}
+                    </View>
+                }
             >
                 <Row>
                     <Col xs={6}>
@@ -54,9 +58,9 @@ class AssociatedEventSummary extends React.Component {
                         <View><EventDate event={associatedEvent.event} /></View>
                     </Col>
                     <Col xs={6}>
-                        {associatedEvent.transactions.edges.length ?
-                            'Purchased Stuff' : 'Buy Stuff'
-                        }
+                        {associatedEvent.transactions.edges.length
+                            ? 'Purchased Stuff'
+                            : 'Buy Stuff'}
                     </Col>
                 </Row>
             </Panel>

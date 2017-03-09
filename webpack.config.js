@@ -34,9 +34,7 @@ module.exports = {
         rules: [
             {
                 test: /\.js$/,
-                use: [
-                    'babel-loader',
-                ],
+                use: ['babel-loader'],
                 exclude: /node_modules/,
             },
             {
@@ -56,12 +54,7 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                use: [
-                    'style-loader',
-                    'css-loader?modules',
-                    'postcss-loader',
-                    'sass-loader',
-                ],
+                use: ['style-loader', 'css-loader?modules', 'postcss-loader', 'sass-loader'],
             },
             {
                 test: /\.(woff2?|svg)$/,
@@ -71,7 +64,6 @@ module.exports = {
                 test: /\.(ttf|eot|jpg)$/,
                 use: 'file-loader',
             },
-
         ],
     },
 
@@ -82,7 +74,9 @@ module.exports = {
                 stripeClientId: JSON.stringify('pk_test_VQtPlmj5VhEm9xOlrRJIDxWG'),
                 appServer: JSON.stringify('http://127.0.0.1:8000'),
                 clientId: JSON.stringify('uJZMHlRFcTHcBYnBctHhrfZQhfv6gg5jbqfgqiR1'),
-                clientSecret: JSON.stringify('W9GY47vMMlEftgr3zGP0HjRHlx0LSC09HTrVTG1F3ioadyrzNx2DxmfyPK7DZjoQmR7a8jxzo8o5lNdAOHp8iEeDU0ihce25D9pXiZerVTe1FSCunr3OYwes1Rj9XXhi'),
+                clientSecret: JSON.stringify(
+                    'W9GY47vMMlEftgr3zGP0HjRHlx0LSC09HTrVTG1F3ioadyrzNx2DxmfyPK7DZjoQmR7a8jxzo8o5lNdAOHp8iEeDU0ihce25D9pXiZerVTe1FSCunr3OYwes1Rj9XXhi',
+                ),
             },
         }),
         new webpack.HotModuleReplacementPlugin(),

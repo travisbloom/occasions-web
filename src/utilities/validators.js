@@ -14,24 +14,18 @@ const isRequired = createValidator(
 const email = composeValidators(
     isRequired,
     createValidator(
-        message => value => (
-            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ? message : false
-        ),
+        message =>
+            value => !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ? message : false,
         field => `this ${field} is not a valid format`,
     ),
 )('email')
 
-const streetAddressLine1 = composeValidators(
-    isRequired,
-    hasLengthGreaterThan(3),
-)('street address')
+const streetAddressLine1 = composeValidators(isRequired, hasLengthGreaterThan(3))('street address')
 
 const postalCode = composeValidators(
     isRequired,
     createValidator(
-        message => value => (
-            !/^\d{5}(?:[-\s]\d{4})?$/i.test(value) ? message : false
-        ),
+        message => value => !/^\d{5}(?:[-\s]\d{4})?$/i.test(value) ? message : false,
         field => `this ${field} is not a valid format`,
     ),
 )('zip code')

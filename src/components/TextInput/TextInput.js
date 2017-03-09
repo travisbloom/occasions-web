@@ -2,16 +2,15 @@ import React from 'react'
 import classNames from 'classnames'
 
 class TextInput extends React.Component {
-
     static propTypes = {
         onChange: React.PropTypes.func.isRequired,
         value: React.PropTypes.oneOfType([
             React.PropTypes.number,
             React.PropTypes.string,
         ]).isRequired,
-    }
+    };
 
-    handleOnChange = event => this.props.onChange(event.target.value, event)
+    handleOnChange = event => this.props.onChange(event.target.value, event);
 
     render() {
         const { className, textarea, ...props } = this.props
@@ -24,6 +23,5 @@ class TextInput extends React.Component {
         return <input {...passedProps} />
     }
 }
-
 
 export default TextInput

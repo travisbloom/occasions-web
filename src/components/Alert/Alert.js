@@ -3,9 +3,7 @@ import React from 'react'
 
 import { View } from '../'
 
-const formatStackedChildren = children => React.Children.map(children, node => (
-    <View>{node}</View>
-))
+const formatStackedChildren = children => React.Children.map(children, node => <View>{node}</View>)
 
 class Alert extends React.Component {
     static propTypes = {
@@ -13,19 +11,19 @@ class Alert extends React.Component {
         stackChildren: React.PropTypes.bool,
         unHideWithChildren: React.PropTypes.bool,
         dismissable: React.PropTypes.bool,
-    }
+    };
 
     static defaultProps = {
         stackChildren: false,
         unHideWithChildren: false,
         dismissable: false,
-    }
+    };
 
     constructor(props) {
         super(props)
         const { unHideWithChildren, dismissable, children } = props
         this.state = {
-            isShowing: dismissable ? (unHideWithChildren && children) : true,
+            isShowing: dismissable ? unHideWithChildren && children : true,
         }
     }
 
@@ -40,7 +38,7 @@ class Alert extends React.Component {
         }
     }
 
-    onDismiss = () => this.setState({ isShowing: false })
+    onDismiss = () => this.setState({ isShowing: false });
 
     render() {
         const { isShowing } = this.state

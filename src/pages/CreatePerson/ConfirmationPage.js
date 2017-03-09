@@ -20,7 +20,6 @@ const LineItem = ({ label, children }) => (
 )
 
 class ConfirmationPage extends React.Component {
-
     handleSubmit = ({ eventId, event, receivingPersonId }) => {
         const { createPerson, router } = this.props
         const input = {
@@ -28,14 +27,11 @@ class ConfirmationPage extends React.Component {
             event: eventId ? null : event,
             receivingPersonId: receivingPersonId ? receivingPersonId.value : null,
         }
-        return (
-            createPerson(input)
-                .then(({ data: { createPerson: { associatedEvent } } }) =>
-                    router.push(urls.associatedEventDetails(associatedEvent.id)),
-                )
-                .catch(formatGeneralReduxFormErrors)
-        )
-    }
+        return createPerson(input)
+            .then(({ data: { createPerson: { associatedEvent } } }) =>
+                router.push(urls.associatedEventDetails(associatedEvent.id)))
+            .catch(formatGeneralReduxFormErrors)
+    };
 
     render() {
         const { handleSubmit, error, formValues, onAddAddress } = this.props
@@ -48,21 +44,18 @@ class ConfirmationPage extends React.Component {
                             <FormattedDate date={formValues.birthday} />
                         </LineItem>
                         <Panel header="Addresses">
-                            {formValues.associatedLocations.map(location =>
+                            {formValues.associatedLocations.map(location => (
                                 <View>
                                     {formatLocation(location)}
-                                </View>,
-                            )}
+                                </View>
+                            ))}
                         </Panel>,
                     </Panel>
                     <Button type="submit" block>Create Person</Button>
-                    <Button onClick={onAddAddress} block>Add Another Address</Button>
-                    <Alert
-                        dismissable
-                        unHideWithChildren
-                        stackChildren
-                        bsStyle="danger"
-                    >
+                    <Button onClick={onAddAddress} block>
+                        Add Another Address
+                    </Button>
+                    <Alert dismissable unHideWithChildren stackChildren bsStyle="danger">
                         {error}
                     </Alert>
                 </View>

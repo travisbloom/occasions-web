@@ -10,7 +10,6 @@ import { Button, Row, Alert, View, AddressForm, Modal } from '../../components'
 import { formatReduxFormErrors } from '../../utilities/errors'
 
 class NewAddressForm extends React.Component {
-
     createNewAssociatedLocation = (values) => {
         const { createNewAssociatedLocation, onComplete } = this.props
         const formattedPayload = {
@@ -20,12 +19,10 @@ class NewAddressForm extends React.Component {
                 state: values.location.state ? values.location.state.value : '',
             },
         }
-        return (
-            createNewAssociatedLocation(formattedPayload)
-                .then(onComplete)
-                .catch(formatReduxFormErrors)
-        )
-    }
+        return createNewAssociatedLocation(formattedPayload)
+            .then(onComplete)
+            .catch(formatReduxFormErrors)
+    };
 
     render() {
         const { handleSubmit, submitting, pristine, error, person, show, onHide } = this.props
@@ -41,12 +38,7 @@ class NewAddressForm extends React.Component {
                             <FormSection name="location">
                                 <AddressForm />
                             </FormSection>
-                            <Alert
-                                dismissable
-                                unHideWithChildren
-                                stackChildren
-                                bsStyle="danger"
-                            >
+                            <Alert dismissable unHideWithChildren stackChildren bsStyle="danger">
                                 {error}
                             </Alert>
                         </View>

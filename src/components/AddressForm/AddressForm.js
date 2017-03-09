@@ -1,7 +1,17 @@
 import React from 'react'
 import { noop } from 'lodash'
 
-import { ReduxFormField, TextInput, Col, Row, Select, Tooltip, OverlayTrigger, View, FormField } from '../'
+import {
+    ReduxFormField,
+    TextInput,
+    Col,
+    Row,
+    Select,
+    Tooltip,
+    OverlayTrigger,
+    View,
+    FormField,
+} from '../'
 import STATES from '../../constants/states'
 
 const AddressForm = ({ autoComplete }) => (
@@ -20,12 +30,7 @@ const AddressForm = ({ autoComplete }) => (
         />
         <Row>
             <Col sm={6} xs={12}>
-                <ReduxFormField
-                    name="state"
-                    label="State"
-                    component={Select}
-                    options={STATES}
-                />
+                <ReduxFormField name="state" label="State" component={Select} options={STATES} />
             </Col>
             <Col sm={6} xs={12}>
                 <ReduxFormField

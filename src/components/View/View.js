@@ -5,17 +5,19 @@ import classNames from 'classnames'
 import styles from './View.scss'
 import styleVars from '../../styles'
 
-
 const toSpacingValue = (type) => {
     const usedType = isBoolean(type) ? 'medium' : type
     switch (usedType) {
-    case ('small') : return `${styleVars.spacingSmall}px`
-    case ('medium') : return `${styleVars.spacing}px`
-    case ('large'): return `${styleVars.spacingLarge}px`
-    default: return null
+    case 'small':
+        return `${styleVars.spacingSmall}px`
+    case 'medium':
+        return `${styleVars.spacing}px`
+    case 'large':
+        return `${styleVars.spacingLarge}px`
+    default:
+        return null
     }
 }
-
 
 const generateStyes = ({ margin, padding, style, inline }) => {
     if (!margin && !padding && !inline) return style
@@ -27,17 +29,19 @@ const generateStyes = ({ margin, padding, style, inline }) => {
     }
 }
 
-const View = ({
-    inline,
-    className,
-    margin,
-    marginChildrenRight,
-    marginChildren,
-    padding,
-    style,
-    children,
-    ...props
-}) => {
+const View = (
+    {
+        inline,
+        className,
+        margin,
+        marginChildrenRight,
+        marginChildren,
+        padding,
+        style,
+        children,
+        ...props
+    },
+) => {
     const generatedStyleObj = generateStyes({ margin, padding, style, inline })
     return React.createElement(
         inline ? 'span' : 'div',
@@ -57,6 +61,5 @@ const View = ({
 View.defaultProps = {
     style: {},
 }
-
 
 export default View

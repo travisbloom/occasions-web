@@ -8,7 +8,6 @@ import { View, Header, LoadingPanel } from '../../components'
 import CreatePersonForm from './CreatePersonForm'
 
 class CreatePerson extends React.Component {
-
     render() {
         const {
             data: {
@@ -20,12 +19,7 @@ class CreatePerson extends React.Component {
         return (
             <View padding>
                 <Header size="largest">Add A New Friend</Header>
-                {currentUser ?
-                    <CreatePersonForm
-                        currentUser={currentUser}
-                    /> :
-                    <LoadingPanel />
-                }
+                {currentUser ? <CreatePersonForm currentUser={currentUser} /> : <LoadingPanel />}
             </View>
         )
     }

@@ -19,11 +19,14 @@ if (process.env.NODE_ENV !== 'production') {
     window._ = require('lodash')
     window.mockExpireAccessToken = () => {
         const { accessToken, refreshToken } = JSON.parse(localStorage.getItem('tokens'))
-        localStorage.setItem('tokens', JSON.stringify({
-            accessToken,
-            refreshToken,
-            expiresAt: window.moment().subtract(1, 'hours').toISOString(),
-        }))
+        localStorage.setItem(
+            'tokens',
+            JSON.stringify({
+                accessToken,
+                refreshToken,
+                expiresAt: window.moment().subtract(1, 'hours').toISOString(),
+            }),
+        )
     }
 }
 /* eslint-enable global-require */

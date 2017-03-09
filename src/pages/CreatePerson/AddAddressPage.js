@@ -8,7 +8,6 @@ import { View, AddressForm, Button } from '../../components'
 import validate from './validate'
 
 class AddAddressPage extends React.Component {
-
     render() {
         const { handleSubmit, submitting, pristine, addressIndex } = this.props
         return (
@@ -17,11 +16,7 @@ class AddAddressPage extends React.Component {
                     <FormSection name={`associatedLocations[${addressIndex}]`}>
                         <AddressForm />
                     </FormSection>
-                    <Button
-                        disabled={submitting || pristine}
-                        bsStyle="info"
-                        type="submit"
-                    >
+                    <Button disabled={submitting || pristine} bsStyle="info" type="submit">
                         Add A New Address
                     </Button>
                 </View>

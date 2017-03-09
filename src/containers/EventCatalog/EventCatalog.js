@@ -10,29 +10,31 @@ import { searchEventTypes } from '../../utilities/search'
 import EventsList from './EventsList'
 
 class EventsCatalog extends React.Component {
-
     static propTypes = {
         onSelectEvent: React.PropTypes.func.isRequired,
-    }
+    };
 
     state = {
         eventSearchValue: '',
         selectedEventTypes: [],
-    }
+    };
 
-    handleEventSearchOnChange = eventSearchValue => this.setState({ eventSearchValue })
+    handleEventSearchOnChange = eventSearchValue => this.setState({ eventSearchValue });
 
-    handleEventTypeOnChange = selectedEventTypes => this.setState({ selectedEventTypes })
+    handleEventTypeOnChange = selectedEventTypes => this.setState({ selectedEventTypes });
 
     handleClickedLabel = eventType => this.setState(state => ({
         selectedEventTypes: _.xorWith(
-            state.selectedEventTypes, [{
-                label: eventType.displayName,
-                value: eventType.pk,
-            }],
+            state.selectedEventTypes,
+            [
+                {
+                    label: eventType.displayName,
+                    value: eventType.pk,
+                },
+            ],
             _.isEqual,
         ),
-    }))
+    }));
 
     render() {
         const { selectedEventTypes, eventSearchValue } = this.state
@@ -47,18 +49,26 @@ class EventsCatalog extends React.Component {
         return (
             <View marginChildren>
                 <View style={{ overflowX: 'auto', whiteSpace: 'nowrap' }} marginChildrenRight>
-                    {eventTypes && eventTypes.edges.map(({ node: eventType }) =>
-                        <View inline key={eventType.id} onClick={() => this.handleClickedLabel(eventType)}>
-                            <Label
-                                bsStyle={
-                                selectedEventTypes.find(({ value }) => value === eventType.pk) ?
-                                'info' : undefined
-                            }
+                    {eventTypes &&
+                        eventTypes.edges.map(({ node: eventType }) => (
+                            <View
+                                inline
+                                key={eventType.id}
+                                onClick={() => this.handleClickedLabel(eventType)}
                             >
-                                {eventType.displayName}
-                            </Label>
-                        </View>,
-                    )}
+                                <Label
+                                    bsStyle={
+                                        selectedEventTypes.find(
+                                            ({ value }) => value === eventType.pk,
+                                        )
+                                            ? 'info'
+                                            : undefined
+                                    }
+                                >
+                                    {eventType.displayName}
+                                </Label>
+                            </View>
+                        ))}
                 </View>
                 <Row>
                     <Col xs={4}>
@@ -105,7 +115,4 @@ query EventTypes {
 }
 `
 
-export default compose(
-    graphql(query),
-    withApollo,
-)(EventsCatalog)
+export default compose(graphql(query), withApollo)(EventsCatalog)

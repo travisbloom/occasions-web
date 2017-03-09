@@ -1,9 +1,4 @@
-export {
-    OverlayTrigger,
-    Tooltip,
-    Panel,
-    Modal,
-} from 'react-bootstrap'
+export { OverlayTrigger, Tooltip, Panel, Modal } from 'react-bootstrap'
 
 export { default as Collapse } from 'react-collapse'
 export { LinkContainer } from 'react-router-bootstrap'

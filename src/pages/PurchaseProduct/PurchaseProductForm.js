@@ -7,14 +7,23 @@ import { withRouter } from 'react-router'
 import gql from 'graphql-tag'
 import StripeCheckout from 'react-stripe-checkout'
 
-import { ReduxFormField, TextInput, Button, Row, Alert, View, Header, Select, Col } from '../../components'
+import {
+    ReduxFormField,
+    TextInput,
+    Button,
+    Row,
+    Alert,
+    View,
+    Header,
+    Select,
+    Col,
+} from '../../components'
 import { formatReduxFormErrors } from '../../utilities/errors'
 import urls from '../../urls'
 
 import { NewAddressForm } from '../../containers'
 
 class PurchaseProductForm extends React.Component {
-
     constructor(props) {
         super(props)
         this.state = {
@@ -25,34 +34,34 @@ class PurchaseProductForm extends React.Component {
     onAddNewAddress = ({ data }) => {
         const { refetch, change } = this.props
         const newAssociatedLocation = data.createAssociatedLocation.associatedLocation
-        return (
-            refetch()
-                .then(() => change('locationId', {
-                    label: newAssociatedLocation.location.displayName,
-                    value: newAssociatedLocation.id,
-                }))
-                .then(this.onToggleNewAddressForm)
-        )
-    }
+        return refetch()
+            .then(() => change('locationId', {
+                label: newAssociatedLocation.location.displayName,
+                value: newAssociatedLocation.id,
+            }))
+            .then(this.onToggleNewAddressForm)
+    };
 
     onToggleNewAddressForm = () => this.setState(prevState => ({
         isAddingNewAddress: !prevState.isAddingNewAddress,
-        intialAddressFormValues: !prevState.isAddingNewAddress ? {
-            personId: this.props.associatedEvent.receivingPerson.pk,
-            location: {
-                streetAddressLine1: '',
-                streetAddressLine2: '',
-                city: '',
-                state: '',
-                postalCode: '',
-            },
-        } : null,
-    }))
+        intialAddressFormValues: !prevState.isAddingNewAddress
+            ? {
+                personId: this.props.associatedEvent.receivingPerson.pk,
+                location: {
+                    streetAddressLine1: '',
+                    streetAddressLine2: '',
+                    city: '',
+                    state: '',
+                    postalCode: '',
+                },
+            }
+            : null,
+    }));
 
     onToken = (values) => {
         const { createStripeUser, submit } = this.props
         createStripeUser(values).then(submit)
-    }
+    };
 
     getLocationOptions = () => {
         const locations = this.props.associatedEvent.receivingPerson.associatedLocations.edges
@@ -62,24 +71,21 @@ class PurchaseProductForm extends React.Component {
             label: location.displayName,
             value: pk,
         }))
-    }
+    };
 
     purchaseProduct = (values) => {
         const { purchaseProduct, router } = this.props
         const variables = {
             ...values,
-            associatedLocationId: (
-                values.associatedLocationId ? values.associatedLocationId.value : null
-            ),
+            associatedLocationId: values.associatedLocationId
+                ? values.associatedLocationId.value
+                : null,
         }
-        return (
-            purchaseProduct(variables)
-                .then(({ data: { createTransaction: { transaction } } }) =>
-                    router.push(urls.transactionDetails(transaction.id)),
-                )
-                .catch(formatReduxFormErrors)
-        )
-    }
+        return purchaseProduct(variables)
+            .then(({ data: { createTransaction: { transaction } } }) =>
+                router.push(urls.transactionDetails(transaction.id)))
+            .catch(formatReduxFormErrors)
+    };
 
     handleSubmit = (values) => {
         const { currentUser } = this.props
@@ -87,16 +93,12 @@ class PurchaseProductForm extends React.Component {
             return this.purchaseProduct(values)
         }
         return Promise.resolve()
-    }
+    };
 
     renderCheckoutButton = () => {
         const { submitting, pristine, product, currentUser } = this.props
         const button = (
-            <Button
-                disabled={submitting || pristine}
-                bsStyle="info"
-                type="submit"
-            >
+            <Button disabled={submitting || pristine} bsStyle="info" type="submit">
                 Purchase Card
             </Button>
         )
@@ -118,7 +120,7 @@ class PurchaseProductForm extends React.Component {
                 {button}
             </StripeCheckout>
         )
-    }
+    };
 
     render() {
         const { isAddingNewAddress, intialAddressFormValues } = this.state
@@ -149,18 +151,9 @@ class PurchaseProductForm extends React.Component {
                             </Button>
                         </Col>
                     </Row>
-                    <ReduxFormField
-                        name="productNotes"
-                        component={TextInput}
-                        textarea
-                    />
+                    <ReduxFormField name="productNotes" component={TextInput} textarea />
                     {this.renderCheckoutButton()}
-                    <Alert
-                        dismissable
-                        unHideWithChildren
-                        stackChildren
-                        bsStyle="danger"
-                    >
+                    <Alert dismissable unHideWithChildren stackChildren bsStyle="danger">
                         {error}
                     </Alert>
                 </Form>

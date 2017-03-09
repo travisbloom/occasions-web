@@ -3,12 +3,21 @@ import React from 'react'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
-import { View, Header, Panel, Row, Col, LinkContainer, Button, FormattedDate, FormattedNumber } from '../../components'
+import {
+    View,
+    Header,
+    Panel,
+    Row,
+    Col,
+    LinkContainer,
+    Button,
+    FormattedDate,
+    FormattedNumber,
+} from '../../components'
 import { EventDate } from '../../fragmentComponents'
 import urls from '../../urls'
 
 class AssociatedEventDetails extends React.Component {
-
     render() {
         const {
             data: {
@@ -19,14 +28,28 @@ class AssociatedEventDetails extends React.Component {
         if (!transaction) return <span>allllmost</span>
         return (
             <View style={style} padding>
-                <Header size="largest">Purchased {transaction.receivingPerson.fullName} a {transaction.product.name}</Header>
-                <Header size="larger">On <FormattedDate date={transaction.datetimeCreated} /></Header>
+                <Header size="largest">
+                    Purchased
+                    {' '}
+                    {transaction.receivingPerson.fullName}
+                    {' '}
+                    a
+                    {' '}
+                    {transaction.product.name}
+                </Header>
+                <Header size="larger">
+                    On <FormattedDate date={transaction.datetimeCreated} />
+                </Header>
                 <Panel>
                     <Row>
                         <Col xs={4}>Event:</Col>
                         <Col xs={8}>
-                            <View>{transaction.associatedEvent.event.name}</View>
-                            <View><EventDate event={transaction.associatedEvent.event} /></View>
+                            <View>
+                                {transaction.associatedEvent.event.name}
+                            </View>
+                            <View>
+                                <EventDate event={transaction.associatedEvent.event} />
+                            </View>
                         </Col>
                         <Col xs={4}>Cost:</Col>
                         <Col xs={8}>

@@ -7,37 +7,38 @@ import { graphql, compose, withApollo } from 'react-apollo'
 import { withRouter } from 'react-router'
 import gql from 'graphql-tag'
 
-import { ReduxFormField, TextInput, Button, Row, Errors, View, OverlayTrigger, Tooltip } from '../../components'
+import {
+    ReduxFormField,
+    TextInput,
+    Button,
+    Row,
+    Errors,
+    View,
+    OverlayTrigger,
+    Tooltip,
+} from '../../components'
 import { formatReduxFormErrors } from '../../utilities/errors'
 import { signIn } from '../../utilities/auth'
 import urls from '../../urls'
 
 class CreateAccountForm extends React.Component {
-
     onSuccess = () => {
         const { client } = this.props
         client.networkInterface.setUri(`${APP_ENV.appServer}/graphql`)
         this.props.router.push(urls.associatedEventsList())
-    }
+    };
 
     createAccount = (values) => {
         const { createUser } = this.props
-        return (
-            createUser(values)
-                .then(this.onSuccess) // TODO add access token to local storage
-                .catch(formatReduxFormErrors)
-        )
-    }
+        return createUser(values).then(this.onSuccess).catch(formatReduxFormErrors) // TODO add access token to local storage
+    };
 
-    signIn = ({ username, password }) => (
-        signIn(username, password)
-            .then(this.onSuccess)
-            .catch(() => {
-                throw new SubmissionError({
-                    _error: 'Invalid username and password.',
-                })
+    signIn = ({ username, password }) =>
+        signIn(username, password).then(this.onSuccess).catch(() => {
+            throw new SubmissionError({
+                _error: 'Invalid username and password.',
             })
-    )
+        });
 
     render() {
         const { handleSubmit, submitting, pristine, error } = this.props
@@ -51,7 +52,9 @@ class CreateAccountForm extends React.Component {
                                 overlay={
                                     <Tooltip id="we-hate-spam-email">
                                         {'We hate spam email as much as you do.'}
-                                        {' Occasions sends delightfully infrequent emails only when you have an upcoming occasion.'}
+                                        {
+                                            ' Occasions sends delightfully infrequent emails only when you have an upcoming occasion.'
+                                        }
                                     </Tooltip>
                                 }
                             >

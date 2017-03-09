@@ -3,7 +3,6 @@ import { SubmissionError } from 'redux-form'
 
 export const responseHasErrors = response => !!response.graphQLErrors
 
-
 const flattenErrorObject = (data, accum, key) => {
     if (isPlainObject(data)) {
         Object.keys(data).forEach((nestedKey) => {
@@ -14,8 +13,8 @@ const flattenErrorObject = (data, accum, key) => {
     }
 }
 
-export const formatRemoteErrors = errors => (
-    errors.reduce((accum, { message, data }) => {
+export const formatRemoteErrors = errors => errors.reduce(
+    (accum, { message, data }) => {
         if (!data) {
             accum.push(message)
             return accum
@@ -26,14 +25,14 @@ export const formatRemoteErrors = errors => (
         }
         flattenErrorObject(data, accum)
         return accum
-    }, [])
+    },
+    [],
 )
 
 export const formatGeneralAPIErrors = (response) => {
     if (!responseHasErrors(response)) return null
     return formatRemoteErrors(response.graphQLErrors)
 }
-
 
 /* eslint-disable no-underscore-dangle, no-param-reassign */
 
@@ -59,18 +58,21 @@ export const formatGeneralReduxFormErrors = (response) => {
 
 export const formatReduxFormErrors = (response) => {
     if (!responseHasErrors(response)) return null
-    const errors = response.graphQLErrors.reduce((accum, { message, data }) => {
-        if (!data) {
-            accum._error = accum._error.concat(message)
+    const errors = response.graphQLErrors.reduce(
+        (accum, { message, data }) => {
+            if (!data) {
+                accum._error = accum._error.concat(message)
+                return accum
+            }
+            if (isString(data)) {
+                accum._error = accum._error.concat(data)
+                return accum
+            }
+            generateErrorObject(data, accum)
             return accum
-        }
-        if (isString(data)) {
-            accum._error = accum._error.concat(data)
-            return accum
-        }
-        generateErrorObject(data, accum)
-        return accum
-    }, { _error: [] })
+        },
+        { _error: [] },
+    )
 
     if (!errors._error.length) {
         delete errors._error

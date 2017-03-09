@@ -21,26 +21,29 @@ export default ({ history }) => {
     )
 
     /* eslint-disable no-param-reassign */
-    networkInterface.use([{
-        applyMiddleware(req, next) {
-            getAccessToken().then((accessToken) => {
-                if (!req.options.headers) {
-                    req.options.headers = {}
-                }
-                req.options.headers.Authorization = `Bearer ${accessToken}`
-                debug('Apollo request', req)
-                next()
-            })
-            .catch(() => {
-                debug('Apollo failed to fetch tokens')
-                if (window.location.pathname === urls.signIn()) {
-                    next()
-                } else {
-                    history.push(urls.signIn())
-                }
-            })
+    networkInterface.use([
+        {
+            applyMiddleware(req, next) {
+                getAccessToken()
+                    .then((accessToken) => {
+                        if (!req.options.headers) {
+                            req.options.headers = {}
+                        }
+                        req.options.headers.Authorization = `Bearer ${accessToken}`
+                        debug('Apollo request', req)
+                        next()
+                    })
+                    .catch(() => {
+                        debug('Apollo failed to fetch tokens')
+                        if (window.location.pathname === urls.signIn()) {
+                            next()
+                        } else {
+                            history.push(urls.signIn())
+                        }
+                    })
+            },
         },
-    }])
+    ])
     /* eslint-enable no-param-reassign */
 
     const dataIdFromObject = result => result.id

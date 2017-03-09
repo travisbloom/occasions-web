@@ -8,11 +8,11 @@ import './DatePicker.scss'
 class DatePicker extends React.Component {
     static propTypes = {
         hasNoYear: React.PropTypes.bool,
-    }
+    };
     static defaultProps = {
         numberOfMonths: 1,
         hasNoYear: false,
-    }
+    };
 
     constructor(props) {
         super(props)
@@ -23,13 +23,21 @@ class DatePicker extends React.Component {
         this.state = { focused: false }
     }
 
-    handleOnFocusChange = ({ focused }) => this.setState({ focused })
+    handleOnFocusChange = ({ focused }) => this.setState({ focused });
 
-    handleOnChange = date => this.props.onChange(date.toISOString())
+    handleOnChange = date => this.props.onChange(date.toISOString());
 
     render() {
         const { focused } = this.state
-        const { hasNoYear, minDate, maxDate, name, monthFormat, value, ...props } = this.props
+        const {
+            hasNoYear,
+            minDate,
+            maxDate,
+            name,
+            monthFormat,
+            value,
+            ...props
+        } = this.props
 
         delete props.onChange
 

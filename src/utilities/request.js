@@ -9,7 +9,6 @@ const checkStatus = (response) => {
     throw error
 }
 
-
 const NO_CONTENT_STATUS = 204
 
 const parseJSON = (response) => {
@@ -20,22 +19,20 @@ const parseJSON = (response) => {
 }
 
 /* eslint-disable no-console */
-export default (...args) => (
-    fetch(...args)
-      .then((response) => {
-          try {
-              return parseJSON(checkStatus(response))
-          } catch (e) {
-              throw parseJSON(e.response)
-          }
-      })
-      .then((data) => {
-          debug('request succeeded with JSON response', data)
-          return data
-      })
-      .catch((error) => {
-          debug('request failed', error.response)
-          throw error
-      })
-)
+export default (...args) => fetch(...args)
+    .then((response) => {
+        try {
+            return parseJSON(checkStatus(response))
+        } catch (e) {
+            throw parseJSON(e.response)
+        }
+    })
+    .then((data) => {
+        debug('request succeeded with JSON response', data)
+        return data
+    })
+    .catch((error) => {
+        debug('request failed', error.response)
+        throw error
+    })
 /* eslint-enable no-console */

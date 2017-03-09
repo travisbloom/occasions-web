@@ -4,14 +4,22 @@ import React from 'react'
 import { reduxForm } from 'redux-form'
 import { compose, withApollo } from 'react-apollo'
 
-import { ReduxFormField, Button, View, Header, Select, Col, Row, LinkContainer } from '../../components'
+import {
+    ReduxFormField,
+    Button,
+    View,
+    Header,
+    Select,
+    Col,
+    Row,
+    LinkContainer,
+} from '../../components'
 import { searchPeople } from '../../utilities/search'
 
 import urls from '../../urls'
 import validate from './validate'
 
 class CreateAssociatedEventFormPage1 extends React.Component {
-
     render() {
         const { client, handleSubmit } = this.props
 

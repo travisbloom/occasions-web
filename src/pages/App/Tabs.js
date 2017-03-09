@@ -25,13 +25,13 @@ class Tabs extends React.Component {
         return (
             <View className={css(styles.base)}>
                 <Row>
-                    {TAB_OPTIONS.map(({ url, icon }) =>
+                    {TAB_OPTIONS.map(({ url, icon }) => (
                         <Col xs={4} className={css(styles.tab)} key={icon}>
                             <Link to={url}>
                                 <Icon type={icon} />
                             </Link>
-                        </Col>,
-                    )}
+                        </Col>
+                    ))}
                 </Row>
             </View>
         )

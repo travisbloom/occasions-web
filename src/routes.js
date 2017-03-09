@@ -47,7 +47,6 @@ export default (
         </Route>
         <IndexRoute onEnter={redirectUserBasedOnAuth} />
         {process.env.NODE_ENV === 'production' &&
-            <Route path="*" onEnter={redirectUserBasedOnAuth} />
-        }
+            <Route path="*" onEnter={redirectUserBasedOnAuth} />}
     </Route>
 )

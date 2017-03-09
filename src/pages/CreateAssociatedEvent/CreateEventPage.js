@@ -5,26 +5,25 @@ import { Button, View, Header, Row, Col } from '../../components'
 import { EventCatalog } from '../../containers'
 
 class CreateEventPage extends React.Component {
-
-    state = { isDefaultEvent: true }
+    state = { isDefaultEvent: true };
 
     toggleIsDefaultEvent = () => this.setState(state => ({
         isDefaultEvent: !state.isDefaultEvent,
-    }))
+    }));
 
     handleSelectEvent = (event) => {
         const { change, submit } = this.props
         change('eventId', event.pk)
         change('event', event)
         submit()
-    }
+    };
 
     render() {
         const { isDefaultEvent } = this.state
 
         return (
             <View marginChildren>
-                <Header>{'What\'s the Occasion?'}</Header>
+                <Header>{"What's the Occasion?"}</Header>
                 <Row>
                     <Col xs={6}>
                         <Button
@@ -45,10 +44,9 @@ class CreateEventPage extends React.Component {
                         </Button>
                     </Col>
                 </Row>
-                {isDefaultEvent ?
-                    <EventCatalog onSelectEvent={this.handleSelectEvent} /> :
-                    <View>foobar</View>
-                }
+                {isDefaultEvent
+                    ? <EventCatalog onSelectEvent={this.handleSelectEvent} />
+                    : <View>foobar</View>}
             </View>
         )
     }

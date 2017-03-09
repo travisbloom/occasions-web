@@ -10,7 +10,9 @@ const Select = ({ onBlur, remote, ...props }) => {
         ...props,
         onBlur: isReduxForm(props) ? undefined : onBlur,
     }
-    return remote ? <ReactSelect.Async {...passedProps} cache={false} /> : <ReactSelect {...passedProps} />
+    return remote
+        ? <ReactSelect.Async {...passedProps} cache={false} />
+        : <ReactSelect {...passedProps} />
 }
 
 Select.propTypes = {
