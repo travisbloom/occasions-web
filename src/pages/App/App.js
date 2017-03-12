@@ -4,7 +4,7 @@ import { graphql, compose } from 'react-apollo'
 import { connect } from 'react-redux'
 import gql from 'graphql-tag'
 
-import { View, Alert, Grid } from '../../components'
+import { View, Alert, Grid, AnimatedRouter } from '../../components'
 import { closeError } from '../../actions/alerts'
 
 import AssociatedEventsList from '../AssociatedEventsList/AssociatedEventsList'
@@ -16,6 +16,8 @@ import CreatePerson from '../CreatePerson/CreatePerson'
 
 import Navbar from './Navbar'
 import Tabs from './Tabs'
+
+const PAGE_STYLES = { marginBottom: `${Tabs.height}px` }
 
 class App extends React.Component {
     state = {
@@ -58,7 +60,6 @@ class App extends React.Component {
 
     render() {
         const { data: { currentUser }, errors } = this.props
-
         return (
             <View>
                 <Navbar hasBackButton={this.state.hasBackButton} currentUser={currentUser} />
@@ -81,28 +82,43 @@ class App extends React.Component {
                         </Alert>
                     ))}
                 </View>
-                <Grid
-                    style={{
-                        marginTop: `${Navbar.height}px`,
-                        marginBottom: `${Tabs.height}px`,
-                    }}
-                >
-                    <Switch>
-                        <Route path="/a/yourEvents" exact component={AssociatedEventsList} />
-                        <Route path="/a/yourEvents/new" exact component={CreateAssociatedEvent} />
-                        <Route
+                <Grid>
+                    <AnimatedRouter.Switch style={{ position: 'relative', width: '100%' }}>
+                        <AnimatedRouter.Route
                             exact
+                            path="/a/yourEvents"
+                            style={PAGE_STYLES}
+                            component={AssociatedEventsList}
+                        />
+                        <AnimatedRouter.Route
+                            exact
+                            path="/a/yourEvents/new"
+                            style={PAGE_STYLES}
+                            component={CreateAssociatedEvent}
+                        />
+                        <AnimatedRouter.Route
+                            exact
+                            style={PAGE_STYLES}
                             path="/a/yourEvents/:associatedEventId"
                             component={AssociatedEventDetails}
                         />
-                        <Route
+                        <AnimatedRouter.Route
                             exact
+                            style={PAGE_STYLES}
                             path="/a/yourEvents/:associatedEventId/:productSlug"
                             component={PurchaseProduct}
                         />
-                        <Route path="/a/yourGifts/:transactionId" component={TransactionDetails} />
-                        <Route path="/a/yourContacts/new" component={CreatePerson} />
-                    </Switch>
+                        <AnimatedRouter.Route
+                            style={PAGE_STYLES}
+                            path="/a/yourGifts/:transactionId"
+                            component={TransactionDetails}
+                        />
+                        <AnimatedRouter.Route
+                            style={PAGE_STYLES}
+                            path="/a/yourContacts/new"
+                            component={CreatePerson}
+                        />
+                    </AnimatedRouter.Switch>
                 </Grid>
                 <Tabs />
             </View>

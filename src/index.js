@@ -13,6 +13,8 @@ import { hasAccessToken } from './utilities/auth'
 import createStore from './createStore'
 import buildApolloClient from './buildApolloClient'
 
+import './styles/global.scss'
+
 /* eslint-disable global-require */
 if (process.env.NODE_ENV !== 'production') {
     window.moment = require('moment')

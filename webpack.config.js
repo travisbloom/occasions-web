@@ -22,7 +22,7 @@ module.exports = {
     devtool: 'eval-source-map',
     devServer: {
         hot: true,
-        https: true, // needed by Stripe
+        // https: true, // needed by Stripe
         contentBase: resolve(__dirname, 'dist'),
         publicPath: '/',
         historyApiFallback: {
@@ -44,7 +44,7 @@ module.exports = {
                     {
                         loader: 'css-loader',
                         options: {
-                            localIdentName: '[name]-[local]-[hash:base64]',
+                            localIdentName: '[path][name]__[local]',
                             modules: true,
                         },
                     },
@@ -54,7 +54,18 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                use: ['style-loader', 'css-loader?modules', 'postcss-loader', 'sass-loader'],
+                use: [
+                    'style-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            localIdentName: '[path][name]__[local]',
+                            modules: true,
+                        },
+                    },
+                    'postcss-loader',
+                    'sass-loader',
+                ],
             },
             {
                 test: /\.(woff2?|svg)$/,

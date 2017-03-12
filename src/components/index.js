@@ -1,4 +1,5 @@
 import { Link as RRLink } from 'react-router-dom'
+
 export const LinkContainer = RRLink
 export const Link = RRLink
 
@@ -13,6 +14,7 @@ export { default as Errors } from './Errors/Errors'
 export { default as Header } from './Header/Header'
 export { default as Icon } from './Icon/Icon'
 export { default as TextInput } from './TextInput/TextInput'
+export { default as AnimatedRouter } from './AnimatedRouter/AnimatedRouter'
 export { default as Label } from './Label/Label'
 export { default as LineBreak } from './LineBreak/LineBreak'
 export { default as LoadingPanel } from './LoadingPanel/LoadingPanel'

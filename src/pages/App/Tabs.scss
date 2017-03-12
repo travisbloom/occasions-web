@@ -15,10 +15,12 @@ $height-tabs: 60px;
 }
 
 @media (min-width: $screen-sm-min) {
-    width: 49rem;
-    margin: 0 auto;
-    border-left: 1px solid $color-primary;
-    border-right: 1px solid $color-primary;
+    .base {
+        width: 49rem;
+        margin: 0 auto;
+        border-left: 1px solid $color-primary;
+        border-right: 1px solid $color-primary;
+    }
 }
 
 .tab {

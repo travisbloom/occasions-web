@@ -32,6 +32,7 @@
     "bootstrap-sass": "^3.3.7",
     "classnames": "^2.2.5",
     "css-loader": "^0.26.1",
+    "data-driven-motion": "^0.0.9",
     "eslint": "^3.15.0",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-css-modules": "^2.6.1",

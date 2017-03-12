@@ -36,7 +36,6 @@ class AssociatedEventsList extends React.Component {
                     </LinkContainer>
                 </View>
                 {this.renderEvents()}
-                {this.renderEvents()}
             </View>
         )
     }
@@ -49,7 +48,7 @@ query AssociatedEventsList {
     person {
       id
       fullName
-      createdEvents {
+      createdEvents(first: 10) {
         edges {
           node {
             id
