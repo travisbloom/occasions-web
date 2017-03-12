@@ -1,12 +1,12 @@
 import { reducer as reduxFormReducer } from 'redux-form'
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
-import { routerReducer } from 'react-router-redux'
+import { routerReducer, routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
 
 import user from './reducers/user'
 import alerts from './reducers/alerts'
 
-export default ({ apolloClient, initialState = {} }) => {
+export default ({ apolloClient, history, initialState = {} }) => {
     const store = createStore(
         combineReducers({
             apollo: apolloClient.reducer(),
@@ -17,7 +17,7 @@ export default ({ apolloClient, initialState = {} }) => {
         }),
         initialState,
         compose(
-            applyMiddleware(apolloClient.middleware(), thunk),
+            applyMiddleware(apolloClient.middleware(), thunk, routerMiddleware(history)),
             window.devToolsExtension ? window.devToolsExtension() : f => f,
         ),
     )

@@ -89,7 +89,7 @@ ${EventDate.fragments.event}
 `
 
 export default graphql(query, {
-    options: ({ params: { associatedEventId } }) => ({
+    options: ({ match: { params: { associatedEventId } } }) => ({
         variables: { associatedEventId },
     }),
 })(AssociatedEventDetails)

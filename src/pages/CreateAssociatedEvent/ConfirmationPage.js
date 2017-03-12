@@ -4,7 +4,7 @@ import React from 'react'
 import { reduxForm, Form, getFormValues } from 'redux-form'
 import { connect } from 'react-redux'
 import { graphql, compose, withApollo } from 'react-apollo'
-import { withRouter } from 'react-router'
+import { withRouter } from 'react-router-dom'
 import gql from 'graphql-tag'
 
 import { Alert, View, Panel, Button } from '../../components'
@@ -14,7 +14,7 @@ import urls from '../../urls'
 
 class ConfirmationPage extends React.Component {
     handleSubmit = ({ eventId, event, receivingPersonId }) => {
-        const { createAssociatedEvent, router } = this.props
+        const { createAssociatedEvent, history } = this.props
         const input = {
             eventId,
             event: eventId ? null : event,
@@ -22,7 +22,7 @@ class ConfirmationPage extends React.Component {
         }
         return createAssociatedEvent(input)
             .then(({ data: { createAssociatedEvent: { associatedEvent } } }) =>
-                router.push(urls.associatedEventDetails(associatedEvent.id)))
+                history.push(urls.associatedEventDetails(associatedEvent.id)))
             .catch(formatGeneralReduxFormErrors)
     };
 

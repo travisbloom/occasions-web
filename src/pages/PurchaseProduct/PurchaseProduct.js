@@ -101,7 +101,7 @@ ${EventDate.fragments.event}
 `
 
 export default graphql(query, {
-    options: ({ params: { associatedEventId, productSlug } }) => ({
+    options: ({ match: { params: { associatedEventId, productSlug } } }) => ({
         variables: { associatedEventId, productSlug },
     }),
 })(PurchaseProduct)

@@ -4,7 +4,8 @@ import React from 'react'
 import { reduxForm, Form, getFormValues } from 'redux-form'
 import { connect } from 'react-redux'
 import { graphql, compose, withApollo } from 'react-apollo'
-import { withRouter } from 'react-router'
+import { withRouter } from 'react-router-dom'
+import moment from 'moment'
 import gql from 'graphql-tag'
 
 import { Alert, View, Panel, Button, Row, Col, FormattedDate } from '../../components'
@@ -21,7 +22,7 @@ const LineItem = ({ label, children }) => (
 
 class ConfirmationPage extends React.Component {
     handleSubmit = ({ associatedLocations, birthdayDate, birthdayYear, ...values }) => {
-        const { createPerson, router } = this.props
+        const { createPerson, history } = this.props
         const input = {
             ...values,
             birthday: moment(birthdayDate).year(birthdayYear),
@@ -30,10 +31,9 @@ class ConfirmationPage extends React.Component {
                 state: state.value,
             })),
         }
-        console.log({ values, input })
         return createPerson(values)
             .then(({ data: { createPerson: { associatedEvent } } }) =>
-                router.push(urls.associatedEventDetails(associatedEvent.id)))
+                history.push(urls.associatedEventDetails(associatedEvent.id)))
             .catch(formatGeneralReduxFormErrors)
     };
 

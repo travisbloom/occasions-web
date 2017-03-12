@@ -4,7 +4,7 @@ import React from 'react'
 import { reduxForm, SubmissionError } from 'redux-form'
 
 import { graphql, compose, withApollo } from 'react-apollo'
-import { withRouter } from 'react-router'
+import { withRouter } from 'react-router-dom'
 import gql from 'graphql-tag'
 
 import {
@@ -23,9 +23,9 @@ import urls from '../../urls'
 
 class CreateAccountForm extends React.Component {
     onSuccess = () => {
-        const { client } = this.props
+        const { client, history } = this.props
         client.networkInterface.setUri(`${APP_ENV.appServer}/graphql`)
-        this.props.router.push(urls.associatedEventsList())
+        history.push(urls.associatedEventsList())
     };
 
     createAccount = (values) => {

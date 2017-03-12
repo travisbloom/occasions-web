@@ -44,7 +44,7 @@ class CreateAssociatedEvent extends React.Component {
         return (
             <View style={style} padding>
                 <View>
-                    <Link onClick={this.previousPage}>{this.renderBackLanguage()}</Link>
+                    <View inline onClick={this.previousPage}>{this.renderBackLanguage()}</View>
                 </View>
                 {this.renderPage()}
             </View>

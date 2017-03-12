@@ -1,6 +1,6 @@
 import { Navbar, Nav, NavDropdown, MenuItem } from 'react-bootstrap'
 import { withApollo, compose } from 'react-apollo'
-import { Link, withRouter } from 'react-router'
+import { Link, withRouter } from 'react-router-dom'
 import React from 'react'
 import { connect } from 'react-redux'
 
@@ -9,10 +9,10 @@ import { logOut } from '../../actions/user'
 
 class AppNav extends React.Component {
     logOut = () => {
-        const { router, logOutUser, client } = this.props
+        const { history, logOutUser, client } = this.props
         logOutUser()
             .then(() => client.networkInterface.setUri(`${APP_ENV.appServer}/graphql_public`))
-            .then(() => router.push(urls.signIn()))
+            .then(() => history.push(urls.signIn()))
     };
 
     render() {

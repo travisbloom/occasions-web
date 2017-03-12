@@ -1,10 +1,10 @@
+import { Link as RRLink } from 'react-router-dom'
+export const LinkContainer = RRLink
+export const Link = RRLink
+
 export { OverlayTrigger, Tooltip, Panel, Modal } from 'react-bootstrap'
-
 export { default as Collapse } from 'react-collapse'
-export { LinkContainer } from 'react-router-bootstrap'
-export { Link } from 'react-router'
 export { Row, Col, Grid } from 'react-flexbox-grid'
-
 export { default as AddressForm } from './AddressForm/AddressForm'
 export { default as Alert } from './Alert/Alert'
 export { default as Button } from './Button/Button'

@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { graphql, compose } from 'react-apollo'
-import { withRouter } from 'react-router'
+import { withRouter } from 'react-router-dom'
 import gql from 'graphql-tag'
 
 import { View, Link, Header, LoadingPanel } from '../../components'
@@ -64,7 +64,7 @@ class CreatePerson extends React.Component {
         return (
             <View style={style} padding>
                 <View>
-                    <Link onClick={this.previousPage}>{this.renderBackLanguage()}</Link>
+                    <View inline onClick={this.previousPage}>{this.renderBackLanguage()}</View>
                 </View>
                 <Header size="largest">Add A New Friend</Header>
                 {this.renderPage()}

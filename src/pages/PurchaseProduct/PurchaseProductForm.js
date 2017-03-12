@@ -3,7 +3,7 @@
 import React from 'react'
 import { reduxForm, Form } from 'redux-form'
 import { graphql, compose } from 'react-apollo'
-import { withRouter } from 'react-router'
+import { withRouter } from 'react-router-dom'
 import gql from 'graphql-tag'
 import StripeCheckout from 'react-stripe-checkout'
 
@@ -74,7 +74,7 @@ class PurchaseProductForm extends React.Component {
     };
 
     purchaseProduct = (values) => {
-        const { purchaseProduct, router } = this.props
+        const { purchaseProduct, history } = this.props
         const variables = {
             ...values,
             associatedLocationId: values.associatedLocationId
@@ -83,7 +83,7 @@ class PurchaseProductForm extends React.Component {
         }
         return purchaseProduct(variables)
             .then(({ data: { createTransaction: { transaction } } }) =>
-                router.push(urls.transactionDetails(transaction.id)))
+                history.push(urls.transactionDetails(transaction.id)))
             .catch(formatReduxFormErrors)
     };
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import gql from 'graphql-tag'
 import { propType } from 'graphql-anywhere'
-import { withRouter } from 'react-router'
+import { withRouter } from 'react-router-dom'
 
 import { Panel, View, Row, Col } from '../../components'
 import { EventDate } from '../../fragmentComponents'
@@ -36,8 +36,8 @@ class AssociatedEventSummary extends React.Component {
     };
 
     transitionToDetailsPage = () => {
-        const { associatedEvent, router } = this.props
-        router.push(urls.associatedEventDetails(associatedEvent.id))
+        const { associatedEvent, history } = this.props
+        history.push(urls.associatedEventDetails(associatedEvent.id))
     };
 
     render() {
@@ -68,8 +68,8 @@ class AssociatedEventSummary extends React.Component {
     }
 }
 
-AssociatedEventSummary.fragments = {
+const wrappedComponent = withRouter(AssociatedEventSummary)
+wrappedComponent.fragments = {
     associatedEvent: fragment,
 }
-
-export default withRouter(AssociatedEventSummary)
+export default wrappedComponent

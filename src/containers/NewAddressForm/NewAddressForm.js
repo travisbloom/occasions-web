@@ -3,7 +3,6 @@
 import React from 'react'
 import { reduxForm, FormSection } from 'redux-form'
 import { graphql, compose } from 'react-apollo'
-import { withRouter } from 'react-router'
 import gql from 'graphql-tag'
 
 import { Button, Row, Alert, View, AddressForm, Modal } from '../../components'
@@ -84,5 +83,4 @@ export default compose(
     reduxForm({
         form: 'NewAddressForm',
     }),
-    withRouter,
 )(NewAddressForm)

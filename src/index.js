@@ -5,10 +5,10 @@ import { AppContainer } from 'react-hot-loader'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { ApolloProvider } from 'react-apollo'
-import { Router, browserHistory } from 'react-router'
-import { syncHistoryWithStore } from 'react-router-redux'
+import createHistory from 'history/createBrowserHistory'
+import { ConnectedRouter } from 'react-router-redux'
 
-import routes from './routes'
+import Routes from './Routes'
 import { hasAccessToken } from './utilities/auth'
 import createStore from './createStore'
 import buildApolloClient from './buildApolloClient'
@@ -30,35 +30,35 @@ if (process.env.NODE_ENV !== 'production') {
     }
 }
 /* eslint-enable global-require */
-
-const apolloClient = buildApolloClient({ history: browserHistory })
+const history = createHistory()
+const apolloClient = buildApolloClient({ history })
 
 const store = createStore({
     apolloClient,
+    history,
     initialState: { user: { isLoggedIn: hasAccessToken() } },
 })
-
-// Create an enhanced history that syncs navigation events with the store
-const history = syncHistoryWithStore(browserHistory, store)
 
 const render = (passedRoutes) => {
     ReactDOM.render(
         <AppContainer>
             <ApolloProvider client={apolloClient} store={store}>
-                <Router history={history} routes={passedRoutes} />
+                <ConnectedRouter history={history}>
+                    {passedRoutes}
+                </ConnectedRouter>
             </ApolloProvider>
         </AppContainer>,
         document.getElementById('root'),
     )
 }
 
-render(routes)
+render(<Routes />)
 
 /* eslint-disable global-require */
 if (module.hot) {
-    module.hot.accept('./routes', () => {
-        const newRoutes = require('./routes').default
-        render(newRoutes)
+    module.hot.accept('./Routes', () => {
+        const NewRoutes = require('./Routes').default
+        render(<NewRoutes />)
     })
 }
 /* eslint-enable global-require */

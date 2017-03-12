@@ -19,6 +19,7 @@ import urls from '../../urls'
 import styles from './MarketingHome.scss'
 import heroImage from './heroImage.jpg'
 
+console.log({ LinkContainer })
 const CollapsableArrow = () => (
     <Header size="larger">
         <MediaQuery md>
