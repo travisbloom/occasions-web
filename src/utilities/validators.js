@@ -5,10 +5,19 @@ import {
     hasLengthGreaterThan,
 } from 'revalidate'
 import { upperFirst } from 'lodash'
+import moment from 'moment'
 
 const isRequired = createValidator(
     message => value => [undefined, null, ''].includes(value) ? message : null,
     field => `${upperFirst(field)} is required`,
+)
+
+const date = composeValidators(
+    isRequired,
+    createValidator(
+        message => value => moment(value).isValid() ? false : message,
+        field => `this ${field} is not a valid date`,
+    ),
 )
 
 const email = composeValidators(
@@ -46,6 +55,7 @@ export default {
     postalCode,
     streetAddressLine1,
     email,
+    date,
     createValidator,
     composeValidators,
     combineValidators,

@@ -35,7 +35,7 @@ class CreatePerson extends React.Component {
     renderPage = () => {
         const { data: { currentUser } } = this.props
         const { page, addressIndex } = this.state
-        if (true) return <LoadingPanel />
+        if (!currentUser) return <LoadingPanel />
         switch (page) {
         case 1:
             return <PersonInfoPage onSubmit={this.nextPage} />

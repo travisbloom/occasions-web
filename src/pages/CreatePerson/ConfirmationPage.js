@@ -20,14 +20,18 @@ const LineItem = ({ label, children }) => (
 )
 
 class ConfirmationPage extends React.Component {
-    handleSubmit = ({ eventId, event, receivingPersonId }) => {
+    handleSubmit = ({ associatedLocations, birthdayDate, birthdayYear, ...values }) => {
         const { createPerson, router } = this.props
         const input = {
-            eventId,
-            event: eventId ? null : event,
-            receivingPersonId: receivingPersonId ? receivingPersonId.value : null,
+            ...values,
+            birthday: moment(birthdayDate).year(birthdayYear),
+            associatedLocations: associatedLocations.map(({ state, ...location }) => ({
+                ...location,
+                state: state.value,
+            })),
         }
-        return createPerson(input)
+        console.log({ values, input })
+        return createPerson(values)
             .then(({ data: { createPerson: { associatedEvent } } }) =>
                 router.push(urls.associatedEventDetails(associatedEvent.id)))
             .catch(formatGeneralReduxFormErrors)

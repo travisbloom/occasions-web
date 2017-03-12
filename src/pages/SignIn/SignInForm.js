@@ -53,9 +53,8 @@ class CreateAccountForm extends React.Component {
                                 overlay={
                                     <Tooltip id="we-hate-spam-email">
                                         {'We hate spam email as much as you do.'}
-                                        {
-                                            ' Occasions sends delightfully infrequent emails only when you have an upcoming occasion.'
-                                        }
+                                        {' Occasions sends delightfully infrequent'}
+                                        {' emails only when you have an upcoming occasion.'}
                                     </Tooltip>
                                 }
                             >
