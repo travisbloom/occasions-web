@@ -2,6 +2,7 @@
 import React from 'react'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
+import DocumentTitle from 'react-document-title'
 
 import { View, Header } from '../../components'
 import { EventDate } from '../../fragmentComponents'
@@ -21,25 +22,30 @@ class PurchaseProduct extends React.Component {
         } = this.props
 
         if (!associatedEvent) return <span>allllmost</span>
+        const pageTitleInfo = associatedEvent
+            ? `for ${associatedEvent.receivingPerson.fullName} - ${associatedEvent.event.name}`
+            : 'Details'
         return (
-            <View style={style} padding>
-                <Header size="largest">{product.name}</Header>
-                <Header size="larger">
-                    For {associatedEvent.receivingPerson.fullName}
-                </Header>
-                <PurchaseProductForm
-                    initialValues={{
-                        receivingPersonId: associatedEvent.receivingPerson.pk,
-                        productId: product.slug,
-                        productNotes: '',
-                        associatedEventId: associatedEvent.pk,
-                    }}
-                    refetch={refetch}
-                    associatedEvent={associatedEvent}
-                    product={product}
-                    currentUser={currentUser}
-                />
-            </View>
+            <DocumentTitle title={`Occasions | Gift ${pageTitleInfo}`}>
+                <View style={style} padding>
+                    <Header size="largest">{product.name}</Header>
+                    <Header size="larger">
+                        For {associatedEvent.receivingPerson.fullName}
+                    </Header>
+                    <PurchaseProductForm
+                        initialValues={{
+                            receivingPersonId: associatedEvent.receivingPerson.pk,
+                            productId: product.slug,
+                            productNotes: '',
+                            associatedEventId: associatedEvent.pk,
+                        }}
+                        refetch={refetch}
+                        associatedEvent={associatedEvent}
+                        product={product}
+                        currentUser={currentUser}
+                    />
+                </View>
+            </DocumentTitle>
         )
     }
 }

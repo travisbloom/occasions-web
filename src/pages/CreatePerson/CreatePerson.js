@@ -4,6 +4,7 @@ import React from 'react'
 import { graphql, compose } from 'react-apollo'
 import { withRouter } from 'react-router-dom'
 import gql from 'graphql-tag'
+import DocumentTitle from 'react-document-title'
 
 import { View, Link, Header, LoadingPanel } from '../../components'
 import { formatReduxFormErrors } from '../../utilities/errors'
@@ -62,13 +63,15 @@ class CreatePerson extends React.Component {
         } = this.props
 
         return (
-            <View style={style} padding>
-                <View>
-                    <View inline onClick={this.previousPage}>{this.renderBackLanguage()}</View>
+            <DocumentTitle title="Occasions | Add Contact">
+                <View style={style} padding>
+                    <View>
+                        <View inline onClick={this.previousPage}>{this.renderBackLanguage()}</View>
+                    </View>
+                    <Header size="largest">Add A New Friend</Header>
+                    {this.renderPage()}
                 </View>
-                <Header size="largest">Add A New Friend</Header>
-                {this.renderPage()}
-            </View>
+            </DocumentTitle>
         )
     }
 }

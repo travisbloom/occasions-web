@@ -1,5 +1,6 @@
 // @flow
 import React from 'react'
+import DocumentTitle from 'react-document-title'
 
 import { View, Link } from '../../components'
 
@@ -42,12 +43,14 @@ class CreateAssociatedEvent extends React.Component {
         } = this.props
 
         return (
-            <View style={style} padding>
-                <View>
-                    <View inline onClick={this.previousPage}>{this.renderBackLanguage()}</View>
+            <DocumentTitle title="Occasions | Create Event">
+                <View style={style} padding>
+                    <View>
+                        <View inline onClick={this.previousPage}>{this.renderBackLanguage()}</View>
+                    </View>
+                    {this.renderPage()}
                 </View>
-                {this.renderPage()}
-            </View>
+            </DocumentTitle>
         )
     }
 }

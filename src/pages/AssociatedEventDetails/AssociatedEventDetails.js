@@ -2,6 +2,7 @@
 import React from 'react'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
+import DocumentTitle from 'react-document-title'
 
 import { View, Header, Panel, Row, Col, LinkContainer, Button } from '../../components'
 import { EventDate } from '../../fragmentComponents'
@@ -17,31 +18,37 @@ class AssociatedEventDetails extends React.Component {
         } = this.props
         if (!associatedEvent) return <span>allllmost</span>
         return (
-            <View style={style} padding marginChildren>
-                <Header size="largest">
-                    {associatedEvent.receivingPerson.fullName}
-                </Header>
-                <Header size="larger">{associatedEvent.event.name}</Header>
-                <Header size="larger">
-                    <EventDate event={associatedEvent.event} />
-                </Header>
-                {associatedEvent.event.relatedProducts.edges.map(({ node }) => (
-                    <Panel key={node.id} title={<Header size="large">{node.name}</Header>}>
-                        <Row>
-                            <Col xs={8} lg={10}>{node.description}</Col>
-                            <Col xs={4} lg={2}>
-                                <LinkContainer
-                                    to={urls.purchaseProduct(associatedEvent.id, node.slug)}
-                                >
-                                    <Button block bsStyle="primary">
-                                        Buy
-                                    </Button>
-                                </LinkContainer>
-                            </Col>
-                        </Row>
-                    </Panel>
-                ))}
-            </View>
+            <DocumentTitle
+                title={
+                    `Occasions | ${associatedEvent ? `${associatedEvent.receivingPerson.fullName} - ${associatedEvent.event.name}` : 'Event Details'}`
+                }
+            >
+                <View style={style} padding marginChildren>
+                    <Header size="largest">
+                        {associatedEvent.receivingPerson.fullName}
+                    </Header>
+                    <Header size="larger">{associatedEvent.event.name}</Header>
+                    <Header size="larger">
+                        <EventDate event={associatedEvent.event} />
+                    </Header>
+                    {associatedEvent.event.relatedProducts.edges.map(({ node }) => (
+                        <Panel key={node.id} title={<Header size="large">{node.name}</Header>}>
+                            <Row>
+                                <Col xs={8} lg={10}>{node.description}</Col>
+                                <Col xs={4} lg={2}>
+                                    <LinkContainer
+                                        to={urls.purchaseProduct(associatedEvent.id, node.slug)}
+                                    >
+                                        <Button block bsStyle="primary">
+                                            Buy
+                                        </Button>
+                                    </LinkContainer>
+                                </Col>
+                            </Row>
+                        </Panel>
+                    ))}
+                </View>
+            </DocumentTitle>
         )
     }
 }
