@@ -1,12 +1,49 @@
 // @flow
 import React from 'react'
-import { graphql } from 'react-apollo'
+import { graphql, compose } from 'react-apollo'
 import gql from 'graphql-tag'
 import DocumentTitle from 'react-document-title'
 
-import { View, Header, Panel, Row, Col, LinkContainer, Button } from '../../components'
+import {
+    View,
+    Header,
+    Panel,
+    Row,
+    Col,
+    LinkContainer,
+    Button,
+    Placeholder,
+} from '../../components'
 import { EventDate } from '../../fragmentComponents'
+import withShell from '../../hoc/withShell'
 import urls from '../../urls'
+
+const AssociatedEventDetailsPlaceholder = () => (
+    <View padding marginChildren>
+        <Header size="largest"><Placeholder /></Header>
+        <Header size="larger"><Placeholder width={55} /></Header>
+        <Header size="larger"><Placeholder width={45} /></Header>
+        {new Array(2).fill().map((_, index) => (
+            <Panel key={index} header={<Header size="large"><Placeholder /></Header>}>
+                <View marginChildren>
+                    <Row>
+                        <Col xs={8} lg={10}>
+                            <View marginChildren>
+                                <View><Placeholder /></View>
+                                <View><Placeholder /></View>
+                            </View>
+                        </Col>
+                        <Col xs={4} lg={2}>
+                            <Button block bsStyle="primary">
+                                <Placeholder light />
+                            </Button>
+                        </Col>
+                    </Row>
+                </View>
+            </Panel>
+        ))}
+    </View>
+)
 
 class AssociatedEventDetails extends React.Component {
     render() {
@@ -16,7 +53,6 @@ class AssociatedEventDetails extends React.Component {
             },
             style,
         } = this.props
-        if (!associatedEvent) return <span>allllmost</span>
         return (
             <DocumentTitle
                 title={
@@ -32,7 +68,7 @@ class AssociatedEventDetails extends React.Component {
                         <EventDate event={associatedEvent.event} />
                     </Header>
                     {associatedEvent.event.relatedProducts.edges.map(({ node }) => (
-                        <Panel key={node.id} title={<Header size="large">{node.name}</Header>}>
+                        <Panel key={node.id} header={<Header size="large">{node.name}</Header>}>
                             <Row>
                                 <Col xs={8} lg={10}>{node.description}</Col>
                                 <Col xs={4} lg={2}>
@@ -52,6 +88,8 @@ class AssociatedEventDetails extends React.Component {
         )
     }
 }
+
+AssociatedEventDetails.Placeholder = AssociatedEventDetailsPlaceholder
 
 const query = gql`
 query AssociatedEventDetails($associatedEventId: ID!) {
@@ -95,8 +133,11 @@ query AssociatedEventDetails($associatedEventId: ID!) {
 ${EventDate.fragments.event}
 `
 
-export default graphql(query, {
-    options: ({ match: { params: { associatedEventId } } }) => ({
-        variables: { associatedEventId },
+export default compose(
+    graphql(query, {
+        options: ({ match: { params: { associatedEventId } } }) => ({
+            variables: { associatedEventId },
+        }),
     }),
-})(AssociatedEventDetails)
+    withShell,
+)(AssociatedEventDetails)

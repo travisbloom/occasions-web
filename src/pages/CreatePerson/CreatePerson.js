@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom'
 import gql from 'graphql-tag'
 import DocumentTitle from 'react-document-title'
 
-import { View, Link, Header, LoadingPanel } from '../../components'
+import { View, Link, Header, Placeholder } from '../../components'
 import { formatReduxFormErrors } from '../../utilities/errors'
 
 import PersonInfoPage from './PersonInfoPage'
@@ -36,7 +36,7 @@ class CreatePerson extends React.Component {
     renderPage = () => {
         const { data: { currentUser } } = this.props
         const { page, addressIndex } = this.state
-        if (!currentUser) return <LoadingPanel />
+        if (!currentUser) return <Placeholder />
         switch (page) {
         case 1:
             return <PersonInfoPage onSubmit={this.nextPage} />

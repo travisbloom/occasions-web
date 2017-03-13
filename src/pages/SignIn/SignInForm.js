@@ -45,8 +45,8 @@ class CreateAccountForm extends React.Component {
         const { handleSubmit, submitting, pristine, error } = this.props
 
         return (
-            <View>
-                <form onSubmit={handleSubmit(this.signIn)}>
+            <form onSubmit={handleSubmit(this.signIn)}>
+                <View marginChildren>
                     <ReduxFormField
                         label={
                             <OverlayTrigger
@@ -89,11 +89,11 @@ class CreateAccountForm extends React.Component {
                             disabled={submitting || pristine}
                             onClick={handleSubmit(this.createAccount)}
                         >
-                            Create An Account
+                            Create Account
                         </Button>
                     </Row>
-                </form>
-            </View>
+                </View>
+            </form>
         )
     }
 }

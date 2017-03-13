@@ -137,25 +137,27 @@ class PurchaseProductForm extends React.Component {
                 />
                 <Header>Where Should We Send This Card?</Header>
                 <Form onSubmit={handleSubmit(this.handleSubmit)}>
-                    <Row>
-                        <Col xs={12} sm={7} md={8}>
-                            <ReduxFormField
-                                name="associatedLocationId"
-                                component={Select}
-                                options={this.getLocationOptions()}
-                            />
-                        </Col>
-                        <Col xs={12} sm={5} md={4}>
-                            <Button block onClick={this.onToggleNewAddressForm}>
-                                Add New Location
-                            </Button>
-                        </Col>
-                    </Row>
-                    <ReduxFormField name="productNotes" component={TextInput} textarea />
-                    {this.renderCheckoutButton()}
-                    <Alert dismissable unHideWithChildren stackChildren bsStyle="danger">
-                        {error}
-                    </Alert>
+                    <View marginChildren>
+                        <Row>
+                            <Col xs={12} sm={7} md={8}>
+                                <ReduxFormField
+                                    name="associatedLocationId"
+                                    component={Select}
+                                    options={this.getLocationOptions()}
+                                />
+                            </Col>
+                            <Col xs={12} sm={5} md={4}>
+                                <Button block onClick={this.onToggleNewAddressForm}>
+                                    Add New Location
+                                </Button>
+                            </Col>
+                        </Row>
+                        <ReduxFormField name="productNotes" component={TextInput} textarea />
+                        {this.renderCheckoutButton()}
+                        <Alert dismissable unHideWithChildren stackChildren bsStyle="danger">
+                            {error}
+                        </Alert>
+                    </View>
                 </Form>
             </View>
         )

@@ -13,7 +13,7 @@ class SignIn extends React.Component {
                 <Grid fluid>
                     <Row center="xs" middle="xs">
                         <Col sm={6} xs={12}>
-                            <View padding>
+                            <View marginChildren>
                                 <Header size="largest">
                                     Welcome to Occasions!
                                 </Header>

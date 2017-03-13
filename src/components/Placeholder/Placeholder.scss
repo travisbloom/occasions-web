@@ -1,0 +1,9 @@
+@import "../../styles/variables";
+.base {
+    background-color: $color-gray;
+    border-radius: $border-radius-small;
+}
+
+.light {
+    background-color: $color-white;
+}
