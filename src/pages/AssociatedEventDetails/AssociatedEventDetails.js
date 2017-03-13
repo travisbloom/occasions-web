@@ -18,33 +18,6 @@ import { EventDate } from '../../fragmentComponents'
 import withShell from '../../hoc/withShell'
 import urls from '../../urls'
 
-const AssociatedEventDetailsPlaceholder = () => (
-    <View padding marginChildren>
-        <Header size="largest"><Placeholder /></Header>
-        <Header size="larger"><Placeholder width={55} /></Header>
-        <Header size="larger"><Placeholder width={45} /></Header>
-        {new Array(2).fill().map((_, index) => (
-            <Panel key={index} header={<Header size="large"><Placeholder /></Header>}>
-                <View marginChildren>
-                    <Row>
-                        <Col xs={8} lg={10}>
-                            <View marginChildren>
-                                <View><Placeholder /></View>
-                                <View><Placeholder /></View>
-                            </View>
-                        </Col>
-                        <Col xs={4} lg={2}>
-                            <Button block bsStyle="primary">
-                                <Placeholder light />
-                            </Button>
-                        </Col>
-                    </Row>
-                </View>
-            </Panel>
-        ))}
-    </View>
-)
-
 class AssociatedEventDetails extends React.Component {
     render() {
         const {
@@ -89,7 +62,32 @@ class AssociatedEventDetails extends React.Component {
     }
 }
 
-AssociatedEventDetails.Placeholder = AssociatedEventDetailsPlaceholder
+AssociatedEventDetails.Shell = () => (
+    <View padding marginChildren>
+        <Header size="largest"><Placeholder /></Header>
+        <Header size="larger"><Placeholder width={55} /></Header>
+        <Header size="larger"><Placeholder width={45} /></Header>
+        {new Array(2).fill().map((_, index) => (
+            <Panel key={index} header={<Header size="large"><Placeholder /></Header>}>
+                <View marginChildren>
+                    <Row>
+                        <Col xs={8} lg={10}>
+                            <View marginChildren>
+                                <View><Placeholder /></View>
+                                <View><Placeholder /></View>
+                            </View>
+                        </Col>
+                        <Col xs={4} lg={2}>
+                            <Button block bsStyle="primary">
+                                <Placeholder light />
+                            </Button>
+                        </Col>
+                    </Row>
+                </View>
+            </Panel>
+        ))}
+    </View>
+)
 
 const query = gql`
 query AssociatedEventDetails($associatedEventId: ID!) {
@@ -139,5 +137,5 @@ export default compose(
             variables: { associatedEventId },
         }),
     }),
-    withShell,
+    withShell({ isLoaded: props => !!props.data.associatedEvent }),
 )(AssociatedEventDetails)

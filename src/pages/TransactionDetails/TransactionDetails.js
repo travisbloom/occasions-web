@@ -1,6 +1,6 @@
 // @flow
 import React from 'react'
-import { graphql } from 'react-apollo'
+import { graphql, compose } from 'react-apollo'
 import gql from 'graphql-tag'
 import DocumentTitle from 'react-document-title'
 
@@ -14,9 +14,11 @@ import {
     Button,
     FormattedDate,
     FormattedNumber,
+    Placeholder,
 } from '../../components'
 import { EventDate } from '../../fragmentComponents'
 import urls from '../../urls'
+import withShell from '../../hoc/withShell'
 
 class TransactionDetails extends React.Component {
     render() {
@@ -24,12 +26,11 @@ class TransactionDetails extends React.Component {
             data: {
                 transaction,
             },
-            style,
         } = this.props
         if (!transaction) return <span>allllmost</span>
         return (
             <DocumentTitle title={`Occasions | Transaction ${transaction.id}`}>
-                <View style={style} padding>
+                <View padding>
                     <Header size="largest">
                         Purchased
                         {' '}
@@ -74,6 +75,42 @@ class TransactionDetails extends React.Component {
     }
 }
 
+TransactionDetails.Shell = () => (
+    <View padding>
+        <Header size="largest">
+            <View><Placeholder /></View>
+            <View><Placeholder /></View>
+        </Header>
+        <Header size="larger">
+            <Placeholder />
+        </Header>
+        <Panel>
+            <Row>
+                <Col xs={4}><Placeholder /></Col>
+                <Col xs={8}>
+                    <View>
+                        <Placeholder />
+                    </View>
+                    <View>
+                        <Placeholder />
+                    </View>
+                </Col>
+                <Col xs={4}><Placeholder /></Col>
+                <Col xs={8}>
+                    <Placeholder />
+                </Col>
+                <Col xs={4}><Placeholder /></Col>
+                <Col xs={8}>
+                    <Placeholder />
+                </Col>
+                <Col xs={4}>
+                    <Button block><Placeholder /></Button>
+                </Col>
+            </Row>
+        </Panel>
+    </View>
+)
+
 const query = gql`
 query TransactionDetails($transactionId: ID!) {
   transaction(id: $transactionId) {
@@ -111,8 +148,11 @@ query TransactionDetails($transactionId: ID!) {
 ${EventDate.fragments.event}
 `
 
-export default graphql(query, {
-    options: ({ match: { params: { transactionId } } }) => ({
-        variables: { transactionId },
+export default compose(
+    graphql(query, {
+        options: ({ match: { params: { transactionId } } }) => ({
+            variables: { transactionId },
+        }),
     }),
-})(TransactionDetails)
+    withShell({ isLoaded: ({ data }) => data.transaction }),
+)(TransactionDetails)

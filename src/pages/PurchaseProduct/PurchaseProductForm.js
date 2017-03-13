@@ -17,6 +17,7 @@ import {
     Header,
     Select,
     Col,
+    Placeholder,
 } from '../../components'
 import { formatReduxFormErrors } from '../../utilities/errors'
 import urls from '../../urls'
@@ -205,7 +206,7 @@ mutation createTransactionQuery($input: CreateTransactionInput!) {
 }
 `
 
-export default compose(
+const wrappedComponent = compose(
     graphql(createStripeUserQuery, {
         props: ({ mutate }) => ({
             createStripeUser: values => mutate({ variables: { input: values } }),
@@ -221,3 +222,27 @@ export default compose(
     }),
     withRouter,
 )(PurchaseProductForm)
+
+wrappedComponent.Shell = () => (
+    <View>
+        <Header><Placeholder>Where Should We Send This Card?</Placeholder></Header>
+        <View marginChildren>
+            <Row>
+                <Col xs={12} sm={7} md={8}>
+                    <Select />
+                </Col>
+                <Col xs={12} sm={5} md={4}>
+                    <Button block>
+                        <Placeholder light>Add New Location</Placeholder>
+                    </Button>
+                </Col>
+            </Row>
+            <TextInput textarea />
+            <Button bsStyle="info" type="submit">
+                <Placeholder light>Purchase Card</Placeholder>
+            </Button>
+        </View>
+    </View>
+)
+
+export default wrappedComponent

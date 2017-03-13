@@ -36,7 +36,7 @@ const AnimatedFade = ({ children: child, getKey }) => (
         willLeave={willLeave}
     >
         {interpolated => (
-            <div>
+            <div style={{ position: 'relative' }}>
                 {interpolated.map(({ key, style, data }) => (
                     <div
                         key={`${key}-transition`}

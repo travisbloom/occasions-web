@@ -39,7 +39,6 @@ class AnimatedSwitch extends React.Component {
                     },
                 })}
                 getKey={this.getKey}
-                onComponentMount={() => ({ x: 50, o: 0.75 })}
                 onRender={(data, i, spring) => ({
                     x: spring(0, WOBBLY_SPRING),
                     o: spring(1),

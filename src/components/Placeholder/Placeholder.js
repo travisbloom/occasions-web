@@ -12,14 +12,14 @@ class Placeholder extends React.Component {
         this.width = props.width || random(0.8, 1) * 100
     }
     render() {
-        const { light, width } = this.props
+        const { light, width, children } = this.props
         return (
             <View
                 inline
                 className={classNames(styles.base, light && styles.light)}
                 style={{ width: `${width || this.width}%` }}
             >
-                {'\u00A0'}
+                <View className={styles.text}>{children || '\u00A0'}</View>
             </View>
         )
     }

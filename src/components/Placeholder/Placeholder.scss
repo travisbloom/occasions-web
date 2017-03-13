@@ -2,6 +2,11 @@
 .base {
     background-color: $color-gray;
     border-radius: $border-radius-small;
+    line-height: .8em;
+}
+
+.text {
+    visibility: hidden;
 }
 
 .light {

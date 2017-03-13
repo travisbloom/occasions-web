@@ -1,11 +1,12 @@
 // @flow
 import React from 'react'
-import { graphql } from 'react-apollo'
+import { graphql, compose } from 'react-apollo'
 import gql from 'graphql-tag'
 import DocumentTitle from 'react-document-title'
 
-import { View, Header } from '../../components'
+import { View, Header, Placeholder } from '../../components'
 import { EventDate } from '../../fragmentComponents'
+import withShell from '../../hoc/withShell'
 
 import PurchaseProductForm from './PurchaseProductForm'
 
@@ -20,13 +21,12 @@ class PurchaseProduct extends React.Component {
             },
             style,
         } = this.props
-
-        if (!associatedEvent) return <span>allllmost</span>
-        const pageTitleInfo = associatedEvent
-            ? `for ${associatedEvent.receivingPerson.fullName} - ${associatedEvent.event.name}`
-            : 'Details'
         return (
-            <DocumentTitle title={`Occasions | Gift ${pageTitleInfo}`}>
+            <DocumentTitle
+                title={
+                    `Occasions | Gift for ${associatedEvent.receivingPerson.fullName} - ${associatedEvent.event.name}`
+                }
+            >
                 <View style={style} padding>
                     <Header size="largest">{product.name}</Header>
                     <Header size="larger">
@@ -49,6 +49,14 @@ class PurchaseProduct extends React.Component {
         )
     }
 }
+
+PurchaseProduct.Shell = () => (
+    <View padding>
+        <Header size="largest"><Placeholder /></Header>
+        <Header size="larger"><Placeholder /></Header>
+        <PurchaseProductForm.Shell />
+    </View>
+)
 
 const query = gql`
 query PurchaseProduct($associatedEventId: ID!, $productSlug: ID!) {
@@ -106,8 +114,11 @@ query PurchaseProduct($associatedEventId: ID!, $productSlug: ID!) {
 ${EventDate.fragments.event}
 `
 
-export default graphql(query, {
-    options: ({ match: { params: { associatedEventId, productSlug } } }) => ({
-        variables: { associatedEventId, productSlug },
+export default compose(
+    graphql(query, {
+        options: ({ match: { params: { associatedEventId, productSlug } } }) => ({
+            variables: { associatedEventId, productSlug },
+        }),
     }),
-})(PurchaseProduct)
+    withShell({ isLoaded: props => props.data.associatedEvent.receivingPerson }),
+)(PurchaseProduct)
