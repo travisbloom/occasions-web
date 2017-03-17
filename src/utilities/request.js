@@ -18,7 +18,6 @@ const parseJSON = (response) => {
     return response.json()
 }
 
-/* eslint-disable no-console */
 export default (...args) => fetch(...args)
     .then((response) => {
         try {
@@ -35,4 +34,3 @@ export default (...args) => fetch(...args)
         debug('request failed', error.response)
         throw error
     })
-/* eslint-enable no-console */
