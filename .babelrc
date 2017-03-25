@@ -1,18 +1,14 @@
 {
-  "presets": [
-    ["es2015", {"modules": false}],
-    "stage-2",
-    "react"
-  ],
-  "plugins": [
-    "react-hot-loader/babel",
-    "transform-flow-strip-types"
-],
   "env": {
      "test": {
        "plugins": ["transform-es2015-modules-commonjs"]
      },
      "dev": {
+         "plugins": [
+           "lodash",
+           "react-hot-loader/babel",
+           "transform-flow-strip-types"
+       ],
         "presets": [
             ["env", {
               "modules": false,
@@ -21,6 +17,7 @@
                 "browsers": ["last 2 Chrome versions"]
               }
             }],
+            "stage-2",
             "react"
         ],
       }

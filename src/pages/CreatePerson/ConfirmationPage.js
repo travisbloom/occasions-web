@@ -31,7 +31,7 @@ class ConfirmationPage extends React.Component {
                 state: state.value,
             })),
         }
-        return createPerson(values)
+        return createPerson(input)
             .then(({ data: { createPerson: { associatedEvent } } }) =>
                 history.push(urls.associatedEventDetails(associatedEvent.id)))
             .catch(formatGeneralReduxFormErrors)

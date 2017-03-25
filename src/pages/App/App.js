@@ -1,5 +1,4 @@
 import React from 'react'
-import { Route, Switch } from 'react-router-dom'
 import { graphql, compose } from 'react-apollo'
 import { connect } from 'react-redux'
 import gql from 'graphql-tag'
@@ -34,7 +33,8 @@ class App extends React.Component {
     //     const longerRouteStack = routeDepthDiff > 0 ? nextProps.routes : this.props.routes
     //     const sameRoutePaths = shorterRouteStack.every(
     //         ({ path }, index) =>
-    //             index < shorterRouteStack.lengt - 1 ? path === longerRouteStack[index].path : true,
+    //             index < shorterRouteStack.lengt - 1 ?
+    //                    path === longerRouteStack[index].path : true,
     //     )
     //     if (!sameRoutePaths) {
     //         if (this.state.hasBackButton) {
@@ -60,6 +60,7 @@ class App extends React.Component {
 
     render() {
         const { data: { currentUser }, errors } = this.props
+        const routeProps = { currentUser, style: PAGE_STYLES }
         return (
             <View>
                 <Navbar hasBackButton={this.state.hasBackButton} currentUser={currentUser} />
@@ -86,35 +87,35 @@ class App extends React.Component {
                     <AnimatedRouter.Switch style={{ position: 'relative', width: '100%' }}>
                         <AnimatedRouter.Route
                             exact
+                            {...routeProps}
                             path="/a/yourEvents"
-                            style={PAGE_STYLES}
                             component={AssociatedEventsList}
                         />
                         <AnimatedRouter.Route
                             exact
+                            {...routeProps}
                             path="/a/yourEvents/new"
-                            style={PAGE_STYLES}
                             component={CreateAssociatedEvent}
                         />
                         <AnimatedRouter.Route
                             exact
-                            style={PAGE_STYLES}
+                            {...routeProps}
                             path="/a/yourEvents/:associatedEventId"
                             component={AssociatedEventDetails}
                         />
                         <AnimatedRouter.Route
                             exact
-                            style={PAGE_STYLES}
+                            {...routeProps}
                             path="/a/yourEvents/:associatedEventId/:productSlug"
                             component={PurchaseProduct}
                         />
                         <AnimatedRouter.Route
-                            style={PAGE_STYLES}
+                            {...routeProps}
                             path="/a/yourGifts/:transactionId"
                             component={TransactionDetails}
                         />
                         <AnimatedRouter.Route
-                            style={PAGE_STYLES}
+                            {...routeProps}
                             path="/a/yourContacts/new"
                             component={CreatePerson}
                         />
@@ -128,11 +129,13 @@ class App extends React.Component {
 
 const query = gql`
 query App {
-currentUser {
-    person {
-      fullName
+    currentUser {
+        id
+        person {
+            id
+            fullName
+        }
     }
-  }
 }
 `
 

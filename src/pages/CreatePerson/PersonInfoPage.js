@@ -31,9 +31,10 @@ class PersonInfoPage extends React.Component {
     }
     render() {
         const { handleSubmit, submitting, pristine } = this.props
+
         return (
             <form onSubmit={handleSubmit}>
-                <View padding>
+                <View padding marginChildren>
                     <ReduxFormField label="First Name" name="firstName" component={TextInput} />
                     <ReduxFormField label="Last Name" name="lastName" component={TextInput} />
                     <ReduxFormField label="Email" type="email" name="email" component={TextInput} />

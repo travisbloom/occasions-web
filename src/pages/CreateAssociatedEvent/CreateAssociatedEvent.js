@@ -2,7 +2,7 @@
 import React from 'react'
 import DocumentTitle from 'react-document-title'
 
-import { View, Link } from '../../components'
+import { View } from '../../components'
 
 import AssignReceivingPersonPage from './AssignReceivingPersonPage'
 import CreateEventPage from './CreateEventPage'

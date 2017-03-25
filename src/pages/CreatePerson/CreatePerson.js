@@ -2,11 +2,10 @@
 
 import React from 'react'
 import { graphql, compose } from 'react-apollo'
-import { withRouter } from 'react-router-dom'
 import gql from 'graphql-tag'
 import DocumentTitle from 'react-document-title'
 
-import { View, Link, Header, Placeholder } from '../../components'
+import { View, Header } from '../../components'
 import { formatReduxFormErrors } from '../../utilities/errors'
 
 import PersonInfoPage from './PersonInfoPage'
@@ -15,18 +14,22 @@ import ConfirmationPage from './ConfirmationPage'
 
 class CreatePerson extends React.Component {
     state = {
-        page: 1,
+        pageNum: 1,
         addressIndex: 0,
     };
 
     onAddAddress = () => this.setState(state => ({
-        page: 2,
+        pageNum: 2,
         addressIndex: state.addressIndex + 1,
     }));
 
-    nextPage = () => this.setState({ page: this.state.page + 1 });
+    nextPage = () => this.setState(state => ({
+        pageNum: state.pageNum + 1,
+    }));
 
-    previousPage = () => this.setState({ page: this.state.page - 1 });
+    previousPage = () => this.setState(state => ({
+        pageNum: state.pageNum - 1,
+    }));
 
     handleSubmit = (values) => {
         const { createPerson, onSuccess } = this.props
@@ -34,10 +37,8 @@ class CreatePerson extends React.Component {
     };
 
     renderPage = () => {
-        const { data: { currentUser } } = this.props
-        const { page, addressIndex } = this.state
-        if (!currentUser) return <Placeholder />
-        switch (page) {
+        const { pageNum, addressIndex } = this.state
+        switch (pageNum) {
         case 1:
             return <PersonInfoPage onSubmit={this.nextPage} />
         case 2:
@@ -47,8 +48,8 @@ class CreatePerson extends React.Component {
     };
 
     renderBackLanguage = () => {
-        const { page } = this.state
-        switch (page) {
+        const { pageNum } = this.state
+        switch (pageNum) {
         case 1:
             return null
         case 2:
@@ -58,13 +59,9 @@ class CreatePerson extends React.Component {
     };
 
     render() {
-        const {
-            style,
-        } = this.props
-
         return (
             <DocumentTitle title="Occasions | Add Contact">
-                <View style={style} padding>
+                <View padding>
                     <View>
                         <View inline onClick={this.previousPage}>{this.renderBackLanguage()}</View>
                     </View>
@@ -88,4 +85,4 @@ query CreatePerson {
 }
 `
 
-export default compose(graphql(query), withRouter)(CreatePerson)
+export default compose(graphql(query))(CreatePerson)

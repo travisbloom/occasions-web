@@ -24,7 +24,9 @@ class PurchaseProduct extends React.Component {
         return (
             <DocumentTitle
                 title={
-                    `Occasions | Gift for ${associatedEvent.receivingPerson.fullName} - ${associatedEvent.event.name}`
+                    'Occasions | Gift for ' +
+                        `${associatedEvent.receivingPerson.fullName} - ` +
+                        `${associatedEvent.event.name}`
                 }
             >
                 <View style={style} padding>

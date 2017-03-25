@@ -53,7 +53,7 @@ class AnimatedSwitch extends React.Component {
     }
 }
 
-const AnimatedRoute = ({ component: Component, style, getKey, ...rest }) => (
+const AnimatedRoute = ({ component: Component, style, ...rest }) => (
     <Route
         {...rest}
         render={props => (
