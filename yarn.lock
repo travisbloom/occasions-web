@@ -63,11 +63,12 @@ acorn@^4.0.11, acorn@^4.0.3, acorn@^4.0.4:
   version "4.0.11"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-4.0.11.tgz#edcda3bd937e7556410d42ed5860f67399c794c0"
 
-airbnb-prop-types@^2.1.0:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/airbnb-prop-types/-/airbnb-prop-types-2.4.0.tgz#7ca1c76fc12f6186722b06a5e7b326c244cb415c"
+airbnb-prop-types@^2.4.1:
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/airbnb-prop-types/-/airbnb-prop-types-2.5.1.tgz#11e4bb804013627b96bf8a97eab3782549b4f127"
   dependencies:
     has "^1.0.1"
+    is-regex "^1.0.4"
 
 ajv-keywords@^1.0.0, ajv-keywords@^1.1.1:
   version "1.5.1"
@@ -142,18 +143,6 @@ apollo-client@^1.0.0-rc.2:
     "@types/async" "^2.0.31"
     "@types/graphql" "^0.8.0"
     "@types/isomorphic-fetch" "0.0.33"
-
-apollo-react@^0.7.1:
-  version "0.7.1"
-  resolved "https://registry.yarnpkg.com/apollo-react/-/apollo-react-0.7.1.tgz#46ae451e8220494ba909dd463647f2fddaf39a0d"
-  dependencies:
-    hoist-non-react-statics "^1.2.0"
-    invariant "^2.2.1"
-    lodash.flatten "^4.2.0"
-    lodash.isequal "^4.1.1"
-    lodash.isobject "^3.0.2"
-    lodash.pick "^4.4.0"
-    object-assign "^4.0.1"
 
 append-transform@^0.4.0:
   version "0.4.0"
@@ -1594,6 +1583,10 @@ console-browserify@^1.1.0:
 console-control-strings@^1.0.0, console-control-strings@~1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/console-control-strings/-/console-control-strings-1.1.0.tgz#3d7cf4464db6446ea644bf4b39507f9851008e8e"
+
+consolidated-events@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/consolidated-events/-/consolidated-events-1.0.1.tgz#70f475f4a5d6d20428e702da1b8870d9cc031a14"
 
 constants-browserify@^1.0.0:
   version "1.0.0"
@@ -3328,6 +3321,12 @@ is-property@^1.0.0:
 is-regex@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/is-regex/-/is-regex-1.0.3.tgz#0d55182bddf9f2fde278220aec3a75642c908637"
+
+is-regex@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/is-regex/-/is-regex-1.0.4.tgz#5517489b547091b0930e095654ced25ee97e9491"
+  dependencies:
+    has "^1.0.1"
 
 is-resolvable@^1.0.0:
   version "1.0.0"
@@ -5218,14 +5217,15 @@ react-collapse@^2.3.3:
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/react-collapse/-/react-collapse-2.3.3.tgz#68c70f1fceeaf375e3599b95710cc51e5dd339a3"
 
-react-dates@^7.0.1:
-  version "7.0.1"
-  resolved "https://registry.yarnpkg.com/react-dates/-/react-dates-7.0.1.tgz#450cfa06de8af74f6ead65c42f511540771f4c90"
+react-dates@^8.2.1:
+  version "8.2.1"
+  resolved "https://registry.yarnpkg.com/react-dates/-/react-dates-8.2.1.tgz#56287b4006ea8f8cc4cdaa2630a7a49499b51328"
   dependencies:
-    airbnb-prop-types "^2.1.0"
+    airbnb-prop-types "^2.4.1"
     array-includes "^3.0.2"
     classnames "^2.2.5"
-    react-moment-proptypes "^1.2.1"
+    consolidated-events "^1.0.1"
+    react-moment-proptypes "^1.3.0"
     react-portal "^3.0.0"
 
 react-deep-force-update@^2.0.1:
@@ -5269,7 +5269,7 @@ react-input-autosize@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/react-input-autosize/-/react-input-autosize-1.1.0.tgz#3fe1ac832387d8abab85f6051ceab1c9e5570853"
 
-react-moment-proptypes@^1.2.1:
+react-moment-proptypes@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/react-moment-proptypes/-/react-moment-proptypes-1.3.0.tgz#b6f564c64fc86e70c5a5f5ec0aa360ca7bf252e3"
   dependencies:

@@ -3,11 +3,13 @@ import classNames from 'classnames'
 
 class TextInput extends React.Component {
     static propTypes = {
-        onChange: React.PropTypes.func.isRequired,
-        value: React.PropTypes.oneOfType([
-            React.PropTypes.number,
-            React.PropTypes.string,
-        ]).isRequired,
+        onChange: React.PropTypes.func,
+        value: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]),
+    };
+
+    static defaultProps = {
+        onChange: () => {},
+        value: '',
     };
 
     handleOnChange = event => this.props.onChange(event.target.value, event);

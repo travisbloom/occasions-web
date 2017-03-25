@@ -19,6 +19,8 @@ class DatePicker extends React.Component {
         if (props.hasNoYear) {
             this.minDate = moment().startOf('year')
             this.maxDate = moment().endOf('year')
+            this.isOutsideCurrentYear = date =>
+                date.isBefore(this.minDate) || date.isAfter(this.maxDate)
         }
         this.state = { focused: false }
     }
@@ -31,28 +33,31 @@ class DatePicker extends React.Component {
         const { focused } = this.state
         const {
             hasNoYear,
-            minDate,
-            maxDate,
             name,
             monthFormat,
+            isOutsideRange,
             value,
             ...props
         } = this.props
 
         delete props.onChange
+        delete props.onBlur
+        delete props.onDragStart
+        delete props.onDrop
+        delete props.onFocus
 
         return (
             <View>
                 <SingleDatePicker
                     id={name}
-                    name={name}
                     focused={focused}
                     date={value ? moment(value) : null}
                     onDateChange={this.handleOnChange}
                     monthFormat={hasNoYear ? 'MMMM' : monthFormat}
                     onFocusChange={this.handleOnFocusChange}
-                    minDate={hasNoYear ? this.minDate : minDate}
-                    maxDate={hasNoYear ? this.maxDate : maxDate}
+                    isOutsideRange={
+                        isOutsideRange || hasNoYear ? this.isOutsideCurrentYear : undefined
+                    }
                     {...props}
                 />
             </View>

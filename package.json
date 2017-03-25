@@ -68,7 +68,7 @@
     "react-apollo": "^1.0.0-rc.2",
     "react-bootstrap": "^0.30.7",
     "react-collapse": "^2.3.3",
-    "react-dates": "^7.0.1",
+    "react-dates": "^8.2.1",
     "react-document-title": "^2.0.2",
     "react-dom": "^15.4.2",
     "react-flexbox-grid": "^0.10.2",
