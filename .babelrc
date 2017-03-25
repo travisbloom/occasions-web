@@ -10,13 +10,7 @@
            "transform-flow-strip-types"
        ],
         "presets": [
-            ["env", {
-              "modules": false,
-              "useBuiltIns": true,
-              "targets": {
-                "browsers": ["last 2 Chrome versions"]
-              }
-            }],
+            ["es2015", {"modules": false}],
             "stage-2",
             "react"
         ],
