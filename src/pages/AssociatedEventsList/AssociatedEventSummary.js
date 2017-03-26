@@ -6,13 +6,7 @@ import { Panel, View, Row, Col, Placeholder } from '../../components'
 import { EventDate } from '../../fragmentComponents'
 import urls from '../../urls'
 
-import graphqlQuery from './AssociatedEventSummaryFragment.graphql'
-
 class AssociatedEventSummary extends React.Component {
-    static propTypes = {
-        associatedEvent: propType(graphqlQuery).isRequired,
-    };
-
     transitionToDetailsPage = () => {
         const { associatedEvent, history } = this.props
         history.push(urls.associatedEventDetails(associatedEvent.id))

@@ -1,5 +1,3 @@
-#import "./AssociatedEventSummaryFragment.graphql"
-
 query AssociatedEventsListQuery {
   currentUser {
     id
@@ -10,7 +8,24 @@ query AssociatedEventsListQuery {
         edges {
           node {
             id
-            ...AssociatedEventSummaryFragment
+            receivingPerson {
+              id
+              fullName
+            }
+            transactions {
+              edges {
+                node {
+                  id
+                }
+              }
+            }
+            event {
+              id
+              name
+              dateStart
+              timeStart
+              isReoccuringYearly
+            }
           }
         }
       }
