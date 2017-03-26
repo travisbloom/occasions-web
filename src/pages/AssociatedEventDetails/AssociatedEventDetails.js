@@ -23,32 +23,33 @@ class AssociatedEventDetails extends React.Component {
     render() {
         const {
             data: {
-                associatedEvent,
+                node,
             },
             style,
         } = this.props
         return (
             <DocumentTitle
                 title={
-                    `Occasions | ${associatedEvent ? `${associatedEvent.receivingPerson.fullName} - ${associatedEvent.event.name}` : 'Event Details'}`
+                    `Occasions | ${node ? `${node.receivingPerson.fullName} - ${node.event.name}` : 'Event Details'}`
                 }
             >
                 <View style={style} padding marginChildren>
                     <Header size="largest">
-                        {associatedEvent.receivingPerson.fullName}
+                        {node.receivingPerson.fullName}
                     </Header>
-                    <Header size="larger">{associatedEvent.event.name}</Header>
+                    <Header size="larger">{node.event.name}</Header>
                     <Header size="larger">
-                        <EventDate event={associatedEvent.event} />
+                        <EventDate event={node.event} />
                     </Header>
-                    {associatedEvent.event.relatedProducts.edges.map(({ node }) => (
-                        <Panel key={node.id} header={<Header size="large">{node.name}</Header>}>
+                    {node.event.relatedProducts.edges.map(({ node: product }) => (
+                        <Panel
+                            key={product.id}
+                            header={<Header size="large">{product.name}</Header>}
+                        >
                             <Row>
-                                <Col xs={8} lg={10}>{node.description}</Col>
+                                <Col xs={8} lg={10}>{product.description}</Col>
                                 <Col xs={4} lg={2}>
-                                    <LinkContainer
-                                        to={urls.purchaseProduct(associatedEvent.id, node.slug)}
-                                    >
+                                    <LinkContainer to={urls.purchaseProduct(node.id, product.id)}>
                                         <Button block bsStyle="primary">
                                             Buy
                                         </Button>
@@ -96,5 +97,5 @@ export default compose(
             variables: { associatedEventId },
         }),
     }),
-    withShell({ isLoaded: props => !!props.data.associatedEvent }),
+    withShell({ isLoaded: props => !!props.data.node }),
 )(AssociatedEventDetails)

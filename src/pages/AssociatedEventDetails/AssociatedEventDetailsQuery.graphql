@@ -1,39 +1,41 @@
 query AssociatedEventDetailsQuery($associatedEventId: ID!) {
-  associatedEvent(id: $associatedEventId) {
-      id
-      receivingPerson {
-        id
-        fullName
-      }
-      transactions {
-        edges {
-          node {
+  node(id: $associatedEventId) {
+      ...on AssociatedEventNode {
+          id
+          receivingPerson {
             id
-            costUsd
-            product {
-              id
-              name
-              mainImageUrl
-              description
-            }
+            fullName
           }
-        }
-      }
-      event {
-        id
-        name
-        dateStart
-        timeStart
-        isReoccuringYearly
-        relatedProducts {
+          transactions {
             edges {
               node {
-                name
-                description
                 id
-                slug
+                costUsd
+                product {
+                  id
+                  name
+                  mainImageUrl
+                  description
+                }
               }
             }
+          }
+          event {
+            id
+            name
+            dateStart
+            timeStart
+            isReoccuringYearly
+            relatedProducts {
+                edges {
+                  node {
+                    name
+                    description
+                    id
+                    slug
+                  }
+                }
+              }
           }
       }
   }

@@ -106,7 +106,7 @@ class App extends React.Component {
                         <AnimatedRouter.Route
                             exact
                             {...routeProps}
-                            path="/a/yourEvents/:associatedEventId/:productSlug"
+                            path="/a/yourEvents/:associatedEventId/:productId"
                             component={PurchaseProduct}
                         />
                         <AnimatedRouter.Route

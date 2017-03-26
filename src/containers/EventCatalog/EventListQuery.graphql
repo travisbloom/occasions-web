@@ -1,9 +1,8 @@
-query EventListQuery($eventSearchValue: String, $selectedEventTypeIds: [ID]) {
-  events(eventTypesPkIn: $selectedEventTypeIds, search: $eventSearchValue) {
+query EventListQuery($eventSearchValue: String, $eventTypes: [ID]) {
+  events(eventTypes: $eventTypes, search: $eventSearchValue) {
     edges {
       node {
         id
-        pk
         name
         slug
         dateStart

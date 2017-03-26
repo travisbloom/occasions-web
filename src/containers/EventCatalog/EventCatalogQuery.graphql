@@ -3,7 +3,6 @@ query EventCatalogQuery {
     edges {
       node {
         id
-        pk
         displayName
       }
     }

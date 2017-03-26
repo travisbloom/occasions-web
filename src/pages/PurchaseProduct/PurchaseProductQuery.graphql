@@ -1,5 +1,5 @@
 
-query PurchaseProductQuery($associatedEventId: ID!, $productSlug: ID!) {
+query PurchaseProductQuery($associatedEventId: ID!, $productId: ID!) {
     currentUser {
       email
       hasStripeUser
@@ -9,46 +9,50 @@ query PurchaseProductQuery($associatedEventId: ID!, $productSlug: ID!) {
         fullName
       }
     }
-    associatedEvent(id: $associatedEventId) {
-        pk
-        id
-        receivingPerson {
-          fullName
-          pk
-          id
-          associatedLocations {
-              edges {
-                  node {
-                      id
-                      pk
-                      location {
+    associatedEvent: node(id: $associatedEventId) {
+        ...on AssociatedEventNode {
+            pk
+            id
+            receivingPerson {
+              fullName
+              pk
+              id
+              associatedLocations {
+                  edges {
+                      node {
                           id
-                          displayName
+                          pk
+                          location {
+                              id
+                              displayName
+                          }
                       }
                   }
               }
-          }
-        }
-        event {
-          name
-          id
-          dateStart
-          timeStart
-          isReoccuringYearly
+            }
+            event {
+              name
+              id
+              dateStart
+              timeStart
+              isReoccuringYearly
+            }
         }
     }
-    product(slug: $productSlug) {
-        name
-        id
-        slug
-        costUsd
-        description
-        eventTypes {
-            edges {
-                node {
-                    id
-                    name
-                    displayName
+    product: node(id: $productId) {
+        ... on ProductNode {
+            name
+            id
+            slug
+            costUsd
+            description
+            eventTypes {
+                edges {
+                    node {
+                        id
+                        name
+                        displayName
+                    }
                 }
             }
         }

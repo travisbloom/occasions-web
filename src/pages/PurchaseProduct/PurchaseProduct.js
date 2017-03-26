@@ -61,8 +61,8 @@ PurchaseProduct.Shell = () => (
 
 export default compose(
     graphql(graphqlQuery, {
-        options: ({ match: { params: { associatedEventId, productSlug } } }) => ({
-            variables: { associatedEventId, productSlug },
+        options: ({ match: { params: { associatedEventId, productId } } }) => ({
+            variables: { associatedEventId, productId },
         }),
     }),
     withShell({ isLoaded: props => props.data.associatedEvent.receivingPerson }),

@@ -29,7 +29,7 @@ class EventsCatalog extends React.Component {
             [
                 {
                     label: eventType.displayName,
-                    value: eventType.pk,
+                    value: eventType.id,
                 },
             ],
             _.isEqual,
@@ -59,7 +59,7 @@ class EventsCatalog extends React.Component {
                                 <Label
                                     bsStyle={
                                         selectedEventTypes.find(
-                                            ({ value }) => value === eventType.pk,
+                                            ({ value }) => value === eventType.id,
                                         )
                                             ? 'info'
                                             : undefined

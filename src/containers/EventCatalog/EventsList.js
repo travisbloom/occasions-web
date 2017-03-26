@@ -33,7 +33,7 @@ export default graphql(graphqlQuery, {
     options: ({ eventSearchValue, selectedEventTypes }) => ({
         variables: {
             eventSearchValue,
-            selectedEventTypeIds: selectedEventTypes.map(({ value }) => value),
+            eventTypes: selectedEventTypes.map(({ value }) => value),
         },
     }),
 })(EventsList)
