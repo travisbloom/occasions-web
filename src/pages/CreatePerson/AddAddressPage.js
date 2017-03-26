@@ -12,7 +12,7 @@ class AddAddressPage extends React.Component {
         const { handleSubmit, submitting, pristine, addressIndex } = this.props
         return (
             <form onSubmit={handleSubmit}>
-                <View padding>
+                <View marginChildren>
                     <FormSection name={`associatedLocations[${addressIndex}]`}>
                         <AddressForm />
                     </FormSection>

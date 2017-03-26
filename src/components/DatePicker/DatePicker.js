@@ -1,15 +1,18 @@
 import React from 'react'
 import { SingleDatePicker } from 'react-dates'
+import classNames from 'classnames'
 import moment from 'moment'
 
 import { View } from '../'
-import './DatePicker.scss'
+import styles from './DatePicker.scss'
 
 class DatePicker extends React.Component {
     static propTypes = {
         hasNoYear: React.PropTypes.bool,
+        inline: React.PropTypes.bool,
     };
     static defaultProps = {
+        inline: false,
         numberOfMonths: 1,
         hasNoYear: false,
     };
@@ -32,9 +35,11 @@ class DatePicker extends React.Component {
     render() {
         const { focused } = this.state
         const {
+            inline,
             hasNoYear,
             name,
             monthFormat,
+            displayFormat,
             isOutsideRange,
             value,
             ...props
@@ -47,12 +52,13 @@ class DatePicker extends React.Component {
         delete props.onFocus
 
         return (
-            <View>
+            <View className={classNames(inline || styles.block)}>
                 <SingleDatePicker
                     id={name}
                     focused={focused}
                     date={value ? moment(value) : null}
                     onDateChange={this.handleOnChange}
+                    displayFormat={hasNoYear ? 'MM/DD' : displayFormat}
                     monthFormat={hasNoYear ? 'MMMM' : monthFormat}
                     onFocusChange={this.handleOnFocusChange}
                     isOutsideRange={

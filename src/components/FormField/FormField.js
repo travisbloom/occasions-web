@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { Errors, View } from '../'
+import './FormField.scss'
 
 const FormField = ({ name, label, error, touched, helpText, children }) => (
     <View className="form-group">

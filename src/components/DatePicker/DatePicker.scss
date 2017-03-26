@@ -1,4 +1,5 @@
 :global {
+    @import "../../styles/variables.scss";
     @import "../../styles/bootstrapTheme/variables.scss";
     $react-dates-width-input: 130px;
     $react-dates-width-arrow: 24px;
@@ -6,27 +7,27 @@
     $react-dates-width-day-picker: 300px;
     $react-dates-spacing-vertical-picker: $input-height-base;
 
-    $react-dates-color-primary: #brand-success;
-    $react-dates-color-primary-dark: #00514a;
-    $react-dates-color-primary-shade-1: #33dacd;
-    $react-dates-color-primary-shade-2: #66e2da;
-    $react-dates-color-primary-shade-3: #80e8e0;
-    $react-dates-color-primary-shade-4: #b2f1ec;
-    $react-dates-color-secondary: #brand-primary;
-    $react-dates-color-white: #fff;
-    $react-dates-color-gray: #565a5c;
-    $react-dates-color-gray-dark: darken($react-dates-color-gray, 10.5%);
-    $react-dates-color-gray-light: lighten($react-dates-color-gray, 17.8%);   // #82888a
-    $react-dates-color-gray-lighter: lighten($react-dates-color-gray, 45%);     // #cacccd
+    $react-dates-color-primary: $brand-info;
+    $react-dates-color-primary-dark: $brand-primary;
+    $react-dates-color-primary-shade-1: lighten($brand-info, 5%);
+    $react-dates-color-primary-shade-2: lighten($brand-info, 10%);
+    $react-dates-color-primary-shade-3: lighten($brand-info, 12%);
+    $react-dates-color-primary-shade-4: lighten($brand-info, 20%);
+    $react-dates-color-secondary: $brand-success;
+    $react-dates-color-white: $color-white;
+    $react-dates-color-gray: $color-gray;
+    $react-dates-color-gray-dark: $color-gray-dark;
+    $react-dates-color-gray-light: $color-gray-light;
+    $react-dates-color-gray-lighter: $color-gray-lighter;
     $react-dates-color-highlighted: #ffe8bc;
 
-    $react-dates-color-border: #dbdbdb;
-    $react-dates-color-border-light: #dce0e0;
-    $react-dates-color-border-medium: #c4c4c4;
-    $react-dates-color-placeholder-text: #757575;
-    $react-dates-color-text: #484848;
-    $react-dates-color-text-focus: #007a87;
-    $react-dates-color-focus: #99ede6;
+    $react-dates-color-border: $color-border;
+    $react-dates-color-border-light: lighten($color-border, 5%);
+    $react-dates-color-border-medium: darken($color-border, 10%);
+    $react-dates-color-placeholder-text: $color-text;
+    $react-dates-color-text: $color-text;
+    $react-dates-color-text-focus: $brand-primary;
+    $react-dates-color-focus: lighten($brand-info, 40%);
     @import '~react-dates/css/styles.scss';
     .SingleDatePicker {
         .SingleDatePickerInput {
@@ -39,8 +40,19 @@
             line-height: $line-height-computed;
             padding: $padding-base-vertical - 4px $padding-base-horizontal - 8px;
         }
-        .DateInput__display-text {
-
+    }
+    .SingleDatePicker {
+        width: 100%;
+        .DateInput {
+            width: 100%;
+        }
+    }
+    :local(.inline) {
+        .SingleDatePicker {
+            width: inherit;
+            .DateInput {
+                width: inherit;
+            }
         }
     }
 }

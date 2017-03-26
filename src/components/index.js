@@ -3,7 +3,7 @@ import { Link as RRLink } from 'react-router-dom'
 export const LinkContainer = RRLink
 export const Link = RRLink
 
-export { OverlayTrigger, Tooltip, Panel, Modal } from 'react-bootstrap'
+export { OverlayTrigger, Tooltip, Panel, Modal, Table } from 'react-bootstrap'
 export { default as Collapse } from 'react-collapse'
 export { Row, Grid } from 'react-flexbox-grid'
 export { default as AddressForm } from './AddressForm/AddressForm'

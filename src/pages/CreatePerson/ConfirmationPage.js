@@ -8,24 +8,27 @@ import { withRouter } from 'react-router-dom'
 import moment from 'moment'
 import gql from 'graphql-tag'
 
-import { Alert, View, Panel, Button, Row, Col, FormattedDate } from '../../components'
+import { Alert, View, Panel, Button, Row, Col, FormattedDate, Table } from '../../components'
 import { formatGeneralReduxFormErrors } from '../../utilities/errors'
 import { formatLocation } from '../../utilities/location'
 import urls from '../../urls'
 
 const LineItem = ({ label, children }) => (
-    <Row>
-        <Col xs={6}>{label}</Col>
-        <Col xs={6}>{children}</Col>
-    </Row>
+    <tr>
+        <td>{label}</td>
+        <td>{children}</td>
+    </tr>
 )
 
 class ConfirmationPage extends React.Component {
+    getBirthday = (birthdayDate, birthdayYear) =>
+        moment(birthdayDate).year(birthdayYear.value).toISOString();
+
     handleSubmit = ({ associatedLocations, birthdayDate, birthdayYear, ...values }) => {
         const { createPerson, history } = this.props
         const input = {
             ...values,
-            birthday: moment(birthdayDate).year(birthdayYear),
+            birthday: this.getBirthday(birthdayDate, birthdayYear),
             associatedLocations: associatedLocations.map(({ state, ...location }) => ({
                 ...location,
                 state: state.value,
@@ -39,21 +42,35 @@ class ConfirmationPage extends React.Component {
 
     render() {
         const { handleSubmit, error, formValues, onAddAddress } = this.props
-
+        console.log(
+            formValues,
+            formValues.birthdayYear,
+            moment(formValues.birthday).year(formValues.birthdayYear),
+        )
         return (
             <Form onSubmit={handleSubmit(this.handleSubmit)}>
                 <View marginChildren>
                     <Panel header={`${formValues.firstName} ${formValues.lastName}`}>
-                        <LineItem label="Birthday">
-                            <FormattedDate date={formValues.birthday} />
-                        </LineItem>
-                        <Panel header="Addresses">
-                            {formValues.associatedLocations.map(location => (
-                                <View>
-                                    {formatLocation(location)}
-                                </View>
-                            ))}
-                        </Panel>,
+                        <Table striped bordered>
+                            <tbody>
+                                <LineItem label="Email">
+                                    {formValues.email}
+                                </LineItem>
+                                <LineItem label="Birthday">
+                                    <FormattedDate
+                                        date={this.getBirthday(
+                                            formValues.birthdayDate,
+                                            formValues.birthdayYear,
+                                        )}
+                                    />
+                                </LineItem>
+                                {formValues.associatedLocations.map((location, index) => (
+                                    <LineItem key={index} label={`Address #${index + 1}`}>
+                                        {formatLocation(location)}
+                                    </LineItem>
+                                ))}
+                            </tbody>
+                        </Table>
                     </Panel>
                     <Button type="submit" block>Create Person</Button>
                     <Button onClick={onAddAddress} block>
