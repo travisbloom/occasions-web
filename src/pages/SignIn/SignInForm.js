@@ -5,7 +5,6 @@ import { reduxForm, SubmissionError } from 'redux-form'
 
 import { graphql, compose, withApollo } from 'react-apollo'
 import { withRouter } from 'react-router-dom'
-import gql from 'graphql-tag'
 
 import {
     ReduxFormField,
@@ -20,6 +19,8 @@ import {
 import { formatReduxFormErrors } from '../../utilities/errors'
 import { signIn } from '../../utilities/auth'
 import urls from '../../urls'
+
+import graphqlQuery from './CreateUserMutation.graphql'
 
 class CreateAccountForm extends React.Component {
     onSuccess = () => {
@@ -98,25 +99,8 @@ class CreateAccountForm extends React.Component {
     }
 }
 
-const query = gql`
-  mutation createUser($input: CreateUserInput!) {
-    createUser(input: $input) {
-        user {
-            username,
-            accessTokens {
-              edges {
-                node {
-                  id
-                }
-              }
-          }
-        }
-    }
-  }
-`
-
 export default compose(
-    graphql(query, {
+    graphql(graphqlQuery, {
         props: ({ mutate }) => ({
             createUser: values => mutate({ variables: { input: values } }),
         }),

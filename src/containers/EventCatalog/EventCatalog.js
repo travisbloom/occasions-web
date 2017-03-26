@@ -1,13 +1,13 @@
 // @flow
 import React from 'react'
 import { graphql, compose, withApollo } from 'react-apollo'
-import gql from 'graphql-tag'
 import _ from 'lodash'
 
 import { View, Label, Row, Col, TextInput, FormField, Select } from '../../components'
 import { searchEventTypes } from '../../utilities/search'
 
 import EventsList from './EventsList'
+import graphqlQuery from './EventCatalogQuery.graphql'
 
 class EventsCatalog extends React.Component {
     static propTypes = {
@@ -101,18 +101,4 @@ class EventsCatalog extends React.Component {
     }
 }
 
-const query = gql`
-query EventTypes {
-  eventTypes(first: 30) {
-    edges {
-      node {
-        id
-        pk
-        displayName
-      }
-    }
-  }
-}
-`
-
-export default compose(graphql(query), withApollo)(EventsCatalog)
+export default compose(graphql(graphqlQuery), withApollo)(EventsCatalog)

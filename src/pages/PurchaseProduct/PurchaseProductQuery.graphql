@@ -1,0 +1,54 @@
+#import "../../fragmentComponents/EventDate/EventDateFragment.graphql"
+
+query PurchaseProductQuery($associatedEventId: ID!, $productSlug: ID!) {
+    currentUser {
+      email
+      hasStripeUser
+      id
+      person {
+        id
+        fullName
+      }
+    }
+    associatedEvent(id: $associatedEventId) {
+        pk
+        id
+        receivingPerson {
+          fullName
+          pk
+          id
+          associatedLocations {
+              edges {
+                  node {
+                      id
+                      pk
+                      location {
+                          id
+                          displayName
+                      }
+                  }
+              }
+          }
+        }
+        event {
+          name
+          ...EventDateFragment
+        }
+    }
+    product(slug: $productSlug) {
+        name
+        id
+        slug
+        costUsd
+        description
+        eventTypes {
+            edges {
+                node {
+                    id
+                    name
+                    displayName
+                }
+            }
+        }
+    }
+}

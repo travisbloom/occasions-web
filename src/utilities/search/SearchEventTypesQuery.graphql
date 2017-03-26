@@ -1,0 +1,11 @@
+query SearchEventTypesQuery($search: String) {
+  eventTypes(search: $search) {
+    edges {
+      node {
+        id
+        pk
+        displayName
+      }
+    }
+  }
+}

@@ -1,22 +1,11 @@
-import gql from 'graphql-tag'
+import searchPeopleGraphqlQuery from './SearchPeopleQuery.graphql'
+import SearchEventTypesQuery from './SearchEventTypesQuery.graphql'
 
 const wrapInOptionsObject = options => ({ options })
 
 export const searchPeople = (client, additionalOptions = {}) => value => client
     .query({
-        query: gql`
-        query SearchPeople($value: String) {
-          people(infoContains: $value) {
-              edges {
-                  node {
-                      id
-                      pk
-                      fullName
-                  }
-              }
-          }
-        }
-        `,
+        query: searchPeopleGraphqlQuery,
         variables: { value },
         ...additionalOptions,
     })
@@ -29,19 +18,7 @@ export const searchPeople = (client, additionalOptions = {}) => value => client
 
 export const searchEventTypes = (client, additionalOptions = {}) => search => client
     .query({
-        query: gql`
-        query SearchEventTypes($search: String) {
-          eventTypes(search: $search) {
-            edges {
-              node {
-                id
-                pk
-                displayName
-              }
-            }
-          }
-        }
-        `,
+        query: SearchEventTypesQuery,
         variables: { search },
         ...additionalOptions,
     })

@@ -1,7 +1,6 @@
 // @flow
 import React from 'react'
 import { graphql, compose } from 'react-apollo'
-import gql from 'graphql-tag'
 import DocumentTitle from 'react-document-title'
 
 import {
@@ -19,6 +18,8 @@ import {
 import { EventDate } from '../../fragmentComponents'
 import urls from '../../urls'
 import withShell from '../../hoc/withShell'
+
+import graphqlQuery from './TransactionDetailsQuery.graphql'
 
 class TransactionDetails extends React.Component {
     render() {
@@ -111,45 +112,8 @@ TransactionDetails.Shell = () => (
     </View>
 )
 
-const query = gql`
-query TransactionDetails($transactionId: ID!) {
-  transaction(id: $transactionId) {
-    id
-    datetimeCreated
-    receivingPerson {
-      id
-      fullName
-    }
-    costUsd
-    product {
-      id
-      name
-      description
-      mainImageUrl
-    }
-    associatedEvent {
-      id
-      event {
-        id
-        name
-        ...EventDate
-      }
-    }
-    associatedLocation {
-      id
-      location {
-        id
-        displayName
-      }
-    }
-    productNotes
-  }
-}
-${EventDate.fragments.event}
-`
-
 export default compose(
-    graphql(query, {
+    graphql(graphqlQuery, {
         options: ({ match: { params: { transactionId } } }) => ({
             variables: { transactionId },
         }),

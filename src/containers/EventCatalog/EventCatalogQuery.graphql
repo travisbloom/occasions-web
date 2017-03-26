@@ -1,0 +1,11 @@
+query EventCatalogQuery {
+  eventTypes(first: 30) {
+    edges {
+      node {
+        id
+        pk
+        displayName
+      }
+    }
+  }
+}

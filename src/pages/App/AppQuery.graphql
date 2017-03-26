@@ -1,0 +1,9 @@
+query AppQuery {
+    currentUser {
+        id
+        person {
+            id
+            fullName
+        }
+    }
+}

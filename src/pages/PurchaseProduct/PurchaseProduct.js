@@ -1,14 +1,13 @@
 // @flow
 import React from 'react'
 import { graphql, compose } from 'react-apollo'
-import gql from 'graphql-tag'
 import DocumentTitle from 'react-document-title'
 
 import { View, Header, Placeholder } from '../../components'
-import { EventDate } from '../../fragmentComponents'
 import withShell from '../../hoc/withShell'
 
 import PurchaseProductForm from './PurchaseProductForm'
+import graphqlQuery from './PurchaseProductQuery.graphql'
 
 class PurchaseProduct extends React.Component {
     render() {
@@ -60,64 +59,8 @@ PurchaseProduct.Shell = () => (
     </View>
 )
 
-const query = gql`
-query PurchaseProduct($associatedEventId: ID!, $productSlug: ID!) {
-    currentUser {
-      email
-      hasStripeUser
-      id
-      person {
-        id
-        fullName
-      }
-    }
-    associatedEvent(id: $associatedEventId) {
-        pk
-        id
-        receivingPerson {
-          fullName
-          pk
-          id
-          associatedLocations {
-              edges {
-                  node {
-                      id
-                      pk
-                      location {
-                          id
-                          displayName
-                      }
-                  }
-              }
-          }
-        }
-        event {
-          name
-          ...EventDate
-        }
-    }
-    product(slug: $productSlug) {
-        name
-        id
-        slug
-        costUsd
-        description
-        eventTypes {
-            edges {
-                node {
-                    id
-                    name
-                    displayName
-                }
-            }
-        }
-    }
-}
-${EventDate.fragments.event}
-`
-
 export default compose(
-    graphql(query, {
+    graphql(graphqlQuery, {
         options: ({ match: { params: { associatedEventId, productSlug } } }) => ({
             variables: { associatedEventId, productSlug },
         }),

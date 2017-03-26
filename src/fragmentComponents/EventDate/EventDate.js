@@ -1,21 +1,13 @@
 import React from 'react'
-import gql from 'graphql-tag'
 import { propType } from 'graphql-anywhere'
 
 import { FormattedDate } from '../../components'
 
-const fragment = gql`
-    fragment EventDate on EventNode {
-        id
-        dateStart
-        timeStart
-        isReoccuringYearly
-    }
-`
+import graphqlQuery from './EventDateFragment.graphql'
 
 class EventDate extends React.Component {
     static propTypes = {
-        event: propType(fragment).isRequired,
+        event: propType(graphqlQuery).isRequired,
     };
 
     render() {
@@ -38,7 +30,7 @@ class EventDate extends React.Component {
 }
 
 EventDate.fragments = {
-    event: fragment,
+    event: graphqlQuery,
 }
 
 export default EventDate

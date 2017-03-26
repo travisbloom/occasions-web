@@ -1,0 +1,17 @@
+mutation CreateAssociatedEventMutation($input: CreateAssociatedEventInput!) {
+  createAssociatedEvent(input: $input) {
+    associatedEvent {
+      id
+      creatingPerson {
+        fullName
+      }
+      receivingPerson {
+        fullName
+      }
+      event {
+        name
+
+      }
+    }
+  }
+}

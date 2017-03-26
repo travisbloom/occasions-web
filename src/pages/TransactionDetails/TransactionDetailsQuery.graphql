@@ -1,0 +1,35 @@
+#import "../../fragmentComponents/EventDate/EventDateFragment.graphql"
+
+query TransactionDetailsQuery($transactionId: ID!) {
+  transaction(id: $transactionId) {
+    id
+    datetimeCreated
+    receivingPerson {
+      id
+      fullName
+    }
+    costUsd
+    product {
+      id
+      name
+      description
+      mainImageUrl
+    }
+    associatedEvent {
+      id
+      event {
+        id
+        name
+        ...EventDateFragment
+      }
+    }
+    associatedLocation {
+      id
+      location {
+        id
+        displayName
+      }
+    }
+    productNotes
+  }
+}

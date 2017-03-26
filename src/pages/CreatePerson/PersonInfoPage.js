@@ -39,7 +39,7 @@ class PersonInfoPage extends React.Component {
                     <ReduxFormField label="Last Name" name="lastName" component={TextInput} />
                     <ReduxFormField label="Email" type="email" name="email" component={TextInput} />
                     <Row>
-                        <Col xs={12}>When's their birthday?</Col>
+                        <Col xs={12}>{"When's"} their birthday?</Col>
                         <Col xs={6}>
                             <ReduxFormField
                                 hasNoYear

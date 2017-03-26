@@ -1,0 +1,15 @@
+#import "../../fragmentComponents/EventDate/EventDateFragment.graphql"
+
+query EventListQuery($eventSearchValue: String, $selectedEventTypeIds: [ID]) {
+  events(eventTypesPkIn: $selectedEventTypeIds, search: $eventSearchValue) {
+    edges {
+      node {
+        id
+        pk
+        name
+        slug
+        ...EventDate
+      }
+    }
+  }
+}

@@ -2,7 +2,6 @@
 
 import React from 'react'
 import { graphql, compose } from 'react-apollo'
-import gql from 'graphql-tag'
 import DocumentTitle from 'react-document-title'
 
 import { View, Header } from '../../components'
@@ -11,6 +10,8 @@ import { formatReduxFormErrors } from '../../utilities/errors'
 import PersonInfoPage from './PersonInfoPage'
 import AddAddressPage from './AddAddressPage'
 import ConfirmationPage from './ConfirmationPage'
+
+import graphqlQuery from './CreatePersonQuery.graphql'
 
 class CreatePerson extends React.Component {
     state = {
@@ -73,16 +74,4 @@ class CreatePerson extends React.Component {
     }
 }
 
-const query = gql`
-query CreatePerson {
-    currentUser {
-      id
-      person {
-        id
-        fullName
-      }
-    }
-}
-`
-
-export default compose(graphql(query))(CreatePerson)
+export default compose(graphql(graphqlQuery))(CreatePerson)

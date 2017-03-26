@@ -77,6 +77,10 @@ module.exports = {
                 test: /\.(ttf|eot|jpg)$/,
                 use: 'file-loader',
             },
+            {
+                test: /\.graphql$/,
+                loader: 'graphql-tag/loader',
+            },
         ],
     },
 

@@ -1,0 +1,9 @@
+query CreatePersonQuery {
+    currentUser {
+      id
+      person {
+        id
+        fullName
+      }
+    }
+}

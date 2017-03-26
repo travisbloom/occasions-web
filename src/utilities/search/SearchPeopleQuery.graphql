@@ -1,0 +1,11 @@
+query SearchPeopleQuery($value: String) {
+  people(infoContains: $value) {
+      edges {
+          node {
+              id
+              pk
+              fullName
+          }
+      }
+  }
+}

@@ -1,10 +1,10 @@
 // @flow
 import React from 'react'
 import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
 
 import { Panel, View, Button } from '../../components'
-import { EventDate } from '../../fragmentComponents'
+
+import graphqlQuery from './EventListQuery.graphql'
 
 class EventsList extends React.Component {
     render() {
@@ -29,24 +29,7 @@ class EventsList extends React.Component {
     }
 }
 
-const query = gql`
-query EventsList($eventSearchValue: String, $selectedEventTypeIds: [ID]) {
-  events(eventTypesPkIn: $selectedEventTypeIds, search: $eventSearchValue) {
-    edges {
-      node {
-        id
-        pk
-        name
-        slug
-        ...EventDate
-      }
-    }
-  }
-}
-${EventDate.fragments.event}
-`
-
-export default graphql(query, {
+export default graphql(graphqlQuery, {
     options: ({ eventSearchValue, selectedEventTypes }) => ({
         variables: {
             eventSearchValue,

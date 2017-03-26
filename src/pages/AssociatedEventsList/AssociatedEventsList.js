@@ -1,7 +1,6 @@
 // @flow
 import React from 'react'
 import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
 import DocumentTitle from 'react-document-title'
 
 import { View, Button, LinkContainer } from '../../components'
@@ -9,6 +8,7 @@ import urls from '../../urls'
 import withShell from '../../hoc/withShell'
 
 import AssociatedEventSummary from './AssociatedEventSummary'
+import graphqlQuery from './AssociatedEventsListQuery.graphql'
 
 const RenderedList = ({ currentUser }) => (
     <View marginChildren>
@@ -47,26 +47,4 @@ class AssociatedEventsList extends React.Component {
         )
     }
 }
-
-const query = gql`
-query AssociatedEventsList {
-  currentUser {
-    id
-    person {
-      id
-      fullName
-      createdEvents(first: 10) {
-        edges {
-          node {
-            id
-            ...AssociatedEventSummary
-          }
-        }
-      }
-    }
-  }
-}
-${AssociatedEventSummary.fragments.associatedEvent}
-`
-
-export default graphql(query)(AssociatedEventsList)
+export default graphql(graphqlQuery)(AssociatedEventsList)

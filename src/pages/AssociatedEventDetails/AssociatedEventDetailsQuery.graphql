@@ -1,0 +1,40 @@
+#import "../../fragmentComponents/EventDate/EventDateFragment.graphql"
+
+query AssociatedEventDetailsQuery($associatedEventId: ID!) {
+  associatedEvent(id: $associatedEventId) {
+      id
+      receivingPerson {
+        id
+        fullName
+      }
+      transactions {
+        edges {
+          node {
+            id
+            costUsd
+            product {
+              id
+              name
+              mainImageUrl
+              description
+            }
+          }
+        }
+      }
+      event {
+        id
+        name
+        relatedProducts {
+            edges {
+              node {
+                name
+                description
+                id
+                slug
+              }
+            }
+          }
+        ...EventDateFragment
+      }
+  }
+}

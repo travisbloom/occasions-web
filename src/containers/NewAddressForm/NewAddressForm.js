@@ -3,10 +3,11 @@
 import React from 'react'
 import { reduxForm, FormSection } from 'redux-form'
 import { graphql, compose } from 'react-apollo'
-import gql from 'graphql-tag'
 
 import { Button, Row, Alert, View, AddressForm, Modal } from '../../components'
 import { formatReduxFormErrors } from '../../utilities/errors'
+
+import graphqlQuery from './CreateAssociatedLocationQuery.graphql'
 
 class NewAddressForm extends React.Component {
     createNewAssociatedLocation = (values) => {
@@ -60,22 +61,8 @@ class NewAddressForm extends React.Component {
     }
 }
 
-const query = gql`
-  mutation createAssociatedLocation($input: CreateAssociatedLocationInput!) {
-    createAssociatedLocation(input: $input) {
-        associatedLocation {
-            id
-            location {
-                id
-                displayName
-            }
-        }
-    }
-  }
-`
-
 export default compose(
-    graphql(query, {
+    graphql(graphqlQuery, {
         props: ({ mutate }) => ({
             createNewAssociatedLocation: values => mutate({ variables: { input: values } }),
         }),

@@ -1,7 +1,6 @@
 import React from 'react'
 import { graphql, compose } from 'react-apollo'
 import { connect } from 'react-redux'
-import gql from 'graphql-tag'
 
 import { View, Alert, Grid, AnimatedRouter } from '../../components'
 import { closeError } from '../../actions/alerts'
@@ -15,6 +14,7 @@ import CreatePerson from '../CreatePerson/CreatePerson'
 
 import Navbar from './Navbar'
 import Tabs from './Tabs'
+import graphqlQuery from './AppQuery.graphql'
 
 const PAGE_STYLES = { marginBottom: `${Tabs.height}px` }
 
@@ -127,19 +127,7 @@ class App extends React.Component {
     }
 }
 
-const query = gql`
-query App {
-    currentUser {
-        id
-        person {
-            id
-            fullName
-        }
-    }
-}
-`
-
 export default compose(
-    graphql(query),
+    graphql(graphqlQuery),
     connect(({ alerts: { errors } }) => ({ errors }), { closeError }),
 )(App)

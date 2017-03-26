@@ -24,6 +24,9 @@ import urls from '../../urls'
 
 import { NewAddressForm } from '../../containers'
 
+import createStripeUserGraphqlQuery from './CreateStripeUserMutation.graphql'
+import createTransactionGraphqlQuery from './CreateTransactionMutation.graphql'
+
 class PurchaseProductForm extends React.Component {
     constructor(props) {
         super(props)
@@ -165,54 +168,13 @@ class PurchaseProductForm extends React.Component {
     }
 }
 
-const createStripeUserQuery = gql`
-  mutation createStripeUser($input: CreateStripeUserInput!) {
-    createStripeUser(input: $input) {
-        user {
-            username,
-            accessTokens {
-              edges {
-                node {
-                  id
-                }
-              }
-          }
-        }
-    }
-  }
-`
-
-const createTransactionQuery = gql`
-mutation createTransactionQuery($input: CreateTransactionInput!) {
-    createTransaction(input: $input) {
-      transaction {
-        id
-        costUsd
-        product {
-          id
-          name
-        }
-        associatedLocation {
-          id
-          location {
-            id
-            displayName
-          }
-        }
-        stripeTransactionId
-        productNotes
-      }
-    }
-}
-`
-
 const wrappedComponent = compose(
-    graphql(createStripeUserQuery, {
+    graphql(createStripeUserGraphqlQuery, {
         props: ({ mutate }) => ({
             createStripeUser: values => mutate({ variables: { input: values } }),
         }),
     }),
-    graphql(createTransactionQuery, {
+    graphql(createTransactionGraphqlQuery, {
         props: ({ mutate }) => ({
             purchaseProduct: values => mutate({ variables: { input: values } }),
         }),

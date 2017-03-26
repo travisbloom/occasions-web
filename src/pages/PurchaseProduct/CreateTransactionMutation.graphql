@@ -1,0 +1,21 @@
+mutation createTransactionQuery($input: CreateTransactionInput!) {
+    createTransaction(input: $input) {
+      transaction {
+        id
+        costUsd
+        product {
+          id
+          name
+        }
+        associatedLocation {
+          id
+          location {
+            id
+            displayName
+          }
+        }
+        stripeTransactionId
+        productNotes
+      }
+    }
+}

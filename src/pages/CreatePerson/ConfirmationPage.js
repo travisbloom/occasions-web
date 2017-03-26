@@ -6,12 +6,13 @@ import { connect } from 'react-redux'
 import { graphql, compose, withApollo } from 'react-apollo'
 import { withRouter } from 'react-router-dom'
 import moment from 'moment'
-import gql from 'graphql-tag'
 
 import { Alert, View, Panel, Button, FormattedDate, Table } from '../../components'
 import { formatGeneralReduxFormErrors } from '../../utilities/errors'
 import { formatLocation } from '../../utilities/location'
 import urls from '../../urls'
+
+import graphqlQuery from './CreatePersonMutation.graphql'
 
 const LineItem = ({ label, children }) => (
     <tr>
@@ -81,31 +82,12 @@ class ConfirmationPage extends React.Component {
     }
 }
 
-const createTransactionQuery = gql`
-mutation CreateAssociatedEvent($input: CreateAssociatedEventInput!) {
-  createPerson(input: $input) {
-    associatedEvent {
-      id
-      creatingPerson {
-        fullName
-      }
-      receivingPerson {
-        fullName
-      }
-      event {
-        name
-
-      }
-    }
-  }
-}
-`
 const formValuesSelector = getFormValues('CreatePersonForm')
 export default compose(
     connect(state => ({
         formValues: formValuesSelector(state),
     })),
-    graphql(createTransactionQuery, {
+    graphql(graphqlQuery, {
         props: ({ mutate }) => ({
             createPerson: values => mutate({ variables: { input: values } }),
         }),

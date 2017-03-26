@@ -1,0 +1,19 @@
+#import "./AssociatedEventSummaryFragment.graphql"
+
+query AssociatedEventsListQuery {
+  currentUser {
+    id
+    person {
+      id
+      fullName
+      createdEvents(first: 10) {
+        edges {
+          node {
+            id
+            ...AssociatedEventSummaryFragment
+          }
+        }
+      }
+    }
+  }
+}

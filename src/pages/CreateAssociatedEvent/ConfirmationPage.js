@@ -5,12 +5,13 @@ import { reduxForm, Form, getFormValues } from 'redux-form'
 import { connect } from 'react-redux'
 import { graphql, compose, withApollo } from 'react-apollo'
 import { withRouter } from 'react-router-dom'
-import gql from 'graphql-tag'
 
 import { Alert, View, Panel, Button } from '../../components'
 import { EventDate } from '../../fragmentComponents'
 import { formatGeneralReduxFormErrors } from '../../utilities/errors'
 import urls from '../../urls'
+
+import graphqlQuery from './CreateAssociatedEventMutation.graphql'
 
 class ConfirmationPage extends React.Component {
     handleSubmit = ({ eventId, event, receivingPersonId }) => {
@@ -48,31 +49,12 @@ class ConfirmationPage extends React.Component {
     }
 }
 
-const createTransactionQuery = gql`
-mutation CreateAssociatedEvent($input: CreateAssociatedEventInput!) {
-  createAssociatedEvent(input: $input) {
-    associatedEvent {
-      id
-      creatingPerson {
-        fullName
-      }
-      receivingPerson {
-        fullName
-      }
-      event {
-        name
-
-      }
-    }
-  }
-}
-`
 const formValuesSelector = getFormValues('CreateAssociatedEventForm')
 export default compose(
     connect(state => ({
         formValues: formValuesSelector(state),
     })),
-    graphql(createTransactionQuery, {
+    graphql(graphqlQuery, {
         props: ({ mutate }) => ({
             createAssociatedEvent: values => mutate({ variables: { input: values } }),
         }),

@@ -1,5 +1,4 @@
 import React from 'react'
-import gql from 'graphql-tag'
 import { propType } from 'graphql-anywhere'
 import { withRouter } from 'react-router-dom'
 
@@ -7,32 +6,11 @@ import { Panel, View, Row, Col, Placeholder } from '../../components'
 import { EventDate } from '../../fragmentComponents'
 import urls from '../../urls'
 
-const fragment = gql`
-    fragment AssociatedEventSummary on AssociatedEventNode {
-        id
-        receivingPerson {
-          id
-          fullName
-        }
-        transactions {
-          edges {
-            node {
-              id
-            }
-          }
-        }
-        event {
-          id
-          name
-          ...EventDate
-        }
-    }
-    ${EventDate.fragments.event}
-`
+import graphqlQuery from './AssociatedEventSummaryFragment.graphql'
 
 class AssociatedEventSummary extends React.Component {
     static propTypes = {
-        associatedEvent: propType(fragment).isRequired,
+        associatedEvent: propType(graphqlQuery).isRequired,
     };
 
     transitionToDetailsPage = () => {
@@ -71,9 +49,6 @@ class AssociatedEventSummary extends React.Component {
 }
 
 const wrappedComponent = withRouter(AssociatedEventSummary)
-wrappedComponent.fragments = {
-    associatedEvent: fragment,
-}
 wrappedComponent.Placeholder = () => (
     <Panel header={<View><Placeholder /></View>}>
         <Row>

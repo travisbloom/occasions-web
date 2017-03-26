@@ -1,0 +1,11 @@
+mutation CreateAssociatedLocationQuery($input: CreateAssociatedLocationInput!) {
+  createAssociatedLocation(input: $input) {
+      associatedLocation {
+          id
+          location {
+              id
+              displayName
+          }
+      }
+  }
+}
