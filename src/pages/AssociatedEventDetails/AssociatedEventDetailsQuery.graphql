@@ -1,5 +1,5 @@
 query AssociatedEventDetailsQuery($associatedEventId: ID!) {
-  node(id: $associatedEventId) {
+  associatedEvent: node(id: $associatedEventId) {
       ...on AssociatedEventNode {
           id
           receivingPerson {

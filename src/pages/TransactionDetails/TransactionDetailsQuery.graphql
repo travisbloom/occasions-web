@@ -1,37 +1,39 @@
 
 query TransactionDetailsQuery($transactionId: ID!) {
-  transaction(id: $transactionId) {
-    id
-    datetimeCreated
-    receivingPerson {
-      id
-      fullName
-    }
-    costUsd
-    product {
-      id
-      name
-      description
-      mainImageUrl
-    }
-    associatedEvent {
-      id
-      event {
-        id
-        name
-        id
-        dateStart
-        timeStart
-        isReoccuringYearly
+  transaction: node(id: $transactionId) {
+      ...on TransactionNode {
+          id
+          datetimeCreated
+          receivingPerson {
+            id
+            fullName
+          }
+          costUsd
+          product {
+            id
+            name
+            description
+            mainImageUrl
+          }
+          associatedEvent {
+            id
+            event {
+              id
+              name
+              id
+              dateStart
+              timeStart
+              isReoccuringYearly
+            }
+          }
+          associatedLocation {
+            id
+            location {
+              id
+              displayName
+            }
+          }
+          productNotes
+        }
       }
-    }
-    associatedLocation {
-      id
-      location {
-        id
-        displayName
-      }
-    }
-    productNotes
-  }
 }

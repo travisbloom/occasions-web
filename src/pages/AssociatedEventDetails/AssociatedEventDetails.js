@@ -23,25 +23,25 @@ class AssociatedEventDetails extends React.Component {
     render() {
         const {
             data: {
-                node,
+                associatedEvent,
             },
             style,
         } = this.props
         return (
             <DocumentTitle
                 title={
-                    `Occasions | ${node ? `${node.receivingPerson.fullName} - ${node.event.name}` : 'Event Details'}`
+                    `Occasions | ${node ? `${associatedEvent.receivingPerson.fullName} - ${associatedEvent.event.name}` : 'Event Details'}`
                 }
             >
                 <View style={style} padding marginChildren>
                     <Header size="largest">
-                        {node.receivingPerson.fullName}
+                        {associatedEvent.receivingPerson.fullName}
                     </Header>
-                    <Header size="larger">{node.event.name}</Header>
+                    <Header size="larger">{associatedEvent.event.name}</Header>
                     <Header size="larger">
-                        <EventDate event={node.event} />
+                        <EventDate event={associatedEvent.event} />
                     </Header>
-                    {node.event.relatedProducts.edges.map(({ node: product }) => (
+                    {associatedEvent.event.relatedProducts.edges.map(({ node: product }) => (
                         <Panel
                             key={product.id}
                             header={<Header size="large">{product.name}</Header>}
@@ -49,7 +49,9 @@ class AssociatedEventDetails extends React.Component {
                             <Row>
                                 <Col xs={8} lg={10}>{product.description}</Col>
                                 <Col xs={4} lg={2}>
-                                    <LinkContainer to={urls.purchaseProduct(node.id, product.id)}>
+                                    <LinkContainer
+                                        to={urls.purchaseProduct(associatedEvent.id, product.id)}
+                                    >
                                         <Button block bsStyle="primary">
                                             Buy
                                         </Button>
