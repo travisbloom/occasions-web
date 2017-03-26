@@ -1,5 +1,3 @@
-#import "../../fragmentComponents/EventDate/EventDateFragment.graphql"
-
 query AssociatedEventDetailsQuery($associatedEventId: ID!) {
   associatedEvent(id: $associatedEventId) {
       id
@@ -24,6 +22,9 @@ query AssociatedEventDetailsQuery($associatedEventId: ID!) {
       event {
         id
         name
+        dateStart
+        timeStart
+        isReoccuringYearly
         relatedProducts {
             edges {
               node {
@@ -34,7 +35,6 @@ query AssociatedEventDetailsQuery($associatedEventId: ID!) {
               }
             }
           }
-        ...EventDateFragment
       }
   }
 }

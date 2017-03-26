@@ -1,4 +1,3 @@
-#import "../../fragmentComponents/EventDate/EventDateFragment.graphql"
 
 query TransactionDetailsQuery($transactionId: ID!) {
   transaction(id: $transactionId) {
@@ -20,7 +19,10 @@ query TransactionDetailsQuery($transactionId: ID!) {
       event {
         id
         name
-        ...EventDateFragment
+        id
+        dateStart
+        timeStart
+        isReoccuringYearly
       }
     }
     associatedLocation {

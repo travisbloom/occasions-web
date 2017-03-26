@@ -1,5 +1,3 @@
-#import "../../fragmentComponents/EventDate/EventDateFragment.graphql"
-
 query EventListQuery($eventSearchValue: String, $selectedEventTypeIds: [ID]) {
   events(eventTypesPkIn: $selectedEventTypeIds, search: $eventSearchValue) {
     edges {
@@ -8,7 +6,9 @@ query EventListQuery($eventSearchValue: String, $selectedEventTypeIds: [ID]) {
         pk
         name
         slug
-        ...EventDate
+        dateStart
+        timeStart
+        isReoccuringYearly
       }
     }
   }
