@@ -10,7 +10,6 @@ mutation CreateAssociatedEventMutation($input: CreateAssociatedEventInput!) {
       }
       event {
         name
-
       }
     }
   }

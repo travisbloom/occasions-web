@@ -1,14 +1,7 @@
 mutation CreateStripeUserMutation($input: CreateStripeUserInput!) {
   createStripeUser(input: $input) {
-      user {
-          username,
-          accessTokens {
-            edges {
-              node {
-                id
-              }
-            }
-        }
-      }
+  user {
+      hasStripeUser
+    }
   }
 }

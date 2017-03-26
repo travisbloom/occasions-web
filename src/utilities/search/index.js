@@ -11,7 +11,7 @@ export const searchPeople = (client, additionalOptions = {}) => value => client
     })
     .then(({ data: { people } }) => people.edges.map(({ node }) => ({
         label: node.fullName,
-        value: node.pk,
+        value: node.id,
         node,
     })))
     .then(wrapInOptionsObject)
@@ -24,7 +24,7 @@ export const searchEventTypes = (client, additionalOptions = {}) => search => cl
     })
     .then(({ data: { eventTypes } }) => eventTypes.edges.map(({ node }) => ({
         label: node.displayName,
-        value: node.pk,
+        value: node.id,
         node,
     })))
     .then(wrapInOptionsObject)

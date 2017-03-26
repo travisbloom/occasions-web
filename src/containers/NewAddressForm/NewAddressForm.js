@@ -7,7 +7,7 @@ import { graphql, compose } from 'react-apollo'
 import { Button, Row, Alert, View, AddressForm, Modal } from '../../components'
 import { formatReduxFormErrors } from '../../utilities/errors'
 
-import graphqlQuery from './CreateAssociatedLocationQuery.graphql'
+import graphqlQuery from './CreateAssociatedLocationMutation.graphql'
 
 class NewAddressForm extends React.Component {
     createNewAssociatedLocation = (values) => {

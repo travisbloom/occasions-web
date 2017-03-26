@@ -50,7 +50,7 @@ class PurchaseProductForm extends React.Component {
         isAddingNewAddress: !prevState.isAddingNewAddress,
         intialAddressFormValues: !prevState.isAddingNewAddress
             ? {
-                personId: this.props.associatedEvent.receivingPerson.pk,
+                personId: this.props.associatedEvent.receivingPerson.id,
                 location: {
                     streetAddressLine1: '',
                     streetAddressLine2: '',
@@ -70,10 +70,10 @@ class PurchaseProductForm extends React.Component {
     getLocationOptions = () => {
         const locations = this.props.associatedEvent.receivingPerson.associatedLocations.edges
         return locations.map(({
-            node: { location, pk },
+            node: { location, id },
         }) => ({
             label: location.displayName,
-            value: pk,
+            value: id,
         }))
     };
 

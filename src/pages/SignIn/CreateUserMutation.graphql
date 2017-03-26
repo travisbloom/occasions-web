@@ -1,14 +1,7 @@
 mutation CreateUserMutation($input: CreateUserInput!) {
   createUser(input: $input) {
       user {
-          username,
-          accessTokens {
-            edges {
-              node {
-                id
-              }
-            }
-        }
+          email
       }
   }
 }

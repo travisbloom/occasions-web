@@ -1,4 +1,4 @@
-mutation CreateAssociatedLocationQuery($input: CreateAssociatedLocationInput!) {
+mutation CreateAssociatedLocationMutation($input: CreateAssociatedLocationInput!) {
   createAssociatedLocation(input: $input) {
       associatedLocation {
           id

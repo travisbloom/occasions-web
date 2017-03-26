@@ -11,17 +11,14 @@ query PurchaseProductQuery($associatedEventId: ID!, $productId: ID!) {
     }
     associatedEvent: node(id: $associatedEventId) {
         ...on AssociatedEventNode {
-            pk
             id
             receivingPerson {
               fullName
-              pk
               id
               associatedLocations {
                   edges {
                       node {
                           id
-                          pk
                           location {
                               id
                               displayName

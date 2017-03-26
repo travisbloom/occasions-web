@@ -3,7 +3,6 @@ query SearchEventTypesQuery($search: String) {
     edges {
       node {
         id
-        pk
         displayName
       }
     }

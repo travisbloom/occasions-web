@@ -13,7 +13,7 @@ class CreateEventPage extends React.Component {
 
     handleSelectEvent = (event) => {
         const { change, submit } = this.props
-        change('eventId', event.pk)
+        change('eventId', event.id)
         change('event', event)
         submit()
     };

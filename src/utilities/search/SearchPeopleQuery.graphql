@@ -3,7 +3,6 @@ query SearchPeopleQuery($value: String) {
       edges {
           node {
               id
-              pk
               fullName
           }
       }

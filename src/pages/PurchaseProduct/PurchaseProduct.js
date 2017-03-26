@@ -35,10 +35,10 @@ class PurchaseProduct extends React.Component {
                     </Header>
                     <PurchaseProductForm
                         initialValues={{
-                            receivingPersonId: associatedEvent.receivingPerson.pk,
+                            receivingPersonId: associatedEvent.receivingPerson.id,
                             productId: product.slug,
                             productNotes: '',
-                            associatedEventId: associatedEvent.pk,
+                            associatedEventId: associatedEvent.id,
                         }}
                         refetch={refetch}
                         associatedEvent={associatedEvent}
