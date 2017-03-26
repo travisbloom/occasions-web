@@ -8,7 +8,7 @@ import { withRouter } from 'react-router-dom'
 import moment from 'moment'
 import gql from 'graphql-tag'
 
-import { Alert, View, Panel, Button, Row, Col, FormattedDate, Table } from '../../components'
+import { Alert, View, Panel, Button, FormattedDate, Table } from '../../components'
 import { formatGeneralReduxFormErrors } from '../../utilities/errors'
 import { formatLocation } from '../../utilities/location'
 import urls from '../../urls'
@@ -42,11 +42,7 @@ class ConfirmationPage extends React.Component {
 
     render() {
         const { handleSubmit, error, formValues, onAddAddress } = this.props
-        console.log(
-            formValues,
-            formValues.birthdayYear,
-            moment(formValues.birthday).year(formValues.birthdayYear),
-        )
+
         return (
             <Form onSubmit={handleSubmit(this.handleSubmit)}>
                 <View marginChildren>
