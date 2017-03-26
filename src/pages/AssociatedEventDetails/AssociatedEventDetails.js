@@ -27,10 +27,11 @@ class AssociatedEventDetails extends React.Component {
             },
             style,
         } = this.props
+
         return (
             <DocumentTitle
                 title={
-                    `Occasions | ${node ? `${associatedEvent.receivingPerson.fullName} - ${associatedEvent.event.name}` : 'Event Details'}`
+                    `Occasions | ${associatedEvent ? `${associatedEvent.receivingPerson.fullName} - ${associatedEvent.event.name}` : 'Event Details'}`
                 }
             >
                 <View style={style} padding marginChildren>
@@ -99,5 +100,5 @@ export default compose(
             variables: { associatedEventId },
         }),
     }),
-    withShell({ isLoaded: props => !!props.data.node }),
+    withShell({ isLoaded: props => !!props.data.associatedEvent }),
 )(AssociatedEventDetails)

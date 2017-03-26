@@ -36,7 +36,7 @@ class PurchaseProduct extends React.Component {
                     <PurchaseProductForm
                         initialValues={{
                             receivingPersonId: associatedEvent.receivingPerson.id,
-                            productId: product.slug,
+                            productId: product.id,
                             productNotes: '',
                             associatedEventId: associatedEvent.id,
                         }}
