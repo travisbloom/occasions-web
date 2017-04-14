@@ -1,15 +1,27 @@
 import React from 'react'
 import { reduxForm } from 'redux-form'
 
-import { Button, View, Header, Row, Col } from '../../components'
+import { Button, View, Header, ButtonGroup, Col } from '../../components'
 import { EventCatalog } from '../../containers'
 
 class CreateEventPage extends React.Component {
     state = { isDefaultEvent: true };
 
-    toggleIsDefaultEvent = () => this.setState(state => ({
-        isDefaultEvent: !state.isDefaultEvent,
-    }));
+    handleSetToCustomEvent = () => {
+        if (this.state.isDefaultEvent) {
+            this.setState({
+                isDefaultEvent: false,
+            })
+        }
+    };
+
+    handleSetToDefaultEvent = () => {
+        if (!this.state.isDefaultEvent) {
+            this.setState({
+                isDefaultEvent: true,
+            })
+        }
+    };
 
     handleSelectEvent = (event) => {
         const { change, submit } = this.props
@@ -24,26 +36,22 @@ class CreateEventPage extends React.Component {
         return (
             <View marginChildren>
                 <Header>{"What's the Occasion?"}</Header>
-                <Row>
-                    <Col xs={6}>
-                        <Button
-                            disabled={!isDefaultEvent}
-                            onClick={this.toggleIsDefaultEvent}
-                            bsSize="small"
-                        >
-                            {'Create A Personalized Event'}
-                        </Button>
-                    </Col>
-                    <Col xs={6}>
-                        <Button
-                            disabled={isDefaultEvent}
-                            onClick={this.toggleIsDefaultEvent}
-                            bsSize="small"
-                        >
-                            {'Choose A Holiday'}
-                        </Button>
-                    </Col>
-                </Row>
+                <ButtonGroup block>
+                    <Button
+                        bsSize="small"
+                        onClick={this.handleSetToCustomEvent}
+                        bsStyle={isDefaultEvent ? undefined : 'info'}
+                    >
+                        {'Create New Event'}
+                    </Button>
+                    <Button
+                        bsSize="small"
+                        onClick={this.handleSetToDefaultEvent}
+                        bsStyle={isDefaultEvent ? 'info' : undefined}
+                    >
+                        {'Choose Holiday'}
+                    </Button>
+                </ButtonGroup>
                 {isDefaultEvent
                     ? <EventCatalog onSelectEvent={this.handleSelectEvent} />
                     : <View>foobar</View>}

@@ -41,17 +41,7 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: [
-                    'style-loader',
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            localIdentName: '[path][name]__[local]',
-                            modules: true,
-                        },
-                    },
-                    'postcss-loader',
-                ],
+                use: ['style-loader', 'css-loader', 'postcss-loader'],
                 include: /flexboxgrid/,
             },
             {

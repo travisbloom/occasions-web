@@ -23,6 +23,11 @@ import urls from '../../urls'
 import graphqlQuery from './CreateUserMutation.graphql'
 
 class CreateAccountForm extends React.Component {
+    componentDidMount() {
+        const { client } = this.props
+        client.networkInterface.setUri(`${APP_ENV.appServer}/graphql_public`)
+    }
+
     onSuccess = () => {
         const { client, history } = this.props
         client.networkInterface.setUri(`${APP_ENV.appServer}/graphql`)
@@ -31,8 +36,7 @@ class CreateAccountForm extends React.Component {
 
     createAccount = (values) => {
         const { createUser } = this.props
-        // TODO add access token to local storage
-        return createUser(values).then(this.onSuccess).catch(formatReduxFormErrors)
+        return createUser(values).catch(formatReduxFormErrors).then(() => this.signIn(values))
     };
 
     signIn = ({ username, password }) =>

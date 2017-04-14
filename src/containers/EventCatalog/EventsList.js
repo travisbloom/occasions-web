@@ -20,8 +20,8 @@ class EventsList extends React.Component {
         return (
             <View style={style} marginChildren>
                 {events.edges.map(({ node: event }) => (
-                    <Panel key={event.id} header={event.name}>
-                        <Button onClick={() => onSelectEvent(event)}>Select</Button>
+                    <Panel key={event.id} onClick={() => onSelectEvent(event)}>
+                        {event.name}
                     </Panel>
                 ))}
             </View>

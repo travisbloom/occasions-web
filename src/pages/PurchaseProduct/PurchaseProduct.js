@@ -33,18 +33,20 @@ class PurchaseProduct extends React.Component {
                     <Header size="larger">
                         For {associatedEvent.receivingPerson.fullName}
                     </Header>
-                    <PurchaseProductForm
-                        initialValues={{
-                            receivingPersonId: associatedEvent.receivingPerson.id,
-                            productId: product.id,
-                            productNotes: '',
-                            associatedEventId: associatedEvent.id,
-                        }}
-                        refetch={refetch}
-                        associatedEvent={associatedEvent}
-                        product={product}
-                        currentUser={currentUser}
-                    />
+                    <View marginTop>
+                        <PurchaseProductForm
+                            initialValues={{
+                                receivingPersonId: associatedEvent.receivingPerson.id,
+                                productId: product.id,
+                                productNotes: '',
+                                associatedEventId: associatedEvent.id,
+                            }}
+                            refetch={refetch}
+                            associatedEvent={associatedEvent}
+                            product={product}
+                            currentUser={currentUser}
+                        />
+                    </View>
                 </View>
             </DocumentTitle>
         )
@@ -55,7 +57,9 @@ PurchaseProduct.Shell = () => (
     <View padding>
         <Header size="largest"><Placeholder /></Header>
         <Header size="larger"><Placeholder /></Header>
-        <PurchaseProductForm.Shell />
+        <View marginTop>
+            <PurchaseProductForm.Shell />
+        </View>
     </View>
 )
 

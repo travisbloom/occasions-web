@@ -1,0 +1,8 @@
+@import "../../styles/variables";
+
+.horizontalBlock {
+    display: flex;
+    button {
+        flex: 1;
+    }
+}

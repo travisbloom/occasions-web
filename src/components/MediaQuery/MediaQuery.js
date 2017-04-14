@@ -12,6 +12,7 @@ const getScreenSize = ({ sm, md, lg }) => {
 
 const getScreenSizeProps = (...args) => {
     const minWidth = getScreenSize(...args)
+    console.log({ minWidth })
     if (minWidth) {
         return { query: `(min-width: ${minWidth}px)` }
     }

@@ -3,7 +3,7 @@ import React from 'react'
 import { graphql, compose, withApollo } from 'react-apollo'
 import _ from 'lodash'
 
-import { View, Label, Row, Col, TextInput, FormField, Select } from '../../components'
+import { View, Row, Col, TextInput, FormField, Select, MediaQuery } from '../../components'
 import { searchEventTypes } from '../../utilities/search'
 
 import EventsList from './EventsList'
@@ -40,57 +40,36 @@ class EventsCatalog extends React.Component {
         const { selectedEventTypes, eventSearchValue } = this.state
         const {
             client,
-            data: {
-                eventTypes,
-            },
             onSelectEvent,
         } = this.props
 
         return (
             <View marginChildren>
-                <View style={{ overflowX: 'auto', whiteSpace: 'nowrap' }} marginChildrenRight>
-                    {eventTypes &&
-                        eventTypes.edges.map(({ node: eventType }) => (
-                            <View
-                                inline
-                                key={eventType.id}
-                                onClick={() => this.handleClickedLabel(eventType)}
-                            >
-                                <Label
-                                    bsStyle={
-                                        selectedEventTypes.find(
-                                            ({ value }) => value === eventType.id,
-                                        )
-                                            ? 'info'
-                                            : undefined
-                                    }
-                                >
-                                    {eventType.displayName}
-                                </Label>
-                            </View>
-                        ))}
-                </View>
-                <Row>
-                    <Col xs={4}>
-                        <FormField label="Filter Events">
-                            <TextInput
-                                onChange={this.handleEventSearchOnChange}
-                                value={eventSearchValue}
-                            />
-                        </FormField>
-                    </Col>
-                    <Col xs={8}>
-                        <FormField label="Filter Types">
-                            <Select
-                                remote
-                                multi
-                                loadOptions={searchEventTypes(client)}
-                                onChange={this.handleEventTypeOnChange}
-                                value={selectedEventTypes}
-                            />
-                        </FormField>
-                    </Col>
-                </Row>
+                <MediaQuery sm>
+                    {matches => console.log(matches) ||
+                    <Row>
+                        {matches &&
+                            <Col xs={12} sm={4}>
+                                <FormField label="Filter Events">
+                                    <TextInput
+                                        onChange={this.handleEventSearchOnChange}
+                                        value={eventSearchValue}
+                                    />
+                                </FormField>
+                            </Col>}
+                        <Col xs={12} sm={8}>
+                            <FormField label="Filter Types">
+                                <Select
+                                    remote
+                                    multi
+                                    loadOptions={searchEventTypes(client)}
+                                    onChange={this.handleEventTypeOnChange}
+                                    value={selectedEventTypes}
+                                />
+                            </FormField>
+                        </Col>
+                    </Row>}
+                </MediaQuery>
                 <EventsList
                     onSelectEvent={onSelectEvent}
                     eventSearchValue={eventSearchValue}

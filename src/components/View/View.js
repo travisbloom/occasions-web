@@ -19,13 +19,14 @@ const toSpacingValue = (type) => {
     }
 }
 
-const generateStyes = ({ margin, padding, style, inline }) => {
-    if (!margin && !padding && !inline) return style
+const generateStyes = ({ marginTop, margin, padding, style, inline }) => {
+    if (!margin && !padding && !inline && !marginTop) return style
     return {
         ...style,
         display: inline ? 'inline-block' : 'inherit',
         margin: toSpacingValue(margin) || style.margin,
         padding: toSpacingValue(padding) || style.padding,
+        marginTop: toSpacingValue(marginTop) || style.marginTop,
     }
 }
 
@@ -36,13 +37,14 @@ const View = (
         margin,
         marginChildrenRight,
         marginChildren,
+        marginTop,
         padding,
         style,
         children,
         ...props
     },
 ) => {
-    const generatedStyleObj = generateStyes({ margin, padding, style, inline })
+    const generatedStyleObj = generateStyes({ marginTop, margin, padding, style, inline })
     return React.createElement(
         inline ? 'span' : 'div',
         {

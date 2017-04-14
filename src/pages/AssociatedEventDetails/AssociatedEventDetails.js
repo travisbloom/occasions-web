@@ -34,7 +34,7 @@ class AssociatedEventDetails extends React.Component {
                     `Occasions | ${associatedEvent ? `${associatedEvent.receivingPerson.fullName} - ${associatedEvent.event.name}` : 'Event Details'}`
                 }
             >
-                <View style={style} padding marginChildren>
+                <View style={style} padding>
                     <Header size="largest">
                         {associatedEvent.receivingPerson.fullName}
                     </Header>
@@ -42,25 +42,30 @@ class AssociatedEventDetails extends React.Component {
                     <Header size="larger">
                         <EventDate event={associatedEvent.event} />
                     </Header>
-                    {associatedEvent.event.relatedProducts.edges.map(({ node: product }) => (
-                        <Panel
-                            key={product.id}
-                            header={<Header size="large">{product.name}</Header>}
-                        >
-                            <Row>
-                                <Col xs={8} lg={10}>{product.description}</Col>
-                                <Col xs={4} lg={2}>
-                                    <LinkContainer
-                                        to={urls.purchaseProduct(associatedEvent.id, product.id)}
-                                    >
-                                        <Button block bsStyle="primary">
-                                            Buy
-                                        </Button>
-                                    </LinkContainer>
-                                </Col>
-                            </Row>
-                        </Panel>
-                    ))}
+                    <View marginChildren marginTop>
+                        {associatedEvent.event.relatedProducts.edges.map(({ node: product }) => (
+                            <Panel
+                                key={product.id}
+                                header={<Header size="large">{product.name}</Header>}
+                            >
+                                <Row>
+                                    <Col xs={8} lg={10}>{product.description}</Col>
+                                    <Col xs={4} lg={2}>
+                                        <LinkContainer
+                                            to={urls.purchaseProduct(
+                                                associatedEvent.id,
+                                                product.id,
+                                            )}
+                                        >
+                                            <Button block bsStyle="primary">
+                                                Buy
+                                            </Button>
+                                        </LinkContainer>
+                                    </Col>
+                                </Row>
+                            </Panel>
+                        ))}
+                    </View>
                 </View>
             </DocumentTitle>
         )

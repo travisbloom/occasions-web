@@ -141,7 +141,7 @@ class PurchaseProductForm extends React.Component {
                 />
                 <Header>Where Should We Send This Card?</Header>
                 <Form onSubmit={handleSubmit(this.handleSubmit)}>
-                    <View marginChildren>
+                    <View>
                         <Row>
                             <Col xs={12} sm={7} md={8}>
                                 <ReduxFormField
@@ -157,7 +157,9 @@ class PurchaseProductForm extends React.Component {
                             </Col>
                         </Row>
                         <ReduxFormField name="productNotes" component={TextInput} textarea />
-                        {this.renderCheckoutButton()}
+                        <View marginTop>
+                            {this.renderCheckoutButton()}
+                        </View>
                         <Alert dismissable unHideWithChildren stackChildren bsStyle="danger">
                             {error}
                         </Alert>
@@ -188,7 +190,7 @@ const wrappedComponent = compose(
 wrappedComponent.Shell = () => (
     <View>
         <Header><Placeholder>Where Should We Send This Card?</Placeholder></Header>
-        <View marginChildren>
+        <View>
             <Row>
                 <Col xs={12} sm={7} md={8}>
                     <Select />
@@ -200,9 +202,11 @@ wrappedComponent.Shell = () => (
                 </Col>
             </Row>
             <TextInput textarea />
-            <Button bsStyle="info" type="submit">
-                <Placeholder light>Purchase Card</Placeholder>
-            </Button>
+            <View marginTop>
+                <Button bsStyle="info" type="submit">
+                    <Placeholder light>Purchase Card</Placeholder>
+                </Button>
+            </View>
         </View>
     </View>
 )
