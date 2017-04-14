@@ -19,18 +19,21 @@ class CreatePerson extends React.Component {
         addressIndex: 0,
     };
 
-    onAddAddress = () => this.setState(state => ({
-        pageNum: 2,
-        addressIndex: state.addressIndex + 1,
-    }));
+    onAddAddress = () =>
+        this.setState(state => ({
+            pageNum: 2,
+            addressIndex: state.addressIndex + 1,
+        }));
 
-    nextPage = () => this.setState(state => ({
-        pageNum: state.pageNum + 1,
-    }));
+    nextPage = () =>
+        this.setState(state => ({
+            pageNum: state.pageNum + 1,
+        }));
 
-    previousPage = () => this.setState(state => ({
-        pageNum: state.pageNum - 1,
-    }));
+    previousPage = () =>
+        this.setState(state => ({
+            pageNum: state.pageNum - 1,
+        }));
 
     handleSubmit = (values) => {
         const { createPerson, onSuccess } = this.props

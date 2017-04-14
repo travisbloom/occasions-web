@@ -8,13 +8,7 @@ import graphqlQuery from './EventListQuery.graphql'
 
 class EventsList extends React.Component {
     render() {
-        const {
-            data: {
-                events,
-            },
-            style,
-            onSelectEvent,
-        } = this.props
+        const { data: { events }, style, onSelectEvent } = this.props
 
         if (!events) return <span>allllmost</span>
         return (

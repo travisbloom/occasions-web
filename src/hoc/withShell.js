@@ -9,7 +9,7 @@ export default ({ isLoaded }) => Component => (props) => {
     } catch (e) {}
 
     return (
-        <AnimatedFade getKey={() => loaded ? 'placeholder' : 'content'}>
+        <AnimatedFade getKey={() => (loaded ? 'placeholder' : 'content')}>
             {loaded ? <Component {...props} /> : <Component.Shell {...props} />}
         </AnimatedFade>
     )

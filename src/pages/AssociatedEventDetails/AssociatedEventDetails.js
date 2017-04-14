@@ -21,18 +21,11 @@ import graphqlQuery from './AssociatedEventDetailsQuery.graphql'
 
 class AssociatedEventDetails extends React.Component {
     render() {
-        const {
-            data: {
-                associatedEvent,
-            },
-            style,
-        } = this.props
+        const { data: { associatedEvent }, style } = this.props
 
         return (
             <DocumentTitle
-                title={
-                    `Occasions | ${associatedEvent ? `${associatedEvent.receivingPerson.fullName} - ${associatedEvent.event.name}` : 'Event Details'}`
-                }
+                title={`Occasions | ${associatedEvent ? `${associatedEvent.receivingPerson.fullName} - ${associatedEvent.event.name}` : 'Event Details'}`}
             >
                 <View style={style} padding>
                     <Header size="largest">

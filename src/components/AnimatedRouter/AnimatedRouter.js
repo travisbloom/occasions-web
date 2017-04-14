@@ -8,9 +8,9 @@ const WOBBLY_SPRING = { stiffness: 200, damping: 15, precision: 0.1 }
 
 class AnimatedSwitch extends React.Component {
     getKey = ({ child, location, match }) =>
-        child.props.getKey
+        (child.props.getKey
             ? child.props.getKey({ location, match })
-            : child.props.path || child.props.from;
+            : child.props.path || child.props.from);
 
     render() {
         const { children, style } = this.props
@@ -28,16 +28,17 @@ class AnimatedSwitch extends React.Component {
             <Motion
                 data={match ? [{ location, match, child }] : []}
                 component={<View style={style} />}
-                render={(key, data, renderStyles) => React.cloneElement(data.child, {
-                    key,
-                    location: data.location,
-                    computedMatch: data.match,
-                    style: {
-                        ...data.child.props.style,
-                        transform: `translate3d(${-renderStyles.x}%, 0, 0)`,
-                        opacity: renderStyles.o,
-                    },
-                })}
+                render={(key, data, renderStyles) =>
+                    React.cloneElement(data.child, {
+                        key,
+                        location: data.location,
+                        computedMatch: data.match,
+                        style: {
+                            ...data.child.props.style,
+                            transform: `translate3d(${-renderStyles.x}%, 0, 0)`,
+                            opacity: renderStyles.o,
+                        },
+                    })}
                 getKey={this.getKey}
                 onRender={(data, i, spring) => ({
                     x: spring(0, WOBBLY_SPRING),

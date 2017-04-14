@@ -8,14 +8,14 @@ import { upperFirst } from 'lodash'
 import moment from 'moment'
 
 const isRequired = createValidator(
-    message => value => [undefined, null, ''].includes(value) ? message : null,
+    message => value => ([undefined, null, ''].includes(value) ? message : null),
     field => `${upperFirst(field)} is required`,
 )
 
 const date = composeValidators(
     isRequired,
     createValidator(
-        message => value => moment(value).isValid() ? false : message,
+        message => value => (moment(value).isValid() ? false : message),
         field => `this ${field} is not a valid date`,
     ),
 )
@@ -23,8 +23,8 @@ const date = composeValidators(
 const email = composeValidators(
     isRequired,
     createValidator(
-        message =>
-            value => !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ? message : false,
+        message => value =>
+            (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ? message : false),
         field => `this ${field} is not a valid format`,
     ),
 )('email')
@@ -34,7 +34,7 @@ const streetAddressLine1 = composeValidators(isRequired, hasLengthGreaterThan(3)
 const postalCode = composeValidators(
     isRequired,
     createValidator(
-        message => value => !/^\d{5}(?:[-\s]\d{4})?$/i.test(value) ? message : false,
+        message => value => (!/^\d{5}(?:[-\s]\d{4})?$/i.test(value) ? message : false),
         field => `this ${field} is not a valid format`,
     ),
 )('zip code')

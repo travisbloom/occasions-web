@@ -38,9 +38,7 @@ class CreateAssociatedEvent extends React.Component {
     };
 
     render() {
-        const {
-            style,
-        } = this.props
+        const { style } = this.props
 
         return (
             <DocumentTitle title="Occasions | Create Event">

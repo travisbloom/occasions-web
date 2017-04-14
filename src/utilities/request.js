@@ -18,19 +18,20 @@ const parseJSON = (response) => {
     return response.json()
 }
 
-export default (...args) => fetch(...args)
-    .then((response) => {
-        try {
-            return parseJSON(checkStatus(response))
-        } catch (e) {
-            throw parseJSON(e.response)
-        }
-    })
-    .then((data) => {
-        debug('request succeeded with JSON response', data)
-        return data
-    })
-    .catch((error) => {
-        debug('request failed', error.response)
-        throw error
-    })
+export default (...args) =>
+    fetch(...args)
+        .then((response) => {
+            try {
+                return parseJSON(checkStatus(response))
+            } catch (e) {
+                throw parseJSON(e.response)
+            }
+        })
+        .then((data) => {
+            debug('request succeeded with JSON response', data)
+            return data
+        })
+        .catch((error) => {
+            debug('request failed', error.response)
+            throw error
+        })

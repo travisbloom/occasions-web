@@ -11,15 +11,7 @@ import graphqlQuery from './PurchaseProductQuery.graphql'
 
 class PurchaseProduct extends React.Component {
     render() {
-        const {
-            data: {
-                associatedEvent,
-                product,
-                currentUser,
-                refetch,
-            },
-            style,
-        } = this.props
+        const { data: { associatedEvent, product, currentUser, refetch }, style } = this.props
         return (
             <DocumentTitle
                 title={

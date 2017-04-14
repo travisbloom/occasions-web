@@ -41,22 +41,23 @@ const getTokens = () => {
     return getTokensFromLocalStorage()
 }
 
-export const signIn = (username, password) => request(`${APP_ENV.appServer}/auth/token`, {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-        username,
-        password,
-        client_id: APP_ENV.clientId,
-        client_secret: APP_ENV.clientSecret,
-        grant_type: 'password',
-    }),
-}).then((response) => {
-    saveTokensToLocalStorage(response)
-    return response.access_token
-})
+export const signIn = (username, password) =>
+    request(`${APP_ENV.appServer}/auth/token`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            username,
+            password,
+            client_id: APP_ENV.clientId,
+            client_secret: APP_ENV.clientSecret,
+            grant_type: 'password',
+        }),
+    }).then((response) => {
+        saveTokensToLocalStorage(response)
+        return response.access_token
+    })
 
 let currentRefreshRequest
 const refreshAccessToken = (refreshToken) => {

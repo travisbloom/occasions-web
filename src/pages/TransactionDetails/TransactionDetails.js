@@ -23,11 +23,7 @@ import graphqlQuery from './TransactionDetailsQuery.graphql'
 
 class TransactionDetails extends React.Component {
     render() {
-        const {
-            data: {
-                transaction,
-            },
-        } = this.props
+        const { data: { transaction } } = this.props
         if (!transaction) return <span>allllmost</span>
         return (
             <DocumentTitle title={`Occasions | Transaction ${transaction.id}`}>

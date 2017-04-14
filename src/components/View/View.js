@@ -30,20 +30,18 @@ const generateStyes = ({ marginTop, margin, padding, style, inline }) => {
     }
 }
 
-const View = (
-    {
-        inline,
-        className,
-        margin,
-        marginChildrenRight,
-        marginChildren,
-        marginTop,
-        padding,
-        style,
-        children,
-        ...props
-    },
-) => {
+const View = ({
+    inline,
+    className,
+    margin,
+    marginChildrenRight,
+    marginChildren,
+    marginTop,
+    padding,
+    style,
+    children,
+    ...props
+}) => {
     const generatedStyleObj = generateStyes({ marginTop, margin, padding, style, inline })
     return React.createElement(
         inline ? 'span' : 'div',

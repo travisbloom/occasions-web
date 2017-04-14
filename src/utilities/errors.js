@@ -13,8 +13,8 @@ const flattenErrorObject = (data, accum, key) => {
     }
 }
 
-export const formatRemoteErrors = errors => errors.reduce(
-    (accum, { message, data }) => {
+export const formatRemoteErrors = errors =>
+    errors.reduce((accum, { message, data }) => {
         if (!data) {
             accum.push(message)
             return accum
@@ -25,9 +25,7 @@ export const formatRemoteErrors = errors => errors.reduce(
         }
         flattenErrorObject(data, accum)
         return accum
-    },
-    [],
-)
+    }, [])
 
 export const formatGeneralAPIErrors = (response) => {
     if (!responseHasErrors(response)) return null

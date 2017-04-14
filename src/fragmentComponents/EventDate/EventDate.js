@@ -11,9 +11,7 @@ class EventDate extends React.Component {
     };
 
     render() {
-        const {
-            event: { isReoccuringYearly, timeStart, dateStart },
-        } = this.props
+        const { event: { isReoccuringYearly, timeStart, dateStart } } = this.props
         if (isReoccuringYearly) {
             if (timeStart) {
                 // TODO

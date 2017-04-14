@@ -28,11 +28,7 @@ const WrappedRenderList = withShell({
 
 class AssociatedEventsList extends React.Component {
     render() {
-        const {
-            data: {
-                currentUser,
-            },
-        } = this.props
+        const { data: { currentUser } } = this.props
         return (
             <DocumentTitle title="Occasions | My Events">
                 <View marginChildren padding>

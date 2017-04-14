@@ -39,28 +39,31 @@ class PurchaseProductForm extends React.Component {
         const { refetch, change } = this.props
         const newAssociatedLocation = data.createAssociatedLocation.associatedLocation
         return refetch()
-            .then(() => change('locationId', {
-                label: newAssociatedLocation.location.displayName,
-                value: newAssociatedLocation.id,
-            }))
+            .then(() =>
+                change('locationId', {
+                    label: newAssociatedLocation.location.displayName,
+                    value: newAssociatedLocation.id,
+                }),
+            )
             .then(this.onToggleNewAddressForm)
     };
 
-    onToggleNewAddressForm = () => this.setState(prevState => ({
-        isAddingNewAddress: !prevState.isAddingNewAddress,
-        intialAddressFormValues: !prevState.isAddingNewAddress
-            ? {
-                personId: this.props.associatedEvent.receivingPerson.id,
-                location: {
-                    streetAddressLine1: '',
-                    streetAddressLine2: '',
-                    city: '',
-                    state: '',
-                    postalCode: '',
-                },
-            }
-            : null,
-    }));
+    onToggleNewAddressForm = () =>
+        this.setState(prevState => ({
+            isAddingNewAddress: !prevState.isAddingNewAddress,
+            intialAddressFormValues: !prevState.isAddingNewAddress
+                ? {
+                    personId: this.props.associatedEvent.receivingPerson.id,
+                    location: {
+                        streetAddressLine1: '',
+                        streetAddressLine2: '',
+                        city: '',
+                        state: '',
+                        postalCode: '',
+                    },
+                }
+                : null,
+        }));
 
     onToken = (values) => {
         const { createStripeUser, submit } = this.props
@@ -69,9 +72,7 @@ class PurchaseProductForm extends React.Component {
 
     getLocationOptions = () => {
         const locations = this.props.associatedEvent.receivingPerson.associatedLocations.edges
-        return locations.map(({
-            node: { location, id },
-        }) => ({
+        return locations.map(({ node: { location, id } }) => ({
             label: location.displayName,
             value: id,
         }))
@@ -87,7 +88,8 @@ class PurchaseProductForm extends React.Component {
         }
         return purchaseProduct(variables)
             .then(({ data: { createTransaction: { transaction } } }) =>
-                history.push(urls.transactionDetails(transaction.id)))
+                history.push(urls.transactionDetails(transaction.id)),
+            )
             .catch(formatReduxFormErrors)
     };
 
