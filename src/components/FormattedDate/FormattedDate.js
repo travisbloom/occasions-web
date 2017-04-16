@@ -1,8 +1,14 @@
+// @flow
 import moment from 'moment'
 import React from 'react'
 
 // simple wrapper to make it easier to support i18n later on
-const FormattedDate = ({ format, date, showYear, ...props }) => (
+const FormattedDate = ({
+    format,
+    date,
+    showYear,
+    ...props
+}: { format?: string, date: string, showYear?: boolean }) => (
     <span {...props}>
         {moment(date).format(
             (() => {
@@ -16,12 +22,6 @@ const FormattedDate = ({ format, date, showYear, ...props }) => (
         )}
     </span>
 )
-
-FormattedDate.propTypes = {
-    format: React.PropTypes.string,
-    date: React.PropTypes.string.isRequired,
-    showYear: React.PropTypes.bool,
-}
 
 FormattedDate.defaultProps = {
     showYear: false,

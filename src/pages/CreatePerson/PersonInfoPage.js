@@ -18,6 +18,8 @@ import {
 import validate from './validate'
 
 class PersonInfoPage extends React.Component {
+    birthdayYearOptions: Array<{ label: number, value: number }>
+
     constructor(props) {
         super(props)
         const currentYear = moment().year()
@@ -29,6 +31,7 @@ class PersonInfoPage extends React.Component {
             }
         })
     }
+
     render() {
         const { handleSubmit, submitting, pristine } = this.props
 

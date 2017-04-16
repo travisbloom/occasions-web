@@ -12,16 +12,16 @@ import graphqlQuery from './EventCatalogQuery.graphql'
 class EventsCatalog extends React.Component {
     static propTypes = {
         onSelectEvent: React.PropTypes.func.isRequired,
-    };
+    }
 
     state = {
         eventSearchValue: '',
         selectedEventTypes: [],
-    };
+    }
 
-    handleEventSearchOnChange = eventSearchValue => this.setState({ eventSearchValue });
+    handleEventSearchOnChange = eventSearchValue => this.setState({ eventSearchValue })
 
-    handleEventTypeOnChange = selectedEventTypes => this.setState({ selectedEventTypes });
+    handleEventTypeOnChange = selectedEventTypes => this.setState({ selectedEventTypes })
 
     handleClickedLabel = eventType =>
         this.setState(state => ({
@@ -35,7 +35,7 @@ class EventsCatalog extends React.Component {
                 ],
                 _.isEqual,
             ),
-        }));
+        }))
 
     render() {
         const { selectedEventTypes, eventSearchValue } = this.state
@@ -44,8 +44,7 @@ class EventsCatalog extends React.Component {
         return (
             <View marginChildren>
                 <MediaQuery sm>
-                    {matches =>
-                        console.log(matches) ||
+                    {matches => (
                         <Row>
                             {matches &&
                                 <Col xs={12} sm={4}>
@@ -67,7 +66,8 @@ class EventsCatalog extends React.Component {
                                     />
                                 </FormField>
                             </Col>
-                        </Row>}
+                        </Row>
+                    )}
                 </MediaQuery>
                 <EventsList
                     onSelectEvent={onSelectEvent}

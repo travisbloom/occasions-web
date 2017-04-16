@@ -4,7 +4,6 @@ import React from 'react'
 import { reduxForm, Form } from 'redux-form'
 import { graphql, compose } from 'react-apollo'
 import { withRouter } from 'react-router-dom'
-import gql from 'graphql-tag'
 import StripeCheckout from 'react-stripe-checkout'
 
 import {
@@ -28,10 +27,25 @@ import createStripeUserGraphqlQuery from './CreateStripeUserMutation.graphql'
 import createTransactionGraphqlQuery from './CreateTransactionMutation.graphql'
 
 class PurchaseProductForm extends React.Component {
+    state: {
+        isAddingNewAddress: boolean,
+        intialAddressFormValues: ?{
+            personId: number,
+            location: {
+                streetAddressLine1: string,
+                streetAddressLine2: string,
+                city: string,
+                state: string,
+                postalCode: string,
+            },
+        },
+    }
+
     constructor(props) {
         super(props)
         this.state = {
             isAddingNewAddress: false,
+            intialAddressFormValues: null,
         }
     }
 
@@ -46,7 +60,7 @@ class PurchaseProductForm extends React.Component {
                 }),
             )
             .then(this.onToggleNewAddressForm)
-    };
+    }
 
     onToggleNewAddressForm = () =>
         this.setState(prevState => ({
@@ -63,12 +77,12 @@ class PurchaseProductForm extends React.Component {
                     },
                 }
                 : null,
-        }));
+        }))
 
     onToken = (values) => {
         const { createStripeUser, submit } = this.props
         createStripeUser(values).then(submit)
-    };
+    }
 
     getLocationOptions = () => {
         const locations = this.props.associatedEvent.receivingPerson.associatedLocations.edges
@@ -76,7 +90,7 @@ class PurchaseProductForm extends React.Component {
             label: location.displayName,
             value: id,
         }))
-    };
+    }
 
     purchaseProduct = (values) => {
         const { purchaseProduct, history } = this.props
@@ -91,7 +105,7 @@ class PurchaseProductForm extends React.Component {
                 history.push(urls.transactionDetails(transaction.id)),
             )
             .catch(formatReduxFormErrors)
-    };
+    }
 
     handleSubmit = (values) => {
         const { currentUser } = this.props
@@ -99,7 +113,7 @@ class PurchaseProductForm extends React.Component {
             return this.purchaseProduct(values)
         }
         return Promise.resolve()
-    };
+    }
 
     renderCheckoutButton = () => {
         const { submitting, pristine, product, currentUser } = this.props
@@ -126,7 +140,7 @@ class PurchaseProductForm extends React.Component {
                 {button}
             </StripeCheckout>
         )
-    };
+    }
 
     render() {
         const { isAddingNewAddress, intialAddressFormValues } = this.state

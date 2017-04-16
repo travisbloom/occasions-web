@@ -2,7 +2,7 @@
 import React from 'react'
 import { graphql } from 'react-apollo'
 
-import { Panel, View, Button } from '../../components'
+import { Panel, View } from '../../components'
 
 import graphqlQuery from './EventListQuery.graphql'
 

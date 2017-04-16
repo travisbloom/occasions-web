@@ -1,6 +1,0 @@
-fragment EventDateFragment on EventNode {
-    id
-    dateStart
-    timeStart
-    isReoccuringYearly
-}

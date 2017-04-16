@@ -1,3 +1,4 @@
+// @flow
 import { Field } from 'redux-form'
 import React from 'react'
 
@@ -17,13 +18,11 @@ const componentRenderer = ({
     </FormField>
 )
 
-const ReduxFormField = ({ component, ...props }) => (
+const ReduxFormField = ({
+    component,
+    ...props
+}: { component: any, name: string, label?: string }) => (
     <Field {...props} RenderedComponent={component} component={componentRenderer} />
 )
-
-ReduxFormField.propTypes = {
-    component: React.PropTypes.func.isRequired,
-    name: React.PropTypes.string.isRequired,
-}
 
 export default ReduxFormField

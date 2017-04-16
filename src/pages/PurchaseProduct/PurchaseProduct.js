@@ -9,7 +9,17 @@ import withShell from '../../hoc/withShell'
 import PurchaseProductForm from './PurchaseProductForm'
 import graphqlQuery from './PurchaseProductQuery.graphql'
 
+const Shell = () => (
+    <View padding>
+        <Header size="largest"><Placeholder /></Header>
+        <Header size="larger"><Placeholder /></Header>
+        <View marginTop>
+            <PurchaseProductForm.Shell />
+        </View>
+    </View>
+)
 class PurchaseProduct extends React.Component {
+    static Shell = Shell
     render() {
         const { data: { associatedEvent, product, currentUser, refetch }, style } = this.props
         return (
@@ -44,16 +54,6 @@ class PurchaseProduct extends React.Component {
         )
     }
 }
-
-PurchaseProduct.Shell = () => (
-    <View padding>
-        <Header size="largest"><Placeholder /></Header>
-        <Header size="larger"><Placeholder /></Header>
-        <View marginTop>
-            <PurchaseProductForm.Shell />
-        </View>
-    </View>
-)
 
 export default compose(
     graphql(graphqlQuery, {

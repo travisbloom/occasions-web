@@ -1,9 +1,24 @@
+// @flow
 import React from 'react'
 
 import { Errors, View } from '../'
 import './FormField.scss'
 
-const FormField = ({ name, label, error, touched, helpText, children }) => (
+const FormField = ({
+    name,
+    label,
+    error,
+    touched,
+    helpText,
+    children,
+}: {
+    name?: string,
+    label?: string,
+    error?: string | Array<any>,
+    touched?: boolean,
+    helpText?: string,
+    children?: any,
+}) => (
     <View className="form-group">
         {label && <label htmlFor={name}>{label}</label>}
         {children}
@@ -18,16 +33,6 @@ FormField.defaultProps = {
     helpText: '',
     error: '',
     name: '',
-}
-
-FormField.propTypes = {
-    label: React.PropTypes.node,
-    helpText: React.PropTypes.node,
-    error: React.PropTypes.oneOfType([
-        React.PropTypes.node,
-        React.PropTypes.arrayOf(React.PropTypes.node),
-    ]),
-    name: React.PropTypes.string,
 }
 
 export default FormField

@@ -1,18 +1,23 @@
+// @flow
 import React from 'react'
 import classNames from 'classnames'
 
 class TextInput extends React.Component {
-    static propTypes = {
-        onChange: React.PropTypes.func,
-        value: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]),
-    };
+    props: {
+        onChange: (value: string, event: SyntheticInputEvent) => void,
+        value: number | string,
+        className?: string,
+        textarea?: boolean,
+    }
 
     static defaultProps = {
+        className: '',
         onChange: () => {},
         value: '',
-    };
+        textarea: false,
+    }
 
-    handleOnChange = event => this.props.onChange(event.target.value, event);
+    handleOnChange = (event: SyntheticInputEvent) => this.props.onChange(event.target.value, event)
 
     render() {
         const { className, textarea, ...props } = this.props

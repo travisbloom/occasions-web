@@ -1,3 +1,4 @@
+// @flow
 import { Col } from 'react-flexbox-grid'
 
 import './Col.scss'

@@ -3,23 +3,42 @@ import React from 'react'
 import { graphql, compose } from 'react-apollo'
 import DocumentTitle from 'react-document-title'
 
-import {
-    View,
-    Header,
-    Panel,
-    Row,
-    Col,
-    LinkContainer,
-    Button,
-    Placeholder,
-} from '../../components'
+import { View, Header, Panel, Row, Col, LinkContainer, Button, Placeholder } from '../../components'
 import { EventDate } from '../../fragmentComponents'
 import withShell from '../../hoc/withShell'
 import urls from '../../urls'
 
 import graphqlQuery from './AssociatedEventDetailsQuery.graphql'
 
+const Shell = () => (
+    <View padding marginChildren>
+        <Header size="largest"><Placeholder /></Header>
+        <Header size="larger"><Placeholder width={55} /></Header>
+        <Header size="larger"><Placeholder width={45} /></Header>
+        {new Array(2).fill().map((_, index) => (
+            <Panel key={index} header={<Header size="large"><Placeholder /></Header>}>
+                <View marginChildren>
+                    <Row>
+                        <Col xs={8} lg={10}>
+                            <View marginChildren>
+                                <View><Placeholder /></View>
+                                <View><Placeholder /></View>
+                            </View>
+                        </Col>
+                        <Col xs={4} lg={2}>
+                            <Button block bsStyle="primary">
+                                <Placeholder light />
+                            </Button>
+                        </Col>
+                    </Row>
+                </View>
+            </Panel>
+        ))}
+    </View>
+)
+
 class AssociatedEventDetails extends React.Component {
+    static Shell = Shell
     render() {
         const { data: { associatedEvent }, style } = this.props
 
@@ -64,33 +83,6 @@ class AssociatedEventDetails extends React.Component {
         )
     }
 }
-
-AssociatedEventDetails.Shell = () => (
-    <View padding marginChildren>
-        <Header size="largest"><Placeholder /></Header>
-        <Header size="larger"><Placeholder width={55} /></Header>
-        <Header size="larger"><Placeholder width={45} /></Header>
-        {new Array(2).fill().map((_, index) => (
-            <Panel key={index} header={<Header size="large"><Placeholder /></Header>}>
-                <View marginChildren>
-                    <Row>
-                        <Col xs={8} lg={10}>
-                            <View marginChildren>
-                                <View><Placeholder /></View>
-                                <View><Placeholder /></View>
-                            </View>
-                        </Col>
-                        <Col xs={4} lg={2}>
-                            <Button block bsStyle="primary">
-                                <Placeholder light />
-                            </Button>
-                        </Col>
-                    </Row>
-                </View>
-            </Panel>
-        ))}
-    </View>
-)
 
 export default compose(
     graphql(graphqlQuery, {

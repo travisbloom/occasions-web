@@ -1,3 +1,4 @@
+// @flow
 import React from 'react'
 import { graphql, compose } from 'react-apollo'
 import { connect } from 'react-redux'
@@ -21,42 +22,14 @@ const PAGE_STYLES = { marginBottom: `${Tabs.height}px` }
 class App extends React.Component {
     state = {
         hasBackButton: false,
-    };
-
-    // componentWillReceiveProps(nextProps) {
-    //     console.log(this.props)
-    //     if (nextProps.location.pathname === this.props.location.pathname) {
-    //         return
-    //     }
-    //     const routeDepthDiff = nextProps.routes.length - this.props.routes.length
-    //     const shorterRouteStack = routeDepthDiff < 0 ? nextProps.routes : this.props.routes
-    //     const longerRouteStack = routeDepthDiff > 0 ? nextProps.routes : this.props.routes
-    //     const sameRoutePaths = shorterRouteStack.every(
-    //         ({ path }, index) =>
-    //             index < shorterRouteStack.lengt - 1 ?
-    //                    path === longerRouteStack[index].path : true,
-    //     )
-    //     if (!sameRoutePaths) {
-    //         if (this.state.hasBackButton) {
-    //             this.setState({ hasBackButton: false })
-    //         }
-    //     } else {
-    //         const secondToLastRoute = nextProps.routes[nextProps.routes.length - 3]
-    //         const isNestedRoute = secondToLastRoute.path !== 'a'
-    //         if (isNestedRoute && !this.state.hasBackButton) {
-    //             this.setState({ hasBackButton: true })
-    //         } else if (!isNestedRoute && this.state.hasBackButton) {
-    //             this.setState({ hasBackButton: false })
-    //         }
-    //     }
-    // }
+    }
 
     mapStyles = styles => ({
         ...styles,
         position: 'absolute',
         height: '100%',
         width: '100%',
-    });
+    })
 
     render() {
         const { data: { currentUser }, errors } = this.props

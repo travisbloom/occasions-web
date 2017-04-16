@@ -36,8 +36,9 @@ const CollapsableArrow = () => (
 )
 
 class MarketingHome extends React.Component {
-    constructor(props) {
-        super(props)
+    isLoggedIn: boolean
+    constructor() {
+        super()
         this.isLoggedIn = hasAccessToken()
     }
 

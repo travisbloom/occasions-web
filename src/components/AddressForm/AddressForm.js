@@ -1,3 +1,4 @@
+// @flow
 import React from 'react'
 import { noop } from 'lodash'
 
@@ -14,7 +15,7 @@ import {
 } from '../'
 import STATES from '../../constants/states'
 
-const AddressForm = ({ autoComplete }) => (
+const AddressForm = ({ autoComplete }: {| autoComplete?: boolean |}) => (
     <View marginChildren>
         <ReduxFormField
             autoComplete={autoComplete ? 'address-line1' : undefined}
@@ -65,5 +66,9 @@ const AddressForm = ({ autoComplete }) => (
         </Row>
     </View>
 )
+
+AddressForm.defaultProps = {
+    autoComplete: false,
+}
 
 export default AddressForm

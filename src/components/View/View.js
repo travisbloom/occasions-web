@@ -1,9 +1,12 @@
+// @flow
 import React from 'react'
 import { isBoolean } from 'lodash'
 import classNames from 'classnames'
 
 import styles from './View.scss'
 import styleVars from '../../styles'
+
+type sizes = 'small' | 'medium' | 'large'
 
 const toSpacingValue = (type) => {
     const usedType = isBoolean(type) ? 'medium' : type
@@ -41,8 +44,24 @@ const View = ({
     style,
     children,
     ...props
+}: {
+    inline?: boolean,
+    className?: string,
+    margin?: sizes,
+    marginChildren?: boolean,
+    marginChildrenRight?: boolean,
+    marginTop?: sizes,
+    padding?: sizes,
+    style?: CSSStyleDeclaration | any,
+    children?: any,
 }) => {
-    const generatedStyleObj = generateStyes({ marginTop, margin, padding, style, inline })
+    const generatedStyleObj = generateStyes({
+        marginTop,
+        margin,
+        padding,
+        style: style || {},
+        inline,
+    })
     return React.createElement(
         inline ? 'span' : 'div',
         {
@@ -60,6 +79,14 @@ const View = ({
 
 View.defaultProps = {
     style: {},
+    inline: false,
+    className: '',
+    margin: false,
+    marginChildren: false,
+    marginChildrenRight: false,
+    marginTop: false,
+    padding: false,
+    children: null,
 }
 
 export default View

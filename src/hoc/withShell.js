@@ -1,8 +1,11 @@
+// @flow
 import React from 'react'
 
 import { AnimatedFade } from '../components'
 
-export default ({ isLoaded }) => Component => (props) => {
+export default ({ isLoaded }: { isLoaded: any => boolean }) => (
+    Component: Class<React$Component<*, *, *>>,
+) => (props: {}) => {
     let loaded = false
     try {
         loaded = isLoaded(props)

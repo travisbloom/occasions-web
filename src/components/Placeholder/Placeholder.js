@@ -1,3 +1,4 @@
+// @flow
 import React from 'react'
 import classNames from 'classnames'
 import { random } from 'lodash'
@@ -6,8 +7,12 @@ import { View } from '../'
 
 import styles from './Placeholder.scss'
 
+type Props = {
+    width: number,
+}
 class Placeholder extends React.Component {
-    constructor(props) {
+    width: number
+    constructor(props: Props) {
         super(props)
         this.width = props.width || random(0.8, 1) * 100
     }

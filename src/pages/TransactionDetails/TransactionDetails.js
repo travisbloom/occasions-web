@@ -21,7 +21,44 @@ import withShell from '../../hoc/withShell'
 
 import graphqlQuery from './TransactionDetailsQuery.graphql'
 
+const Shell = () => (
+    <View padding>
+        <Header size="largest">
+            <View><Placeholder /></View>
+            <View><Placeholder /></View>
+        </Header>
+        <Header size="larger">
+            <Placeholder />
+        </Header>
+        <Panel>
+            <Row>
+                <Col xs={4}><Placeholder /></Col>
+                <Col xs={8}>
+                    <View>
+                        <Placeholder />
+                    </View>
+                    <View>
+                        <Placeholder />
+                    </View>
+                </Col>
+                <Col xs={4}><Placeholder /></Col>
+                <Col xs={8}>
+                    <Placeholder />
+                </Col>
+                <Col xs={4}><Placeholder /></Col>
+                <Col xs={8}>
+                    <Placeholder />
+                </Col>
+                <Col xs={4}>
+                    <Button block><Placeholder /></Button>
+                </Col>
+            </Row>
+        </Panel>
+    </View>
+)
+
 class TransactionDetails extends React.Component {
+    static Shell = Shell
     render() {
         const { data: { transaction } } = this.props
         if (!transaction) return <span>allllmost</span>
@@ -71,42 +108,6 @@ class TransactionDetails extends React.Component {
         )
     }
 }
-
-TransactionDetails.Shell = () => (
-    <View padding>
-        <Header size="largest">
-            <View><Placeholder /></View>
-            <View><Placeholder /></View>
-        </Header>
-        <Header size="larger">
-            <Placeholder />
-        </Header>
-        <Panel>
-            <Row>
-                <Col xs={4}><Placeholder /></Col>
-                <Col xs={8}>
-                    <View>
-                        <Placeholder />
-                    </View>
-                    <View>
-                        <Placeholder />
-                    </View>
-                </Col>
-                <Col xs={4}><Placeholder /></Col>
-                <Col xs={8}>
-                    <Placeholder />
-                </Col>
-                <Col xs={4}><Placeholder /></Col>
-                <Col xs={8}>
-                    <Placeholder />
-                </Col>
-                <Col xs={4}>
-                    <Button block><Placeholder /></Button>
-                </Col>
-            </Row>
-        </Panel>
-    </View>
-)
 
 export default compose(
     graphql(graphqlQuery, {

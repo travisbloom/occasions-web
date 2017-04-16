@@ -12,7 +12,7 @@ import { formatGeneralReduxFormErrors } from '../../utilities/errors'
 import { formatLocation } from '../../utilities/location'
 import urls from '../../urls'
 
-import graphqlQuery from './CreatePersonMutation.graphql'
+// import graphqlQuery from './CreatePersonMutation.graphql'
 
 const LineItem = ({ label, children }) => (
     <tr>
@@ -23,7 +23,7 @@ const LineItem = ({ label, children }) => (
 
 class ConfirmationPage extends React.Component {
     getBirthday = (birthdayDate, birthdayYear) =>
-        moment(birthdayDate).year(birthdayYear.value).toISOString();
+        moment(birthdayDate).year(birthdayYear.value).toISOString()
 
     handleSubmit = ({ associatedLocations, birthdayDate, birthdayYear, ...values }) => {
         const { createPerson, history } = this.props
@@ -40,7 +40,7 @@ class ConfirmationPage extends React.Component {
                 history.push(urls.associatedEventDetails(associatedEvent.id)),
             )
             .catch(formatGeneralReduxFormErrors)
-    };
+    }
 
     render() {
         const { handleSubmit, error, formValues, onAddAddress } = this.props
@@ -88,7 +88,7 @@ export default compose(
     connect(state => ({
         formValues: formValuesSelector(state),
     })),
-    graphql(graphqlQuery, {
+    graphql('test', {
         props: ({ mutate }) => ({
             createPerson: values => mutate({ variables: { input: values } }),
         }),

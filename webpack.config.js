@@ -4,7 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
 
-const clientSecret = 'W9GY47vMMlEftgr3zGP0HjRHlx0LSC09HTrVTG1F3ioadyrzNx2DxmfyPK7DZjoQmR7a8jxzo8o5lNdAOHp8iEeDU0ihce25D9pXiZerVTe1FSCunr3OYwes1Rj9XXhi'
+const clientSecret =
+    'W9GY47vMMlEftgr3zGP0HjRHlx0LSC09HTrVTG1F3ioadyrzNx2DxmfyPK7DZjoQmR7a8jxzo8o5lNdAOHp8iEeDU0ihce25D9pXiZerVTe1FSCunr3OYwes1Rj9XXhi'
 
 module.exports = {
     entry: [
@@ -76,7 +77,7 @@ module.exports = {
 
     plugins: [
         new LodashModuleReplacementPlugin(),
-        new webpack.ContextReplacementPlugin(/moment[\\\/]locale$/, /^\.\/(en)$/),
+        new webpack.ContextReplacementPlugin(/moment[\\\/]locale$/, /^\.\/(en)$/), //eslint-disable-line
         // new BundleAnalyzerPlugin(),
         new webpack.DefinePlugin({
             process: { env: { NODE_ENV: JSON.stringify('development') } },

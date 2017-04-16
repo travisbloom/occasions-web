@@ -1,3 +1,4 @@
+// @flow
 import { Link as RRLink } from 'react-router-dom'
 
 export const LinkContainer = RRLink

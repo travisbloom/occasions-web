@@ -1,3 +1,4 @@
+// @flow
 import React from 'react'
 import { TransitionMotion, spring } from 'react-motion'
 
@@ -23,7 +24,7 @@ const styles = {
     },
 }
 
-const AnimatedFade = ({ children: child, getKey }) => (
+const AnimatedFade = ({ children: child, getKey }: { children?: any, getKey: () => any }) => (
     <TransitionMotion
         styles={[
             {

@@ -1,23 +1,42 @@
+// @flow
 import React from 'react'
 import { SingleDatePicker } from 'react-dates'
-import classNames from 'classnames'
 import moment from 'moment'
 
 import { View } from '../'
-import styles from './DatePicker.scss'
+import './DatePicker.scss'
 
+type Props = {
+    hasNoYear: boolean,
+    inline: boolean,
+    numberOfMonths: number,
+    onChange: (date: string) => void,
+    name: string,
+    monthFormat: string,
+    displayFormat: string,
+    isOutsideRange: boolean,
+    value: string,
+    onBlur: () => void,
+    onDragStart: () => void,
+    onDrop: () => void,
+    onFocus: () => void,
+}
 class DatePicker extends React.Component {
-    static propTypes = {
-        hasNoYear: React.PropTypes.bool,
-        inline: React.PropTypes.bool,
-    };
+    props: Props
+    maxDate: moment
+    minDate: moment
+    isOutsideCurrentYear: (date: moment) => boolean
+    state: {
+        focused: boolean,
+    }
+
     static defaultProps = {
         inline: false,
         numberOfMonths: 1,
         hasNoYear: false,
-    };
+    }
 
-    constructor(props) {
+    constructor(props: Props) {
         super(props)
         if (props.hasNoYear) {
             this.minDate = moment().startOf('year')
@@ -28,14 +47,13 @@ class DatePicker extends React.Component {
         this.state = { focused: false }
     }
 
-    handleOnFocusChange = ({ focused }) => this.setState({ focused });
+    handleOnFocusChange = ({ focused }: { focused: boolean }) => this.setState({ focused })
 
-    handleOnChange = date => this.props.onChange(date.toISOString());
+    handleOnChange = (date: moment) => this.props.onChange(date.toISOString())
 
     render() {
         const { focused } = this.state
         const {
-            inline,
             hasNoYear,
             name,
             monthFormat,
@@ -52,7 +70,7 @@ class DatePicker extends React.Component {
         delete props.onFocus
 
         return (
-            <View className={classNames(inline || styles.block)}>
+            <View>
                 <SingleDatePicker
                     id={name}
                     focused={focused}
