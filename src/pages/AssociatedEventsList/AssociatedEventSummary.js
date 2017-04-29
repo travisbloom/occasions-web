@@ -1,5 +1,5 @@
+// @flow
 import React from 'react'
-import { propType } from 'graphql-anywhere'
 import { withRouter } from 'react-router-dom'
 
 import { Panel, View, Row, Col, Placeholder } from '../../components'
@@ -7,10 +7,25 @@ import { EventDate } from '../../fragmentComponents'
 import urls from '../../urls'
 
 class AssociatedEventSummary extends React.Component {
+    Shell = () => (
+        <Panel header={<View><Placeholder /></View>}>
+            <Row>
+                <Col xs={6}>
+                    <View marginChildren>
+                        <View><Placeholder /></View>
+                        <View><Placeholder /></View>
+                    </View>
+                </Col>
+                <Col xs={6}>
+                    <Placeholder />
+                </Col>
+            </Row>
+        </Panel>
+    )
     transitionToDetailsPage = () => {
         const { associatedEvent, history } = this.props
         history.push(urls.associatedEventDetails(associatedEvent.id))
-    };
+    }
 
     render() {
         const { associatedEvent } = this.props
@@ -42,21 +57,4 @@ class AssociatedEventSummary extends React.Component {
     }
 }
 
-const wrappedComponent = withRouter(AssociatedEventSummary)
-wrappedComponent.Placeholder = () => (
-    <Panel header={<View><Placeholder /></View>}>
-        <Row>
-            <Col xs={6}>
-                <View marginChildren>
-                    <View><Placeholder /></View>
-                    <View><Placeholder /></View>
-                </View>
-            </Col>
-            <Col xs={6}>
-                <Placeholder />
-            </Col>
-        </Row>
-    </Panel>
-)
-
-export default wrappedComponent
+export default withRouter(AssociatedEventSummary)

@@ -1,4 +1,4 @@
-mutation CreateStripeUserMutation($input: CreateStripeUserInput!) {
+mutation CreateStripeUser($input: CreateStripeUserInput!) {
   createStripeUser(input: $input) {
   user {
       hasStripeUser

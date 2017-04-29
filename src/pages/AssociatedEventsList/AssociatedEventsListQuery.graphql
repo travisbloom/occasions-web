@@ -1,4 +1,4 @@
-query AssociatedEventsListQuery {
+query AssociatedEventsList {
   currentUser {
     id
     person {

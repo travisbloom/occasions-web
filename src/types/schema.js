@@ -3,124 +3,124 @@
 
 export type CreateAssociatedLocationInput = {
     personId: string,
-    location: ?CreateLocationInput,
-    clientMutationId: ?string,
-};
+    location: CreateLocationInput,
+    clientMutationId: string,
+}
 
 export type CreateLocationInput = {
     streetAddressLine1: string,
-    streetAddressLine2: ?string,
+    streetAddressLine2: string,
     postalCode: string,
     city: string,
     state: string,
-};
+}
 
 export type CreateAssociatedEventInput = {
-    event: ?CreateEventInput,
-    eventId: ?string,
+    event: CreateEventInput,
+    eventId: string,
     receivingPersonId: string,
-    clientMutationId: ?string,
-};
+    clientMutationId: string,
+}
 
 export type CreateEventInput = {
-    eventTypes: ?Array<?string>,
-    name: ?string,
-    dateStart: ?String,
-    timeStart: ?String,
-};
+    eventTypes: Array<string>,
+    name: string,
+    dateStart: String,
+    timeStart: String,
+}
 
 export type CreateStripeUserInput = {
     stripTransactionId: string,
     email: string,
-    clientMutationId: ?string,
-};
+    clientMutationId: string,
+}
 
 export type CreateTransactionInput = {
-    productId: ?string,
-    associatedEventId: ?string,
-    associatedLocationId: ?string,
-    receivingPersonId: ?string,
-    productNotes: ?string,
-    clientMutationId: ?string,
-};
+    productId: string,
+    associatedEventId: string,
+    associatedLocationId: string,
+    receivingPersonId: string,
+    productNotes: string,
+    clientMutationId: string,
+}
 
 export type CreateUserInput = {
     username: string,
     password: string,
-    clientMutationId: ?string,
-};
+    clientMutationId: string,
+}
 
 export type EventCatalogQueryQuery = {
-    eventTypes: ?{
+    eventTypes: {
         edges: Array<{
-            node: ?{
+            node: {
                 id: string,
                 displayName: string,
             },
         }>,
     },
-};
+}
 
 export type EventListQueryQueryVariables = {
-    eventSearchValue: ?string,
-    eventTypes: ?Array<?string>,
-};
+    eventSearchValue: string,
+    eventTypes: Array<string>,
+}
 
 export type EventListQueryQuery = {
-    events: ?{
+    events: {
         edges: Array<{
-            node: ?{
+            node: {
                 id: string,
                 name: string,
                 slug: string,
                 dateStart: String,
-                timeStart: ?String,
+                timeStart: String,
                 isReoccuringYearly: boolean,
             },
         }>,
     },
-};
+}
 
 export type CreateAssociatedLocationMutationMutationVariables = {
     input: CreateAssociatedLocationInput,
-};
+}
 
 export type CreateAssociatedLocationMutationMutation = {
-    createAssociatedLocation: ?{
-        associatedLocation: ?{
+    createAssociatedLocation: {
+        associatedLocation: {
             id: string,
             location: {
                 id: string,
-                displayName: ?string,
+                displayName: string,
             },
         },
     },
-};
+}
 
-export type AppQueryQuery = {
-    currentUser: ?{
+export type AppQuery = {
+    currentUser: {
         id: string,
-        person: ?{
+        person: {
             id: string,
-            fullName: ?string,
+            fullName: string,
         },
     },
-};
+}
 
-export type AssociatedEventDetailsQueryQueryVariables = {
+export type AssociatedEventDetailsQueryVariables = {
     associatedEventId: string,
-};
+}
 
-export type AssociatedEventDetailsQueryQuery = {
-    associatedEvent: ?{
+export type AssociatedEventDetailsQuery = {
+    associatedEvent: {
         id: string,
-        receivingPerson: ?{
+        receivingPerson: {
             id: string,
-            fullName: ?string,
+            fullName: string,
         },
-        transactions: ?{
+        transactions: {
             edges: Array<{
-                node: ?{
+                node: {
                     id: string,
                     costUsd: number,
                     product: {
@@ -132,43 +132,43 @@ export type AssociatedEventDetailsQueryQuery = {
                 },
             }>,
         },
-        event: ?{
+        event: {
             id: string,
             name: string,
             dateStart: String,
-            timeStart: ?String,
+            timeStart: String,
             isReoccuringYearly: boolean,
-            relatedProducts: ?{
+            relatedProducts: {
                 edges: Array<{
-                    node: ?{
+                    node: {
                         name: string,
                         description: string,
                         id: string,
-                        slug: ?string,
+                        slug: string,
                     },
                 }>,
             },
         },
     },
-};
+}
 
-export type AssociatedEventsListQueryQuery = {
-    currentUser: ?{
+export type AssociatedEventsListQuery = {
+    currentUser: {
         id: string,
-        person: ?{
+        person: {
             id: string,
-            fullName: ?string,
-            createdEvents: ?{
+            fullName: string,
+            createdEvents: {
                 edges: Array<{
-                    node: ?{
+                    node: {
                         id: string,
                         receivingPerson: {
                             id: string,
-                            fullName: ?string,
+                            fullName: string,
                         },
-                        transactions: ?{
+                        transactions: {
                             edges: Array<{
-                                node: ?{
+                                node: {
                                     id: string,
                                 },
                             }>,
@@ -177,7 +177,7 @@ export type AssociatedEventsListQueryQuery = {
                             id: string,
                             name: string,
                             dateStart: String,
-                            timeStart: ?String,
+                            timeStart: String,
                             isReoccuringYearly: boolean,
                         },
                     },
@@ -185,58 +185,58 @@ export type AssociatedEventsListQueryQuery = {
             },
         },
     },
-};
+}
 
-export type CreateAssociatedEventMutationMutationVariables = {
+export type CreateAssociatedEventMutationVariables = {
     input: CreateAssociatedEventInput,
-};
+}
 
-export type CreateAssociatedEventMutationMutation = {
-    createAssociatedEvent: ?{
-        associatedEvent: ?{
+export type CreateAssociatedEventMutation = {
+    createAssociatedEvent: {
+        associatedEvent: {
             id: string,
             creatingPerson: {
-                fullName: ?string,
+                fullName: string,
             },
             receivingPerson: {
-                fullName: ?string,
+                fullName: string,
             },
             event: {
                 name: string,
             },
         },
     },
-};
+}
 
-export type CreatePersonQueryQuery = {
-    currentUser: ?{
+export type CreatePersonQuery = {
+    currentUser: {
         id: string,
-        person: ?{
+        person: {
             id: string,
-            fullName: ?string,
+            fullName: string,
         },
     },
-};
+}
 
-export type CreateStripeUserMutationMutationVariables = {
+export type CreateStripeUserMutationVariables = {
     input: CreateStripeUserInput,
-};
+}
 
-export type CreateStripeUserMutationMutation = {
-    createStripeUser: ?{
-        user: ?{
-            hasStripeUser: ?boolean,
+export type CreateStripeUserMutation = {
+    createStripeUser: {
+        user: {
+            hasStripeUser: boolean,
         },
     },
-};
+}
 
-export type CreateTransactionQueryMutationVariables = {
+export type CreateTransactionMutationVariables = {
     input: CreateTransactionInput,
-};
+}
 
-export type CreateTransactionQueryMutation = {
-    createTransaction: ?{
-        transaction: ?{
+export type CreateTransactionMutation = {
+    createTransaction: {
+        transaction: {
             id: string,
             costUsd: number,
             product: {
@@ -247,64 +247,64 @@ export type CreateTransactionQueryMutation = {
                 id: string,
                 location: {
                     id: string,
-                    displayName: ?string,
+                    displayName: string,
                 },
             },
             stripeTransactionId: string,
             productNotes: string,
         },
     },
-};
+}
 
-export type PurchaseProductQueryQueryVariables = {
+export type PurchaseProductQueryVariables = {
     associatedEventId: string,
     productId: string,
-};
+}
 
-export type PurchaseProductQueryQuery = {
-    currentUser: ?{
-        email: ?string,
-        hasStripeUser: ?boolean,
+export type PurchaseProductQuery = {
+    currentUser: {
+        email: string,
+        hasStripeUser: boolean,
         id: string,
-        person: ?{
+        person: {
             id: string,
-            fullName: ?string,
+            fullName: string,
         },
     },
-    associatedEvent: ?{
+    associatedEvent: {
         id: string,
-        receivingPerson: ?{
-            fullName: ?string,
+        receivingPerson: {
+            fullName: string,
             id: string,
-            associatedLocations: ?{
+            associatedLocations: {
                 edges: Array<{
-                    node: ?{
+                    node: {
                         id: string,
                         location: {
                             id: string,
-                            displayName: ?string,
+                            displayName: string,
                         },
                     },
                 }>,
             },
         },
-        event: ?{
+        event: {
             name: string,
             id: string,
             dateStart: String,
-            timeStart: ?String,
+            timeStart: String,
             isReoccuringYearly: boolean,
         },
     },
-    product: ?{
+    product: {
         name: string,
         id: string,
-        slug: ?string,
+        slug: string,
         costUsd: number,
         description: string,
-        eventTypes: ?{
+        eventTypes: {
             edges: Array<{
-                node: ?{
+                node: {
                     id: string,
                     name: string,
                     displayName: string,
@@ -312,86 +312,86 @@ export type PurchaseProductQueryQuery = {
             }>,
         },
     },
-};
+}
 
-export type CreateUserMutationMutationVariables = {
+export type CreateUserMutationVariables = {
     input: CreateUserInput,
-};
+}
 
-export type CreateUserMutationMutation = {
-    createUser: ?{
-        user: ?{
-            email: ?string,
+export type CreateUserMutation = {
+    createUser: {
+        user: {
+            email: string,
         },
     },
-};
+}
 
-export type TransactionDetailsQueryQueryVariables = {
+export type TransactionDetailsQueryVariables = {
     transactionId: string,
-};
+}
 
-export type TransactionDetailsQueryQuery = {
-    transaction: ?{
+export type TransactionDetailsQuery = {
+    transaction: {
         id: string,
         datetimeCreated: String,
-        receivingPerson: ?{
+        receivingPerson: {
             id: string,
-            fullName: ?string,
+            fullName: string,
         },
         costUsd: number,
-        product: ?{
+        product: {
             id: string,
             name: string,
             description: string,
             mainImageUrl: string,
         },
-        associatedEvent: ?{
+        associatedEvent: {
             id: string,
             event: {
                 id: string,
                 name: string,
                 dateStart: String,
-                timeStart: ?String,
+                timeStart: String,
                 isReoccuringYearly: boolean,
             },
         },
-        associatedLocation: ?{
+        associatedLocation: {
             id: string,
             location: {
                 id: string,
-                displayName: ?string,
+                displayName: string,
             },
         },
         productNotes: string,
     },
-};
+}
 
 export type SearchEventTypesQueryQueryVariables = {
-    search: ?string,
-};
+    search: string,
+}
 
 export type SearchEventTypesQueryQuery = {
-    eventTypes: ?{
+    eventTypes: {
         edges: Array<{
-            node: ?{
+            node: {
                 id: string,
                 displayName: string,
             },
         }>,
     },
-};
+}
 
 export type SearchPeopleQueryQueryVariables = {
-    value: ?string,
-};
+    value: string,
+}
 
 export type SearchPeopleQueryQuery = {
-    people: ?{
+    people: {
         edges: Array<{
-            node: ?{
+            node: {
                 id: string,
-                fullName: ?string,
+                fullName: string,
             },
         }>,
     },
-};
+}

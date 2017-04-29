@@ -6,6 +6,7 @@ import DocumentTitle from 'react-document-title'
 import { View, Button, LinkContainer } from '../../components'
 import urls from '../../urls'
 import withShell from '../../hoc/withShell'
+import type { AssociatedEventsListQuery } from '../../types/schema'
 
 import AssociatedEventSummary from './AssociatedEventSummary'
 import graphqlQuery from './AssociatedEventsListQuery.graphql'
@@ -17,16 +18,20 @@ const RenderedList = ({ currentUser }) => (
         ))}
     </View>
 )
-RenderedList.Shell = () => (
+const RenderedListShell = () => (
     <View marginChildren>
-        {new Array(4).fill().map((_, index) => <AssociatedEventSummary.Placeholder key={index} />)}
+        {new Array(4).fill().map((_, index) => <AssociatedEventSummary.Shell key={index} />)}
     </View>
 )
 const WrappedRenderList = withShell({
+    shell: RenderedListShell,
     isLoaded: ({ currentUser }) => currentUser.person.createdEvents,
 })(RenderedList)
 
 class AssociatedEventsList extends React.Component {
+    props: {
+        data: AssociatedEventsListQuery,
+    }
     render() {
         const { data: { currentUser } } = this.props
         return (

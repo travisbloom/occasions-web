@@ -1,3 +1,4 @@
+// @flow
 import { Navbar, Nav, NavDropdown, MenuItem } from 'react-bootstrap'
 import { withApollo, compose } from 'react-apollo'
 import { Link, withRouter } from 'react-router-dom'
@@ -13,7 +14,7 @@ class AppNav extends React.Component {
         logOutUser()
             .then(() => client.networkInterface.setUri(`${APP_ENV.appServer}/graphql_public`))
             .then(() => history.push(urls.signIn()))
-    };
+    }
 
     render() {
         const { currentUser } = this.props

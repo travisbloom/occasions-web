@@ -1,4 +1,4 @@
-query AssociatedEventDetailsQuery($associatedEventId: ID!) {
+query AssociatedEventDetails($associatedEventId: ID!) {
   associatedEvent: node(id: $associatedEventId) {
       ...on AssociatedEventNode {
           id

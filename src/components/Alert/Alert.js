@@ -12,7 +12,7 @@ type Props = {
     dismissable?: boolean,
     children?: any,
     style?: any,
-    onDismiss?: ((Event) => void) | any, // TODO figure out why this is erroring
+    onDismiss?: Event => void, // TODO figure out why this is erroring
 }
 type State = {
     isShowing: boolean,
@@ -22,11 +22,10 @@ class Alert extends React.Component {
     state: State
     static defaultProps = {
         children: null,
-        style: CSSStyleDeclaration,
+        style: {},
         stackChildren: false,
         unHideWithChildren: false,
         dismissable: false,
-        onDismiss: null,
     }
 
     constructor(props: Props) {

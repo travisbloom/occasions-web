@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 
 import { View, Alert, Grid, AnimatedRouter } from '../../components'
 import { closeError } from '../../actions/alerts'
+import type { AppQuery } from '../../types/schema'
 
 import AssociatedEventsList from '../AssociatedEventsList/AssociatedEventsList'
 import AssociatedEventDetails from '../AssociatedEventDetails/AssociatedEventDetails'
@@ -20,6 +21,11 @@ import graphqlQuery from './AppQuery.graphql'
 const PAGE_STYLES = { marginBottom: `${Tabs.height}px` }
 
 class App extends React.Component {
+    props: {
+        data: AppQuery,
+        errors: Array<string>,
+        closeError: number => void,
+    }
     state = {
         hasBackButton: false,
     }

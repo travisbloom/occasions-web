@@ -1,4 +1,4 @@
-query CreatePersonQuery {
+query CreatePerson {
     currentUser {
       id
       person {

@@ -1,3 +1,16 @@
 [ignore]
 .*/node_modules/revalidate/.*
 .*/node_modules/fbjs/*
+
+[include]
+src/.*
+
+[options]
+module.file_ext=.js
+module.file_ext=.css
+module.file_ext=.scss
+module.file_ext=.graphql
+module.name_mapper='^.*\.s?css$' -> 'css-module-flow'
+module.name_mapper='.*\(.graphql\)' -> 'empty/object'
+module.name_mapper='^json3$' -> 'JSON'
+suppress_comment= \\(.\\|\n\\)*\\$FlowFixMe

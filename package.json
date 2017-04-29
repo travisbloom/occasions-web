@@ -10,6 +10,7 @@
     "format": "prettier-eslint --write \"src/**/*.js\"",
     "schema": "apollo-codegen introspect-schema http://localhost:8000/graphql --output schema.json",
     "flow-schema": "apollo-codegen generate src/**/*.graphql --schema schema.json --target flow --output src/types/schema.js",
+    "build-schema": "npm run schema && npm run flow-schema",
     "flow": "flow; test $? -eq 0 -o $? -eq 2"
   },
   "author": "travisbloom@gmail.com",

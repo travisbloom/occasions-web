@@ -1,4 +1,4 @@
-query AppQuery {
+query App {
     currentUser {
         id
         person {

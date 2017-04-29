@@ -7,6 +7,7 @@ import { View, Header, Panel, Row, Col, LinkContainer, Button, Placeholder } fro
 import { EventDate } from '../../fragmentComponents'
 import withShell from '../../hoc/withShell'
 import urls from '../../urls'
+import type { AssociatedEventDetailsQuery } from '../../types/schema'
 
 import graphqlQuery from './AssociatedEventDetailsQuery.graphql'
 
@@ -38,15 +39,18 @@ const Shell = () => (
 )
 
 class AssociatedEventDetails extends React.Component {
+    props: {
+        data: AssociatedEventDetailsQuery,
+    }
     static Shell = Shell
     render() {
-        const { data: { associatedEvent }, style } = this.props
+        const { data: { associatedEvent } } = this.props
 
         return (
             <DocumentTitle
                 title={`Occasions | ${associatedEvent ? `${associatedEvent.receivingPerson.fullName} - ${associatedEvent.event.name}` : 'Event Details'}`}
             >
-                <View style={style} padding>
+                <View padding>
                     <Header size="largest">
                         {associatedEvent.receivingPerson.fullName}
                     </Header>

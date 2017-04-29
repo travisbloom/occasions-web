@@ -1,3 +1,4 @@
+// @flow
 import React from 'react'
 import classNames from 'classnames'
 
@@ -22,6 +23,7 @@ const TAB_OPTIONS = [
 ]
 
 class Tabs extends React.Component {
+    static height: number
     render() {
         return (
             <View className={classNames(styles.base)}>

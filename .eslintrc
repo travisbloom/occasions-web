@@ -26,13 +26,17 @@
       "default-case": 0,
       "import/prefer-default-export": 0,
       "no-confusing-arrow": 0,
+      "react/sort-comp": 0,
+      "react/require-default-props": 0,
       "no-empty": [2, { "allowEmptyCatch": true }]
   },
   "plugins": [
-    "css-modules"
+    "css-modules",
+    "flowtype"
   ],
   "extends": [
     "airbnb",
-    "plugin:css-modules/recommended"
+    "plugin:css-modules/recommended",
+    "plugin:flowtype/recommended"
   ]
 }

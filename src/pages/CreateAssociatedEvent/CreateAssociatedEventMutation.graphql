@@ -1,4 +1,4 @@
-mutation CreateAssociatedEventMutation($input: CreateAssociatedEventInput!) {
+mutation CreateAssociatedEvent($input: CreateAssociatedEventInput!) {
   createAssociatedEvent(input: $input) {
     associatedEvent {
       id

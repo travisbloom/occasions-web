@@ -1,5 +1,5 @@
 
-query TransactionDetailsQuery($transactionId: ID!) {
+query TransactionDetails($transactionId: ID!) {
   transaction: node(id: $transactionId) {
       ...on TransactionNode {
           id
