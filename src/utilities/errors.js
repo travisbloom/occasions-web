@@ -71,7 +71,6 @@ export const formatReduxFormErrors = (response) => {
         },
         { _error: [] },
     )
-
     if (!errors._error.length) {
         delete errors._error
     }

@@ -1,18 +1,32 @@
 // @flow
 
 import React from 'react'
-import { reduxForm, FormSection } from 'redux-form'
+import { reduxForm, FormSection, getFormValues } from 'redux-form'
+import { connect } from 'react-redux'
+import { compose } from 'react-apollo'
 
-import { View, AddressForm, Button } from '../../components'
+import { View, Header, AddressForm, Button } from '../../components'
 
 import validate from './validate'
 
 class AddAddressPage extends React.Component {
     render() {
-        const { handleSubmit, submitting, pristine, addressIndex } = this.props
+        const { handleSubmit, submitting, pristine, addressIndex, formValues } = this.props
+
         return (
             <form onSubmit={handleSubmit}>
                 <View marginChildren>
+                    <Header size="largest">
+                        Add
+                        {' '}
+                        {addressIndex ? 'Another' : 'An'}
+                        {' '}
+                        Address For
+                        {' '}
+                        {formValues.firstName}
+                        {' '}
+                        {formValues.lastName}
+                    </Header>
                     <FormSection name={`associatedLocations[${addressIndex}]`}>
                         <AddressForm />
                     </FormSection>
@@ -25,8 +39,14 @@ class AddAddressPage extends React.Component {
     }
 }
 
-export default reduxForm({
-    validate,
-    destroyOnUnmount: false,
-    form: 'CreatePersonForm',
-})(AddAddressPage)
+const formValuesSelector = getFormValues('CreatePersonForm')
+export default compose(
+    connect(state => ({
+        formValues: formValuesSelector(state),
+    })),
+    reduxForm({
+        validate,
+        destroyOnUnmount: false,
+        form: 'CreatePersonForm',
+    }),
+)(AddAddressPage)

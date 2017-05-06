@@ -9,6 +9,13 @@ export default (state = initialState, action) => {
     switch (action.type) {
     case 'APOLLO_MUTATION_ERROR':
     case 'APOLLO_QUERY_ERROR': {
+        if (
+                action.error &&
+                action.error.graphQLErrors &&
+                action.error.graphQLErrors.some(({ data }) => data)
+            ) {
+            return state
+        }
         const message = action.error && action.error.message
         if (!message) return state
         return {

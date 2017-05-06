@@ -8,7 +8,7 @@ import urls from '../../urls'
 import withShell from '../../hoc/withShell'
 import type { AssociatedEventsListQuery } from '../../types/schema'
 
-import AssociatedEventSummary from './AssociatedEventSummary'
+import AssociatedEventSummary, { AssociatedEventSummaryShell } from './AssociatedEventSummary'
 import graphqlQuery from './AssociatedEventsListQuery.graphql'
 
 const RenderedList = ({ currentUser }) => (
@@ -20,7 +20,7 @@ const RenderedList = ({ currentUser }) => (
 )
 const RenderedListShell = () => (
     <View marginChildren>
-        {new Array(4).fill().map((_, index) => <AssociatedEventSummary.Shell key={index} />)}
+        {new Array(4).fill().map((_, index) => <AssociatedEventSummaryShell key={index} />)}
     </View>
 )
 const WrappedRenderList = withShell({

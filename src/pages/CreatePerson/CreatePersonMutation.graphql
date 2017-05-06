@@ -1,0 +1,24 @@
+mutation CreatePerson($input: CreatePersonInput!) {
+  createPerson(input: $input) {
+    person {
+      id
+      datetimeCreated
+      fullName
+      firstName
+      lastName
+      email
+      associatedLocations {
+        edges {
+          node {
+            location {
+              id
+              displayName
+            }
+            id
+          }
+        }
+      }
+      id
+    }
+  }
+}

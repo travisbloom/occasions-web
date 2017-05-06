@@ -9,7 +9,7 @@ import styleVars from '../../styles'
 type sizes = 'small' | 'medium' | 'large'
 
 const toSpacingValue = (type) => {
-    const usedType = isBoolean(type) ? 'medium' : type
+    const usedType = isBoolean(type) && type ? 'medium' : type
     switch (usedType) {
     case 'small':
         return `${styleVars.spacingSmall}px`

@@ -88,11 +88,11 @@ export default compose(
     connect(state => ({
         formValues: formValuesSelector(state),
     })),
-    graphql('test', {
-        props: ({ mutate }) => ({
-            createPerson: values => mutate({ variables: { input: values } }),
-        }),
-    }),
+    // graphql('test', {
+    //     props: ({ mutate }) => ({
+    //         createPerson: values => mutate({ variables: { input: values } }),
+    //     }),
+    // }),
     reduxForm({
         destroyOnUnmount: false,
         form: 'CreatePersonForm',

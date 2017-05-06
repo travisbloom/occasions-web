@@ -17,28 +17,28 @@ class CreatePerson extends React.Component {
     state = {
         pageNum: 1,
         addressIndex: 0,
-    };
+    }
 
     onAddAddress = () =>
         this.setState(state => ({
             pageNum: 2,
             addressIndex: state.addressIndex + 1,
-        }));
+        }))
 
     nextPage = () =>
         this.setState(state => ({
             pageNum: state.pageNum + 1,
-        }));
+        }))
 
     previousPage = () =>
         this.setState(state => ({
             pageNum: state.pageNum - 1,
-        }));
+        }))
 
     handleSubmit = (values) => {
         const { createPerson, onSuccess } = this.props
         createPerson(values).then(onSuccess).catch(formatReduxFormErrors)
-    };
+    }
 
     renderPage = () => {
         const { pageNum, addressIndex } = this.state
@@ -49,7 +49,7 @@ class CreatePerson extends React.Component {
             return <AddAddressPage addressIndex={addressIndex} onSubmit={this.nextPage} />
         }
         return <ConfirmationPage onAddAddress={this.onAddAddress} />
-    };
+    }
 
     renderBackLanguage = () => {
         const { pageNum } = this.state
@@ -60,7 +60,7 @@ class CreatePerson extends React.Component {
             return 'Select Receiving Person'
         }
         return 'Select Event'
-    };
+    }
 
     render() {
         return (
@@ -69,7 +69,6 @@ class CreatePerson extends React.Component {
                     <View>
                         <View inline onClick={this.previousPage}>{this.renderBackLanguage()}</View>
                     </View>
-                    <Header size="largest">Add A New Friend</Header>
                     {this.renderPage()}
                 </View>
             </DocumentTitle>

@@ -6,22 +6,23 @@ import { Panel, View, Row, Col, Placeholder } from '../../components'
 import { EventDate } from '../../fragmentComponents'
 import urls from '../../urls'
 
+export const AssociatedEventSummaryShell = () => (
+    <Panel header={<View><Placeholder /></View>}>
+        <Row>
+            <Col xs={6}>
+                <View marginChildren>
+                    <View><Placeholder /></View>
+                    <View><Placeholder /></View>
+                </View>
+            </Col>
+            <Col xs={6}>
+                <Placeholder />
+            </Col>
+        </Row>
+    </Panel>
+)
+
 class AssociatedEventSummary extends React.Component {
-    Shell = () => (
-        <Panel header={<View><Placeholder /></View>}>
-            <Row>
-                <Col xs={6}>
-                    <View marginChildren>
-                        <View><Placeholder /></View>
-                        <View><Placeholder /></View>
-                    </View>
-                </Col>
-                <Col xs={6}>
-                    <Placeholder />
-                </Col>
-            </Row>
-        </Panel>
-    )
     transitionToDetailsPage = () => {
         const { associatedEvent, history } = this.props
         history.push(urls.associatedEventDetails(associatedEvent.id))

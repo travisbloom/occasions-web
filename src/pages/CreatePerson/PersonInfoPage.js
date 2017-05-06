@@ -5,6 +5,7 @@ import { reduxForm } from 'redux-form'
 import moment from 'moment'
 
 import {
+    Header,
     View,
     ReduxFormField,
     TextInput,
@@ -38,6 +39,7 @@ class PersonInfoPage extends React.Component {
         return (
             <form onSubmit={handleSubmit}>
                 <View marginChildren>
+                    <Header size="largest">Add A New Friend</Header>
                     <ReduxFormField label="First Name" name="firstName" component={TextInput} />
                     <ReduxFormField label="Last Name" name="lastName" component={TextInput} />
                     <ReduxFormField label="Email" type="email" name="email" component={TextInput} />

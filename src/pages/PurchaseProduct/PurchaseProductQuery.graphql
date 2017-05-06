@@ -43,15 +43,6 @@ query PurchaseProduct($associatedEventId: ID!, $productId: ID!) {
             slug
             costUsd
             description
-            eventTypes {
-                edges {
-                    node {
-                        id
-                        name
-                        displayName
-                    }
-                }
-            }
         }
     }
 }
