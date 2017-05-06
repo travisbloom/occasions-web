@@ -24,7 +24,7 @@ const email = composeValidators(
     isRequired,
     createValidator(
         message => value =>
-            (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ? message : false),
+            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ? message : false,
         field => `this ${field} is not a valid format`,
     ),
 )('email')

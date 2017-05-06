@@ -32,19 +32,19 @@ class CreateAccountForm extends React.Component {
         const { client, history } = this.props
         client.networkInterface.setUri(`${APP_ENV.appServer}/graphql`)
         history.push(urls.associatedEventsList())
-    };
+    }
 
     createAccount = (values) => {
         const { createUser } = this.props
         return createUser(values).catch(formatReduxFormErrors).then(() => this.signIn(values))
-    };
+    }
 
     signIn = ({ username, password }) =>
         signIn(username, password).then(this.onSuccess).catch(() => {
             throw new SubmissionError({
                 _error: 'Invalid username and password.',
             })
-        });
+        })
 
     render() {
         const { handleSubmit, submitting, pristine, error } = this.props

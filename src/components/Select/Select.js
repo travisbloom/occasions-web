@@ -10,7 +10,10 @@ const Select = ({
     onBlur,
     remote,
     ...props
-}: { onBlur?: (event: Event) => void, remote?: boolean }) => {
+}: {
+    onBlur?: (event: Event) => void,
+    remote?: boolean,
+}) => {
     const passedProps = {
         ...props,
         onBlur: isReduxForm(props) ? undefined : onBlur,

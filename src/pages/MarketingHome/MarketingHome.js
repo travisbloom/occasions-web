@@ -25,12 +25,12 @@ const CollapsableArrow = () => (
     <Header size="larger">
         <MediaQuery md>
             {matches =>
-                (matches
+                matches
                     ? <Icon
                         type="arrow-right"
                         style={{ display: 'inline-block', marginLeft: '8px' }}
                     />
-                    : <View margin="large"><Icon type="arrow-down" /></View>)}
+                    : <View margin="large"><Icon type="arrow-down" /></View>}
         </MediaQuery>
     </Header>
 )

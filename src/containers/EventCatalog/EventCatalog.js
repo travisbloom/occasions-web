@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 // @flow
 import React from 'react'
 import { graphql, compose, withApollo } from 'react-apollo'
@@ -11,7 +12,7 @@ import graphqlQuery from './EventCatalogQuery.graphql'
 
 class EventsCatalog extends React.Component {
     static propTypes = {
-        onSelectEvent: React.PropTypes.func.isRequired,
+        onSelectEvent: PropTypes.func.isRequired,
     }
 
     state = {

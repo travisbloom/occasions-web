@@ -25,8 +25,11 @@ const MediaQuery = ({
     md,
     lg,
     ...props
-}: { xs?: boolean, sm?: boolean, md?: boolean, lg?: boolean }) => (
-    <RRMediaQuery {...getScreenSizeProps({ xs, sm, md, lg })} {...props} />
-)
+}: {
+    xs?: boolean,
+    sm?: boolean,
+    md?: boolean,
+    lg?: boolean,
+}) => <RRMediaQuery {...getScreenSizeProps({ xs, sm, md, lg })} {...props} />
 
 export default MediaQuery

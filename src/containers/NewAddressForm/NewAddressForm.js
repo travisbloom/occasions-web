@@ -22,7 +22,7 @@ class NewAddressForm extends React.Component {
         return createNewAssociatedLocation(formattedPayload)
             .then(onComplete)
             .catch(formatReduxFormErrors)
-    };
+    }
 
     render() {
         const { handleSubmit, submitting, pristine, error, person, show, onHide } = this.props

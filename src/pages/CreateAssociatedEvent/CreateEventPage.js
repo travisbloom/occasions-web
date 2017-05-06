@@ -5,7 +5,7 @@ import { Button, View, Header, ButtonGroup, Col } from '../../components'
 import { EventCatalog } from '../../containers'
 
 class CreateEventPage extends React.Component {
-    state = { isDefaultEvent: true };
+    state = { isDefaultEvent: true }
 
     handleSetToCustomEvent = () => {
         if (this.state.isDefaultEvent) {
@@ -13,7 +13,7 @@ class CreateEventPage extends React.Component {
                 isDefaultEvent: false,
             })
         }
-    };
+    }
 
     handleSetToDefaultEvent = () => {
         if (!this.state.isDefaultEvent) {
@@ -21,14 +21,14 @@ class CreateEventPage extends React.Component {
                 isDefaultEvent: true,
             })
         }
-    };
+    }
 
     handleSelectEvent = (event) => {
         const { change, submit } = this.props
         change('eventId', event.id)
         change('event', event)
         submit()
-    };
+    }
 
     render() {
         const { isDefaultEvent } = this.state

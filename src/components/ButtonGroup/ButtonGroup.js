@@ -10,7 +10,11 @@ const ButtonGroup = ({
     direction,
     className,
     ...props
-}: { block: boolean, direction: 'vertical' | 'horizontal', className: string }) => (
+}: {
+    block: boolean,
+    direction: 'vertical' | 'horizontal',
+    className: string,
+}) => (
     <RBButtonGroup
         direction={direction}
         block={(block && direction === 'vertical') || undefined}

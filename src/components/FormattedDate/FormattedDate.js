@@ -8,7 +8,11 @@ const FormattedDate = ({
     date,
     showYear,
     ...props
-}: { format?: string, date: string, showYear?: boolean }) => (
+}: {
+    format?: string,
+    date: string,
+    showYear?: boolean,
+}) => (
     <span {...props}>
         {moment(date).format(
             (() => {

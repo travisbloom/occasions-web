@@ -26,9 +26,9 @@ class ConfirmationPage extends React.Component {
                 history.push(urls.associatedEventDetails(associatedEvent.id)),
             )
             .catch(formatGeneralReduxFormErrors)
-    };
+    }
 
-    handleSelectEvent = event => this.props.change('eventId', event.id);
+    handleSelectEvent = event => this.props.change('eventId', event.id)
 
     render() {
         const { handleSubmit, error, formValues } = this.props

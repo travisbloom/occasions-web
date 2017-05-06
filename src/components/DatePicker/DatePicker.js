@@ -8,7 +8,6 @@ import './DatePicker.scss'
 
 type Props = {
     hasNoYear: boolean,
-    inline: boolean,
     numberOfMonths: number,
     onChange: (date: string) => void,
     name: string,
@@ -31,7 +30,6 @@ class DatePicker extends React.Component {
     }
 
     static defaultProps = {
-        inline: false,
         numberOfMonths: 1,
         hasNoYear: false,
     }

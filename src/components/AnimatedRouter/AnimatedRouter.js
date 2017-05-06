@@ -8,9 +8,9 @@ const WOBBLY_SPRING = { stiffness: 200, damping: 15, precision: 0.1 }
 
 class AnimatedSwitch extends React.Component {
     getKey = ({ child, location, match }) =>
-        (child.props.getKey
+        child.props.getKey
             ? child.props.getKey({ location, match })
-            : child.props.path || child.props.from);
+            : child.props.path || child.props.from
 
     render() {
         const { children, style } = this.props

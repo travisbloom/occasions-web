@@ -21,8 +21,10 @@ const componentRenderer = ({
 const ReduxFormField = ({
     component,
     ...props
-}: { component: any, name: string, label?: string }) => (
-    <Field {...props} RenderedComponent={component} component={componentRenderer} />
-)
+}: {
+    component: any,
+    name: string,
+    label?: string,
+}) => <Field {...props} RenderedComponent={component} component={componentRenderer} />
 
 export default ReduxFormField
