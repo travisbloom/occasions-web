@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 // @flow
 import React from 'react'
 import { graphql, compose, withApollo } from 'react-apollo'

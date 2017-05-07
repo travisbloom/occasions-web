@@ -1,38 +1,38 @@
 // @flow
-import ReactSelect from 'react-select';
-import React from 'react';
+import ReactSelect from 'react-select'
+import React from 'react'
 
-import {View} from '../';
+import { View } from '../'
 
-import './Select.scss';
+import './Select.scss'
 
-const isReduxForm = props => props.onDragStart && props.onDrop;
+const isReduxForm = props => props.onDragStart && props.onDrop
 
 const Select = ({
-  onBlur,
-  remote,
-  'data-e2e': e2e,
-  ...props
+    onBlur,
+    remote,
+    'data-e2e': e2e,
+    ...props
 }: {
-  'data-e2e'?: string,
-  onBlur?: (event: Event) => void,
-  remote?: boolean,
+    'data-e2e'?: string,
+    onBlur?: (event: Event) => void,
+    remote?: boolean,
 }) => {
-  const passedProps = {
-    ...props,
-    onBlur: isReduxForm(props) ? undefined : onBlur,
-  };
-  return (
-    <View data-e2e={e2e}>
-      {remote
-        ? <ReactSelect.Async {...passedProps} cache={false} />
-        : <ReactSelect {...passedProps} />}
-    </View>
-  );
-};
+    const passedProps = {
+        ...props,
+        onBlur: isReduxForm(props) ? undefined : onBlur,
+    }
+    return (
+        <View data-e2e={e2e}>
+            {remote
+                ? <ReactSelect.Async {...passedProps} cache={false} />
+                : <ReactSelect {...passedProps} />}
+        </View>
+    )
+}
 
 Select.defaultProps = {
-  remote: false,
-};
+    remote: false,
+}
 
-export default Select;
+export default Select
