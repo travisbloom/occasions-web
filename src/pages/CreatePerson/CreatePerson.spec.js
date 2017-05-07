@@ -6,6 +6,26 @@ import {
     el,
 } from '../../test/nightmare'
 
+const fillOutPersonInfo = () => nightmare =>
+    nightmare
+        .wait(el('person-info-page'))
+        .type(el('input-first-name'), 'Travis')
+        .type(el('input-last-name'), 'Bloom')
+        .type(el('input-email'), 'travis@trigga.com')
+        .use(selectReactDatesDay(moment(), el('input-birth-date')))
+        .use(selectReactSelectOption(0, el('input-birth-date-year')))
+        .click(el('submit'))
+
+const fillOutAddress = num => nightmare =>
+    nightmare
+        .wait(el('add-address-page'))
+        .type(el('input-address-line1'), `${num} Address Line 1`)
+        .type(el('input-address-line2'), `${num} Address Line 2`)
+        .type(el('input-city'), `${num} City`)
+        .use(selectReactSelectOption(0, el('input-state')))
+        .type(el('input-postal-code'), '10011')
+        .click(el('submit'))
+
 describe('Load a Page', () => {
     let nightmare = null
     beforeEach(() => {
@@ -13,36 +33,17 @@ describe('Load a Page', () => {
     })
 
     describe('CreatePerson', () => {
-        it('should load without error', () =>
+        it('should successfully create a new person', () =>
             nightmare
                 .goto('http://localhost:8080/a/yourContacts/new')
-                .wait('[data-e2e="person-info-page"]')
-                .type('[data-e2e="input-first-name"]', 'Travis')
-                .type('[data-e2e="input-last-name"]', 'Bloom')
-                .type('[data-e2e="input-email"]', 'travis@trigga.com')
-                .use(selectReactDatesDay(moment(), '[data-e2e="input-birth-date"]'))
-                .use(selectReactSelectOption(0, '[data-e2e="input-birth-date-year"]'))
-                .click('[data-e2e="submit"]')
-                .wait('[data-e2e="add-address-page"]')
-                .type('[data-e2e="input-address-line1"]', 'First Address Line 1')
-                .type('[data-e2e="input-address-line2"]', 'First Address Line 2')
-                .type('[data-e2e="input-city"]', 'First City')
-                .use(selectReactSelectOption(0, '[data-e2e="input-state"]'))
-                .type('[data-e2e="input-postal-code"]', '10011')
-                .click('[data-e2e="submit"]')
-                .wait('[data-e2e="confirmation-page"]')
-                .click('[data-e2e="add-location"]')
-                .wait('[data-e2e="add-address-page"]')
-                .type('[data-e2e="input-address-line1"]', 'Second Address Line 1')
-                .type('[data-e2e="input-address-line2"]', 'Second Address Line 2')
-                .type('[data-e2e="input-city"]', 'Second City')
-                .use(selectReactSelectOption(0, '[data-e2e="input-state"]'))
-                .type('[data-e2e="input-postal-code"]', '10011')
-                .click('[data-e2e="submit"]')
-                .wait('[data-e2e="confirmation-page"]')
-                .click('[data-e2e="submit"]')
-                .wait('[data-e2e="confimation-pge"]')
-                .end()
-                .then())
+                .use(fillOutPersonInfo())
+                .use(fillOutAddress(1))
+                .wait(el('confirmation-page'))
+                .click(el('add-location'))
+                .use(fillOutAddress(2))
+                .wait(el('confirmation-page'))
+                .click(el('submit'))
+                .wait(el('confimation-pge'))
+                .end())
     })
 })
