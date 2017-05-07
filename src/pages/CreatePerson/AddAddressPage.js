@@ -26,7 +26,7 @@ class AddAddressPage extends React.Component {
                         {' '}
                         {formValues.lastName}
                     </Header>
-                    <FormSection name={`associatedLocations[${addressIndex}]`}>
+                    <FormSection name={`locations[${addressIndex}]`}>
                         <AddressForm />
                     </FormSection>
                     <Button

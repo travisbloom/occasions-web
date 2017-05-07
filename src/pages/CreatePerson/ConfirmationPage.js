@@ -12,7 +12,7 @@ import { formatGeneralReduxFormErrors } from '../../utilities/errors'
 import { formatLocation } from '../../utilities/location'
 import urls from '../../urls'
 
-// import graphqlQuery from './CreatePersonMutation.graphql'
+import graphqlQuery from './CreatePersonMutation.graphql'
 
 const LineItem = ({ label, children }) => (
     <tr>
@@ -23,14 +23,14 @@ const LineItem = ({ label, children }) => (
 
 class ConfirmationPage extends React.Component {
     getBirthday = (birthdayDate, birthdayYear) =>
-        moment(birthdayDate).year(birthdayYear.value).toISOString()
+        moment(birthdayDate).year(birthdayYear.value).format('YYYY-MM-DD')
 
-    handleSubmit = ({ associatedLocations, birthdayDate, birthdayYear, ...values }) => {
+    handleSubmit = ({ locations, birthdayDate, birthdayYear, ...values }) => {
         const { createPerson, history } = this.props
         const input = {
             ...values,
-            birthday: this.getBirthday(birthdayDate, birthdayYear),
-            associatedLocations: associatedLocations.map(({ state, ...location }) => ({
+            birthDate: this.getBirthday(birthdayDate, birthdayYear),
+            locations: locations.map(({ state, ...location }) => ({
                 ...location,
                 state: state.value,
             })),
@@ -62,7 +62,7 @@ class ConfirmationPage extends React.Component {
                                         )}
                                     />
                                 </LineItem>
-                                {formValues.associatedLocations.map((location, index) => (
+                                {formValues.locations.map((location, index) => (
                                     <LineItem key={index} label={`Address #${index + 1}`}>
                                         {formatLocation(location)}
                                     </LineItem>
@@ -88,11 +88,11 @@ export default compose(
     connect(state => ({
         formValues: formValuesSelector(state),
     })),
-    // graphql('test', {
-    //     props: ({ mutate }) => ({
-    //         createPerson: values => mutate({ variables: { input: values } }),
-    //     }),
-    // }),
+    graphql(graphqlQuery, {
+        props: ({ mutate }) => ({
+            createPerson: values => mutate({ variables: { input: values } }),
+        }),
+    }),
     reduxForm({
         destroyOnUnmount: false,
         form: 'CreatePersonForm',
