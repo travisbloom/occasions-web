@@ -24,7 +24,7 @@ module.exports = {
     context: resolve(__dirname, 'src'),
     devtool: 'eval-source-map',
     devServer: {
-        hot: true,
+        // hot: true,
         // https: true, // needed by Stripe
         contentBase: resolve(__dirname, 'dist'),
         publicPath: '/',

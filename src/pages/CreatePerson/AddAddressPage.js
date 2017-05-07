@@ -12,10 +12,9 @@ import validate from './validate'
 class AddAddressPage extends React.Component {
     render() {
         const { handleSubmit, submitting, pristine, addressIndex, formValues } = this.props
-
         return (
             <form onSubmit={handleSubmit}>
-                <View marginChildren>
+                <View marginChildren data-e2e="add-address-page">
                     <Header size="largest">
                         Add
                         {' '}
@@ -30,7 +29,12 @@ class AddAddressPage extends React.Component {
                     <FormSection name={`associatedLocations[${addressIndex}]`}>
                         <AddressForm />
                     </FormSection>
-                    <Button disabled={submitting || pristine} bsStyle="info" type="submit">
+                    <Button
+                        data-e2e="submit"
+                        disabled={submitting || pristine}
+                        bsStyle="info"
+                        type="submit"
+                    >
                         Add A New Address
                     </Button>
                 </View>

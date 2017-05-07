@@ -25,6 +25,11 @@ export default ({ history }) => {
     networkInterface.use([
         {
             applyMiddleware(req, next) {
+                // eslint-disable-next-line
+                if (window.__nightmare) {
+                    next()
+                    return
+                }
                 getAccessToken()
                     .then((accessToken) => {
                         if (!req.options.headers) {

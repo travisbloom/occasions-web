@@ -47,7 +47,7 @@ class ConfirmationPage extends React.Component {
 
         return (
             <Form onSubmit={handleSubmit(this.handleSubmit)}>
-                <View marginChildren>
+                <View marginChildren data-e2e="confirmation-page">
                     <Panel header={`${formValues.firstName} ${formValues.lastName}`}>
                         <Table striped bordered>
                             <tbody>
@@ -70,8 +70,8 @@ class ConfirmationPage extends React.Component {
                             </tbody>
                         </Table>
                     </Panel>
-                    <Button type="submit" block>Create Person</Button>
-                    <Button onClick={onAddAddress} block>
+                    <Button data-e2e="submit" type="submit" block>Create Person</Button>
+                    <Button data-e2e="add-location" onClick={onAddAddress} block>
                         Add Another Address
                     </Button>
                     <Alert dismissable unHideWithChildren stackChildren bsStyle="danger">

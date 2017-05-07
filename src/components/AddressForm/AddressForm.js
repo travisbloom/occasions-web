@@ -19,22 +19,31 @@ const AddressForm = ({ autoComplete }: {| autoComplete?: boolean |}) => (
     <View marginChildren>
         <ReduxFormField
             autoComplete={autoComplete ? 'address-line1' : undefined}
+            data-e2e="input-address-line1"
             name="streetAddressLine1"
             label="Address Line 1"
             component={TextInput}
         />
         <ReduxFormField
             autoComplete={autoComplete ? 'address-line2' : undefined}
+            data-e2e="input-address-line2"
             name="streetAddressLine2"
             label="Address Line 2"
             component={TextInput}
         />
         <Row>
             <Col sm={6} xs={12}>
-                <ReduxFormField name="state" label="State" component={Select} options={STATES} />
+                <ReduxFormField
+                    data-e2e="input-state"
+                    name="state"
+                    label="State"
+                    component={Select}
+                    options={STATES}
+                />
             </Col>
             <Col sm={6} xs={12}>
                 <ReduxFormField
+                    data-e2e="input-city"
                     autoComplete={autoComplete ? 'city' : undefined}
                     name="city"
                     label="City"
@@ -43,6 +52,7 @@ const AddressForm = ({ autoComplete }: {| autoComplete?: boolean |}) => (
             </Col>
             <Col xs={6}>
                 <ReduxFormField
+                    data-e2e="input-postal-code"
                     autoComplete={autoComplete ? 'postal-code' : undefined}
                     name="postalCode"
                     label="Zip Code"

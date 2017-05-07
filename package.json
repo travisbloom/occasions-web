@@ -21,6 +21,7 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
+    "nightmare": "^2.10.0",
     "webpack": "^2.5.0"
   },
   "dependencies": {
@@ -110,7 +111,7 @@
     "globals": {
       "APP_ENV": {}
     },
-    "testPathDirs": [
+    "roots": [
       "<rootDir>/src"
     ]
   }

@@ -1,82 +1,107 @@
 // @flow
 
-import React from 'react'
-import { reduxForm } from 'redux-form'
-import moment from 'moment'
+import React from 'react';
+import {reduxForm} from 'redux-form';
+import moment from 'moment';
 
 import {
-    Header,
-    View,
-    ReduxFormField,
-    TextInput,
-    Button,
-    DatePicker,
-    Select,
-    Row,
-    Col,
-} from '../../components'
+  Header,
+  View,
+  ReduxFormField,
+  TextInput,
+  Button,
+  DatePicker,
+  Select,
+  Row,
+  Col,
+} from '../../components';
 
-import validate from './validate'
+import validate from './validate';
 
 class PersonInfoPage extends React.Component {
-    birthdayYearOptions: Array<{ label: number, value: number }>
+  birthdayYearOptions: Array<{label: number, value: number}>;
 
-    constructor(props) {
-        super(props)
-        const currentYear = moment().year()
-        this.birthdayYearOptions = new Array(currentYear - 1920).fill().map((_, index) => {
-            const year = currentYear - index
-            return {
-                label: year,
-                value: year,
-            }
-        })
-    }
+  constructor(props) {
+    super(props);
+    const currentYear = moment().year();
+    this.birthdayYearOptions = new Array(currentYear - 1920)
+      .fill()
+      .map((_, index) => {
+        const year = currentYear - index;
+        return {
+          label: year,
+          value: year,
+        };
+      });
+  }
 
-    render() {
-        const { handleSubmit, submitting, pristine } = this.props
+  render() {
+    const {handleSubmit, submitting, pristine} = this.props;
 
-        return (
-            <form onSubmit={handleSubmit}>
-                <View marginChildren>
-                    <Header size="largest">Add A New Friend</Header>
-                    <ReduxFormField label="First Name" name="firstName" component={TextInput} />
-                    <ReduxFormField label="Last Name" name="lastName" component={TextInput} />
-                    <ReduxFormField label="Email" type="email" name="email" component={TextInput} />
-                    <Row>
-                        <Col xs={12}>{"When's"} their birthday?</Col>
-                        <Col xs={6}>
-                            <ReduxFormField
-                                hasNoYear
-                                label="Month and Day"
-                                name="birthdayDate"
-                                component={DatePicker}
-                            />
-                        </Col>
-                        <Col xs={6}>
-                            <ReduxFormField
-                                label="Year"
-                                name="birthdayYear"
-                                component={Select}
-                                options={this.birthdayYearOptions}
-                            />
-                        </Col>
-                    </Row>
+    return (
+      <form onSubmit={handleSubmit}>
+        <View marginChildren data-e2e="person-info-page">
+          <Header size="largest">Add A New Friend</Header>
+          <ReduxFormField
+            data-e2e="input-first-name"
+            label="First Name"
+            name="firstName"
+            component={TextInput}
+          />
+          <ReduxFormField
+            data-e2e="input-last-name"
+            label="Last Name"
+            name="lastName"
+            component={TextInput}
+          />
+          <ReduxFormField
+            data-e2e="input-email"
+            label="Email"
+            type="email"
+            name="email"
+            component={TextInput}
+          />
+          <Row>
+            <Col xs={12}>{"When's"} their birthday?</Col>
+            <Col xs={6}>
+              <ReduxFormField
+                hasNoYear
+                data-e2e="input-birth-date"
+                label="Month and Day"
+                name="birthdayDate"
+                component={DatePicker}
+              />
+            </Col>
+            <Col xs={6}>
+              <ReduxFormField
+                label="Year"
+                data-e2e="input-birth-date-year"
+                name="birthdayYear"
+                component={Select}
+                options={this.birthdayYearOptions}
+              />
+            </Col>
+          </Row>
 
-                    <Button disabled={submitting || pristine} bsStyle="info" type="submit">
-                        Add Contact
-                    </Button>
-                </View>
-            </form>
-        )
-    }
+          <Button
+            disabled={submitting || pristine}
+            bsStyle="info"
+            type="submit"
+            data-e2e="submit"
+          >
+            Add Contact
+          </Button>
+        </View>
+      </form>
+    );
+  }
 }
 
 export default reduxForm({
-    validate,
-    initialValues: {
-        associatedLocations: [{}],
-    },
-    destroyOnUnmount: false,
-    form: 'CreatePersonForm',
-})(PersonInfoPage)
+  validate,
+  initialValues: {
+    associatedLocations: [{}],
+  },
+  destroyOnUnmount: false,
+  form: 'CreatePersonForm',
+})(PersonInfoPage);
