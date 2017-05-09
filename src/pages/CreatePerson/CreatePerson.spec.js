@@ -5,6 +5,7 @@ import {
     selectReactSelectOption,
     el,
 } from '../../test/nightmare'
+import urls from '../../urls'
 
 const fillOutPersonInfo = () => nightmare =>
     nightmare
@@ -35,7 +36,7 @@ describe('Load a Page', () => {
     describe('CreatePerson', () => {
         it('should successfully create a new person', () =>
             nightmare
-                .goto('http://localhost:8080/a/yourContacts/new')
+                .goto(`http://localhost:8080${urls.createPerson()}`)
                 .use(fillOutPersonInfo())
                 .use(fillOutAddress(1))
                 .wait(el('confirmation-page'))

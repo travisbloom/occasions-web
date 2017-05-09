@@ -1,12 +1,10 @@
 // @flow
-import { Link as RRLink } from 'react-router-dom'
-
-export const LinkContainer = RRLink
-export const Link = RRLink
-
-export { OverlayTrigger, Tooltip, Panel, Modal, Table } from 'react-bootstrap'
+export { Link } from 'react-router-dom'
+export { LinkContainer } from 'react-router-bootstrap'
+export { OverlayTrigger, Tooltip, Panel, Modal, Table, PanelGroup } from 'react-bootstrap'
 export { default as Collapse } from 'react-collapse'
 export { Row, Grid } from 'react-flexbox-grid'
+
 export { default as AddressForm } from './AddressForm/AddressForm'
 export { default as Alert } from './Alert/Alert'
 export { default as AnimatedFade } from './AnimatedFade/AnimatedFade'

@@ -1,0 +1,20 @@
+query PersonList {
+  currentUser {
+      id
+    person {
+        id
+      fromRelationships {
+        edges {
+          node {
+              id
+            relationshipType
+            toPerson {
+                id
+              fullName
+            }
+          }
+        }
+      }
+    }
+  }
+}

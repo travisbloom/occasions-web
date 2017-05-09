@@ -1,0 +1,39 @@
+query PersonDetails($personId: ID!) {
+  person: node(id: $personId) {
+    ... on PersonNode {
+      id
+      fullName
+      datetimeCreated
+      email
+      birthDate
+      transactions {
+        edges {
+          node {
+            id
+            datetimeCreated
+            productNotes
+            product {
+              id
+              name
+              mainImageUrl
+            }
+          }
+        }
+      }
+      receivedEvents {
+        edges {
+          node {
+            id
+            event {
+              id
+              name
+              dateStart
+              timeStart
+              isReoccuringYearly
+            }
+          }
+        }
+      }
+    }
+  }
+}

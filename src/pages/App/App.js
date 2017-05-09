@@ -13,6 +13,8 @@ import PurchaseProduct from '../PurchaseProduct/PurchaseProduct'
 import TransactionDetails from '../TransactionDetails/TransactionDetails'
 import CreateAssociatedEvent from '../CreateAssociatedEvent/CreateAssociatedEvent'
 import CreatePerson from '../CreatePerson/CreatePerson'
+import PersonList from '../PersonList/PersonList'
+import PersonDetails from '../PersonDetails/PersonDetails'
 
 import Navbar from './Navbar'
 import Tabs from './Tabs'
@@ -49,6 +51,7 @@ class App extends React.Component {
                         bottom: `${Tabs.height}px`,
                         width: '100%',
                     }}
+                    data-foo="baz"
                     padding
                 >
                     {errors.map((err, index) => (
@@ -95,8 +98,20 @@ class App extends React.Component {
                         />
                         <AnimatedRouter.Route
                             {...routeProps}
-                            path="/a/yourContacts/new"
+                            path="/a/yourRelationships/new"
                             component={CreatePerson}
+                        />
+                        <AnimatedRouter.Route
+                            exact
+                            {...routeProps}
+                            path="/a/yourRelationships"
+                            component={PersonList}
+                        />
+                        <AnimatedRouter.Route
+                            exact
+                            {...routeProps}
+                            path="/a/yourRelationships/:personId"
+                            component={PersonDetails}
                         />
                     </AnimatedRouter.Switch>
                 </Grid>

@@ -13,7 +13,7 @@ const TAB_OPTIONS = [
         icon: 'calendar',
     },
     {
-        url: urls.purchaseProduct(),
+        url: urls.personList(),
         icon: 'user',
     },
     {

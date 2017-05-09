@@ -7,7 +7,9 @@ const createAssociatedEvent = () => `${AUTHENTICATED_ROUTES}/yourEvents/new`
 const purchaseProduct = (eventId, productId) =>
     `${AUTHENTICATED_ROUTES}/yourEvents/${eventId}/${productId}`
 const transactionDetails = id => `${AUTHENTICATED_ROUTES}/yourGifts/${id}`
-const createPerson = () => `${AUTHENTICATED_ROUTES}/yourContacts/new`
+const createPerson = () => `${AUTHENTICATED_ROUTES}/yourRelationships/new`
+const personList = () => `${AUTHENTICATED_ROUTES}/yourRelationships`
+const personDetails = id => `${AUTHENTICATED_ROUTES}/yourRelationships/${id}`
 
 export default {
     signIn,
@@ -17,5 +19,7 @@ export default {
     associatedEventDetails,
     purchaseProduct,
     transactionDetails,
+    personList,
     createPerson,
+    personDetails,
 }
