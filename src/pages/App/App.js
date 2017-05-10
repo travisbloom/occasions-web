@@ -47,9 +47,9 @@ class App extends React.Component {
                 <View
                     style={{
                         position: 'fixed',
+                        bottom: '60px',
                         width: '100%',
                     }}
-                    data-foo="baz"
                     padding
                 >
                     {errors.map((err, index) => (

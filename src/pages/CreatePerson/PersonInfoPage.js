@@ -88,7 +88,7 @@ class PersonInfoPage extends React.Component {
 
                     <Button
                         disabled={submitting || pristine}
-                        bsStyle="info"
+                        bsStyle="primary"
                         type="submit"
                         data-e2e="submit"
                     >

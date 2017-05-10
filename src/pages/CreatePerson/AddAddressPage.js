@@ -4,7 +4,6 @@ import React from 'react'
 import { reduxForm, FormSection, getFormValues } from 'redux-form'
 import { connect } from 'react-redux'
 import { compose } from 'react-apollo'
-import { withRouter } from 'react-router-dom'
 
 import { View, Header, AddressForm, Button } from '../../components'
 import urls from '../../urls'
@@ -27,7 +26,7 @@ class AddAddressPage extends React.Component {
                     <Header size="largest">
                         Add
                         {' '}
-                        {addressIndex ? 'Another' : 'An'}
+                        {addressIndex !== '0' ? 'Another' : 'An'}
                         {' '}
                         Address For
                         {' '}
@@ -41,7 +40,7 @@ class AddAddressPage extends React.Component {
                     <Button
                         data-e2e="submit"
                         disabled={submitting || pristine}
-                        bsStyle="info"
+                        bsStyle="primary"
                         type="submit"
                     >
                         Add A New Address

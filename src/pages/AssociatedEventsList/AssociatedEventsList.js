@@ -39,7 +39,7 @@ class AssociatedEventsList extends React.Component {
                 <View marginChildren padding data-e2e="page-associated-events-list">
                     <View>
                         <LinkContainer to={urls.createAssociatedEvent()}>
-                            <Button block bsStyle="info">Add An Event</Button>
+                            <Button block bsStyle="primary">Add An Event</Button>
                         </LinkContainer>
                     </View>
                     <WrappedRenderList currentUser={currentUser} />

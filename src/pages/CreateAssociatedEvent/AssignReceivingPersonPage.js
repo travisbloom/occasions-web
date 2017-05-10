@@ -46,7 +46,7 @@ class CreateAssociatedEventFormPage1 extends React.Component {
                         </Col>
                     </Row>
 
-                    <Button type="submit" block>Next</Button>
+                    <Button type="submit" bsStyle="primary" block>Next</Button>
                 </View>
             </form>
         )

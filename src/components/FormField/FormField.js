@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 
-import { Errors, View } from '../'
+import { Errors, View, Collapse } from '../'
 import './FormField.scss'
 
 const FormField = ({
@@ -23,7 +23,9 @@ const FormField = ({
         {label && <label htmlFor={name}>{label}</label>}
         {children}
         {helpText && <View className="help-block">{helpText}</View>}
-        {touched && error && <Errors stackChildren>{error}</Errors>}
+        <Collapse isOpened={touched && !!error}>
+            {touched && error && <Errors stackChildren>{error}</Errors>}
+        </Collapse>
     </View>
 )
 

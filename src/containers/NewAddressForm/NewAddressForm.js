@@ -30,29 +30,26 @@ class NewAddressForm extends React.Component {
         return (
             <Modal show={show} onHide={onHide}>
                 <form onSubmit={handleSubmit(this.createNewAssociatedLocation)}>
-                    <Modal.Header>
+                    <Modal.Header closeButton>
                         Create New Address For {person.fullName}
                     </Modal.Header>
                     <Modal.Body>
-                        <View padding>
-                            <FormSection name="location">
-                                <AddressForm />
-                            </FormSection>
-                            <Alert dismissable unHideWithChildren stackChildren bsStyle="danger">
-                                {error}
-                            </Alert>
-                        </View>
+                        <FormSection name="location">
+                            <AddressForm />
+                        </FormSection>
+                        <Alert dismissable unHideWithChildren stackChildren bsStyle="danger">
+                            {error}
+                        </Alert>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Row center="xs">
-                            <Button
-                                bsStyle="success"
-                                disabled={submitting || pristine}
-                                type="submit"
-                            >
-                                Create
-                            </Button>
-                        </Row>
+                        <Button
+                            responsive
+                            bsStyle="success"
+                            disabled={submitting || pristine}
+                            type="submit"
+                        >
+                            Create
+                        </Button>
                     </Modal.Footer>
                 </form>
 

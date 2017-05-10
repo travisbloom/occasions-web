@@ -118,7 +118,7 @@ class PurchaseProductForm extends React.Component {
     renderCheckoutButton = () => {
         const { submitting, pristine, product, currentUser } = this.props
         const button = (
-            <Button disabled={submitting || pristine} bsStyle="info" type="submit">
+            <Button disabled={submitting || pristine} type="submit" responsive>
                 Purchase Card
             </Button>
         )
@@ -219,7 +219,7 @@ wrappedComponent.Shell = () => (
             </Row>
             <TextInput textarea />
             <View marginTop>
-                <Button bsStyle="info" type="submit">
+                <Button responsive type="submit">
                     <Placeholder light>Purchase Card</Placeholder>
                 </Button>
             </View>

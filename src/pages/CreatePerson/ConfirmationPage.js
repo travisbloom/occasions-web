@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { graphql, compose, withApollo } from 'react-apollo'
 import moment from 'moment'
 
-import { Alert, View, Panel, Button, FormattedDate, Table } from '../../components'
+import { Alert, View, Panel, Button, FormattedDate, Table, Row, Col } from '../../components'
 import { formatGeneralReduxFormErrors } from '../../utilities/errors'
 import { formatLocation } from '../../utilities/location'
 import urls from '../../urls'
@@ -74,10 +74,16 @@ class ConfirmationPage extends React.Component {
                             </tbody>
                         </Table>
                     </Panel>
-                    <Button data-e2e="submit" type="submit" block>Create Person</Button>
-                    <Button data-e2e="add-location" onClick={this.onAddAddress} block>
-                        Add Another Address
-                    </Button>
+                    <Row>
+                        <Col xs={6}>
+                            <Button data-e2e="submit" type="submit" block>Create Person</Button>
+                        </Col>
+                        <Col xs={6}>
+                            <Button data-e2e="add-location" onClick={this.onAddAddress} block>
+                                Add Another Address
+                            </Button>
+                        </Col>
+                    </Row>
                     <Alert dismissable unHideWithChildren stackChildren bsStyle="danger">
                         {error}
                     </Alert>
