@@ -1,6 +1,6 @@
 @import "../../styles/variables";
 .base {
-    background-color: $color-gray;
+    background-color: $color-text;
     border-radius: $border-radius-small;
     line-height: .8em;
 }
@@ -10,5 +10,5 @@
 }
 
 .light {
-    background-color: $color-white;
+    background-color: $color-text;
 }

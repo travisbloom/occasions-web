@@ -4,16 +4,25 @@ import React from 'react'
 import { reduxForm, FormSection, getFormValues } from 'redux-form'
 import { connect } from 'react-redux'
 import { compose } from 'react-apollo'
+import { withRouter } from 'react-router-dom'
 
 import { View, Header, AddressForm, Button } from '../../components'
+import urls from '../../urls'
 
 import validate from './validate'
 
 class AddAddressPage extends React.Component {
+    onSubmit = () => this.props.history.push(`${urls.createPerson()}/confirmation`)
     render() {
-        const { handleSubmit, submitting, pristine, addressIndex, formValues } = this.props
+        const {
+            handleSubmit,
+            submitting,
+            pristine,
+            match: { params: { addressIndex } },
+            formValues,
+        } = this.props
         return (
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit(this.onSubmit)}>
                 <View marginChildren data-e2e="add-address-page">
                     <Header size="largest">
                         Add

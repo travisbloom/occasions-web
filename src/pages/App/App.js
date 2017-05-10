@@ -20,8 +20,6 @@ import Navbar from './Navbar'
 import Tabs from './Tabs'
 import graphqlQuery from './AppQuery.graphql'
 
-const PAGE_STYLES = { marginBottom: `${Tabs.height}px` }
-
 class App extends React.Component {
     props: {
         data: AppQuery,
@@ -41,14 +39,13 @@ class App extends React.Component {
 
     render() {
         const { data: { currentUser }, errors } = this.props
-        const routeProps = { currentUser, style: PAGE_STYLES }
+        const routeProps = { currentUser }
         return (
             <View>
                 <Navbar hasBackButton={this.state.hasBackButton} currentUser={currentUser} />
                 <View
                     style={{
                         position: 'fixed',
-                        bottom: `${Tabs.height}px`,
                         width: '100%',
                     }}
                     data-foo="baz"
@@ -66,7 +63,7 @@ class App extends React.Component {
                     ))}
                 </View>
                 <Grid>
-                    <AnimatedRouter.Switch style={{ position: 'relative', width: '100%' }}>
+                    <AnimatedRouter.Switch>
                         <AnimatedRouter.Route
                             exact
                             {...routeProps}

@@ -13,7 +13,7 @@ class AnimatedSwitch extends React.Component {
             : child.props.path || child.props.from
 
     render() {
-        const { children, style } = this.props
+        const { children } = this.props
         const location = this.props.location
         let match
         let child
@@ -27,7 +27,7 @@ class AnimatedSwitch extends React.Component {
         return (
             <Motion
                 data={match ? [{ location, match, child }] : []}
-                component={<View style={style} />}
+                component={<View style={{ position: 'relative', width: '100%' }} />}
                 render={(key, data, renderStyles) =>
                     React.cloneElement(data.child, {
                         key,

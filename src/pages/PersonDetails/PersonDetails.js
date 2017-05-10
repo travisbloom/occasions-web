@@ -18,6 +18,7 @@ import { EventDate } from '../../fragmentComponents'
 import urls from '../../urls'
 import withShell from '../../hoc/withShell'
 import type { PersonDetailsQuery } from '../../types/schema'
+import styleVars from '../../styles'
 
 import graphqlQuery from './PersonDetailsQuery.graphql'
 
@@ -50,7 +51,11 @@ class PersonDetails extends React.Component {
                         </tbody>
                     </Table>
                     <PanelGroup defaultActiveKey="Upcoming Occasions" accordion>
-                        <Panel header="Upcoming Occasions" eventKey="Upcoming Occasions">
+                        <Panel
+                            header="Upcoming Occasions"
+                            eventKey="Upcoming Occasions"
+                            style={{ backgroundColor: styleVars.colorBackground }}
+                        >
                             <View marginChildren>
                                 {person.receivedEvents.edges.length
                                     ? person.receivedEvents.edges.map(({ node }) => (
@@ -66,7 +71,11 @@ class PersonDetails extends React.Component {
                                     : <Button>Create New Occassion</Button>}
                             </View>
                         </Panel>
-                        <Panel header="Previous Gifts" eventKey="Previous Gifts">
+                        <Panel
+                            header="Previous Gifts"
+                            eventKey="Previous Gifts"
+                            style={{ backgroundColor: styleVars.colorBackground }}
+                        >
                             {person.transactions.edges.length
                                 ? <View marginChildren>
                                     {person.receivedEvents.edges.map(({ node }) => (
@@ -97,7 +106,11 @@ const PersonDetailsShell = () => (
             </tbody>
         </Table>
         <PanelGroup defaultActiveKey="Upcoming Occasions" accordion>
-            <Panel header={<Placeholder />} eventKey="Upcoming Occasions">
+            <Panel
+                header={<Placeholder />}
+                eventKey="Upcoming Occasions"
+                style={{ backgroundColor: styleVars.colorBackground }}
+            >
                 {new Array(4).fill().map((_, index) => (
                     <Panel key={index} title={<Placeholder />}>
                         <Placeholder />

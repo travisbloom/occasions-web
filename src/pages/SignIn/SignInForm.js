@@ -81,7 +81,7 @@ class CreateAccountForm extends React.Component {
                         component={TextInput}
                     />
                     <Errors>{error}</Errors>
-                    <Row center="xs">
+                    <Row center="xs" middle="xs">
                         <Button
                             data-e2e="submit"
                             style={{ width: '160px' }}

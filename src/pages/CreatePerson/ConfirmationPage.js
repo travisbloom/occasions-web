@@ -4,7 +4,6 @@ import React from 'react'
 import { reduxForm, Form, getFormValues } from 'redux-form'
 import { connect } from 'react-redux'
 import { graphql, compose, withApollo } from 'react-apollo'
-import { withRouter } from 'react-router-dom'
 import moment from 'moment'
 
 import { Alert, View, Panel, Button, FormattedDate, Table } from '../../components'
@@ -36,14 +35,19 @@ class ConfirmationPage extends React.Component {
             })),
         }
         return createPerson(input)
-            .then(({ data: { createPerson: { associatedEvent } } }) =>
-                history.push(urls.associatedEventDetails(associatedEvent.id)),
+            .then(({ data: { createPerson: { person } } }) =>
+                history.push(urls.personDetails(person.id)),
             )
             .catch(formatGeneralReduxFormErrors)
     }
 
+    onAddAddress = () => {
+        const { formValues, history } = this.props
+        history.push(`${urls.createPerson()}/address/${formValues.locations.length}`)
+    }
+
     render() {
-        const { handleSubmit, error, formValues, onAddAddress } = this.props
+        const { handleSubmit, error, formValues } = this.props
 
         return (
             <Form onSubmit={handleSubmit(this.handleSubmit)}>
@@ -71,7 +75,7 @@ class ConfirmationPage extends React.Component {
                         </Table>
                     </Panel>
                     <Button data-e2e="submit" type="submit" block>Create Person</Button>
-                    <Button data-e2e="add-location" onClick={onAddAddress} block>
+                    <Button data-e2e="add-location" onClick={this.onAddAddress} block>
                         Add Another Address
                     </Button>
                     <Alert dismissable unHideWithChildren stackChildren bsStyle="danger">
@@ -97,6 +101,5 @@ export default compose(
         destroyOnUnmount: false,
         form: 'CreatePersonForm',
     }),
-    withRouter,
     withApollo,
 )(ConfirmationPage)

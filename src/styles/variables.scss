@@ -1,20 +1,22 @@
-$color-black: #000;
-$color-gray-darker: #222;
-$color-gray-dark: #7b8a8b;
-$color-gray: #95a5a6;
-$color-gray-light: #b4bcc2;
-$color-gray-lighter: #ecf0f1;
-$color-primary: #2C3E50;
-$color-success: #18BC9C;
-$color-info: #3498DB;
-$color-warning: #F39C12;
-$color-danger: #E74C3C;
+@import "./bootstrapTheme/variables.scss";
+
+$color-black: $gray-base;
+$color-gray-darker: $gray-darker;
+$color-gray-dark: $gray-dark;
+$color-gray: $gray;
+$color-gray-light: $gray-light;
+$color-gray-lighter: $gray-lighter;
+$color-primary: $brand-primary;
+$color-success: $brand-success;
+$color-info: $brand-info;
+$color-warning: $brand-warning;
+$color-danger: $brand-danger;
 $color-white: #fff;
 
-$color-background: $color-white;
-$color-text: $color-primary;
-$color-link: $color-success;
-$color-border: $color-gray-lighter;
+$color-background: $body-bg;
+$color-text: $text-color;
+$color-link: $link-color;
+$color-border: $table-border-color;
 
 $font-size: 15px;
 $font-size-small: 12px;

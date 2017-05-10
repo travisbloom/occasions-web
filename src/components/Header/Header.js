@@ -1,5 +1,6 @@
 // @flow
 import React from 'react'
+import './Header.scss'
 
 class Header extends React.Component {
     props: {

@@ -2,8 +2,11 @@
 
 import React from 'react'
 import { reduxForm } from 'redux-form'
+import { withRouter } from 'react-router-dom'
 import moment from 'moment'
+import { compose } from 'react-apollo'
 
+import urls from '../../urls'
 import {
     Header,
     View,
@@ -33,11 +36,13 @@ class PersonInfoPage extends React.Component {
         })
     }
 
+    onSubmit = () => this.props.history.push(`${urls.createPerson()}/address/0`)
+
     render() {
         const { handleSubmit, submitting, pristine } = this.props
 
         return (
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit(this.onSubmit)}>
                 <View marginChildren data-e2e="person-info-page">
                     <Header size="largest">Add A New Friend</Header>
                     <ReduxFormField
@@ -95,11 +100,13 @@ class PersonInfoPage extends React.Component {
     }
 }
 
-export default reduxForm({
-    validate,
-    initialValues: {
-        locations: [{}],
-    },
-    destroyOnUnmount: false,
-    form: 'CreatePersonForm',
-})(PersonInfoPage)
+export default compose(
+    reduxForm({
+        validate,
+        initialValues: {
+            locations: [{}],
+        },
+        destroyOnUnmount: false,
+        form: 'CreatePersonForm',
+    }),
+)(PersonInfoPage)

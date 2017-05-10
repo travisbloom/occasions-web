@@ -1,14 +1,14 @@
 const colorBlack = '#000'
 const colorGrayDarker = '#222'
-const colorGrayDark = '#7b8a8b'
-const colorGray = '#95a5a6'
-const colorGrayLight = '#b4bcc2'
-const colorGrayLighter = '#ecf0f1'
-const colorPrimary = '#2C3E50'
-const colorSuccess = '#18BC9C'
-const colorInfo = '#3498DB'
-const colorWarning = '#F39C12'
-const colorDanger = '#E74C3C'
+const colorGrayDark = '#333'
+const colorGray = '#555'
+const colorGrayLight = '#999'
+const colorGrayLighter = '#eee'
+const colorPrimary = '#DF691A'
+const colorSuccess = '#5cb85c'
+const colorInfo = '#5bc0de'
+const colorWarning = '#f0ad4e'
+const colorDanger = '#d9534f'
 const colorWhite = '#fff'
 
 export default {
@@ -25,9 +25,9 @@ export default {
     colorWarning,
     colorDanger,
 
-    colorBackground: colorWhite,
-    colorText: colorPrimary,
-    colorLink: colorSuccess,
+    colorBackground: '#2B3E50',
+    colorText: colorGrayLighter,
+    colorLink: colorPrimary,
 
     fontSize: 15,
     fontSizeSmall: 12,

@@ -22,14 +22,15 @@ export const el = id => `[data-e2e="${id}"]`
 
 export const getNightmare = () =>
     new Nightmare({
-        openDevTools: {
-            mode: 'detach',
-        },
+        // openDevTools: {
+        //     mode: 'detach',
+        // },
         typeInterval: 20,
         dock: true,
         show: true,
     })
 
+// NOTE: if you arent focused on the electron window, this wont work as expected (weird huh?)
 export const selectReactDatesDay = (date, reactDatesSelector = '') => {
     const dateSelector = `[aria-label="${date.format('dddd')}, ${date.format('LL')}"]`
     return (nightmare) => {

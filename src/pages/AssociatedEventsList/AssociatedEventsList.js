@@ -12,7 +12,7 @@ import AssociatedEventSummary, { AssociatedEventSummaryShell } from './Associate
 import graphqlQuery from './AssociatedEventsListQuery.graphql'
 
 const RenderedList = ({ currentUser }) => (
-    <View marginChildren>
+    <View marginChildren tabsContainer>
         {currentUser.person.createdEvents.edges.map(({ node }) => (
             <AssociatedEventSummary key={node.id} associatedEvent={node} />
         ))}

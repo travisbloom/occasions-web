@@ -12,29 +12,31 @@ import type { AssociatedEventDetailsQuery } from '../../types/schema'
 import graphqlQuery from './AssociatedEventDetailsQuery.graphql'
 
 const Shell = () => (
-    <View padding marginChildren>
+    <View padding>
         <Header size="largest"><Placeholder /></Header>
         <Header size="larger"><Placeholder width={55} /></Header>
         <Header size="larger"><Placeholder width={45} /></Header>
-        {new Array(2).fill().map((_, index) => (
-            <Panel key={index} header={<Header size="large"><Placeholder /></Header>}>
-                <View marginChildren>
-                    <Row>
-                        <Col xs={8} lg={10}>
-                            <View marginChildren>
-                                <View><Placeholder /></View>
-                                <View><Placeholder /></View>
-                            </View>
-                        </Col>
-                        <Col xs={4} lg={2}>
-                            <Button block bsStyle="primary">
-                                <Placeholder light />
-                            </Button>
-                        </Col>
-                    </Row>
-                </View>
-            </Panel>
-        ))}
+        <View marginChildren marginTop>
+            {new Array(4).fill().map((_, index) => (
+                <Panel key={index} header={<Header size="large"><Placeholder /></Header>}>
+                    <View marginChildren>
+                        <Row>
+                            <Col xs={8} lg={10}>
+                                <View marginChildren>
+                                    <View><Placeholder /></View>
+                                    <View><Placeholder /></View>
+                                </View>
+                            </Col>
+                            <Col xs={4} lg={2}>
+                                <Button block bsStyle="primary">
+                                    <Placeholder light />
+                                </Button>
+                            </Col>
+                        </Row>
+                    </View>
+                </Panel>
+            ))}
+        </View>
     </View>
 )
 

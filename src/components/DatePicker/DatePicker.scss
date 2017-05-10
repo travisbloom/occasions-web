@@ -24,8 +24,8 @@
     $react-dates-color-border: $color-border;
     $react-dates-color-border-light: lighten($color-border, 5%);
     $react-dates-color-border-medium: darken($color-border, 10%);
-    $react-dates-color-placeholder-text: $color-text;
-    $react-dates-color-text: $color-text;
+    $react-dates-color-placeholder-text: $color-background;
+    $react-dates-color-text: $color-background;
     $react-dates-color-text-focus: $brand-primary;
     $react-dates-color-focus: lighten($brand-info, 40%);
     @import '~react-dates/css/styles.scss';
