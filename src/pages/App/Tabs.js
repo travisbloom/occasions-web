@@ -2,7 +2,7 @@
 import React from 'react'
 import classNames from 'classnames'
 
-import { View, Row, Col, Icon, Link } from '../../components'
+import { View, Row, Col, Icon, Link, Grid } from '../../components'
 import urls from '../../urls'
 
 import styles from './Tabs.scss'
@@ -27,15 +27,17 @@ class Tabs extends React.Component {
     render() {
         return (
             <View className={classNames(styles.base)}>
-                <Row>
-                    {TAB_OPTIONS.map(({ url, icon }) => (
-                        <Col xs={4} className={classNames(styles.tab)} key={icon}>
-                            <Link to={url}>
-                                <Icon type={icon} />
-                            </Link>
-                        </Col>
-                    ))}
-                </Row>
+                <Grid>
+                    <Row>
+                        {TAB_OPTIONS.map(({ url, icon }) => (
+                            <Col xs={4} className={classNames(styles.tab)} key={icon}>
+                                <Link to={url}>
+                                    <Icon type={icon} />
+                                </Link>
+                            </Col>
+                        ))}
+                    </Row>
+                </Grid>
             </View>
         )
     }

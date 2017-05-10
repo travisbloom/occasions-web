@@ -1,9 +1,10 @@
 // @flow
 import React from 'react'
 import { graphql, compose } from 'react-apollo'
+import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import { View, Alert, Grid, AnimatedRouter } from '../../components'
+import { View, Alert, Grid, AnimatedRouter, FourOhFour } from '../../components'
 import { closeError } from '../../actions/alerts'
 import type { AppQuery } from '../../types/schema'
 
@@ -64,6 +65,7 @@ class App extends React.Component {
                 </View>
                 <Grid>
                     <AnimatedRouter.Switch>
+                        <Redirect path="/a" exact to="/a/yourEvents" />
                         <AnimatedRouter.Route
                             exact
                             {...routeProps}
@@ -110,6 +112,7 @@ class App extends React.Component {
                             path="/a/yourRelationships/:personId"
                             component={PersonDetails}
                         />
+                        <AnimatedRouter.Route {...routeProps} path="/a/" component={FourOhFour} />
                     </AnimatedRouter.Switch>
                 </Grid>
                 <Tabs />

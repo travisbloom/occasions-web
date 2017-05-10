@@ -1,8 +1,11 @@
 const { resolve } = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
+
+// const path = require('path')
+// const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 const clientSecret =
     'W9GY47vMMlEftgr3zGP0HjRHlx0LSC09HTrVTG1F3ioadyrzNx2DxmfyPK7DZjoQmR7a8jxzo8o5lNdAOHp8iEeDU0ihce25D9pXiZerVTe1FSCunr3OYwes1Rj9XXhi'
@@ -65,7 +68,7 @@ module.exports = {
                 use: 'url-loader?limit=10000',
             },
             {
-                test: /\.(ttf|eot|jpg)$/,
+                test: /\.(ttf|eot|jpg|png)$/,
                 use: 'file-loader',
             },
             {
@@ -99,5 +102,20 @@ module.exports = {
             template: resolve(__dirname, 'src/index.ejs'),
         }),
         new webpack.NamedModulesPlugin(),
+        // new FaviconsWebpackPlugin({
+        //     logo: path.join(__dirname, 'assets', 'logo-thumb.png'),
+        //     persistentCache: true,
+        //     inject: true,
+        //     background: '#fff',
+        //     title: 'Occasions App',
+        //     icons: {
+        //         android: true,
+        //         appleIcon: true,
+        //         appleStartup: true,
+        //         coast: false,
+        //         favicons: true,
+        //         firefox: true,
+        //     },
+        // }),
     ],
 }
