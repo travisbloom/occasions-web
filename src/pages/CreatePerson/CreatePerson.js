@@ -16,7 +16,6 @@ import graphqlQuery from './CreatePersonQuery.graphql'
 
 class CreatePerson extends React.Component {
     render() {
-        const { history } = this.props
         return (
             <DocumentTitle title="Occasions | Add Contact">
                 <View padding>

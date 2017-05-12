@@ -13,9 +13,9 @@ import graphqlQuery from './AssociatedEventDetailsQuery.graphql'
 
 const Shell = () => (
     <View padding>
-        <Header size="largest"><Placeholder /></Header>
-        <Header size="larger"><Placeholder width={55} /></Header>
-        <Header size="larger"><Placeholder width={45} /></Header>
+        <Header size="largest"><Placeholder>Travis Bloomberg</Placeholder></Header>
+        <Header size="larger"><Placeholder>Valentines Day</Placeholder></Header>
+        <Header size="larger"><Placeholder>Jan 4th, 1991</Placeholder></Header>
         <View marginChildren marginTop>
             {new Array(4).fill().map((_, index) => (
                 <Panel key={index} header={<Header size="large"><Placeholder /></Header>}>
