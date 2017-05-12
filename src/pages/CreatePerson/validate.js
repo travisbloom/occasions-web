@@ -6,6 +6,7 @@ export default combineValidators({
     firstName: validators.isRequired('first name'),
     lastName: validators.isRequired('last name'),
     email: validators.email,
-    birthday: validators.date('birthday'),
+    birthdayDate: validators.isRequired('birthday date'),
+    birthdayYear: validators.isRequired('birthday year'),
     'associatedLocations[]': validators.location,
 })

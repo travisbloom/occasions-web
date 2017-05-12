@@ -103,9 +103,6 @@ class PersonInfoPage extends React.Component {
 export default compose(
     reduxForm({
         validate,
-        initialValues: {
-            locations: [{}],
-        },
         destroyOnUnmount: false,
         form: 'CreatePersonForm',
     }),
