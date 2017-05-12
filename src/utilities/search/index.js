@@ -1,4 +1,4 @@
-import searchPeopleGraphqlQuery from './SearchPeopleQuery.graphql'
+import searchPeopleGraphqlQuery from './SearchCurrentUserRelationships.graphql'
 import SearchEventTypesQuery from './SearchEventTypesQuery.graphql'
 
 const wrapInOptionsObject = options => ({ options })
@@ -10,8 +10,8 @@ export const searchPeople = (client, additionalOptions = {}) => value =>
             variables: { value },
             ...additionalOptions,
         })
-        .then(({ data: { people } }) =>
-            people.edges.map(({ node }) => ({
+        .then(({ data: { currentUser } }) =>
+            currentUser.relatedPeople.edges.map(({ node }) => ({
                 label: node.fullName,
                 value: node.id,
                 node,

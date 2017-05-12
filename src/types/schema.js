@@ -547,11 +547,11 @@ export type SearchEventTypesQueryQuery = {|
     |},
 |}
 
-export type SearchPeopleQueryQueryVariables = {|
+export type SearchCurrentUserRelationshipsQueryVariables = {|
     value: string,
 |}
 
-export type SearchPeopleQueryQuery = {|
+export type SearchCurrentUserRelationshipsQuery = {|
     people: {|
         edges: Array<{|
             // The item at the end of the edge

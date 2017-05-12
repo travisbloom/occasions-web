@@ -1,0 +1,13 @@
+query SearchCurrentUserRelationships($value: String) {
+    currentUser {
+        id
+        relatedPeople(search: $value) {
+            edges {
+                node {
+                    id
+                    fullName
+                }
+            }
+        }
+    }
+}
