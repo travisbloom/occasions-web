@@ -5,7 +5,7 @@ import DocumentTitle from 'react-document-title'
 
 import { View, Header, Panel, Row, Col, LinkContainer, Button, Placeholder } from '../../components'
 import { EventDate } from '../../fragmentComponents'
-import withShell from '../../hoc/withShell'
+import withApolloFetchingContainer from '../../hoc/withApolloFetchingContainer'
 import urls from '../../urls'
 import type { AssociatedEventDetailsQuery } from '../../types/schema'
 
@@ -44,7 +44,6 @@ class AssociatedEventDetails extends React.Component {
     props: {
         data: AssociatedEventDetailsQuery,
     }
-    static Shell = Shell
     render() {
         const { data: { associatedEvent } } = this.props
 
@@ -96,5 +95,5 @@ export default compose(
             variables: { associatedEventId },
         }),
     }),
-    withShell({ isLoaded: props => !!props.data.associatedEvent }),
+    withApolloFetchingContainer(Shell, { fullPage: true }),
 )(AssociatedEventDetails)

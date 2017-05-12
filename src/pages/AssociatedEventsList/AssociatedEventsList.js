@@ -1,39 +1,31 @@
 // @flow
 import React from 'react'
-import { graphql } from 'react-apollo'
+import { graphql, compose } from 'react-apollo'
 import DocumentTitle from 'react-document-title'
 
 import { View, Button, LinkContainer } from '../../components'
 import urls from '../../urls'
-import withShell from '../../hoc/withShell'
+import withApolloFetchingContainer from '../../hoc/withApolloFetchingContainer'
 import type { AssociatedEventsListQuery } from '../../types/schema'
 
 import AssociatedEventSummary, { AssociatedEventSummaryShell } from './AssociatedEventSummary'
 import graphqlQuery from './AssociatedEventsListQuery.graphql'
 
-const RenderedList = ({ currentUser }) => (
-    <View marginChildren tabsContainer>
-        {currentUser.person.createdEvents.edges.map(({ node }) => (
-            <AssociatedEventSummary key={node.id} associatedEvent={node} />
-        ))}
-    </View>
-)
-const RenderedListShell = () => (
-    <View marginChildren>
-        {new Array(4).fill().map((_, index) => <AssociatedEventSummaryShell key={index} />)}
-    </View>
-)
-const WrappedRenderList = withShell({
-    shell: RenderedListShell,
-    isLoaded: ({ currentUser }) => currentUser.person.createdEvents,
-})(RenderedList)
-
 class AssociatedEventsList extends React.Component {
     props: {
         data: AssociatedEventsListQuery,
+        renderWhenReady: () => any,
     }
+    renderBody = () => (
+        <View marginChildren tabsContainer>
+            {this.props.data.currentUser.person.createdEvents.edges.map(({ node }) => (
+                <AssociatedEventSummary key={node.id} associatedEvent={node} />
+            ))}
+        </View>
+    )
+
     render() {
-        const { data: { currentUser } } = this.props
+        const { renderWhenReady } = this.props
         return (
             <DocumentTitle title="Occasions | My Events">
                 <View marginChildren padding data-e2e="page-associated-events-list">
@@ -42,10 +34,17 @@ class AssociatedEventsList extends React.Component {
                             <Button block bsStyle="primary">Add An Event</Button>
                         </LinkContainer>
                     </View>
-                    <WrappedRenderList currentUser={currentUser} />
+                    {renderWhenReady(this.renderBody)}
                 </View>
             </DocumentTitle>
         )
     }
 }
-export default graphql(graphqlQuery)(AssociatedEventsList)
+export default compose(
+    graphql(graphqlQuery),
+    withApolloFetchingContainer(() => (
+        <View marginChildren>
+            {new Array(4).fill().map((_, index) => <AssociatedEventSummaryShell key={index} />)}
+        </View>
+    )),
+)(AssociatedEventsList)

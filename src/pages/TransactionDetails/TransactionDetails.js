@@ -17,51 +17,13 @@ import {
 } from '../../components'
 import { EventDate } from '../../fragmentComponents'
 import urls from '../../urls'
-import withShell from '../../hoc/withShell'
+import withApolloFetchingContainer from '../../hoc/withApolloFetchingContainer'
 
 import graphqlQuery from './TransactionDetailsQuery.graphql'
 
-const Shell = () => (
-    <View padding>
-        <Header size="largest">
-            <View><Placeholder /></View>
-            <View><Placeholder /></View>
-        </Header>
-        <Header size="larger">
-            <Placeholder />
-        </Header>
-        <Panel>
-            <Row>
-                <Col xs={4}><Placeholder /></Col>
-                <Col xs={8}>
-                    <View>
-                        <Placeholder />
-                    </View>
-                    <View>
-                        <Placeholder />
-                    </View>
-                </Col>
-                <Col xs={4}><Placeholder /></Col>
-                <Col xs={8}>
-                    <Placeholder />
-                </Col>
-                <Col xs={4}><Placeholder /></Col>
-                <Col xs={8}>
-                    <Placeholder />
-                </Col>
-                <Col xs={4}>
-                    <Button block><Placeholder /></Button>
-                </Col>
-            </Row>
-        </Panel>
-    </View>
-)
-
 class TransactionDetails extends React.Component {
-    static Shell = Shell
     render() {
         const { data: { transaction } } = this.props
-        if (!transaction) return <span>allllmost</span>
         return (
             <DocumentTitle title={`Occasions | Transaction ${transaction.id}`}>
                 <View padding>
@@ -109,11 +71,47 @@ class TransactionDetails extends React.Component {
     }
 }
 
+const Shell = () => (
+    <View padding>
+        <Header size="largest">
+            <View><Placeholder /></View>
+            <View><Placeholder /></View>
+        </Header>
+        <Header size="larger">
+            <Placeholder />
+        </Header>
+        <Panel>
+            <Row>
+                <Col xs={4}><Placeholder /></Col>
+                <Col xs={8}>
+                    <View>
+                        <Placeholder />
+                    </View>
+                    <View>
+                        <Placeholder />
+                    </View>
+                </Col>
+                <Col xs={4}><Placeholder /></Col>
+                <Col xs={8}>
+                    <Placeholder />
+                </Col>
+                <Col xs={4}><Placeholder /></Col>
+                <Col xs={8}>
+                    <Placeholder />
+                </Col>
+                <Col xs={4}>
+                    <Button block><Placeholder /></Button>
+                </Col>
+            </Row>
+        </Panel>
+    </View>
+)
+
 export default compose(
     graphql(graphqlQuery, {
         options: ({ match: { params: { transactionId } } }) => ({
             variables: { transactionId },
         }),
     }),
-    withShell({ isLoaded: ({ data }) => data.transaction }),
+    withApolloFetchingContainer(Shell),
 )(TransactionDetails)

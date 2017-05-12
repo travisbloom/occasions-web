@@ -16,7 +16,7 @@ import {
 } from '../../components'
 import { EventDate } from '../../fragmentComponents'
 import urls from '../../urls'
-import withShell from '../../hoc/withShell'
+import withApolloFetchingContainer from '../../hoc/withApolloFetchingContainer'
 import type { PersonDetailsQuery } from '../../types/schema'
 import styleVars from '../../styles'
 
@@ -128,8 +128,5 @@ export default compose(
             variables: { personId },
         }),
     }),
-    withShell({
-        shell: PersonDetailsShell,
-        isLoaded: ({ data }) => data.person.receivedEvents,
-    }),
+    withApolloFetchingContainer(PersonDetailsShell, { fullPage: true }),
 )(PersonDetails)

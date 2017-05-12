@@ -59,6 +59,7 @@
     "graphql-anywhere": "^3.0.1",
     "graphql-tag": "^2.0.0",
     "history": "^4.6.1",
+    "hoist-non-react-statics": "^1.2.0",
     "html-webpack-plugin": "^2.28.0",
     "identity-obj-proxy": "^3.0.0",
     "immutability-helper": "^2.2.0",

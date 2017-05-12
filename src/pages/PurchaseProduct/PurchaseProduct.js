@@ -4,22 +4,12 @@ import { graphql, compose } from 'react-apollo'
 import DocumentTitle from 'react-document-title'
 
 import { View, Header, Placeholder } from '../../components'
-import withShell from '../../hoc/withShell'
+import withApolloFetchingContainer from '../../hoc/withApolloFetchingContainer'
 
 import PurchaseProductForm from './PurchaseProductForm'
 import graphqlQuery from './PurchaseProductQuery.graphql'
 
-const Shell = () => (
-    <View padding>
-        <Header size="largest"><Placeholder /></Header>
-        <Header size="larger"><Placeholder /></Header>
-        <View marginTop>
-            <PurchaseProductForm.Shell />
-        </View>
-    </View>
-)
 class PurchaseProduct extends React.Component {
-    static Shell = Shell
     render() {
         const { data: { associatedEvent, product, currentUser, refetch }, style } = this.props
         return (
@@ -61,5 +51,16 @@ export default compose(
             variables: { associatedEventId, productId },
         }),
     }),
-    withShell({ isLoaded: props => props.data.associatedEvent.receivingPerson }),
+    withApolloFetchingContainer(
+        () => (
+            <View padding>
+                <Header size="largest"><Placeholder /></Header>
+                <Header size="larger"><Placeholder /></Header>
+                <View marginTop>
+                    <PurchaseProductForm.Shell />
+                </View>
+            </View>
+        ),
+        { fullPage: true },
+    ),
 )(PurchaseProduct)
