@@ -32,7 +32,7 @@ class PersonList extends React.Component {
                 <View marginChildren padding data-e2e="page-person-list">
                     <View>
                         <LinkContainer to={urls.createPerson()}>
-                            <Button block bsStyle="info">Add A Relationship</Button>
+                            <Button block bsStyle="primary">Add A Relationship</Button>
                         </LinkContainer>
                     </View>
                     {this.props.renderWhenReady(this.renderBody)}

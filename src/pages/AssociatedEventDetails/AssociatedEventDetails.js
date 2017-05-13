@@ -11,35 +11,6 @@ import type { AssociatedEventDetailsQuery } from '../../types/schema'
 
 import graphqlQuery from './AssociatedEventDetailsQuery.graphql'
 
-const Shell = () => (
-    <View padding>
-        <Header size="largest"><Placeholder>Travis Bloomberg</Placeholder></Header>
-        <Header size="larger"><Placeholder>Valentines Day</Placeholder></Header>
-        <Header size="larger"><Placeholder>Jan 4th, 1991</Placeholder></Header>
-        <View marginChildren marginTop>
-            {new Array(4).fill().map((_, index) => (
-                <Panel key={index} header={<Header size="large"><Placeholder /></Header>}>
-                    <View marginChildren>
-                        <Row>
-                            <Col xs={8} lg={10}>
-                                <View marginChildren>
-                                    <View><Placeholder /></View>
-                                    <View><Placeholder /></View>
-                                </View>
-                            </Col>
-                            <Col xs={4} lg={2}>
-                                <Button block bsStyle="primary">
-                                    <Placeholder light />
-                                </Button>
-                            </Col>
-                        </Row>
-                    </View>
-                </Panel>
-            ))}
-        </View>
-    </View>
-)
-
 class AssociatedEventDetails extends React.Component {
     props: {
         data: AssociatedEventDetailsQuery,
@@ -88,6 +59,35 @@ class AssociatedEventDetails extends React.Component {
         )
     }
 }
+
+const Shell = () => (
+    <View padding>
+        <Header size="largest"><Placeholder>Travis Bloomberg</Placeholder></Header>
+        <Header size="larger"><Placeholder>Valentines Day</Placeholder></Header>
+        <Header size="larger"><Placeholder>Jan 4th, 1991</Placeholder></Header>
+        <View marginChildren marginTop>
+            {new Array(4).fill().map((_, index) => (
+                <Panel key={index} header={<Header size="large"><Placeholder /></Header>}>
+                    <View marginChildren>
+                        <Row>
+                            <Col xs={8} lg={10}>
+                                <View marginChildren>
+                                    <View><Placeholder /></View>
+                                    <View><Placeholder /></View>
+                                </View>
+                            </Col>
+                            <Col xs={4} lg={2}>
+                                <Button block bsStyle="primary">
+                                    <Placeholder light />
+                                </Button>
+                            </Col>
+                        </Row>
+                    </View>
+                </Panel>
+            ))}
+        </View>
+    </View>
+)
 
 export default compose(
     graphql(graphqlQuery, {

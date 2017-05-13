@@ -17,7 +17,7 @@ const withApolloFetchingContainer = (
         static WrappedComponent: ReactComponent<*>
         static propTypes = {
             data: React.PropTypes.shape({
-                networkStatus: React.PropTypes.number, //eslint-disable-line
+                networkStatus: React.PropTypes.number,
             }).isRequired,
         }
 
@@ -34,7 +34,7 @@ const withApolloFetchingContainer = (
             if (networkStatus === IS_LOADING_NETWORK_STATUS) {
                 return { content: <PlaceholderComponent />, key: 'placeholder' }
             }
-            return { content: fn ? fn() : null, key: 'content' }
+            return { content: fn(), key: 'content' }
         }
 
         renderWhenReady = (fn) => {
