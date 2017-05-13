@@ -4,12 +4,21 @@ $border-radius-base:        3px;
 $border-radius-large:       5px;
 $border-radius-small:       2px;
 
+$navbar-default-color:             #DF691A;
+$navbar-default-bg:                #2B3E50;
+
 .panel-group {
     margin-bottom: 0px;
 }
 
+.navbar {
+    font-size: 15px;
+}
 .navbar-brand {
     padding: 5px 15px;
+}
+.navbar-toggle {
+    margin-right: 10px;
 }
 
 .form-group {

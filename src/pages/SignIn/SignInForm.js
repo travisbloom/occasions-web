@@ -15,6 +15,7 @@ import {
     View,
     OverlayTrigger,
     Tooltip,
+    Col,
 } from '../../components'
 import { formatReduxFormErrors } from '../../utilities/errors'
 import { signIn } from '../../utilities/auth'
@@ -52,53 +53,63 @@ class CreateAccountForm extends React.Component {
         return (
             <form onSubmit={handleSubmit(this.signIn)}>
                 <View marginChildren>
-                    <ReduxFormField
-                        label={
-                            <OverlayTrigger
-                                overlay={
-                                    <Tooltip id="we-hate-spam-email">
-                                        {'We hate spam email as much as you do.'}
-                                        {' Occasions sends delightfully infrequent'}
-                                        {' emails only when you have an upcoming occasion.'}
-                                    </Tooltip>
-                                }
-                            >
-                                <View inline>Email</View>
-                            </OverlayTrigger>
-                        }
-                        data-e2e="input-email"
-                        type="email"
-                        autoComplete="email"
-                        name="username"
-                        component={TextInput}
-                    />
-                    <ReduxFormField
-                        autoComplete="password"
-                        label="Password"
-                        type="password"
-                        name="password"
-                        data-e2e="input-password"
-                        component={TextInput}
-                    />
+                    <View>
+                        <ReduxFormField
+                            label={
+                                <OverlayTrigger
+                                    overlay={
+                                        <Tooltip id="we-hate-spam-email">
+                                            {'We hate spam email as much as you do.'}
+                                            {' Occasions sends delightfully infrequent'}
+                                            {' emails only when you have an upcoming occasion.'}
+                                        </Tooltip>
+                                    }
+                                >
+                                    <View inline>Email</View>
+                                </OverlayTrigger>
+                            }
+                            data-e2e="input-email"
+                            type="email"
+                            autoComplete="email"
+                            name="username"
+                            component={TextInput}
+                        />
+                        <ReduxFormField
+                            autoComplete="password"
+                            label="Password"
+                            type="password"
+                            name="password"
+                            data-e2e="input-password"
+                            component={TextInput}
+                        />
+                    </View>
                     <Errors>{error}</Errors>
                     <Row center="xs" middle="xs">
-                        <Button
-                            data-e2e="submit"
-                            style={{ width: '160px' }}
-                            disabled={submitting || pristine}
-                            type="submit"
-                        >
-                            Sign In
-                        </Button>
-                        <View margin>
-                            Or
-                        </View>
-                        <Button
-                            disabled={submitting || pristine}
-                            onClick={handleSubmit(this.createAccount)}
-                        >
-                            Create Account
-                        </Button>
+                        <Col sm={5} xs={12}>
+                            <Button
+                                block
+                                data-e2e="submit"
+                                disabled={submitting || pristine}
+                                type="submit"
+                            >
+                                Sign In
+                            </Button>
+                        </Col>
+                        <Col sm={2} xs={12}>
+                            <View margin>
+                                Or
+                            </View>
+                        </Col>
+                        <Col sm={5} xs={12}>
+                            <Button
+                                block
+                                disabled={submitting || pristine}
+                                onClick={handleSubmit(this.createAccount)}
+                            >
+                                Create Account
+                            </Button>
+                        </Col>
+
                     </Row>
                 </View>
             </form>

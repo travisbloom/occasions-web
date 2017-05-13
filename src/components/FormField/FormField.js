@@ -19,7 +19,7 @@ const FormField = ({
     helpText?: string,
     children?: any,
 }) => (
-    <View className="form-group">
+    <View className="form-group" style={{ textAlign: 'left' }}>
         {label && <label htmlFor={name}>{label}</label>}
         {children}
         {helpText && <View className="help-block">{helpText}</View>}

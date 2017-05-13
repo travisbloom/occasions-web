@@ -47,7 +47,7 @@ class App extends React.Component {
                 <View
                     style={{
                         position: 'fixed',
-                        bottom: '60px',
+                        bottom: '40px',
                         width: '100%',
                     }}
                     padding
@@ -97,6 +97,7 @@ class App extends React.Component {
                         />
                         <AnimatedRouter.Route
                             {...routeProps}
+                            exact
                             path="/a/yourRelationships/new"
                             component={CreatePerson}
                         />
