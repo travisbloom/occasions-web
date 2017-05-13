@@ -35,7 +35,9 @@ class AnimatedSwitch extends React.Component {
                         computedMatch: data.match,
                         style: {
                             ...data.child.props.style,
-                            transform: `translate3d(${-renderStyles.x}%, 0, 0)`,
+                            transform: !renderStyles.x
+                                ? 'inherit'
+                                : `translate3d(${-renderStyles.x}%, 0, 0)`,
                             opacity: renderStyles.o,
                         },
                     })}

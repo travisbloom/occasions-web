@@ -2,7 +2,7 @@
 import React from 'react'
 import hoistStatics from 'hoist-non-react-statics'
 
-import { AnimatedFade, Alert } from '../components'
+import { AnimatedFade, Alert, View } from '../components'
 import { formatApolloErrors } from '../utilities/errors'
 
 const getDisplayName = WrappedComponent =>
@@ -41,7 +41,9 @@ const withApolloFetchingContainer = (
             const { content, key } = this.getRenderedContent(fn)
             return (
                 <AnimatedFade getKey={() => key}>
-                    {content}
+                    <View tabsContainer data-foo="bar">
+                        {content}
+                    </View>
                 </AnimatedFade>
             )
         }

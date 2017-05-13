@@ -17,7 +17,7 @@ class AssociatedEventsList extends React.Component {
         renderWhenReady: () => any,
     }
     renderBody = () => (
-        <View marginChildren tabsContainer>
+        <View marginChildren>
             {this.props.data.currentUser.person.createdEvents.edges.map(({ node }) => (
                 <AssociatedEventSummary key={node.id} associatedEvent={node} />
             ))}

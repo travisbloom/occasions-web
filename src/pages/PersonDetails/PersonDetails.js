@@ -37,7 +37,7 @@ class PersonDetails extends React.Component {
         const { data: { person } } = this.props
         return (
             <DocumentTitle title={`Occasions | ${person.fullName}`}>
-                <View tabsContainer marginChildren padding data-e2e="page-person-details">
+                <View marginChildren padding data-e2e="page-person-details">
                     <Header size="largest">{person.fullName}</Header>
                     <Table>
                         <tbody>
@@ -92,7 +92,7 @@ class PersonDetails extends React.Component {
 }
 
 const PersonDetailsShell = () => (
-    <View tabsContainer marginChildren padding data-e2e="page-person-details">
+    <View marginChildren padding data-e2e="page-person-details">
         <Header size="largest"><Placeholder /></Header>
         <Table>
             <tbody>

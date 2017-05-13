@@ -23,12 +23,12 @@ const toSpacingValue = (type) => {
 }
 
 const generateStyes = ({ marginTop, margin, padding, style, inline, tabsContainer }) => ({
-    ...style,
     display: inline ? 'inline-block' : 'inherit',
     margin: toSpacingValue(margin) || style.margin,
     padding: toSpacingValue(padding) || style.padding,
     marginTop: toSpacingValue(marginTop) || style.marginTop,
     marginBottom: tabsContainer ? `${80 + styleVars.spacing}px` : style.marginBottom,
+    ...style,
 })
 
 const View = ({
