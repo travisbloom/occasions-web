@@ -28,7 +28,7 @@ class AssociatedEventsList extends React.Component {
         const { renderWhenReady } = this.props
         return (
             <DocumentTitle title="Occasions | My Events">
-                <View marginChildren padding data-e2e="page-associated-events-list">
+                <View marginChildren data-e2e="page-associated-events-list">
                     <View>
                         <LinkContainer to={urls.createAssociatedEvent()}>
                             <Button block bsStyle="primary">Add An Event</Button>

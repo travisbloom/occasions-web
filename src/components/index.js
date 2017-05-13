@@ -1,7 +1,15 @@
 // @flow
 export { Link } from 'react-router-dom'
 export { LinkContainer } from 'react-router-bootstrap'
-export { OverlayTrigger, Tooltip, Panel, Modal, Table, PanelGroup } from 'react-bootstrap'
+export {
+    OverlayTrigger,
+    Tooltip,
+    Panel,
+    Modal,
+    Table,
+    PanelGroup,
+    Breadcrumb,
+} from 'react-bootstrap'
 export { default as Collapse } from 'react-collapse'
 export { Row, Grid } from 'react-flexbox-grid'
 

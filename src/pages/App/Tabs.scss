@@ -26,3 +26,11 @@ $height-tabs: 40px;
     font-size: 28px;
     text-align: center;
 }
+
+:global {
+    .breadcrumb {
+        padding: 0 0;
+        margin-bottom: 0;
+        background-color: inherit;
+    }
+}

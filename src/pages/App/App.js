@@ -3,27 +3,29 @@ import React from 'react'
 import { graphql, compose } from 'react-apollo'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { flatMapDeep } from 'lodash'
 
 import { View, Alert, Grid, AnimatedRouter, FourOhFour } from '../../components'
 import { closeError } from '../../actions/alerts'
 import type { AppQuery } from '../../types/schema'
 
-import AssociatedEventsList from '../AssociatedEventsList/AssociatedEventsList'
-import AssociatedEventDetails from '../AssociatedEventDetails/AssociatedEventDetails'
-import PurchaseProduct from '../PurchaseProduct/PurchaseProduct'
-import TransactionDetails from '../TransactionDetails/TransactionDetails'
-import CreateAssociatedEvent from '../CreateAssociatedEvent/CreateAssociatedEvent'
-import CreatePerson from '../CreatePerson/CreatePerson'
-import PersonList from '../PersonList/PersonList'
-import PersonDetails from '../PersonDetails/PersonDetails'
-
 import Navbar from './Navbar'
 import Tabs from './Tabs'
 import graphqlQuery from './AppQuery.graphql'
+import routes from './routes'
+import Breadcrumbs from './Breadcrumbs'
+
+const flattenRoutes = topRoutes =>
+    flatMapDeep(topRoutes, ({ routes: nestedRoutes, ...other }) => [
+        other,
+        ...flattenRoutes(nestedRoutes),
+    ])
 
 class App extends React.Component {
+    flattenedRoutes: Array<{ path: string, component: ReactComponent<*>, exact: boolean }>
     props: {
         data: AppQuery,
+        location: Location,
         errors: Array<string>,
         closeError: number => void,
     }
@@ -31,15 +33,13 @@ class App extends React.Component {
         hasBackButton: false,
     }
 
-    mapStyles = styles => ({
-        ...styles,
-        position: 'absolute',
-        height: '100%',
-        width: '100%',
-    })
+    constructor(props) {
+        super(props)
+        this.flattenedRoutes = flattenRoutes(routes)
+    }
 
     render() {
-        const { data: { currentUser }, errors } = this.props
+        const { data: { currentUser }, errors, location } = this.props
         const routeProps = { currentUser }
         return (
             <View>
@@ -64,55 +64,12 @@ class App extends React.Component {
                     ))}
                 </View>
                 <Grid>
+                    <Breadcrumbs location={location} />
                     <AnimatedRouter.Switch>
                         <Redirect path="/a" exact to="/a/yourEvents" />
-                        <AnimatedRouter.Route
-                            exact
-                            {...routeProps}
-                            path="/a/yourEvents"
-                            component={AssociatedEventsList}
-                        />
-                        <AnimatedRouter.Route
-                            exact
-                            {...routeProps}
-                            path="/a/yourEvents/new"
-                            component={CreateAssociatedEvent}
-                        />
-                        <AnimatedRouter.Route
-                            exact
-                            {...routeProps}
-                            path="/a/yourEvents/:associatedEventId"
-                            component={AssociatedEventDetails}
-                        />
-                        <AnimatedRouter.Route
-                            exact
-                            {...routeProps}
-                            path="/a/yourEvents/:associatedEventId/:productId"
-                            component={PurchaseProduct}
-                        />
-                        <AnimatedRouter.Route
-                            {...routeProps}
-                            path="/a/yourGifts/:transactionId"
-                            component={TransactionDetails}
-                        />
-                        <AnimatedRouter.Route
-                            {...routeProps}
-                            exact
-                            path="/a/yourRelationships/new"
-                            component={CreatePerson}
-                        />
-                        <AnimatedRouter.Route
-                            exact
-                            {...routeProps}
-                            path="/a/yourRelationships"
-                            component={PersonList}
-                        />
-                        <AnimatedRouter.Route
-                            exact
-                            {...routeProps}
-                            path="/a/yourRelationships/:personId"
-                            component={PersonDetails}
-                        />
+                        {this.flattenedRoutes.map(props => (
+                            <AnimatedRouter.Route key={props.path} {...props} />
+                        ))}
                         <AnimatedRouter.Route {...routeProps} path="/a/" component={FourOhFour} />
                     </AnimatedRouter.Switch>
                 </Grid>

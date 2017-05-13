@@ -37,7 +37,7 @@ class PersonDetails extends React.Component {
         const { data: { person } } = this.props
         return (
             <DocumentTitle title={`Occasions | ${person.fullName}`}>
-                <View marginChildren padding data-e2e="page-person-details">
+                <View marginChildren data-e2e="page-person-details">
                     <Header size="largest">{person.fullName}</Header>
                     <Table>
                         <tbody>

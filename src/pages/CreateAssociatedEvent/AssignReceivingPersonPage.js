@@ -1,5 +1,4 @@
 // @flow
-
 import React from 'react'
 import { reduxForm } from 'redux-form'
 import { compose, withApollo } from 'react-apollo'

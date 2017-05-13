@@ -2,7 +2,6 @@
 
 import React from 'react'
 import { reduxForm } from 'redux-form'
-import { withRouter } from 'react-router-dom'
 import moment from 'moment'
 import { compose } from 'react-apollo'
 

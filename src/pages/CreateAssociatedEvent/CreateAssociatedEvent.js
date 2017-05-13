@@ -38,14 +38,9 @@ class CreateAssociatedEvent extends React.Component {
     }
 
     render() {
-        const { style } = this.props
-
         return (
             <DocumentTitle title="Occasions | Create Event">
-                <View style={style} padding>
-                    <View>
-                        <View inline onClick={this.previousPage}>{this.renderBackLanguage()}</View>
-                    </View>
+                <View>
                     {this.renderPage()}
                 </View>
             </DocumentTitle>

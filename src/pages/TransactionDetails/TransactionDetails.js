@@ -26,7 +26,7 @@ class TransactionDetails extends React.Component {
         const { data: { transaction } } = this.props
         return (
             <DocumentTitle title={`Occasions | Transaction ${transaction.id}`}>
-                <View padding>
+                <View>
                     <Header size="largest">
                         Purchased
                         {' '}

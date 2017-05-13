@@ -27,7 +27,7 @@ const generateStyes = ({ marginTop, margin, padding, style, inline, tabsContaine
     margin: toSpacingValue(margin) || style.margin,
     padding: toSpacingValue(padding) || style.padding,
     marginTop: toSpacingValue(marginTop) || style.marginTop,
-    marginBottom: tabsContainer ? `${80 + styleVars.spacing}px` : style.marginBottom,
+    marginBottom: tabsContainer ? `${55 + styleVars.spacing}px` : style.marginBottom,
     ...style,
 })
 

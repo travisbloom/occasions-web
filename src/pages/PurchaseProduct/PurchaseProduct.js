@@ -11,7 +11,7 @@ import graphqlQuery from './PurchaseProductQuery.graphql'
 
 class PurchaseProduct extends React.Component {
     render() {
-        const { data: { associatedEvent, product, currentUser, refetch }, style } = this.props
+        const { data: { associatedEvent, product, currentUser, refetch } } = this.props
         return (
             <DocumentTitle
                 title={
@@ -20,7 +20,7 @@ class PurchaseProduct extends React.Component {
                         `${associatedEvent.event.name}`
                 }
             >
-                <View style={style} padding>
+                <View>
                     <Header size="largest">{product.name}</Header>
                     <Header size="larger">
                         For {associatedEvent.receivingPerson.fullName}

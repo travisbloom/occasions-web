@@ -24,7 +24,7 @@ class CreatePerson extends React.Component {
         }
         return (
             <DocumentTitle title="Occasions | Add Contact">
-                <View padding>
+                <View>
                     <AnimatedRouter.Switch>
                         <AnimatedRouter.Route
                             exact
