@@ -25,13 +25,14 @@ class AssignReceivingPersonPage extends React.Component {
         const { client, handleSubmit } = this.props
 
         return (
-            <form onSubmit={handleSubmit(this.onSubmit)}>
+            <form onSubmit={handleSubmit(this.onSubmit)} data-e2e="assign-receiving-person-page">
                 <View marginChildren>
                     <Header>{'Who Is This Event For?'}</Header>
                     <Row>
                         <Col xs={12} md={5}>
                             <ReduxFormField
                                 remote
+                                data-e2e="input-receiving-person-id"
                                 loadOptions={searchPeople(client)}
                                 name="receivingPersonId"
                                 component={Select}
@@ -47,7 +48,7 @@ class AssignReceivingPersonPage extends React.Component {
                         </Col>
                     </Row>
 
-                    <Button type="submit" bsStyle="primary" block>Next</Button>
+                    <Button data-e2e="submit" type="submit" bsStyle="primary" block>Next</Button>
                 </View>
             </form>
         )

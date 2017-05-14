@@ -44,6 +44,7 @@ class CreateEventPage extends React.Component {
                     <ButtonGroup block>
                         <Button
                             bsSize="small"
+                            data-e2e="toggle-custom-event"
                             onClick={this.handleSetToCustomEvent}
                             bsStyle={isDefaultEvent ? undefined : 'info'}
                         >
@@ -51,6 +52,7 @@ class CreateEventPage extends React.Component {
                         </Button>
                         <Button
                             bsSize="small"
+                            data-e2e="toggle-default-event"
                             onClick={this.handleSetToDefaultEvent}
                             bsStyle={isDefaultEvent ? 'info' : undefined}
                         >
