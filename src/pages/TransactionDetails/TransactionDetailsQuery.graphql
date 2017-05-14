@@ -15,14 +15,16 @@ query TransactionDetails($transactionId: ID!) {
             description
             mainImageUrl
           }
+          associatedEventDate {
+              dateStart
+              id
+          }
           associatedEvent {
             id
             event {
               id
               name
               id
-              dateStart
-              timeStart
               isReoccuringYearly
             }
           }

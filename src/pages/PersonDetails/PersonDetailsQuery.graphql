@@ -27,8 +27,9 @@ query PersonDetails($personId: ID!) {
             event {
               id
               name
-              dateStart
-              timeStart
+              nextDate {
+                  dateStart
+              }
               isReoccuringYearly
             }
           }

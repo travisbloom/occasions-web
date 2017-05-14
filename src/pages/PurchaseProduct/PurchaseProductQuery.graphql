@@ -30,8 +30,9 @@ query PurchaseProduct($associatedEventId: ID!, $productId: ID!) {
             event {
               name
               id
-              dateStart
-              timeStart
+              nextDate {
+                  dateStart
+              }
               isReoccuringYearly
             }
         }

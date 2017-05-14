@@ -5,8 +5,9 @@ query EventListQuery($eventSearchValue: String, $eventTypes: [ID]) {
         id
         name
         slug
-        dateStart
-        timeStart
+        nextDate {
+            dateStart
+        }
         isReoccuringYearly
       }
     }

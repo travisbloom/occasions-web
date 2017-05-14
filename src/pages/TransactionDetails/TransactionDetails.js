@@ -47,7 +47,10 @@ class TransactionDetails extends React.Component {
                                     {transaction.associatedEvent.event.name}
                                 </View>
                                 <View>
-                                    <EventDate event={transaction.associatedEvent.event} />
+                                    <EventDate
+                                        eventDate={transaction.associatedEventDate}
+                                        event={transaction.associatedEvent.event}
+                                    />
                                 </View>
                             </Col>
                             <Col xs={4}>Cost:</Col>

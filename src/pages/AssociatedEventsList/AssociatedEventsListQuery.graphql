@@ -22,8 +22,9 @@ query AssociatedEventsList {
             event {
               id
               name
-              dateStart
-              timeStart
+              nextDate {
+                  dateStart
+              }
               isReoccuringYearly
             }
           }

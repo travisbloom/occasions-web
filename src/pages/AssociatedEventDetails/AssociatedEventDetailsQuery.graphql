@@ -23,8 +23,9 @@ query AssociatedEventDetails($associatedEventId: ID!) {
           event {
             id
             name
-            dateStart
-            timeStart
+            nextDate {
+                dateStart
+            }
             isReoccuringYearly
             relatedProducts {
                 edges {
