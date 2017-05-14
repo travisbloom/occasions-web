@@ -61,6 +61,7 @@ const AnimatedRoute = ({ component: Component, style, ...rest }) => (
         {...rest}
         render={props => (
             <View
+                tabsContainer
                 style={{
                     width: '100%',
                     position: 'absolute',

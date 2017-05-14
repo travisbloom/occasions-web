@@ -20,15 +20,14 @@ export default [
         component: AssociatedEventsList,
         routes: [
             {
-                exact: true,
-                breadcrumb: 'New',
+                breadcrumb: 'New Event',
                 path: '/a/yourEvents/new',
                 component: CreateAssociatedEvent,
                 routes: [],
             },
             {
                 exact: true,
-                breadcrumb: 'Details',
+                breadcrumb: 'Event Details',
                 path: '/a/yourEvents/:associatedEventId',
                 component: AssociatedEventDetails,
                 routes: [
@@ -45,7 +44,7 @@ export default [
     },
     {
         exact: true,
-        breadcrumb: 'foo',
+        breadcrumb: 'Transaction Details',
         path: '/a/yourGifts/:transactionId',
         component: TransactionDetails,
         routes: [],
@@ -57,8 +56,7 @@ export default [
         component: PersonList,
         routes: [
             {
-                exact: true,
-                breadcrumb: 'New Friendship',
+                breadcrumb: 'New Contact',
                 path: '/a/yourRelationships/new',
                 component: CreatePerson,
                 routes: [],

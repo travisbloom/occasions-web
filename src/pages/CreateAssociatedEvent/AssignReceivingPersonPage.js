@@ -1,6 +1,7 @@
 // @flow
 import React from 'react'
 import { reduxForm } from 'redux-form'
+import { withRouter } from 'react-router-dom'
 import { compose, withApollo } from 'react-apollo'
 
 import {
@@ -18,12 +19,13 @@ import { searchPeople } from '../../utilities/search'
 import urls from '../../urls'
 import validate from './validate'
 
-class CreateAssociatedEventFormPage1 extends React.Component {
+class AssignReceivingPersonPage extends React.Component {
+    onSubmit = () => this.props.history.push(`${urls.createAssociatedEvent()}/createEvent`)
     render() {
         const { client, handleSubmit } = this.props
 
         return (
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit(this.onSubmit)}>
                 <View marginChildren>
                     <Header>{'Who Is This Event For?'}</Header>
                     <Row>
@@ -59,4 +61,5 @@ export default compose(
         validate,
     }),
     withApollo,
-)(CreateAssociatedEventFormPage1)
+    withRouter,
+)(AssignReceivingPersonPage)

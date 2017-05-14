@@ -17,7 +17,7 @@ const ButtonGroup = ({
 }) => (
     <RBButtonGroup
         direction={direction}
-        block={(block && direction === 'vertical') || undefined}
+        block={!!(block && direction === 'vertical') || undefined}
         className={classNames(
             className,
             block && direction !== 'vertical' && styles.horizontalBlock,

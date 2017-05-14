@@ -1,7 +1,10 @@
 import React from 'react'
-import { reduxForm } from 'redux-form'
+import { reduxForm, Form } from 'redux-form'
+import { withRouter } from 'react-router-dom'
+import { compose } from 'react-apollo'
 
-import { Button, View, Header, ButtonGroup, Col } from '../../components'
+import { Button, View, Header, ButtonGroup } from '../../components'
+import urls from '../../urls'
 import { EventCatalog } from '../../containers'
 
 class CreateEventPage extends React.Component {
@@ -24,43 +27,49 @@ class CreateEventPage extends React.Component {
     }
 
     handleSelectEvent = (event) => {
-        const { change, submit } = this.props
+        const { change } = this.props
         change('eventId', event.id)
         change('event', event)
-        submit()
+        this.handleSubmit()
     }
+
+    handleSubmit = () => this.props.history.push(`${urls.createAssociatedEvent()}/confirmation`)
 
     render() {
         const { isDefaultEvent } = this.state
-
         return (
-            <View marginChildren>
-                <Header>{"What's the Occasion?"}</Header>
-                <ButtonGroup block>
-                    <Button
-                        bsSize="small"
-                        onClick={this.handleSetToCustomEvent}
-                        bsStyle={isDefaultEvent ? undefined : 'info'}
-                    >
-                        {'Create New Event'}
-                    </Button>
-                    <Button
-                        bsSize="small"
-                        onClick={this.handleSetToDefaultEvent}
-                        bsStyle={isDefaultEvent ? 'info' : undefined}
-                    >
-                        {'Choose Holiday'}
-                    </Button>
-                </ButtonGroup>
-                {isDefaultEvent
-                    ? <EventCatalog onSelectEvent={this.handleSelectEvent} />
-                    : <View>foobar</View>}
-            </View>
+            <Form>
+                <View marginChildren>
+                    <Header>{"What's the Occasion?"}</Header>
+                    <ButtonGroup block>
+                        <Button
+                            bsSize="small"
+                            onClick={this.handleSetToCustomEvent}
+                            bsStyle={isDefaultEvent ? undefined : 'info'}
+                        >
+                            {'Create New Event'}
+                        </Button>
+                        <Button
+                            bsSize="small"
+                            onClick={this.handleSetToDefaultEvent}
+                            bsStyle={isDefaultEvent ? 'info' : undefined}
+                        >
+                            {'Choose Holiday'}
+                        </Button>
+                    </ButtonGroup>
+                    {isDefaultEvent
+                        ? <EventCatalog onSelectEvent={this.handleSelectEvent} />
+                        : <View>foobar</View>}
+                </View>
+            </Form>
         )
     }
 }
 
-export default reduxForm({
-    form: 'CreateAssociatedEventForm',
-    destroyOnUnmount: false,
-})(CreateEventPage)
+export default compose(
+    reduxForm({
+        form: 'CreateAssociatedEventForm',
+        destroyOnUnmount: false,
+    }),
+    withRouter,
+)(CreateEventPage)

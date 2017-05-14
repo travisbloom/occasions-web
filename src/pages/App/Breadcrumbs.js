@@ -30,7 +30,7 @@ const Breadcrumbs = ({ location }: { location: Location }) => {
         >
             <Breadcrumb>
                 {generatedBreadcrumbs.map(({ breadcrumb, pathname }, index) => (
-                    <LinkContainer to={pathname}>
+                    <LinkContainer to={pathname} key={pathname}>
                         <Breadcrumb.Item active={generatedBreadcrumbs.length - 1 === index}>
                             {breadcrumb}
                         </Breadcrumb.Item>
