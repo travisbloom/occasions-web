@@ -113,5 +113,5 @@ export default compose(
             variables: { transactionId },
         }),
     }),
-    withApolloFetchingContainer(Shell),
+    withApolloFetchingContainer(Shell, { fullPage: true }),
 )(TransactionDetails)
