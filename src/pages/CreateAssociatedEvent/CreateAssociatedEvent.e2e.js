@@ -47,6 +47,6 @@ describe('CreatePerson', () => {
             .use(submit)
             .end())
 
-    // it('should successfully create a new associated event using a default event', () =>
-    //     nightmare.use(selectReceivingPerson).use(selectExistingEvent).use(submit).end())
+    it('should successfully create a new associated event using a default event', () =>
+        nightmare.use(selectReceivingPerson).use(selectExistingEvent).use(submit).end())
 })
