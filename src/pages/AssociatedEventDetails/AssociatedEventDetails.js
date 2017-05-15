@@ -22,7 +22,7 @@ class AssociatedEventDetails extends React.Component {
             <DocumentTitle
                 title={`Occasions | ${associatedEvent ? `${associatedEvent.receivingPerson.fullName} - ${associatedEvent.event.name}` : 'Event Details'}`}
             >
-                <View>
+                <View data-e2e="associated-event-details-page">
                     <Header size="largest">
                         {associatedEvent.receivingPerson.fullName}
                     </Header>

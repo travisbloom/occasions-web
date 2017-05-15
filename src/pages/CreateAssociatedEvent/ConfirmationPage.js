@@ -16,9 +16,13 @@ import graphqlQuery from './CreateAssociatedEventMutation.graphql'
 class ConfirmationPage extends React.Component {
     handleSubmit = ({ eventId, event, receivingPersonId }) => {
         const { createAssociatedEvent, history } = this.props
+        const formattedEvent = event && {
+            ...event,
+            eventTypes: event.eventTypes.map(({ value }) => value),
+        }
         const input = {
             eventId,
-            event: eventId ? null : event,
+            event: eventId ? null : formattedEvent,
             receivingPersonId: receivingPersonId ? receivingPersonId.value : null,
         }
         return createAssociatedEvent(input)
@@ -28,19 +32,22 @@ class ConfirmationPage extends React.Component {
             .catch(formatGeneralReduxFormErrors)
     }
 
-    handleSelectEvent = event => this.props.change('eventId', event.id)
-
     render() {
         const { handleSubmit, error, formValues } = this.props
-
+        if (!formValues.event.name) return null
         return (
-            <Form onSubmit={handleSubmit(this.handleSubmit)}>
+            <Form onSubmit={handleSubmit(this.handleSubmit)} data-e2e="confirmation-page">
                 <View marginChildren>
                     <Panel header={`${formValues.receivingPersonId.label}'s Event`}>
                         <View>{formValues.event.name}</View>
                         <View><EventDate event={formValues.event} /></View>
+                        <View>
+                            {formValues.event.eventTypes.map(({ node }) => (
+                                <View key={node.id}>{node.displayName}</View>
+                            ))}
+                        </View>
                     </Panel>
-                    <Button type="submit" block>Create Event</Button>
+                    <Button data-e2e="submit" type="submit" block>Create Event</Button>
                     <Alert dismissable unHideWithChildren stackChildren bsStyle="danger">
                         {error}
                     </Alert>

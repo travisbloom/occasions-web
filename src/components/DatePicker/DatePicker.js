@@ -4,10 +4,12 @@ import { SingleDatePicker } from 'react-dates'
 import moment from 'moment'
 
 import { View } from '../'
+import { toMoment } from '../../utilities/datetime'
 import './DatePicker.scss'
 
 type Props = {
     hasNoYear: boolean,
+    isDateFormat: boolean,
     numberOfMonths: number,
     onChange: (date: string) => void,
     name: string,
@@ -48,8 +50,10 @@ class DatePicker extends React.Component {
 
     handleOnFocusChange = ({ focused }: { focused: boolean }) => this.setState({ focused })
 
-    handleOnChange = (date: moment) => this.props.onChange(date.toISOString())
-
+    handleOnChange = (date: moment) => {
+        const { onChange, isDateFormat } = this.props
+        return onChange(isDateFormat ? date.format('YYYY-MM-DD') : date.toISOString())
+    }
     render() {
         const { focused } = this.state
         const {
@@ -73,7 +77,7 @@ class DatePicker extends React.Component {
                 <SingleDatePicker
                     id={name}
                     focused={focused}
-                    date={value ? moment(value) : null}
+                    date={value ? toMoment(value) : null}
                     onDateChange={this.handleOnChange}
                     displayFormat={hasNoYear ? 'MM/DD' : displayFormat}
                     monthFormat={hasNoYear ? 'MMMM' : monthFormat}

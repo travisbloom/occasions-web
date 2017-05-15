@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, matchPath, withRouter } from 'react-router-dom'
+import { Route, matchPath, withRouter, Switch } from 'react-router-dom'
 import { Motion } from 'data-driven-motion'
 
 import { View } from '../'
@@ -78,6 +78,6 @@ const AnimatedRoute = ({ component: Component, style, ...rest }) => (
 )
 
 export default {
-    Route: AnimatedRoute,
-    Switch: withRouter(AnimatedSwitch),
+    Route: window.__nightmare ? Route : AnimatedRoute,
+    Switch: window.__nightmare ? Switch : withRouter(AnimatedSwitch),
 }

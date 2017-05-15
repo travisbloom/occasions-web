@@ -13,8 +13,12 @@ class EventsList extends React.Component {
         if (!events) return <span>allllmost</span>
         return (
             <View style={style} marginChildren>
-                {events.edges.map(({ node: event }) => (
-                    <Panel key={event.id} onClick={() => onSelectEvent(event)}>
+                {events.edges.map(({ node: event }, index) => (
+                    <Panel
+                        data-e2e={`option-event-${index}`}
+                        key={event.id}
+                        onClick={() => onSelectEvent(event)}
+                    >
                         {event.name}
                     </Panel>
                 ))}

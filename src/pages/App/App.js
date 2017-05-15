@@ -49,6 +49,7 @@ class App extends React.Component {
                         position: 'fixed',
                         bottom: '40px',
                         width: '100%',
+                        zIndex: '2',
                     }}
                     padding
                 >

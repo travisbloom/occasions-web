@@ -5,6 +5,10 @@ query EventListQuery($eventSearchValue: String, $eventTypes: [ID]) {
         id
         name
         slug
+        eventTypes {
+            displayName
+            id
+        }
         nextDate {
             dateStart
         }

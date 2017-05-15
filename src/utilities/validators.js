@@ -20,6 +20,14 @@ const date = composeValidators(
     ),
 )
 
+const isNotEmptyArray = composeValidators(
+    isRequired,
+    createValidator(
+        message => value => (value.length ? false : message),
+        field => `You must select at least one ${field}`,
+    ),
+)
+
 const email = composeValidators(
     isRequired,
     createValidator(
@@ -56,6 +64,7 @@ export default {
     streetAddressLine1,
     email,
     date,
+    isNotEmptyArray,
     createValidator,
     composeValidators,
     combineValidators,

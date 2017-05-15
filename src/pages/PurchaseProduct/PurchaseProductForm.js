@@ -122,7 +122,7 @@ class PurchaseProductForm extends React.Component {
                 Purchase Card
             </Button>
         )
-        if (currentUser.hasStripeUser) {
+        if (currentUser.hasStripeUser || (window.navigator && !window.navigator.onLine)) {
             return button
         }
         return (

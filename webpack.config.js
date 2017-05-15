@@ -8,7 +8,7 @@ const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 const clientSecret =
-    'W9GY47vMMlEftgr3zGP0HjRHlx0LSC09HTrVTG1F3ioadyrzNx2DxmfyPK7DZjoQmR7a8jxzo8o5lNdAOHp8iEeDU0ihce25D9pXiZerVTe1FSCunr3OYwes1Rj9XXhi'
+    'rmlZEIFyOtx5jPX7GBtkzWWf6KuX0hpQCJOChbpMAbltEZg5cmvXKrWSiUdEQDoGzfSuUD7Ki8yXw5BNsJx4PoqiKD1D8qzDeXtdDWYZZp1WsUc3lMwOzxmTKpKwWgsO'
 
 module.exports = {
     entry: [
@@ -87,7 +87,7 @@ module.exports = {
             APP_ENV: {
                 stripeClientId: JSON.stringify('pk_test_VQtPlmj5VhEm9xOlrRJIDxWG'),
                 appServer: JSON.stringify('http://127.0.0.1:8000'),
-                clientId: JSON.stringify('uJZMHlRFcTHcBYnBctHhrfZQhfv6gg5jbqfgqiR1'),
+                clientId: JSON.stringify('Y2Zx6W64q65ibWnXFoFFwVBk038t2gEVcV8cLC6v'),
                 clientSecret: JSON.stringify(clientSecret),
             },
         }),

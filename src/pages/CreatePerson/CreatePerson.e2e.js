@@ -27,26 +27,21 @@ const fillOutAddress = num => nightmare =>
         .type(el('input-postal-code'), '10011')
         .click(el('submit'))
 
-describe('Load a Page', () => {
+describe('CreatePerson', () => {
     let nightmare = null
     beforeEach(() => {
         nightmare = getNightmare()
     })
-
-    describe('CreatePerson', () => {
-        it('should successfully create a new person', () =>
-            nightmare
-                .goto(`http://localhost:8080${urls.createPerson()}`)
-                .use(fillOutPersonInfo())
-                .use(fillOutAddress(1))
-                .wait(el('confirmation-page'))
-                .wait(1000) // ensure the page finishes transitioning
-                .click(el('add-location'))
-                .use(fillOutAddress(2))
-                .wait(el('confirmation-page'))
-                .wait(1000)
-                .click(el('submit'))
-                .wait(el('page-person-details'))
-                .end())
-    })
+    it('should successfully create a new person', () =>
+        nightmare
+            .goto(`http://localhost:8080${urls.createPerson()}`)
+            .use(fillOutPersonInfo())
+            .use(fillOutAddress(1))
+            .wait(el('confirmation-page'))
+            .click(el('add-location'))
+            .use(fillOutAddress(2))
+            .wait(el('confirmation-page'))
+            .click(el('submit'))
+            .wait(el('page-person-details'))
+            .end())
 })

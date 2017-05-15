@@ -3,7 +3,7 @@ import React from 'react'
 import hoistStatics from 'hoist-non-react-statics'
 
 import { AnimatedFade, Alert, View } from '../components'
-import { formatApolloErrors } from '../utilities/errors'
+import { formatGeneralAPIErrors } from '../utilities/errors'
 
 const getDisplayName = WrappedComponent =>
     WrappedComponent.displayName || WrappedComponent.name || 'Component'
@@ -26,7 +26,7 @@ const withApolloFetchingContainer = (
             if (error) {
                 const content = (
                     <Alert isHiddenWithoutChildren canBeHidden shouldStackChildren>
-                        {formatApolloErrors(error)}
+                        {formatGeneralAPIErrors(error)}
                     </Alert>
                 )
                 return { content, key: 'alert' }

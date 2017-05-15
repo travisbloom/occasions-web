@@ -44,6 +44,7 @@ export const selectReactDatesDay = (date, reactDatesSelector = '') => {
 export const selectReactSelectOption = (optionIndex = 0, reactDatesSelector = '') => (nightmare) => {
     nightmare
         .mousedown(`${reactDatesSelector} .Select-control`)
+        .wait(200)
         .wait(`.Select-menu > div:nth-child(${optionIndex + 1})`)
         .mousedown(`.Select-menu > div:nth-child(${optionIndex + 1})`)
 }

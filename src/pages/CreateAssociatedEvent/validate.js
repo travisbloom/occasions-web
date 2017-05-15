@@ -1,10 +1,14 @@
-export default (values) => {
-    const errors = {}
-    if (!values.receivingPersonId) {
-        errors.receivingPersonId = 'You must select a person to associate with this event.'
-    }
-    if (!values.eventId) {
-        errors.eventId = 'You must select an event'
-    }
-    return errors
-}
+import { combineValidators } from 'revalidate'
+
+import validators from '../../utilities/validators'
+
+export default combineValidators({
+    receivingPersonId: validators.isRequired('A contact'),
+    event: combineValidators({
+        name: validators.isRequired('Event name'),
+        eventTypes: validators.isNotEmptyArray('event type'),
+        nextDate: combineValidators({
+            dateStart: validators.isRequired('Event date'),
+        }),
+    }),
+})
