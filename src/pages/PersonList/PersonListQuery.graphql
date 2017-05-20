@@ -7,7 +7,10 @@ query PersonList {
         edges {
           node {
               id
-            relationshipType
+            relationshipType {
+                id
+                name
+            }
             toPerson {
                 id
               fullName
