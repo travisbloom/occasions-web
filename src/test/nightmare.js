@@ -36,6 +36,7 @@ export const selectReactDatesDay = (date, reactDatesSelector = '') => {
     return (nightmare) => {
         nightmare
             .focus(`${reactDatesSelector} .DateInput__input`)
+            .wait(100)
             .wait(dateSelector)
             .click(dateSelector)
     }

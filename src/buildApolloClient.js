@@ -1,7 +1,7 @@
 import ApolloClient, { HTTPFetchNetworkInterface, toIdValue } from 'apollo-client'
 
 import urls from './urls'
-import { getAccessToken, hasAccessToken } from './utilities/auth'
+import { getAccessToken, hasAccessToken, revokeTokens } from './utilities/auth'
 import debug from './utilities/debug'
 
 /* eslint-disable no-underscore-dangle */
@@ -19,13 +19,13 @@ export default ({ history }) => {
 
     const networkInterface = new NetworkInterface(gqlUrl, {
         credentials: 'same-origin',
+        headers: window.__nightmare && { 'X-Has-Mock-User': 'true' },
     })
 
     /* eslint-disable no-param-reassign */
     networkInterface.use([
         {
             applyMiddleware(req, next) {
-                // eslint-disable-next-line
                 if (window.__nightmare) {
                     next()
                     return
@@ -47,6 +47,17 @@ export default ({ history }) => {
                             history.push(urls.signIn())
                         }
                     })
+            },
+        },
+    ])
+    networkInterface.useAfter([
+        {
+            applyAfterware({ response }, next) {
+                if (response.status === 403) {
+                    history.push(urls.signIn())
+                } else {
+                    next()
+                }
             },
         },
     ])

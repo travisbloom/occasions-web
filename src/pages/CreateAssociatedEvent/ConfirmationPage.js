@@ -1,5 +1,5 @@
 // @flow
-
+import moment from 'moment'
 import React from 'react'
 import { reduxForm, Form, getFormValues } from 'redux-form'
 import { connect } from 'react-redux'
@@ -19,6 +19,11 @@ class ConfirmationPage extends React.Component {
         const formattedEvent = event && {
             ...event,
             eventTypes: event.eventTypes.map(({ value }) => value),
+            nextDate: {
+                dateStart: moment(event.nextDate.dateStart).isBefore(moment())
+                    ? moment(event.nextDate.dateStart).add(1, 'years').format('YYYY-MM-DD')
+                    : event.nextDate.dateStart,
+            },
         }
         const input = {
             eventId,

@@ -1,5 +1,11 @@
+@import "variables";
+
 :global {
     html {
       overflow-y: scroll;
+    }
+    .container-fluid {
+        padding-left: $spacing;
+        padding-right: $spacing;
     }
 }

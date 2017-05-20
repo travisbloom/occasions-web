@@ -22,7 +22,7 @@ const createNewEvent = nightmare =>
         .type(el('input-name'), 'Event Name')
         .use(selectReactSelectOption(0, el('input-event-types')))
         .use(selectReactSelectOption(1, el('input-event-types')))
-        .use(selectReactDatesDay(moment(), el('input-date-start')))
+        .use(selectReactDatesDay(moment().startOf('month'), el('input-date-start')))
         .click(el('submit'))
         .wait(el('confirmation-page'))
 

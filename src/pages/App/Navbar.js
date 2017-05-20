@@ -1,19 +1,15 @@
 // @flow
 import { Navbar, Nav, NavDropdown, MenuItem } from 'react-bootstrap'
-import { withApollo, compose } from 'react-apollo'
+import { compose } from 'react-apollo'
 import { Link, withRouter } from 'react-router-dom'
 import React from 'react'
-import { connect } from 'react-redux'
 import logo from '../../../assets/logo-white.png'
 import urls from '../../urls'
-import { logOut } from '../../actions/user'
 
 class AppNav extends React.Component {
     logOut = () => {
-        const { history, logOutUser, client } = this.props
-        logOutUser()
-            .then(() => client.networkInterface.setUri(`${APP_ENV.appServer}/graphql_public`))
-            .then(() => history.push(urls.signIn()))
+        const { history } = this.props
+        history.push(urls.signIn())
     }
 
     render() {
@@ -49,4 +45,4 @@ class AppNav extends React.Component {
 
 Navbar.height = 60
 
-export default compose(withApollo, withRouter, connect(null, { logOutUser: logOut }))(AppNav)
+export default compose(withRouter)(AppNav)

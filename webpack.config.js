@@ -7,9 +7,6 @@ const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
 // const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
-const clientSecret =
-    'rmlZEIFyOtx5jPX7GBtkzWWf6KuX0hpQCJOChbpMAbltEZg5cmvXKrWSiUdEQDoGzfSuUD7Ki8yXw5BNsJx4PoqiKD1D8qzDeXtdDWYZZp1WsUc3lMwOzxmTKpKwWgsO'
-
 module.exports = {
     entry: [
         'bootstrap-loader',
@@ -87,8 +84,8 @@ module.exports = {
             APP_ENV: {
                 stripeClientId: JSON.stringify('pk_test_VQtPlmj5VhEm9xOlrRJIDxWG'),
                 appServer: JSON.stringify('http://127.0.0.1:8000'),
-                clientId: JSON.stringify('Y2Zx6W64q65ibWnXFoFFwVBk038t2gEVcV8cLC6v'),
-                clientSecret: JSON.stringify(clientSecret),
+                clientId: JSON.stringify('MOCK_CLIENT_ID'),
+                clientSecret: JSON.stringify('MOCK_CLIENT_SECRET'),
             },
         }),
         new webpack.optimize.CommonsChunkPlugin({

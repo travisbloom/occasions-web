@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { reduxForm, SubmissionError } from 'redux-form'
-
+import { connect } from 'react-redux'
 import { graphql, compose, withApollo } from 'react-apollo'
 import { withRouter } from 'react-router-dom'
 
@@ -20,12 +20,14 @@ import {
 import { formatReduxFormErrors } from '../../utilities/errors'
 import { signIn } from '../../utilities/auth'
 import urls from '../../urls'
+import { logOut } from '../../actions/user'
 
 import graphqlQuery from './CreateUserMutation.graphql'
 
 class CreateAccountForm extends React.Component {
     componentDidMount() {
-        const { client } = this.props
+        const { client, logOut } = this.props
+        logOut()
         client.networkInterface.setUri(`${APP_ENV.appServer}/graphql_public`)
     }
 
@@ -127,6 +129,7 @@ export default compose(
         form: 'CreateAccountForm',
         initialValues: { username: '', password: '' },
     }),
+    connect(null, { logOut }),
     withRouter,
     withApollo,
 )(CreateAccountForm)
