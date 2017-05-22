@@ -92,7 +92,7 @@ class PersonDetails extends React.Component {
 }
 
 const PersonDetailsShell = () => (
-    <View marginChildren padding data-e2e="page-person-details">
+    <View marginChildren padding>
         <Header size="largest"><Placeholder /></Header>
         <Table>
             <tbody>

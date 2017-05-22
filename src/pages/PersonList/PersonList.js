@@ -16,9 +16,13 @@ class PersonList extends React.Component {
         renderWhenReady: () => any,
     }
     renderBody = () => (
-        <View marginChildren>
-            {this.props.data.currentUser.person.fromRelationships.edges.map(({ node }) => (
-                <LinkContainer to={urls.personDetails(node.toPerson.id)} key={node.id}>
+        <View marginChildren data-e2e="person-list-page">
+            {this.props.data.currentUser.person.fromRelationships.edges.map(({ node }, index) => (
+                <LinkContainer
+                    data-e2e={`person-link-${index}`}
+                    to={urls.personDetails(node.toPerson.id)}
+                    key={node.id}
+                >
                     <Panel>
                         {node.toPerson.fullName}
                     </Panel>

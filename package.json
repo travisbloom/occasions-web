@@ -6,6 +6,7 @@
   "scripts": {
     "start": "BABEL_ENV=dev webpack-dev-server",
     "test": "jest --runInBand",
+    "test:full": "jest",
     "lint": "eslint ./src",
     "format": "prettier-eslint --write \"src/**/*.js\"",
     "schema": "npm run server-schema && npm run flow-schema",
