@@ -10,13 +10,13 @@ const isReduxForm = props => props.onDragStart && props.onDrop
 
 const Select = ({
     onBlur,
-    remote,
+    loadOptions,
     'data-e2e': e2e,
     ...props
 }: {
     'data-e2e'?: string,
     onBlur?: (event: Event) => void,
-    remote?: boolean,
+    loadOptions?: (search: string) => Array<{ label: any, value: any }>,
 }) => {
     const passedProps = {
         ...props,
@@ -24,8 +24,8 @@ const Select = ({
     }
     return (
         <View data-e2e={e2e}>
-            {remote
-                ? <ReactSelect.Async {...passedProps} cache={false} />
+            {loadOptions
+                ? <ReactSelect.Async {...passedProps} loadOptions={loadOptions} cache={false} />
                 : <ReactSelect {...passedProps} />}
         </View>
     )

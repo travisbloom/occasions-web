@@ -1,5 +1,4 @@
 // @flow
-import PropTypes from 'prop-types'
 import React from 'react'
 import { graphql, compose, withApollo } from 'react-apollo'
 import _ from 'lodash'
@@ -59,7 +58,6 @@ class EventsCatalog extends React.Component {
                             <Col xs={12} sm={8}>
                                 <FormField label="Filter Types">
                                     <Select
-                                        remote
                                         multi
                                         loadOptions={searchEventTypes(client)}
                                         onChange={this.handleEventTypeOnChange}

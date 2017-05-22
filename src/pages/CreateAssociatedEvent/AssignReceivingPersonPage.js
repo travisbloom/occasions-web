@@ -31,7 +31,6 @@ class AssignReceivingPersonPage extends React.Component {
                     <Row>
                         <Col xs={12} md={5}>
                             <ReduxFormField
-                                remote
                                 data-e2e="input-receiving-person-id"
                                 loadOptions={searchPeople(client)}
                                 name="receivingPersonId"

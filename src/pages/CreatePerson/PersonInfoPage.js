@@ -1,9 +1,10 @@
 // @flow
 
 import React from 'react'
-import { reduxForm } from 'redux-form'
+import { reduxForm, formValueSelector } from 'redux-form'
+import { connect } from 'react-redux'
 import moment from 'moment'
-import { compose } from 'react-apollo'
+import { compose, withApollo } from 'react-apollo'
 
 import urls from '../../urls'
 import {
@@ -17,11 +18,13 @@ import {
     Row,
     Col,
 } from '../../components'
+import { searchRelationshipTypes } from '../../utilities/search'
 
 import validate from './validate'
 
 class PersonInfoPage extends React.Component {
     birthdayYearOptions: Array<{ label: number, value: number }>
+    genderOptions: Array<{ label: string, value: string }>
 
     constructor(props) {
         super(props)
@@ -33,13 +36,17 @@ class PersonInfoPage extends React.Component {
                 value: year,
             }
         })
+        this.genderOptions = [
+            { label: 'Male', value: 'MALE' },
+            { label: 'Female', value: 'FEMALE' },
+        ]
     }
 
     onSubmit = () => this.props.history.push(`${urls.createPerson()}/address/0`)
 
     render() {
-        const { handleSubmit, submitting, pristine } = this.props
-
+        const { handleSubmit, submitting, pristine, genderValue, client } = this.props
+        console.log(genderValue)
         return (
             <form onSubmit={handleSubmit(this.onSubmit)}>
                 <View marginChildren data-e2e="person-info-page">
@@ -63,6 +70,13 @@ class PersonInfoPage extends React.Component {
                         name="email"
                         component={TextInput}
                     />
+                    <ReduxFormField
+                        data-e2e="input-gender"
+                        label="Gender"
+                        name="gender"
+                        component={Select}
+                        options={this.genderOptions}
+                    />
                     <Row>
                         <Col xs={12}>{"When's"} their birthday?</Col>
                         <Col xs={6}>
@@ -84,7 +98,17 @@ class PersonInfoPage extends React.Component {
                             />
                         </Col>
                     </Row>
-
+                    <ReduxFormField
+                        key={`RELATION_SELECT_${genderValue ? genderValue.value : 'DISABLED'}`}
+                        data-e2e="input-relationship-type"
+                        label="Relation"
+                        name="relationshipType"
+                        component={Select}
+                        disabled={!genderValue}
+                        loadOptions={searchRelationshipTypes(client, {
+                            gender: genderValue && genderValue.value,
+                        })}
+                    />
                     <Button
                         disabled={submitting || pristine}
                         bsStyle="primary"
@@ -99,10 +123,15 @@ class PersonInfoPage extends React.Component {
     }
 }
 
+const selector = formValueSelector('CreatePersonForm')
 export default compose(
+    withApollo,
     reduxForm({
         validate,
         destroyOnUnmount: false,
         form: 'CreatePersonForm',
     }),
+    connect(state => ({
+        genderValue: selector(state, 'gender'),
+    })),
 )(PersonInfoPage)

@@ -1,0 +1,11 @@
+query SearchRelationshipTypesQuery($search: String) {
+  relationshipTypes(search: $search) {
+    edges {
+      node {
+        id
+        toPersonMaleDisplayName
+        toPersonFemaleDisplayName
+      }
+    }
+  }
+}

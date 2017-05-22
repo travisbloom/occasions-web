@@ -13,8 +13,10 @@ const fillOutPersonInfo = () => nightmare =>
         .type(el('input-first-name'), 'Travis')
         .type(el('input-last-name'), 'Bloom')
         .type(el('input-email'), 'travis@trigga.com')
+        .use(selectReactSelectOption(0, el('input-gender')))
         .use(selectReactDatesDay(moment(), el('input-birth-date')))
         .use(selectReactSelectOption(0, el('input-birth-date-year')))
+        .use(selectReactSelectOption(0, el('input-relationship-type')))
         .click(el('submit'))
 
 const fillOutAddress = num => nightmare =>

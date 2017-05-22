@@ -40,7 +40,6 @@ class CreateEventForm extends React.Component {
                             </Col>
                             <Col xs={12} md={6}>
                                 <ReduxFormField
-                                    remote
                                     multi
                                     label="Type"
                                     data-e2e="input-event-types"

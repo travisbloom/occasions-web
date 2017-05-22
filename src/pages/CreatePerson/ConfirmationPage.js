@@ -29,6 +29,8 @@ class ConfirmationPage extends React.Component {
         const input = {
             ...values,
             birthDate: this.getBirthday(birthdayDate, birthdayYear),
+            gender: values.gender.value,
+            relationshipType: values.relationshipType.value,
             locations: locations.map(({ state, ...location }) => ({
                 ...location,
                 state: state.value,
@@ -65,6 +67,12 @@ class ConfirmationPage extends React.Component {
                                             formValues.birthdayYear,
                                         )}
                                     />
+                                </LineItem>
+                                <LineItem label="Gender">
+                                    {formValues.gender.label}
+                                </LineItem>
+                                <LineItem label="Relation">
+                                    {formValues.relationshipType.label}
                                 </LineItem>
                                 {formValues.locations.map((location, index) => (
                                     <LineItem key={index} label={`Address #${index + 1}`}>
