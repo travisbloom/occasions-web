@@ -20,7 +20,7 @@ class PurchaseProduct extends React.Component {
                         `${associatedEvent.event.name}`
                 }
             >
-                <View>
+                <View data-e2e="page-purchase-product">
                     <Header size="largest">{product.name}</Header>
                     <Header size="larger">
                         For {associatedEvent.receivingPerson.fullName}

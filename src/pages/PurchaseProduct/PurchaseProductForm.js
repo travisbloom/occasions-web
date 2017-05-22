@@ -118,7 +118,7 @@ class PurchaseProductForm extends React.Component {
     renderCheckoutButton = () => {
         const { submitting, pristine, product, currentUser } = this.props
         const button = (
-            <Button disabled={submitting || pristine} type="submit" responsive>
+            <Button disabled={submitting || pristine} type="submit" responsive data-e2e="submit">
                 Purchase Card
             </Button>
         )
@@ -161,6 +161,7 @@ class PurchaseProductForm extends React.Component {
                         <Row>
                             <Col xs={12} sm={7} md={8}>
                                 <ReduxFormField
+                                    data-e2e="input-associated-location-id"
                                     name="associatedLocationId"
                                     component={Select}
                                     options={this.getLocationOptions()}
@@ -172,7 +173,12 @@ class PurchaseProductForm extends React.Component {
                                 </Button>
                             </Col>
                         </Row>
-                        <ReduxFormField name="productNotes" component={TextInput} textarea />
+                        <ReduxFormField
+                            data-e2e="input-product-notes"
+                            name="productNotes"
+                            component={TextInput}
+                            textarea
+                        />
                         <View marginTop>
                             {this.renderCheckoutButton()}
                         </View>

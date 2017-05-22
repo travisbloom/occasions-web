@@ -23,10 +23,13 @@ export const AssociatedEventSummaryShell = () => (
 
 class AssociatedEventSummary extends React.Component {
     render() {
-        const { associatedEvent } = this.props
+        const { associatedEvent, index } = this.props
 
         return (
-            <LinkContainer to={urls.associatedEventDetails(associatedEvent.id)}>
+            <LinkContainer
+                to={urls.associatedEventDetails(associatedEvent.id)}
+                data-e2e={`associated-event-summary-${index}`}
+            >
                 <Panel
                     header={
                         <View>

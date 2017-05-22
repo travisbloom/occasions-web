@@ -18,8 +18,8 @@ class AssociatedEventsList extends React.Component {
     }
     renderBody = () => (
         <View marginChildren>
-            {this.props.data.currentUser.person.createdEvents.edges.map(({ node }) => (
-                <AssociatedEventSummary key={node.id} associatedEvent={node} />
+            {this.props.data.currentUser.person.createdEvents.edges.map(({ node }, index) => (
+                <AssociatedEventSummary key={node.id} index={index} associatedEvent={node} />
             ))}
         </View>
     )

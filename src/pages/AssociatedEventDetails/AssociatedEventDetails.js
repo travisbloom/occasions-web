@@ -31,28 +31,34 @@ class AssociatedEventDetails extends React.Component {
                         <EventDate event={associatedEvent.event} />
                     </Header>
                     <View marginChildren marginTop>
-                        {associatedEvent.event.relatedProducts.edges.map(({ node: product }) => (
-                            <Panel
-                                key={product.id}
-                                header={<Header size="large">{product.name}</Header>}
-                            >
-                                <Row>
-                                    <Col xs={8} lg={10}>{product.description}</Col>
-                                    <Col xs={4} lg={2}>
-                                        <LinkContainer
-                                            to={urls.purchaseProduct(
-                                                associatedEvent.id,
-                                                product.id,
-                                            )}
-                                        >
-                                            <Button block bsStyle="primary">
-                                                Buy
-                                            </Button>
-                                        </LinkContainer>
-                                    </Col>
-                                </Row>
-                            </Panel>
-                        ))}
+                        {associatedEvent.event.relatedProducts.edges.map(
+                            ({ node: product }, index) => (
+                                <Panel
+                                    key={product.id}
+                                    header={<Header size="large">{product.name}</Header>}
+                                >
+                                    <Row>
+                                        <Col xs={8} lg={10}>{product.description}</Col>
+                                        <Col xs={4} lg={2}>
+                                            <LinkContainer
+                                                to={urls.purchaseProduct(
+                                                    associatedEvent.id,
+                                                    product.id,
+                                                )}
+                                            >
+                                                <Button
+                                                    block
+                                                    bsStyle="primary"
+                                                    data-e2e={`product-link-${index}`}
+                                                >
+                                                    Buy
+                                                </Button>
+                                            </LinkContainer>
+                                        </Col>
+                                    </Row>
+                                </Panel>
+                            ),
+                        )}
                     </View>
                 </View>
             </DocumentTitle>

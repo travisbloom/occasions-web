@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import Nightmare from 'nightmare'
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 10 * 1000
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 20 * 1000
 
 Nightmare.action('focus', function focus(selector, done) {
     this.evaluate_now(
