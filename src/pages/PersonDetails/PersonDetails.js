@@ -76,7 +76,7 @@ class PersonDetails extends React.Component {
                             eventKey="Previous Gifts"
                             style={{ backgroundColor: styleVars.colorBackground }}
                         >
-                            {person.transactions.edges.length
+                            {person.receivedTransactions.edges.length
                                 ? <View marginChildren>
                                     {person.receivedEvents.edges.map(({ node }) => (
                                         <Panel key={node.id}>{node.event.name}</Panel>
