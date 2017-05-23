@@ -17,8 +17,8 @@ const TAB_OPTIONS = [
         icon: 'user',
     },
     {
-        url: urls.associatedEventsList(),
-        icon: 'home',
+        url: urls.transactionList(),
+        icon: 'gift',
     },
 ]
 

@@ -7,6 +7,7 @@ import AssociatedEventsList from '../AssociatedEventsList/AssociatedEventsList'
 import AssociatedEventDetails from '../AssociatedEventDetails/AssociatedEventDetails'
 import PurchaseProduct from '../PurchaseProduct/PurchaseProduct'
 import TransactionDetails from '../TransactionDetails/TransactionDetails'
+import TransactionList from '../TransactionList/TransactionList'
 import CreateAssociatedEvent from '../CreateAssociatedEvent/CreateAssociatedEvent'
 import CreatePerson from '../CreatePerson/CreatePerson'
 import PersonList from '../PersonList/PersonList'
@@ -44,10 +45,18 @@ export default [
     },
     {
         exact: true,
-        breadcrumb: 'Transaction Details',
-        path: '/a/yourGifts/:transactionId',
-        component: TransactionDetails,
-        routes: [],
+        path: '/a/yourGifts',
+        breadcrumb: <Icon type="gift" />,
+        component: TransactionList,
+        routes: [
+            {
+                exact: true,
+                breadcrumb: 'Transaction Details',
+                path: '/a/yourGifts/:transactionId',
+                component: TransactionDetails,
+                routes: [],
+            },
+        ],
     },
     {
         exact: true,

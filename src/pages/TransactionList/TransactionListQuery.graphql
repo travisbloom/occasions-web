@@ -1,0 +1,45 @@
+query TransactionList {
+  currentUser {
+      id
+    transactions {
+        edges {
+            node {
+                id
+                datetimeCreated
+                receivingPerson {
+                  id
+                  fullName
+                }
+                costUsd
+                product {
+                  id
+                  name
+                  description
+                  mainImageUrl
+                }
+                associatedEventDate {
+                    dateStart
+                    id
+                }
+                associatedEvent {
+                  id
+                  event {
+                    id
+                    name
+                    id
+                    isReoccuringYearly
+                  }
+                }
+                associatedLocation {
+                  id
+                  location {
+                    id
+                    displayName
+                  }
+                }
+                productNotes
+            }
+        }
+    }
+  }
+}

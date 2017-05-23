@@ -33,7 +33,7 @@ class PersonList extends React.Component {
     render() {
         return (
             <DocumentTitle title="Occasions | Relationship Details">
-                <View marginChildren data-e2e="page-person-list">
+                <View marginChildren>
                     <View>
                         <LinkContainer to={urls.createPerson()}>
                             <Button block bsStyle="primary">Add Contact</Button>
