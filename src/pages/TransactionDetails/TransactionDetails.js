@@ -9,7 +9,7 @@ import {
     Panel,
     Row,
     Col,
-    LinkContainer,
+    Table,
     Button,
     FormattedDate,
     FormattedNumber,
@@ -21,50 +21,56 @@ import withApolloFetchingContainer from '../../hoc/withApolloFetchingContainer'
 
 import graphqlQuery from './TransactionDetailsQuery.graphql'
 
+const LineItem = ({ label, children }) => (
+    <tr>
+        <td xs={4}>{label}</td>
+        <td xs={8}>{children}</td>
+    </tr>
+)
+
 class TransactionDetails extends React.Component {
     render() {
         const { data: { transaction } } = this.props
         return (
             <DocumentTitle title={`Occasions | Transaction ${transaction.id}`}>
                 <View data-e2e="page-transaction-details">
-                    <Header size="largest">
-                        Purchased
-                        {' '}
-                        {transaction.receivingPerson.fullName}
-                        {' '}
-                        a
-                        {' '}
-                        {transaction.product.name}
+                    <Header size="large">
+                        <FormattedDate date={transaction.datetimeCreated} showTime />
                     </Header>
-                    <Header size="larger">
-                        On <FormattedDate date={transaction.datetimeCreated} />
-                    </Header>
+                    <View marginBottom>
+                        <Header size="largest">
+                            {transaction.receivingPerson.fullName}
+                        </Header>
+                    </View>
                     <Panel>
                         <Row>
-                            <Col xs={4}>Event:</Col>
-                            <Col xs={8}>
-                                <View>
-                                    {transaction.associatedEvent.event.name}
-                                </View>
-                                <View>
-                                    <EventDate
-                                        eventDate={transaction.associatedEventDate}
-                                        event={transaction.associatedEvent.event}
-                                    />
-                                </View>
-                            </Col>
-                            <Col xs={4}>Cost:</Col>
-                            <Col xs={8}>
-                                <FormattedNumber currency number={transaction.costUsd} />
-                            </Col>
-                            <Col xs={4}>Shipping Info:</Col>
-                            <Col xs={8}>
-                                {transaction.associatedLocation.location.displayName}
-                            </Col>
                             <Col xs={4}>
-                                <LinkContainer to={urls.associatedEventsList()}>
-                                    <Button block>Buy stuff</Button>
-                                </LinkContainer>
+                                <View marginChildren>
+                                    {transaction.productNotes}
+                                </View>
+                            </Col>
+                            <Col xs={8}>
+                                <Table striped bordered>
+                                    <tbody>
+                                        <LineItem label="Cost">
+                                            <FormattedNumber
+                                                currency
+                                                number={transaction.costUsd}
+                                            />
+                                        </LineItem>
+                                        <LineItem label="Event">
+                                            {transaction.associatedEvent.event.name}
+                                            {' - '}
+                                            <EventDate
+                                                eventDate={transaction.associatedEventDate}
+                                                event={transaction.associatedEvent.event}
+                                            />
+                                        </LineItem>
+                                        <LineItem label="Shipping Info">
+                                            {transaction.associatedLocation.location.displayName}
+                                        </LineItem>
+                                    </tbody>
+                                </Table>
                             </Col>
                         </Row>
                     </Panel>
@@ -75,35 +81,39 @@ class TransactionDetails extends React.Component {
 }
 
 const Shell = () => (
-    <View padding>
-        <Header size="largest">
-            <View><Placeholder /></View>
-            <View><Placeholder /></View>
+    <View data-e2e="page-transaction-details">
+        <Header size="large">
+            <Placeholder>May 22nd 2017 at 10:51 PM</Placeholder>
         </Header>
-        <Header size="larger">
-            <Placeholder />
-        </Header>
+        <View marginBottom>
+            <Header size="largest">
+                <Placeholder>Travis Bloom</Placeholder>
+            </Header>
+        </View>
         <Panel>
             <Row>
-                <Col xs={4}><Placeholder /></Col>
-                <Col xs={8}>
-                    <View>
-                        <Placeholder />
-                    </View>
-                    <View>
-                        <Placeholder />
-                    </View>
-                </Col>
-                <Col xs={4}><Placeholder /></Col>
-                <Col xs={8}>
-                    <Placeholder />
-                </Col>
-                <Col xs={4}><Placeholder /></Col>
-                <Col xs={8}>
-                    <Placeholder />
-                </Col>
                 <Col xs={4}>
-                    <Button block><Placeholder /></Button>
+                    <View marginChildren>
+                        <Placeholder>
+                            Something that would be written on a card.
+                            This is a person that needs to say hello to you.
+                        </Placeholder>
+                    </View>
+                </Col>
+                <Col xs={8}>
+                    <Table striped bordered>
+                        <tbody>
+                            <LineItem label={<Placeholder>Cost</Placeholder>}>
+                                <Placeholder>$2</Placeholder>
+                            </LineItem>
+                            <LineItem label={<Placeholder>Event</Placeholder>}>
+                                <Placeholder>Valentines Day - May 22nd</Placeholder>
+                            </LineItem>
+                            <LineItem label={<Placeholder>Shipping Info</Placeholder>}>
+                                <Placeholder>1 Main St. Apt #1, city_1 CA 11112</Placeholder>
+                            </LineItem>
+                        </tbody>
+                    </Table>
                 </Col>
             </Row>
         </Panel>

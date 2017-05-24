@@ -1,19 +1,19 @@
 // @flow
 import React from 'react'
-import { graphql } from 'react-apollo'
+import { graphql, compose } from 'react-apollo'
 
-import { Panel, View } from '../../components'
+import { Panel, View, Placeholder } from '../../components'
+import withApolloFetchingContainer from '../../hoc/withApolloFetchingContainer'
 
 import graphqlQuery from './EventListQuery.graphql'
 
 class EventsList extends React.Component {
     render() {
-        const { data: { events }, style, onSelectEvent } = this.props
+        const { data: { defaultEvents }, onSelectEvent } = this.props
 
-        if (!events) return <span>allllmost</span>
         return (
-            <View style={style} marginChildren>
-                {events.edges.map(({ node: event }, index) => (
+            <View marginChildren>
+                {defaultEvents.edges.map(({ node: event }, index) => (
                     <Panel
                         data-e2e={`option-event-${index}`}
                         key={event.id}
@@ -27,11 +27,25 @@ class EventsList extends React.Component {
     }
 }
 
-export default graphql(graphqlQuery, {
-    options: ({ eventSearchValue, selectedEventTypes }) => ({
-        variables: {
-            eventSearchValue,
-            eventTypes: selectedEventTypes.map(({ value }) => value),
-        },
+export default compose(
+    graphql(graphqlQuery, {
+        options: ({ eventSearchValue, selectedEventTypes }) => ({
+            variables: {
+                eventSearchValue,
+                eventTypes: selectedEventTypes.map(({ value }) => value),
+            },
+        }),
     }),
-})(EventsList)
+    withApolloFetchingContainer(
+        () => (
+            <View marginChildren>
+                {new Array(6).fill().map((_, index) => (
+                    <Panel data-e2e={`option-event-${index}`} key={index}>
+                        <Placeholder>Christmas</Placeholder>
+                    </Panel>
+                ))}
+            </View>
+        ),
+        { fullPage: true },
+    ),
+)(EventsList)

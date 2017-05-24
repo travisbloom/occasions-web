@@ -22,12 +22,22 @@ const toSpacingValue = (type) => {
     }
 }
 
-const generateStyes = ({ marginTop, margin, padding, style, inline, tabsContainer }) => ({
+const generateStyes = ({
+    marginTop,
+    marginBottom,
+    margin,
+    padding,
+    style,
+    inline,
+    tabsContainer,
+}) => ({
     display: inline ? 'inline-block' : 'inherit',
     margin: toSpacingValue(margin) || style.margin,
     padding: toSpacingValue(padding) || style.padding,
     marginTop: toSpacingValue(marginTop) || style.marginTop,
-    marginBottom: tabsContainer ? `${55 + styleVars.spacing}px` : style.marginBottom,
+    marginBottom: tabsContainer
+        ? `${55 + styleVars.spacing}px`
+        : toSpacingValue(marginBottom) || style.marginBottom,
     ...style,
 })
 
@@ -38,6 +48,7 @@ const View = ({
     marginChildrenRight,
     marginChildren,
     marginTop,
+    marginBottom,
     padding,
     style,
     tabsContainer,
@@ -51,12 +62,14 @@ const View = ({
     marginChildrenRight?: boolean,
     tabsContainer?: boolean,
     marginTop?: sizes,
+    marginBottom?: sizes,
     padding?: sizes,
     style?: CSSStyleDeclaration | any,
     children?: any,
 }) => {
     const generatedStyleObj = generateStyes({
         marginTop,
+        marginBottom,
         margin,
         padding,
         tabsContainer,
@@ -86,6 +99,7 @@ View.defaultProps = {
     marginChildren: false,
     marginChildrenRight: false,
     marginTop: false,
+    marginBottom: false,
     padding: false,
     children: null,
 }

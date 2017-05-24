@@ -3,7 +3,7 @@ import React from 'react'
 import { graphql, compose } from 'react-apollo'
 import DocumentTitle from 'react-document-title'
 
-import { View, LinkContainer, Panel, Placeholder, FormattedDate } from '../../components'
+import { View, LinkContainer, Panel, Placeholder, FormattedDate, Row, Col } from '../../components'
 import urls from '../../urls'
 import withApolloFetchingContainer from '../../hoc/withApolloFetchingContainer'
 import type { TransactionListQuery } from '../../types/schema'
@@ -23,12 +23,17 @@ class TransactionList extends React.Component {
                     to={urls.transactionDetails(node.id)}
                     key={node.id}
                 >
-                    <Panel>
+                    <Panel
+                        header={
+                            <Row>
+                                <Col xs={6}>{node.receivingPerson.fullName}</Col>
+                                <Col xs={6} style={{ textAlign: 'right' }}>
+                                    <FormattedDate date={node.datetimeCreated} />
+                                </Col>
+                            </Row>
+                        }
+                    >
                         {node.product.name}
-                        {' for '}
-                        {node.receivingPerson.fullName}
-                        {' on '}
-                        <FormattedDate date={node.datetimeCreated} />
                     </Panel>
                 </LinkContainer>
             ))}

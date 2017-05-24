@@ -1,5 +1,5 @@
 query EventListQuery($eventSearchValue: String, $eventTypes: [ID]) {
-  events(eventTypes: $eventTypes, search: $eventSearchValue) {
+  defaultEvents(eventTypes: $eventTypes, search: $eventSearchValue) {
     edges {
       node {
         id

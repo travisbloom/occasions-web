@@ -46,37 +46,47 @@ class PersonInfoPage extends React.Component {
 
     render() {
         const { handleSubmit, submitting, pristine, genderValue, client } = this.props
-        console.log(genderValue)
+
         return (
             <form onSubmit={handleSubmit(this.onSubmit)}>
                 <View marginChildren data-e2e="person-info-page">
                     <Header size="largest">Add A New Friend</Header>
-                    <ReduxFormField
-                        data-e2e="input-first-name"
-                        label="First Name"
-                        name="firstName"
-                        component={TextInput}
-                    />
-                    <ReduxFormField
-                        data-e2e="input-last-name"
-                        label="Last Name"
-                        name="lastName"
-                        component={TextInput}
-                    />
-                    <ReduxFormField
-                        data-e2e="input-email"
-                        label="Email"
-                        type="email"
-                        name="email"
-                        component={TextInput}
-                    />
-                    <ReduxFormField
-                        data-e2e="input-gender"
-                        label="Gender"
-                        name="gender"
-                        component={Select}
-                        options={this.genderOptions}
-                    />
+                    <Row>
+                        <Col xs={12} sm={6}>
+                            <ReduxFormField
+                                data-e2e="input-first-name"
+                                label="First Name"
+                                name="firstName"
+                                component={TextInput}
+                            />
+                        </Col>
+                        <Col xs={12} sm={6}>
+                            <ReduxFormField
+                                data-e2e="input-last-name"
+                                label="Last Name"
+                                name="lastName"
+                                component={TextInput}
+                            />
+                        </Col>
+                        <Col xs={12}>
+                            <ReduxFormField
+                                data-e2e="input-email"
+                                label="Email"
+                                type="email"
+                                name="email"
+                                component={TextInput}
+                            />
+                        </Col>
+                        <Col xs={12}>
+                            <ReduxFormField
+                                data-e2e="input-gender"
+                                label="Gender"
+                                name="gender"
+                                component={Select}
+                                options={this.genderOptions}
+                            />
+                        </Col>
+                    </Row>
                     <Row>
                         <Col xs={12}>{"When's"} their birthday?</Col>
                         <Col xs={6}>

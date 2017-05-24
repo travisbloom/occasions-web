@@ -21,6 +21,6 @@ $navbar-default-bg:                #2B3E50;
     margin-right: 10px;
 }
 
-.form-group {
-    margin-bottom: 0px;
+.form-group, table {
+    margin-bottom: 0px !important;
 }

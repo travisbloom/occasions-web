@@ -10,6 +10,7 @@ const FormattedDate = ({
     format,
     date,
     showYear,
+    showTime,
     ...props
 }: {
     format?: string,
@@ -25,6 +26,9 @@ const FormattedDate = ({
                     const shouldShowYear = showYear || currentYear !== momentObj.year()
                     if (shouldShowYear) {
                         return "MMM Do, 'YY"
+                    }
+                    if (showTime) {
+                        return 'MMM Do YYYY [at] h:mm A'
                     }
                     return 'MMM Do'
                 })(),
