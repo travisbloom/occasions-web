@@ -55,7 +55,9 @@ const withApolloFetchingContainer = (
             return <WrappedComponent {...this.props} renderWhenReady={this.renderWhenReady} />
         }
     }
-    WithApolloFetchingContainer.displayName = `WithApolloFetchingContainer(${getDisplayName(WrappedComponent)})`
+    WithApolloFetchingContainer.displayName = `WithApolloFetchingContainer(${getDisplayName(
+        WrappedComponent,
+    )})`
     WithApolloFetchingContainer.WrappedComponent = WrappedComponent
 
     return hoistStatics(WithApolloFetchingContainer, WrappedComponent)

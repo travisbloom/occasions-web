@@ -16,15 +16,13 @@ class PurchaseProduct extends React.Component {
             <DocumentTitle
                 title={
                     'Occasions | Gift for ' +
-                        `${associatedEvent.receivingPerson.fullName} - ` +
-                        `${associatedEvent.event.name}`
+                    `${associatedEvent.receivingPerson.fullName} - ` +
+                    `${associatedEvent.event.name}`
                 }
             >
                 <View data-e2e="page-purchase-product">
                     <Header size="largest">{product.name}</Header>
-                    <Header size="larger">
-                        For {associatedEvent.receivingPerson.fullName}
-                    </Header>
+                    <Header size="larger">For {associatedEvent.receivingPerson.fullName}</Header>
                     <View marginTop>
                         <PurchaseProductForm
                             initialValues={{
@@ -54,8 +52,12 @@ export default compose(
     withApolloFetchingContainer(
         () => (
             <View padding>
-                <Header size="largest"><Placeholder /></Header>
-                <Header size="larger"><Placeholder /></Header>
+                <Header size="largest">
+                    <Placeholder />
+                </Header>
+                <Header size="larger">
+                    <Placeholder />
+                </Header>
                 <View marginTop>
                     <PurchaseProductForm.Shell />
                 </View>

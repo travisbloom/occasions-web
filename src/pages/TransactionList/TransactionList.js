@@ -53,7 +53,11 @@ export default compose(
     graphql(graphqlQuery),
     withApolloFetchingContainer(() => (
         <View marginChildren>
-            {new Array(4).fill().map((_, index) => <Panel key={index}><Placeholder /></Panel>)}
+            {new Array(4).fill().map((_, index) => (
+                <Panel key={index}>
+                    <Placeholder />
+                </Panel>
+            ))}
         </View>
     )),
 )(TransactionList)

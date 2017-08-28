@@ -75,9 +75,11 @@ class CreateEventPage extends React.Component {
                         {'Choose Holiday'}
                     </Button>
                 </ButtonGroup>
-                {isDefaultEvent
-                    ? <EventCatalog onSelectEvent={this.handleSelectEvent} />
-                    : <CreateEventForm />}
+                {isDefaultEvent ? (
+                    <EventCatalog onSelectEvent={this.handleSelectEvent} />
+                ) : (
+                    <CreateEventForm />
+                )}
             </View>
         )
     }

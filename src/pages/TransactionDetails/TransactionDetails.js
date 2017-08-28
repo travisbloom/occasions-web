@@ -38,16 +38,12 @@ class TransactionDetails extends React.Component {
                         <FormattedDate date={transaction.datetimeCreated} showTime />
                     </Header>
                     <View marginBottom>
-                        <Header size="largest">
-                            {transaction.receivingPerson.fullName}
-                        </Header>
+                        <Header size="largest">{transaction.receivingPerson.fullName}</Header>
                     </View>
                     <Panel>
                         <Row>
                             <Col xs={4}>
-                                <View marginChildren>
-                                    {transaction.productNotes}
-                                </View>
+                                <View marginChildren>{transaction.productNotes}</View>
                             </Col>
                             <Col xs={8}>
                                 <Table striped bordered>
@@ -95,8 +91,8 @@ const Shell = () => (
                 <Col xs={4}>
                     <View marginChildren>
                         <Placeholder>
-                            Something that would be written on a card.
-                            This is a person that needs to say hello to you.
+                            Something that would be written on a card. This is a person that needs
+                            to say hello to you.
                         </Placeholder>
                     </View>
                 </Col>

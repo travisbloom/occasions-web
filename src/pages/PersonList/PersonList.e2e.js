@@ -7,5 +7,8 @@ describe('PersonList', () => {
         nightmare = getNightmare()
     })
     it('should load', () =>
-        nightmare.goto(`http://localhost:8080${urls.personList()}`).wait(el('person-link-0')).end())
+        nightmare
+            .goto(`http://localhost:8080${urls.personList()}`)
+            .wait(el('person-link-0'))
+            .end())
 })

@@ -24,15 +24,8 @@ class AddAddressPage extends React.Component {
             <form onSubmit={handleSubmit(this.onSubmit)}>
                 <View marginChildren data-e2e="add-address-page">
                     <Header size="largest">
-                        Add
-                        {' '}
-                        {addressIndex !== '0' ? 'Another' : 'An'}
-                        {' '}
-                        Address For
-                        {' '}
-                        {formValues.firstName}
-                        {' '}
-                        {formValues.lastName}
+                        Add {addressIndex !== '0' ? 'Another' : 'An'} Address For{' '}
+                        {formValues.firstName} {formValues.lastName}
                     </Header>
                     <FormSection name={`locations[${addressIndex}]`}>
                         <AddressForm />

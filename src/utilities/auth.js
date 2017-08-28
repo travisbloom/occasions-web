@@ -8,7 +8,9 @@ const saveTokensToLocalStorage = (response) => {
     const tokens = {
         accessToken: response.access_token,
         refreshToken: response.refresh_token,
-        expiresAt: moment().add(response.expires_in, 'seconds').toISOString(),
+        expiresAt: moment()
+            .add(response.expires_in, 'seconds')
+            .toISOString(),
     }
     localStorage.setItem('tokens', JSON.stringify(tokens))
     cachedAuth = tokens

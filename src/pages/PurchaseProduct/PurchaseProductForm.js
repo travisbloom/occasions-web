@@ -179,9 +179,7 @@ class PurchaseProductForm extends React.Component {
                             component={TextInput}
                             textarea
                         />
-                        <View marginTop>
-                            {this.renderCheckoutButton()}
-                        </View>
+                        <View marginTop>{this.renderCheckoutButton()}</View>
                         <Alert dismissable unHideWithChildren stackChildren bsStyle="danger">
                             {error}
                         </Alert>
@@ -211,7 +209,9 @@ const wrappedComponent = compose(
 
 wrappedComponent.Shell = () => (
     <View>
-        <Header><Placeholder>Where Should We Send This Card?</Placeholder></Header>
+        <Header>
+            <Placeholder>Where Should We Send This Card?</Placeholder>
+        </Header>
         <View>
             <Row>
                 <Col xs={12} sm={7} md={8}>

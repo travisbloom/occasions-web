@@ -39,15 +39,19 @@ class CreateAccountForm extends React.Component {
 
     createAccount = (values) => {
         const { createUser } = this.props
-        return createUser(values).catch(formatReduxFormErrors).then(() => this.signIn(values))
+        return createUser(values)
+            .catch(formatReduxFormErrors)
+            .then(() => this.signIn(values))
     }
 
     signIn = ({ username, password }) =>
-        signIn(username, password).then(this.onSuccess).catch(() => {
-            throw new SubmissionError({
-                _error: 'Invalid username and password.',
+        signIn(username, password)
+            .then(this.onSuccess)
+            .catch(() => {
+                throw new SubmissionError({
+                    _error: 'Invalid username and password.',
+                })
             })
-        })
 
     render() {
         const { handleSubmit, submitting, pristine, error } = this.props
@@ -98,9 +102,7 @@ class CreateAccountForm extends React.Component {
                             </Button>
                         </Col>
                         <Col sm={2} xs={12}>
-                            <View margin>
-                                Or
-                            </View>
+                            <View margin>Or</View>
                         </Col>
                         <Col sm={5} xs={12}>
                             <Button
@@ -111,7 +113,6 @@ class CreateAccountForm extends React.Component {
                                 Create Account
                             </Button>
                         </Col>
-
                     </Row>
                 </View>
             </form>

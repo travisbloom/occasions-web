@@ -17,7 +17,6 @@ const FourOhFour = () => (
                     </Button>
                 </LinkContainer>
             </View>
-
         </Panel>
     </Row>
 )

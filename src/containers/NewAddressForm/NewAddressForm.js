@@ -52,7 +52,6 @@ class NewAddressForm extends React.Component {
                         </Button>
                     </Modal.Footer>
                 </form>
-
             </Modal>
         )
     }

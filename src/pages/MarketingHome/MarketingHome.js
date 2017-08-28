@@ -25,12 +25,16 @@ const CollapsableArrow = () => (
     <Header size="larger">
         <MediaQuery md>
             {matches =>
-                matches
-                    ? <Icon
+                matches ? (
+                    <Icon
                         type="arrow-right"
                         style={{ display: 'inline-block', marginLeft: '8px' }}
                     />
-                    : <View margin="large"><Icon type="arrow-down" /></View>}
+                ) : (
+                    <View margin="large">
+                        <Icon type="arrow-down" />
+                    </View>
+                )}
         </MediaQuery>
     </Header>
 )
@@ -58,9 +62,7 @@ class MarketingHome extends React.Component {
                             </Button>
                         </LinkContainer>
                         <View className={classNames(styles.firstHeroContent)}>
-                            <Header size="largest">
-                                Occasions
-                            </Header>
+                            <Header size="largest">Occasions</Header>
                             <LineBreak />
                             <Header size="larger" style={{ maxWidth: '515px' }}>
                                 {
@@ -76,25 +78,19 @@ class MarketingHome extends React.Component {
                         <Grid fluid>
                             <Row between="sm" middle="sm">
                                 <Col md={3} xs={12}>
-                                    <Header size="larger">
-                                        Set Important Events
-                                    </Header>
+                                    <Header size="larger">Set Important Events</Header>
                                 </Col>
                                 <Col md={1} xs={12}>
                                     <CollapsableArrow />
                                 </Col>
                                 <Col md={3} xs={12}>
-                                    <Header size="larger">
-                                        {'Get Emailed Beforehand'}
-                                    </Header>
+                                    <Header size="larger">{'Get Emailed Beforehand'}</Header>
                                 </Col>
                                 <Col md={1} xs={12}>
                                     <CollapsableArrow />
                                 </Col>
                                 <Col md={3} xs={12}>
-                                    <Header size="larger">
-                                        {'Send Postcards With One Click'}
-                                    </Header>
+                                    <Header size="larger">{'Send Postcards With One Click'}</Header>
                                 </Col>
                             </Row>
                         </Grid>

@@ -24,9 +24,11 @@ const Select = ({
     }
     return (
         <View data-e2e={e2e}>
-            {loadOptions
-                ? <ReactSelect.Async {...passedProps} loadOptions={loadOptions} cache={false} />
-                : <ReactSelect {...passedProps} />}
+            {loadOptions ? (
+                <ReactSelect.Async {...passedProps} loadOptions={loadOptions} cache={false} />
+            ) : (
+                <ReactSelect {...passedProps} />
+            )}
         </View>
     )
 }

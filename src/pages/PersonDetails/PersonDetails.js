@@ -57,8 +57,8 @@ class PersonDetails extends React.Component {
                             style={{ backgroundColor: styleVars.colorBackground }}
                         >
                             <View marginChildren>
-                                {person.receivedEvents.edges.length
-                                    ? person.receivedEvents.edges.map(({ node }) => (
+                                {person.receivedEvents.edges.length ? (
+                                    person.receivedEvents.edges.map(({ node }) => (
                                         <LinkContainer
                                             key={node.id}
                                             to={urls.associatedEventDetails(node.id)}
@@ -67,8 +67,10 @@ class PersonDetails extends React.Component {
                                                 {node.event.name}
                                             </Panel>
                                         </LinkContainer>
-                                      ))
-                                    : <Button>Create New Occassion</Button>}
+                                    ))
+                                ) : (
+                                    <Button>Create New Occassion</Button>
+                                )}
                             </View>
                         </Panel>
                         <Panel
@@ -76,13 +78,13 @@ class PersonDetails extends React.Component {
                             eventKey="Previous Gifts"
                             style={{ backgroundColor: styleVars.colorBackground }}
                         >
-                            {person.receivedTransactions.edges.length
-                                ? <View marginChildren>
+                            {person.receivedTransactions.edges.length ? (
+                                <View marginChildren>
                                     {person.receivedEvents.edges.map(({ node }) => (
                                         <Panel key={node.id}>{node.event.name}</Panel>
-                                      ))}
+                                    ))}
                                 </View>
-                                : null}
+                            ) : null}
                         </Panel>
                     </PanelGroup>
                 </View>
@@ -93,7 +95,9 @@ class PersonDetails extends React.Component {
 
 const PersonDetailsShell = () => (
     <View marginChildren padding>
-        <Header size="largest"><Placeholder /></Header>
+        <Header size="largest">
+            <Placeholder />
+        </Header>
         <Table>
             <tbody>
                 <LineItem label={<Placeholder />}>
@@ -102,7 +106,9 @@ const PersonDetailsShell = () => (
                 <LineItem label={<Placeholder />}>
                     <Placeholder />
                 </LineItem>
-                <LineItem label={<Placeholder />}><Placeholder /></LineItem>
+                <LineItem label={<Placeholder />}>
+                    <Placeholder />
+                </LineItem>
             </tbody>
         </Table>
         <PanelGroup defaultActiveKey="Upcoming Occasions" accordion>

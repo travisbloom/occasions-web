@@ -20,12 +20,12 @@ class AssociatedEventDetails extends React.Component {
 
         return (
             <DocumentTitle
-                title={`Occasions | ${associatedEvent ? `${associatedEvent.receivingPerson.fullName} - ${associatedEvent.event.name}` : 'Event Details'}`}
+                title={`Occasions | ${associatedEvent
+                    ? `${associatedEvent.receivingPerson.fullName} - ${associatedEvent.event.name}`
+                    : 'Event Details'}`}
             >
                 <View data-e2e="associated-event-details-page">
-                    <Header size="largest">
-                        {associatedEvent.receivingPerson.fullName}
-                    </Header>
+                    <Header size="largest">{associatedEvent.receivingPerson.fullName}</Header>
                     <Header size="larger">{associatedEvent.event.name}</Header>
                     <Header size="larger">
                         <EventDate event={associatedEvent.event} />
@@ -38,7 +38,9 @@ class AssociatedEventDetails extends React.Component {
                                     header={<Header size="large">{product.name}</Header>}
                                 >
                                     <Row>
-                                        <Col xs={8} lg={10}>{product.description}</Col>
+                                        <Col xs={8} lg={10}>
+                                            {product.description}
+                                        </Col>
                                         <Col xs={4} lg={2}>
                                             <LinkContainer
                                                 to={urls.purchaseProduct(
@@ -68,18 +70,35 @@ class AssociatedEventDetails extends React.Component {
 
 const Shell = () => (
     <View padding>
-        <Header size="largest"><Placeholder>Travis Bloomberg</Placeholder></Header>
-        <Header size="larger"><Placeholder>Valentines Day</Placeholder></Header>
-        <Header size="larger"><Placeholder>Jan 4th, 1991</Placeholder></Header>
+        <Header size="largest">
+            <Placeholder>Travis Bloomberg</Placeholder>
+        </Header>
+        <Header size="larger">
+            <Placeholder>Valentines Day</Placeholder>
+        </Header>
+        <Header size="larger">
+            <Placeholder>Jan 4th, 1991</Placeholder>
+        </Header>
         <View marginChildren marginTop>
             {new Array(4).fill().map((_, index) => (
-                <Panel key={index} header={<Header size="large"><Placeholder /></Header>}>
+                <Panel
+                    key={index}
+                    header={
+                        <Header size="large">
+                            <Placeholder />
+                        </Header>
+                    }
+                >
                     <View marginChildren>
                         <Row>
                             <Col xs={8} lg={10}>
                                 <View marginChildren>
-                                    <View><Placeholder /></View>
-                                    <View><Placeholder /></View>
+                                    <View>
+                                        <Placeholder />
+                                    </View>
+                                    <View>
+                                        <Placeholder />
+                                    </View>
                                 </View>
                             </Col>
                             <Col xs={4} lg={2}>

@@ -6,12 +6,22 @@ import { EventDate } from '../../fragmentComponents'
 import urls from '../../urls'
 
 export const AssociatedEventSummaryShell = () => (
-    <Panel header={<View><Placeholder /></View>}>
+    <Panel
+        header={
+            <View>
+                <Placeholder />
+            </View>
+        }
+    >
         <Row>
             <Col xs={6}>
                 <View marginChildren>
-                    <View><Placeholder /></View>
-                    <View><Placeholder /></View>
+                    <View>
+                        <Placeholder />
+                    </View>
+                    <View>
+                        <Placeholder />
+                    </View>
                 </View>
             </Col>
             <Col xs={6}>
@@ -33,10 +43,7 @@ class AssociatedEventSummary extends React.Component {
                 <Panel
                     header={
                         <View>
-                            {associatedEvent.receivingPerson.fullName}
-                            {' '}
-                            -
-                            {' '}
+                            {associatedEvent.receivingPerson.fullName} -{' '}
                             {associatedEvent.event.name}
                         </View>
                     }
@@ -45,13 +52,17 @@ class AssociatedEventSummary extends React.Component {
                         <Col xs={6}>
                             <View marginChildren>
                                 <View>{associatedEvent.receivingPerson.fullName}</View>
-                                <View><EventDate event={associatedEvent.event} /></View>
+                                <View>
+                                    <EventDate event={associatedEvent.event} />
+                                </View>
                             </View>
                         </Col>
                         <Col xs={6}>
-                            {associatedEvent.transactions.edges.length
-                                ? 'Purchased Stuff'
-                                : 'Buy Stuff'}
+                            {associatedEvent.transactions.edges.length ? (
+                                'Purchased Stuff'
+                            ) : (
+                                'Buy Stuff'
+                            )}
                         </Col>
                     </Row>
                 </Panel>

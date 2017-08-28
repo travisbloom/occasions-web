@@ -47,7 +47,9 @@ class AssignReceivingPersonPage extends React.Component {
                         </Col>
                     </Row>
 
-                    <Button data-e2e="submit" type="submit" bsStyle="primary" block>Next</Button>
+                    <Button data-e2e="submit" type="submit" bsStyle="primary" block>
+                        Next
+                    </Button>
                 </View>
             </form>
         )

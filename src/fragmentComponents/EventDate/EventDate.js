@@ -8,9 +8,17 @@ class EventDate extends React.Component {
         const { event: { isReoccuringYearly, nextDate }, eventDate } = this.props
         const dateStart = eventDate ? eventDate.dateStart : nextDate.dateStart
         if (isReoccuringYearly) {
-            return <span><FormattedDate date={dateStart} /></span>
+            return (
+                <span>
+                    <FormattedDate date={dateStart} />
+                </span>
+            )
         }
-        return <span><FormattedDate date={dateStart} showYear /></span>
+        return (
+            <span>
+                <FormattedDate date={dateStart} showYear />
+            </span>
+        )
     }
 }
 

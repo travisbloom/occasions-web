@@ -21,7 +21,9 @@ class ConfirmationPage extends React.Component {
             eventTypes: event.eventTypes.map(({ value }) => value),
             nextDate: {
                 dateStart: moment(event.nextDate.dateStart).isBefore(moment())
-                    ? moment(event.nextDate.dateStart).add(1, 'years').format('YYYY-MM-DD')
+                    ? moment(event.nextDate.dateStart)
+                        .add(1, 'years')
+                        .format('YYYY-MM-DD')
                     : event.nextDate.dateStart,
             },
         }
@@ -45,14 +47,18 @@ class ConfirmationPage extends React.Component {
                 <View marginChildren>
                     <Panel header={`${formValues.receivingPersonId.label}'s Event`}>
                         <View>{formValues.event.name}</View>
-                        <View><EventDate event={formValues.event} /></View>
+                        <View>
+                            <EventDate event={formValues.event} />
+                        </View>
                         <View>
                             {formValues.event.eventTypes.map(({ node }) => (
                                 <View key={node.id}>{node.displayName}</View>
                             ))}
                         </View>
                     </Panel>
-                    <Button data-e2e="submit" type="submit" block>Create Event</Button>
+                    <Button data-e2e="submit" type="submit" block>
+                        Create Event
+                    </Button>
                     <Alert dismissable unHideWithChildren stackChildren bsStyle="danger">
                         {error}
                     </Alert>

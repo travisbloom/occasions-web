@@ -46,7 +46,7 @@ class EventsCatalog extends React.Component {
                 <MediaQuery sm>
                     {matches => (
                         <Row>
-                            {matches &&
+                            {matches && (
                                 <Col xs={12} sm={4}>
                                     <FormField label="Filter Events">
                                         <TextInput
@@ -54,7 +54,8 @@ class EventsCatalog extends React.Component {
                                             value={eventSearchValue}
                                         />
                                     </FormField>
-                                </Col>}
+                                </Col>
+                            )}
                             <Col xs={12} sm={8}>
                                 <FormField label="Filter Types">
                                     <Select

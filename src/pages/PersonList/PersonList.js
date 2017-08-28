@@ -23,9 +23,7 @@ class PersonList extends React.Component {
                     to={urls.personDetails(node.toPerson.id)}
                     key={node.id}
                 >
-                    <Panel>
-                        {node.toPerson.fullName}
-                    </Panel>
+                    <Panel>{node.toPerson.fullName}</Panel>
                 </LinkContainer>
             ))}
         </View>
@@ -36,7 +34,9 @@ class PersonList extends React.Component {
                 <View marginChildren>
                     <View>
                         <LinkContainer to={urls.createPerson()}>
-                            <Button block bsStyle="primary">Add Contact</Button>
+                            <Button block bsStyle="primary">
+                                Add Contact
+                            </Button>
                         </LinkContainer>
                     </View>
                     {this.props.renderWhenReady(this.renderBody)}
@@ -49,7 +49,11 @@ export default compose(
     graphql(graphqlQuery),
     withApolloFetchingContainer(() => (
         <View marginChildren>
-            {new Array(4).fill().map((_, index) => <Panel key={index}><Placeholder /></Panel>)}
+            {new Array(4).fill().map((_, index) => (
+                <Panel key={index}>
+                    <Placeholder />
+                </Panel>
+            ))}
         </View>
     )),
 )(PersonList)

@@ -24,7 +24,13 @@ const Button = ({
         />
     )
     if (!responsive) return button
-    return <Row center="xs" start="md"><Col xs={10} sm={4}>{button}</Col></Row>
+    return (
+        <Row center="xs" start="md">
+            <Col xs={10} sm={4}>
+                {button}
+            </Col>
+        </Row>
+    )
 }
 
 export default Button
