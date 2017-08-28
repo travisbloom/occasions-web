@@ -23,8 +23,8 @@ import graphqlQuery from './TransactionDetailsQuery.graphql'
 
 const LineItem = ({ label, children }) => (
     <tr>
-        <td xs={4}>{label}</td>
-        <td xs={8}>{children}</td>
+        <td>{label}</td>
+        <td>{children}</td>
     </tr>
 )
 
