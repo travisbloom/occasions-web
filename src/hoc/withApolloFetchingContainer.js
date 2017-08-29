@@ -1,31 +1,30 @@
 // @flow
-import React from 'react'
+import * as React from 'react'
 import hoistStatics from 'hoist-non-react-statics'
 
 import { AnimatedFade, Alert, View } from '../components'
 import { formatGeneralAPIErrors } from '../utilities/errors'
 
-const getDisplayName = WrappedComponent =>
+const getDisplayName = (WrappedComponent): string =>
     WrappedComponent.displayName || WrappedComponent.name || 'Component'
 const IS_LOADING_NETWORK_STATUS = 1
 
 const withApolloFetchingContainer = (
-    PlaceholderComponent: ReactComponent<*>,
-    { fullPage }: { fullPage?: boolean } = {},
-) => (WrappedComponent: ReactComponent<*>) => {
-    class WithApolloFetchingContainer extends React.Component {
-        static WrappedComponent: ReactComponent<*>
-        static propTypes = {
-            data: React.PropTypes.shape({
-                networkStatus: React.PropTypes.number,
-            }).isRequired,
-        }
+    PlaceholderComponent: React.ComponentType<any>,
+    { fullPage }: { fullPage?: boolean } = {}
+) => <Props: {}>(
+    WrappedComponent: React.ComponentType<{ renderWhenReady?: (fn: () => any) => any } & Props>
+) => {
+    class WithApolloFetchingContainer extends React.Component<{
+        data: { networkStatus: number, error: any },
+    }> {
+        static WrappedComponent: React.ComponentType<any>
 
-        getRenderedContent = (fn) => {
+        getRenderedContent = (fn: () => any) => {
             const { data: { networkStatus, error } } = this.props
             if (error) {
                 const content = (
-                    <Alert isHiddenWithoutChildren canBeHidden shouldStackChildren>
+                    <Alert unHideWithChildren canBeHidden stackChildren>
                         {formatGeneralAPIErrors(error)}
                     </Alert>
                 )
@@ -37,7 +36,7 @@ const withApolloFetchingContainer = (
             return { content: fn(), key: 'content' }
         }
 
-        renderWhenReady = (fn) => {
+        renderWhenReady = fn => {
             const { content, key } = this.getRenderedContent(fn)
             return (
                 <AnimatedFade getKey={() => key}>
@@ -55,7 +54,9 @@ const withApolloFetchingContainer = (
             return <WrappedComponent {...this.props} renderWhenReady={this.renderWhenReady} />
         }
     }
-    WithApolloFetchingContainer.displayName = `WithApolloFetchingContainer(${getDisplayName(WrappedComponent)})`
+    WithApolloFetchingContainer.displayName = `WithApolloFetchingContainer(${getDisplayName(
+        WrappedComponent
+    )})`
     WithApolloFetchingContainer.WrappedComponent = WrappedComponent
 
     return hoistStatics(WithApolloFetchingContainer, WrappedComponent)

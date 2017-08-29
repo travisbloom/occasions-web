@@ -18,8 +18,8 @@ export default ({ apolloClient, history, initialState = {} }) => {
         initialState,
         compose(
             applyMiddleware(apolloClient.middleware(), thunk, routerMiddleware(history)),
-            window.devToolsExtension ? window.devToolsExtension() : f => f,
-        ),
+            window.devToolsExtension ? window.devToolsExtension() : f => f
+        )
     )
     return store
 }

@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import * as React from 'react'
 import { graphql, compose, withApollo } from 'react-apollo'
 import _ from 'lodash'
 
@@ -9,11 +9,15 @@ import { searchEventTypes } from '../../utilities/search'
 import EventsList from './EventsList'
 import graphqlQuery from './EventCatalogQuery.graphql'
 
-class EventsCatalog extends React.Component {
-    props: {
+class EventsCatalog extends React.Component<
+    {
         onSelectEvent: () => void,
+    },
+    {
+        eventSearchValue: string,
+        selectedEventTypes: Array<{ label: string, value: string | number }>,
     }
-
+> {
     state = {
         eventSearchValue: '',
         selectedEventTypes: [],
@@ -33,7 +37,7 @@ class EventsCatalog extends React.Component {
                         value: eventType.id,
                     },
                 ],
-                _.isEqual,
+                _.isEqual
             ),
         }))
 
@@ -46,7 +50,7 @@ class EventsCatalog extends React.Component {
                 <MediaQuery sm>
                     {matches => (
                         <Row>
-                            {matches &&
+                            {matches && (
                                 <Col xs={12} sm={4}>
                                     <FormField label="Filter Events">
                                         <TextInput
@@ -54,7 +58,8 @@ class EventsCatalog extends React.Component {
                                             value={eventSearchValue}
                                         />
                                     </FormField>
-                                </Col>}
+                                </Col>
+                            )}
                             <Col xs={12} sm={8}>
                                 <FormField label="Filter Types">
                                     <Select

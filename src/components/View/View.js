@@ -1,24 +1,24 @@
 // @flow
-import React from 'react'
+import * as React from 'react'
 import { isBoolean } from 'lodash'
 import classNames from 'classnames'
 
 import styles from './View.scss'
 import styleVars from '../../styles'
 
-type sizes = 'small' | 'medium' | 'large'
+type sizes = 'small' | 'medium' | 'large' | boolean
 
-const toSpacingValue = (type) => {
+const toSpacingValue = type => {
     const usedType = isBoolean(type) && type ? 'medium' : type
     switch (usedType) {
-    case 'small':
-        return `${styleVars.spacingSmall}px`
-    case 'medium':
-        return `${styleVars.spacing}px`
-    case 'large':
-        return `${styleVars.spacingLarge}px`
-    default:
-        return null
+        case 'small':
+            return `${styleVars.spacingSmall}px`
+        case 'medium':
+            return `${styleVars.spacing}px`
+        case 'large':
+            return `${styleVars.spacingLarge}px`
+        default:
+            return null
     }
 }
 
@@ -83,11 +83,11 @@ const View = ({
             className: classNames(
                 marginChildren && styles.marginChildren,
                 marginChildrenRight && styles.marginChildrenRight,
-                className,
+                className
             ),
             ...props,
         },
-        children,
+        children
     )
 }
 

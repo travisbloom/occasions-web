@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import * as React from 'react'
 import { graphql, compose } from 'react-apollo'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
@@ -9,7 +9,7 @@ import { View, Alert, Grid, AnimatedRouter, FourOhFour } from '../../components'
 import { closeError } from '../../actions/alerts'
 import type { AppQuery } from '../../types/schema'
 
-import Navbar from './Navbar'
+import AppNav from './Navbar'
 import Tabs from './Tabs'
 import graphqlQuery from './AppQuery.graphql'
 import routes from './routes'
@@ -21,19 +21,24 @@ const flattenRoutes = topRoutes =>
         ...flattenRoutes(nestedRoutes),
     ])
 
-class App extends React.Component {
-    flattenedRoutes: Array<{ path: string, component: ReactComponent<*>, exact: boolean }>
-    props: {
-        data: AppQuery,
-        location: Location,
-        errors: Array<string>,
-        closeError: number => void,
-    }
+type Props = {
+    data: AppQuery,
+    location: Location,
+    errors: Array<string>,
+    closeError: number => void,
+}
+
+class App extends React.Component<Props, { hasBackButton: boolean }> {
+    flattenedRoutes: Array<{
+        path: string,
+        component: React.Component<*>,
+        exact: boolean,
+    }>
     state = {
         hasBackButton: false,
     }
 
-    constructor(props) {
+    constructor(props: Props) {
         super(props)
         this.flattenedRoutes = flattenRoutes(routes)
     }
@@ -43,7 +48,7 @@ class App extends React.Component {
         const routeProps = { currentUser }
         return (
             <View>
-                <Navbar hasBackButton={this.state.hasBackButton} currentUser={currentUser} />
+                <AppNav currentUser={currentUser} />
                 <View
                     style={{
                         position: 'fixed',
@@ -82,5 +87,5 @@ class App extends React.Component {
 
 export default compose(
     graphql(graphqlQuery),
-    connect(({ alerts: { errors } }) => ({ errors }), { closeError }),
+    connect(({ alerts: { errors } }) => ({ errors }), { closeError })
 )(App)

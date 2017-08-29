@@ -1,6 +1,6 @@
 // @flow
-import React from 'react'
-import { graphql, compose } from 'react-apollo'
+import * as React from 'react'
+import { compose } from 'react-apollo'
 import { withRouter, Redirect } from 'react-router-dom'
 import DocumentTitle from 'react-document-title'
 import { reduxForm, formValueSelector } from 'redux-form'
@@ -13,7 +13,7 @@ import AssignReceivingPersonPage from './AssignReceivingPersonPage'
 import CreateEventPage from './CreateEventPage'
 import ConfirmationPage from './ConfirmationPage'
 
-class CreateAssociatedEvent extends React.Component {
+class CreateAssociatedEvent extends React.Component<$FlowFixMeProps> {
     render() {
         const { receivingPersonIdValue, location } = this.props
         if (!receivingPersonIdValue && location.pathname !== urls.createAssociatedEvent()) {
@@ -56,5 +56,5 @@ export default compose(
     }),
     connect(state => ({
         receivingPersonIdValue: selector(state, 'receivingPersonId'),
-    })),
+    }))
 )(CreateAssociatedEvent)

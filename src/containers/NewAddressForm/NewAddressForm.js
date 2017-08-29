@@ -1,16 +1,16 @@
 // @flow
 
-import React from 'react'
+import * as React from 'react'
 import { reduxForm, FormSection } from 'redux-form'
 import { graphql, compose } from 'react-apollo'
 
-import { Button, Row, Alert, View, AddressForm, Modal } from '../../components'
+import { Button, Alert, AddressForm, Modal } from '../../components'
 import { formatReduxFormErrors } from '../../utilities/errors'
 
 import graphqlQuery from './CreateAssociatedLocationMutation.graphql'
 
-class NewAddressForm extends React.Component {
-    createNewAssociatedLocation = (values) => {
+class NewAddressForm extends React.Component<$FlowFixMeProps, $FlowFixMeState> {
+    createNewAssociatedLocation = values => {
         const { createNewAssociatedLocation, onComplete } = this.props
         const formattedPayload = {
             ...values,
@@ -52,7 +52,6 @@ class NewAddressForm extends React.Component {
                         </Button>
                     </Modal.Footer>
                 </form>
-
             </Modal>
         )
     }
@@ -66,5 +65,5 @@ export default compose(
     }),
     reduxForm({
         form: 'NewAddressForm',
-    }),
+    })
 )(NewAddressForm)

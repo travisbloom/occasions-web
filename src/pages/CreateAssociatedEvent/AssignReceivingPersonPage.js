@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import * as React from 'react'
 import { reduxForm } from 'redux-form'
 import { withRouter } from 'react-router-dom'
 import { compose, withApollo } from 'react-apollo'
@@ -19,7 +19,7 @@ import { searchPeople } from '../../utilities/search'
 import urls from '../../urls'
 import validate from './validate'
 
-class AssignReceivingPersonPage extends React.Component {
+class AssignReceivingPersonPage extends React.Component<$FlowFixMeProps> {
     onSubmit = () => this.props.history.push(`${urls.createAssociatedEvent()}/createEvent`)
     render() {
         const { client, handleSubmit } = this.props
@@ -47,7 +47,9 @@ class AssignReceivingPersonPage extends React.Component {
                         </Col>
                     </Row>
 
-                    <Button data-e2e="submit" type="submit" bsStyle="primary" block>Next</Button>
+                    <Button data-e2e="submit" type="submit" bsStyle="primary" block>
+                        Next
+                    </Button>
                 </View>
             </form>
         )
@@ -61,5 +63,5 @@ export default compose(
         validate,
     }),
     withApollo,
-    withRouter,
+    withRouter
 )(AssignReceivingPersonPage)

@@ -1,6 +1,6 @@
 // @flow
 
-import React from 'react'
+import * as React from 'react'
 import { reduxForm, SubmissionError } from 'redux-form'
 import { connect } from 'react-redux'
 import { graphql, compose, withApollo } from 'react-apollo'
@@ -24,10 +24,10 @@ import { logOut } from '../../actions/user'
 
 import graphqlQuery from './CreateUserMutation.graphql'
 
-class CreateAccountForm extends React.Component {
+class CreateAccountForm extends React.Component<$FlowFixMeProps> {
     componentDidMount() {
-        const { client, logOut } = this.props
-        logOut()
+        const { client, dispatch } = this.props
+        dispatch(logOut())
         client.networkInterface.setUri(`${APP_ENV.appServer}/graphql_public`)
     }
 
@@ -37,17 +37,21 @@ class CreateAccountForm extends React.Component {
         history.push(urls.associatedEventsList())
     }
 
-    createAccount = (values) => {
+    createAccount = values => {
         const { createUser } = this.props
-        return createUser(values).catch(formatReduxFormErrors).then(() => this.signIn(values))
+        return createUser(values)
+            .catch(formatReduxFormErrors)
+            .then(() => this.signIn(values))
     }
 
     signIn = ({ username, password }) =>
-        signIn(username, password).then(this.onSuccess).catch(() => {
-            throw new SubmissionError({
-                _error: 'Invalid username and password.',
+        signIn(username, password)
+            .then(this.onSuccess)
+            .catch(() => {
+                throw new SubmissionError({
+                    _error: 'Invalid username and password.',
+                })
             })
-        })
 
     render() {
         const { handleSubmit, submitting, pristine, error } = this.props
@@ -98,9 +102,7 @@ class CreateAccountForm extends React.Component {
                             </Button>
                         </Col>
                         <Col sm={2} xs={12}>
-                            <View margin>
-                                Or
-                            </View>
+                            <View margin>Or</View>
                         </Col>
                         <Col sm={5} xs={12}>
                             <Button
@@ -111,7 +113,6 @@ class CreateAccountForm extends React.Component {
                                 Create Account
                             </Button>
                         </Col>
-
                     </Row>
                 </View>
             </form>
@@ -129,7 +130,7 @@ export default compose(
         form: 'CreateAccountForm',
         initialValues: { username: '', password: '' },
     }),
-    connect(null, { logOut }),
+    connect(),
     withRouter,
-    withApollo,
+    withApollo
 )(CreateAccountForm)

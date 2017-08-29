@@ -1,6 +1,6 @@
 import debug from './debug'
 
-const checkStatus = (response) => {
+const checkStatus = response => {
     if (response.status >= 200 && response.status < 300) {
         return response
     }
@@ -11,7 +11,7 @@ const checkStatus = (response) => {
 
 const NO_CONTENT_STATUS = 204
 
-const parseJSON = (response) => {
+const parseJSON = response => {
     if (response.status === NO_CONTENT_STATUS) {
         return null
     }
@@ -20,18 +20,18 @@ const parseJSON = (response) => {
 
 export default (...args) =>
     fetch(...args)
-        .then((response) => {
+        .then(response => {
             try {
                 return parseJSON(checkStatus(response))
             } catch (e) {
                 throw parseJSON(e.response)
             }
         })
-        .then((data) => {
+        .then(data => {
             debug('request succeeded with JSON response', data)
             return data
         })
-        .catch((error) => {
+        .catch(error => {
             debug('request failed', error.response)
             throw error
         })

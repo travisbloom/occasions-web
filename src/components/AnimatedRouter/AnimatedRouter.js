@@ -1,3 +1,4 @@
+// @flow
 import React from 'react'
 import { Route, matchPath, withRouter, Switch } from 'react-router-dom'
 import { Motion } from 'data-driven-motion'
@@ -6,7 +7,7 @@ import { View } from '../'
 
 const WOBBLY_SPRING = { stiffness: 200, damping: 15, precision: 0.1 }
 
-class AnimatedSwitch extends React.Component {
+class AnimatedSwitch extends React.Component<*> {
     getKey = ({ child, location, match }) =>
         child.props.getKey
             ? child.props.getKey({ location, match })
@@ -17,7 +18,7 @@ class AnimatedSwitch extends React.Component {
         const location = this.props.location
         let match
         let child
-        React.Children.forEach(children, (element) => {
+        React.Children.forEach(children, element => {
             if (match == null) {
                 child = element
                 match = matchPath(location.pathname, element.props)

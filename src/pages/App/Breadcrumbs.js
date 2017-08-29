@@ -12,7 +12,10 @@ const generateBreadcrumbs = (accum, topRoutes, location) => {
     topRoutes.some(({ path, breadcrumb, routes }) => {
         const matches = matchPath(location.pathname, path)
         if (matches) {
-            accum.push({ breadcrumb, pathname: generatePathname(path, matches.params) })
+            accum.push({
+                breadcrumb,
+                pathname: generatePathname(path, matches.params),
+            })
             generateBreadcrumbs(accum, routes, location)
         }
         return !!matches

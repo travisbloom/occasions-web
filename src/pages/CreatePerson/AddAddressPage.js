@@ -1,6 +1,6 @@
 // @flow
 
-import React from 'react'
+import * as React from 'react'
 import { reduxForm, FormSection, getFormValues } from 'redux-form'
 import { connect } from 'react-redux'
 import { compose } from 'react-apollo'
@@ -10,7 +10,7 @@ import urls from '../../urls'
 
 import validate from './validate'
 
-class AddAddressPage extends React.Component {
+class AddAddressPage extends React.Component<$FlowFixMeProps> {
     onSubmit = () => this.props.history.push(`${urls.createPerson()}/confirmation`)
     render() {
         const {
@@ -24,15 +24,8 @@ class AddAddressPage extends React.Component {
             <form onSubmit={handleSubmit(this.onSubmit)}>
                 <View marginChildren data-e2e="add-address-page">
                     <Header size="largest">
-                        Add
-                        {' '}
-                        {addressIndex !== '0' ? 'Another' : 'An'}
-                        {' '}
-                        Address For
-                        {' '}
-                        {formValues.firstName}
-                        {' '}
-                        {formValues.lastName}
+                        Add {addressIndex !== '0' ? 'Another' : 'An'} Address For{' '}
+                        {formValues.firstName} {formValues.lastName}
                     </Header>
                     <FormSection name={`locations[${addressIndex}]`}>
                         <AddressForm />
@@ -60,5 +53,5 @@ export default compose(
         validate,
         destroyOnUnmount: false,
         form: 'CreatePersonForm',
-    }),
+    })
 )(AddAddressPage)

@@ -1,6 +1,6 @@
 // @flow
 
-import React from 'react'
+import * as React from 'react'
 import { reduxForm, Form } from 'redux-form'
 import { graphql, compose } from 'react-apollo'
 import { withRouter } from 'react-router-dom'
@@ -26,8 +26,9 @@ import { NewAddressForm } from '../../containers'
 import createStripeUserGraphqlQuery from './CreateStripeUserMutation.graphql'
 import createTransactionGraphqlQuery from './CreateTransactionMutation.graphql'
 
-class PurchaseProductForm extends React.Component {
-    state: {
+class PurchaseProductForm extends React.Component<
+    $FlowFixMeProps,
+    {
         isAddingNewAddress: boolean,
         intialAddressFormValues: ?{
             personId: number,
@@ -40,7 +41,7 @@ class PurchaseProductForm extends React.Component {
             },
         },
     }
-
+> {
     constructor(props) {
         super(props)
         this.state = {
@@ -57,7 +58,7 @@ class PurchaseProductForm extends React.Component {
                 change('locationId', {
                     label: newAssociatedLocation.location.displayName,
                     value: newAssociatedLocation.id,
-                }),
+                })
             )
             .then(this.onToggleNewAddressForm)
     }
@@ -67,19 +68,19 @@ class PurchaseProductForm extends React.Component {
             isAddingNewAddress: !prevState.isAddingNewAddress,
             intialAddressFormValues: !prevState.isAddingNewAddress
                 ? {
-                    personId: this.props.associatedEvent.receivingPerson.id,
-                    location: {
-                        streetAddressLine1: '',
-                        streetAddressLine2: '',
-                        city: '',
-                        state: '',
-                        postalCode: '',
-                    },
-                }
+                      personId: this.props.associatedEvent.receivingPerson.id,
+                      location: {
+                          streetAddressLine1: '',
+                          streetAddressLine2: '',
+                          city: '',
+                          state: '',
+                          postalCode: '',
+                      },
+                  }
                 : null,
         }))
 
-    onToken = (values) => {
+    onToken = values => {
         const { createStripeUser, submit } = this.props
         createStripeUser(values).then(submit)
     }
@@ -92,7 +93,7 @@ class PurchaseProductForm extends React.Component {
         }))
     }
 
-    purchaseProduct = (values) => {
+    purchaseProduct = values => {
         const { purchaseProduct, history } = this.props
         const variables = {
             ...values,
@@ -102,12 +103,12 @@ class PurchaseProductForm extends React.Component {
         }
         return purchaseProduct(variables)
             .then(({ data: { createTransaction: { transaction } } }) =>
-                history.push(urls.transactionDetails(transaction.id)),
+                history.push(urls.transactionDetails(transaction.id))
             )
             .catch(formatReduxFormErrors)
     }
 
-    handleSubmit = (values) => {
+    handleSubmit = values => {
         const { currentUser } = this.props
         if (currentUser.hasStripeUser) {
             return this.purchaseProduct(values)
@@ -179,9 +180,7 @@ class PurchaseProductForm extends React.Component {
                             component={TextInput}
                             textarea
                         />
-                        <View marginTop>
-                            {this.renderCheckoutButton()}
-                        </View>
+                        <View marginTop>{this.renderCheckoutButton()}</View>
                         <Alert dismissable unHideWithChildren stackChildren bsStyle="danger">
                             {error}
                         </Alert>
@@ -206,12 +205,14 @@ const wrappedComponent = compose(
     reduxForm({
         form: 'PurchaseProductForm',
     }),
-    withRouter,
+    withRouter
 )(PurchaseProductForm)
 
 wrappedComponent.Shell = () => (
     <View>
-        <Header><Placeholder>Where Should We Send This Card?</Placeholder></Header>
+        <Header>
+            <Placeholder>Where Should We Send This Card?</Placeholder>
+        </Header>
         <View>
             <Row>
                 <Col xs={12} sm={7} md={8}>

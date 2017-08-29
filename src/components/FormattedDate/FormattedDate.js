@@ -1,6 +1,6 @@
 // @flow
 import moment from 'moment'
-import React from 'react'
+import * as React from 'react'
 
 import { toMoment } from '../../utilities/datetime'
 
@@ -16,6 +16,7 @@ const FormattedDate = ({
     format?: string,
     date: string,
     showYear?: boolean,
+    showTime?: boolean,
 }) => {
     const momentObj = toMoment(date)
     return (
@@ -31,7 +32,7 @@ const FormattedDate = ({
                         return 'MMM Do YYYY [at] h:mm A'
                     }
                     return 'MMM Do'
-                })(),
+                })()
             )}
         </span>
     )

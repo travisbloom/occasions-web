@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import * as React from 'react'
 import { graphql, compose } from 'react-apollo'
 import DocumentTitle from 'react-document-title'
 
@@ -10,25 +10,23 @@ import {
     Row,
     Col,
     Table,
-    Button,
     FormattedDate,
     FormattedNumber,
     Placeholder,
 } from '../../components'
 import { EventDate } from '../../fragmentComponents'
-import urls from '../../urls'
 import withApolloFetchingContainer from '../../hoc/withApolloFetchingContainer'
 
 import graphqlQuery from './TransactionDetailsQuery.graphql'
 
 const LineItem = ({ label, children }) => (
     <tr>
-        <td xs={4}>{label}</td>
-        <td xs={8}>{children}</td>
+        <td>{label}</td>
+        <td>{children}</td>
     </tr>
 )
 
-class TransactionDetails extends React.Component {
+class TransactionDetails extends React.Component<$FlowFixMeProps> {
     render() {
         const { data: { transaction } } = this.props
         return (
@@ -38,16 +36,12 @@ class TransactionDetails extends React.Component {
                         <FormattedDate date={transaction.datetimeCreated} showTime />
                     </Header>
                     <View marginBottom>
-                        <Header size="largest">
-                            {transaction.receivingPerson.fullName}
-                        </Header>
+                        <Header size="largest">{transaction.receivingPerson.fullName}</Header>
                     </View>
                     <Panel>
                         <Row>
                             <Col xs={4}>
-                                <View marginChildren>
-                                    {transaction.productNotes}
-                                </View>
+                                <View marginChildren>{transaction.productNotes}</View>
                             </Col>
                             <Col xs={8}>
                                 <Table striped bordered>
@@ -95,8 +89,8 @@ const Shell = () => (
                 <Col xs={4}>
                     <View marginChildren>
                         <Placeholder>
-                            Something that would be written on a card.
-                            This is a person that needs to say hello to you.
+                            Something that would be written on a card. This is a person that needs
+                            to say hello to you.
                         </Placeholder>
                     </View>
                 </Col>
@@ -126,5 +120,5 @@ export default compose(
             variables: { transactionId },
         }),
     }),
-    withApolloFetchingContainer(Shell, { fullPage: true }),
+    withApolloFetchingContainer(Shell, { fullPage: true })
 )(TransactionDetails)

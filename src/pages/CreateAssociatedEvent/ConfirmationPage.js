@@ -1,6 +1,6 @@
 // @flow
 import moment from 'moment'
-import React from 'react'
+import * as React from 'react'
 import { reduxForm, Form, getFormValues } from 'redux-form'
 import { connect } from 'react-redux'
 import { graphql, compose, withApollo } from 'react-apollo'
@@ -13,7 +13,7 @@ import urls from '../../urls'
 
 import graphqlQuery from './CreateAssociatedEventMutation.graphql'
 
-class ConfirmationPage extends React.Component {
+class ConfirmationPage extends React.Component<$FlowFixMeProps> {
     handleSubmit = ({ eventId, event, receivingPersonId }) => {
         const { createAssociatedEvent, history } = this.props
         const formattedEvent = event && {
@@ -21,7 +21,9 @@ class ConfirmationPage extends React.Component {
             eventTypes: event.eventTypes.map(({ value }) => value),
             nextDate: {
                 dateStart: moment(event.nextDate.dateStart).isBefore(moment())
-                    ? moment(event.nextDate.dateStart).add(1, 'years').format('YYYY-MM-DD')
+                    ? moment(event.nextDate.dateStart)
+                          .add(1, 'years')
+                          .format('YYYY-MM-DD')
                     : event.nextDate.dateStart,
             },
         }
@@ -32,7 +34,7 @@ class ConfirmationPage extends React.Component {
         }
         return createAssociatedEvent(input)
             .then(({ data: { createAssociatedEvent: { associatedEvent } } }) =>
-                history.push(urls.associatedEventDetails(associatedEvent.id)),
+                history.push(urls.associatedEventDetails(associatedEvent.id))
             )
             .catch(formatGeneralReduxFormErrors)
     }
@@ -45,14 +47,18 @@ class ConfirmationPage extends React.Component {
                 <View marginChildren>
                     <Panel header={`${formValues.receivingPersonId.label}'s Event`}>
                         <View>{formValues.event.name}</View>
-                        <View><EventDate event={formValues.event} /></View>
+                        <View>
+                            <EventDate event={formValues.event} />
+                        </View>
                         <View>
                             {formValues.event.eventTypes.map(({ node }) => (
                                 <View key={node.id}>{node.displayName}</View>
                             ))}
                         </View>
                     </Panel>
-                    <Button data-e2e="submit" type="submit" block>Create Event</Button>
+                    <Button data-e2e="submit" type="submit" block>
+                        Create Event
+                    </Button>
                     <Alert dismissable unHideWithChildren stackChildren bsStyle="danger">
                         {error}
                     </Alert>
@@ -77,5 +83,5 @@ export default compose(
         destroyOnUnmount: false,
     }),
     withRouter,
-    withApollo,
+    withApollo
 )(ConfirmationPage)

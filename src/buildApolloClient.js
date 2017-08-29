@@ -1,7 +1,7 @@
 import ApolloClient, { HTTPFetchNetworkInterface, toIdValue } from 'apollo-client'
 
 import urls from './urls'
-import { getAccessToken, hasAccessToken, revokeTokens } from './utilities/auth'
+import { getAccessToken, hasAccessToken } from './utilities/auth'
 import debug from './utilities/debug'
 
 /* eslint-disable no-underscore-dangle */
@@ -31,7 +31,7 @@ export default ({ history }) => {
                     return
                 }
                 getAccessToken()
-                    .then((accessToken) => {
+                    .then(accessToken => {
                         if (!req.options.headers) {
                             req.options.headers = {}
                         }

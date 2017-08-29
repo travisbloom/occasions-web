@@ -1,11 +1,10 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import Nightmare from 'nightmare'
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 10 * 1000
 
 Nightmare.action('focus', function focus(selector, done) {
     this.evaluate_now(
-        (nestedSelector) => {
+        nestedSelector => {
             document.activeElement.blur()
             const element = document.querySelector(nestedSelector)
             if (!element) {
@@ -14,7 +13,7 @@ Nightmare.action('focus', function focus(selector, done) {
             element.focus()
         },
         done,
-        selector,
+        selector
     )
 })
 
@@ -33,7 +32,7 @@ export const getNightmare = () =>
 // NOTE: if you arent focused on the electron window, this wont work as expected (weird huh?)
 export const selectReactDatesDay = (date, reactDatesSelector = '') => {
     const dateSelector = `[aria-label="${date.format('dddd')}, ${date.format('LL')}"]`
-    return (nightmare) => {
+    return nightmare => {
         nightmare
             .focus(`${reactDatesSelector} .DateInput__input`)
             .wait(100)
@@ -42,7 +41,7 @@ export const selectReactDatesDay = (date, reactDatesSelector = '') => {
     }
 }
 
-export const selectReactSelectOption = (optionIndex = 0, reactDatesSelector = '') => (nightmare) => {
+export const selectReactSelectOption = (optionIndex = 0, reactDatesSelector = '') => nightmare => {
     nightmare
         .mousedown(`${reactDatesSelector} .Select-control`)
         .wait(200)

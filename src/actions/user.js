@@ -6,5 +6,5 @@ export const logOut = () => (dispatch: () => void) =>
     revokeTokens().then(() =>
         dispatch({
             type: LOG_OUT,
-        }),
+        })
     )

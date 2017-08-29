@@ -26,8 +26,11 @@ if (process.env.NODE_ENV !== 'production') {
             JSON.stringify({
                 accessToken,
                 refreshToken,
-                expiresAt: window.moment().subtract(1, 'hours').toISOString(),
-            }),
+                expiresAt: window
+                    .moment()
+                    .subtract(1, 'hours')
+                    .toISOString(),
+            })
         )
     }
 }
@@ -41,16 +44,14 @@ const store = createStore({
     initialState: { user: { isLoggedIn: hasAccessToken() } },
 })
 
-const render = (passedRoutes) => {
+const render = passedRoutes => {
     ReactDOM.render(
         <AppContainer>
             <ApolloProvider client={apolloClient} store={store}>
-                <ConnectedRouter history={history}>
-                    {passedRoutes}
-                </ConnectedRouter>
+                <ConnectedRouter history={history}>{passedRoutes}</ConnectedRouter>
             </ApolloProvider>
         </AppContainer>,
-        document.getElementById('root'),
+        document.getElementById('root')
     )
 }
 

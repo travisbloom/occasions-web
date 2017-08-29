@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import * as React from 'react'
 import { Button as BootstrapButton } from 'react-bootstrap'
 import { Row, Col } from '../'
 
@@ -12,7 +12,7 @@ const Button = ({
 }: {
     block?: boolean,
     responsive?: boolean,
-    bsStyle?: bsStyle,
+    bsStyle?: 'primary',
     type?: 'submit' | 'button',
 }) => {
     const button = (
@@ -24,7 +24,13 @@ const Button = ({
         />
     )
     if (!responsive) return button
-    return <Row center="xs" start="md"><Col xs={10} sm={4}>{button}</Col></Row>
+    return (
+        <Row center="xs" start="md">
+            <Col xs={10} sm={4}>
+                {button}
+            </Col>
+        </Row>
+    )
 }
 
 export default Button

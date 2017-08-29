@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import * as React from 'react'
 
 import styleVars from '../../styles'
 import { View } from '../'

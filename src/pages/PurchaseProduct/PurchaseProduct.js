@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import * as React from 'react'
 import { graphql, compose } from 'react-apollo'
 import DocumentTitle from 'react-document-title'
 
@@ -9,22 +9,20 @@ import withApolloFetchingContainer from '../../hoc/withApolloFetchingContainer'
 import PurchaseProductForm from './PurchaseProductForm'
 import graphqlQuery from './PurchaseProductQuery.graphql'
 
-class PurchaseProduct extends React.Component {
+class PurchaseProduct extends React.Component<$FlowFixMeProps> {
     render() {
         const { data: { associatedEvent, product, currentUser, refetch } } = this.props
         return (
             <DocumentTitle
                 title={
                     'Occasions | Gift for ' +
-                        `${associatedEvent.receivingPerson.fullName} - ` +
-                        `${associatedEvent.event.name}`
+                    `${associatedEvent.receivingPerson.fullName} - ` +
+                    `${associatedEvent.event.name}`
                 }
             >
                 <View data-e2e="page-purchase-product">
                     <Header size="largest">{product.name}</Header>
-                    <Header size="larger">
-                        For {associatedEvent.receivingPerson.fullName}
-                    </Header>
+                    <Header size="larger">For {associatedEvent.receivingPerson.fullName}</Header>
                     <View marginTop>
                         <PurchaseProductForm
                             initialValues={{
@@ -54,13 +52,17 @@ export default compose(
     withApolloFetchingContainer(
         () => (
             <View padding>
-                <Header size="largest"><Placeholder /></Header>
-                <Header size="larger"><Placeholder /></Header>
+                <Header size="largest">
+                    <Placeholder />
+                </Header>
+                <Header size="larger">
+                    <Placeholder />
+                </Header>
                 <View marginTop>
                     <PurchaseProductForm.Shell />
                 </View>
             </View>
         ),
-        { fullPage: true },
-    ),
+        { fullPage: true }
+    )
 )(PurchaseProduct)

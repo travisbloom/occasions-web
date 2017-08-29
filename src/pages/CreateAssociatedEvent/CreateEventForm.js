@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import * as React from 'react'
 import { reduxForm, Form, FormSection } from 'redux-form'
 import { withRouter } from 'react-router-dom'
 import { compose, withApollo } from 'react-apollo'
@@ -19,7 +19,7 @@ import { searchEventTypes } from '../../utilities/search'
 import urls from '../../urls'
 import validate from './validate'
 
-class CreateEventForm extends React.Component {
+class CreateEventForm extends React.Component<$FlowFixMeProps> {
     handleSubmit = () => this.props.history.push(`${urls.createAssociatedEvent()}/confirmation`)
 
     render() {
@@ -78,5 +78,5 @@ export default compose(
         form: 'CreateAssociatedEventForm',
         destroyOnUnmount: false,
         validate,
-    }),
+    })
 )(CreateEventForm)

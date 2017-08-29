@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import * as React from 'react'
 import { graphql, compose } from 'react-apollo'
 import DocumentTitle from 'react-document-title'
 
@@ -10,11 +10,10 @@ import type { PersonListQuery } from '../../types/schema'
 
 import graphqlQuery from './PersonListQuery.graphql'
 
-class PersonList extends React.Component {
-    props: {
-        data: PersonListQuery,
-        renderWhenReady: () => any,
-    }
+class PersonList extends React.Component<{
+    data: PersonListQuery,
+    renderWhenReady: () => any,
+}> {
     renderBody = () => (
         <View marginChildren data-e2e="person-list-page">
             {this.props.data.currentUser.person.fromRelationships.edges.map(({ node }, index) => (
@@ -23,9 +22,7 @@ class PersonList extends React.Component {
                     to={urls.personDetails(node.toPerson.id)}
                     key={node.id}
                 >
-                    <Panel>
-                        {node.toPerson.fullName}
-                    </Panel>
+                    <Panel>{node.toPerson.fullName}</Panel>
                 </LinkContainer>
             ))}
         </View>
@@ -36,7 +33,9 @@ class PersonList extends React.Component {
                 <View marginChildren>
                     <View>
                         <LinkContainer to={urls.createPerson()}>
-                            <Button block bsStyle="primary">Add Contact</Button>
+                            <Button block bsStyle="primary">
+                                Add Contact
+                            </Button>
                         </LinkContainer>
                     </View>
                     {this.props.renderWhenReady(this.renderBody)}
@@ -49,7 +48,11 @@ export default compose(
     graphql(graphqlQuery),
     withApolloFetchingContainer(() => (
         <View marginChildren>
-            {new Array(4).fill().map((_, index) => <Panel key={index}><Placeholder /></Panel>)}
+            {new Array(4).fill().map((_, index) => (
+                <Panel key={index}>
+                    <Placeholder />
+                </Panel>
+            ))}
         </View>
-    )),
+    ))
 )(PersonList)

@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import * as React from 'react'
 import classNames from 'classnames'
 
 import { View, Row, Col, Icon, LinkContainer, Grid } from '../../components'
@@ -22,7 +22,7 @@ const TAB_OPTIONS = [
     },
 ]
 
-class Tabs extends React.Component {
+class Tabs extends React.Component<{}> {
     static height: number
     render() {
         return (

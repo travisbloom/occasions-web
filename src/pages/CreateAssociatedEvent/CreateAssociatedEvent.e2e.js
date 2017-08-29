@@ -27,7 +27,10 @@ const createNewEvent = nightmare =>
         .wait(el('confirmation-page'))
 
 const selectExistingEvent = nightmare =>
-    nightmare.wait(el('option-event-0')).click(el('option-event-0')).wait(el('confirmation-page'))
+    nightmare
+        .wait(el('option-event-0'))
+        .click(el('option-event-0'))
+        .wait(el('confirmation-page'))
 
 const submit = nightmare => nightmare.click(el('submit')).wait(el('associated-event-details-page'))
 
@@ -48,5 +51,9 @@ describe('CreatePerson', () => {
             .end())
 
     it('should successfully create a new associated event using a default event', () =>
-        nightmare.use(selectReceivingPerson).use(selectExistingEvent).use(submit).end())
+        nightmare
+            .use(selectReceivingPerson)
+            .use(selectExistingEvent)
+            .use(submit)
+            .end())
 })

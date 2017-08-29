@@ -1,6 +1,6 @@
 // @flow
 
-import React from 'react'
+import * as React from 'react'
 import { graphql, compose } from 'react-apollo'
 import { withRouter, Redirect } from 'react-router-dom'
 import DocumentTitle from 'react-document-title'
@@ -16,7 +16,7 @@ import ConfirmationPage from './ConfirmationPage'
 
 import graphqlQuery from './CreatePersonQuery.graphql'
 
-class CreatePerson extends React.Component {
+class CreatePerson extends React.Component<$FlowFixMeProps> {
     render() {
         const { firstNameValue, location } = this.props
         if (!firstNameValue && location.pathname !== urls.createPerson()) {
@@ -61,5 +61,5 @@ export default compose(
     }),
     connect(state => ({
         firstNameValue: selector(state, 'firstName'),
-    })),
+    }))
 )(CreatePerson)

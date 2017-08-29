@@ -1,6 +1,6 @@
 // @flow
 import ReactSelect from 'react-select'
-import React from 'react'
+import * as React from 'react'
 
 import { View } from '../'
 
@@ -24,9 +24,11 @@ const Select = ({
     }
     return (
         <View data-e2e={e2e}>
-            {loadOptions
-                ? <ReactSelect.Async {...passedProps} loadOptions={loadOptions} cache={false} />
-                : <ReactSelect {...passedProps} />}
+            {loadOptions ? (
+                <ReactSelect.Async {...passedProps} loadOptions={loadOptions} cache={false} />
+            ) : (
+                <ReactSelect {...passedProps} />
+            )}
         </View>
     )
 }

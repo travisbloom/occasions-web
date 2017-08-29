@@ -1,6 +1,6 @@
 // @flow
 
-import React from 'react'
+import * as React from 'react'
 import { reduxForm, Form, getFormValues } from 'redux-form'
 import { connect } from 'react-redux'
 import { graphql, compose, withApollo } from 'react-apollo'
@@ -20,9 +20,11 @@ const LineItem = ({ label, children }) => (
     </tr>
 )
 
-class ConfirmationPage extends React.Component {
+class ConfirmationPage extends React.Component<$FlowFixMeProps, $FlowFixMeState> {
     getBirthday = (birthdayDate, birthdayYear) =>
-        moment(birthdayDate).year(birthdayYear.value).format('YYYY-MM-DD')
+        moment(birthdayDate)
+            .year(birthdayYear.value)
+            .format('YYYY-MM-DD')
 
     handleSubmit = ({ locations, birthdayDate, birthdayYear, ...values }) => {
         const { createPerson, history } = this.props
@@ -38,7 +40,7 @@ class ConfirmationPage extends React.Component {
         }
         return createPerson(input)
             .then(({ data: { createPerson: { person } } }) =>
-                history.push(urls.personDetails(person.id)),
+                history.push(urls.personDetails(person.id))
             )
             .catch(formatGeneralReduxFormErrors)
     }
@@ -57,20 +59,16 @@ class ConfirmationPage extends React.Component {
                     <Panel header={`${formValues.firstName} ${formValues.lastName}`}>
                         <Table striped bordered>
                             <tbody>
-                                <LineItem label="Email">
-                                    {formValues.email}
-                                </LineItem>
+                                <LineItem label="Email">{formValues.email}</LineItem>
                                 <LineItem label="Birthday">
                                     <FormattedDate
                                         date={this.getBirthday(
                                             formValues.birthdayDate,
-                                            formValues.birthdayYear,
+                                            formValues.birthdayYear
                                         )}
                                     />
                                 </LineItem>
-                                <LineItem label="Gender">
-                                    {formValues.gender.label}
-                                </LineItem>
+                                <LineItem label="Gender">{formValues.gender.label}</LineItem>
                                 <LineItem label="Relation">
                                     {formValues.relationshipType.label}
                                 </LineItem>
@@ -84,7 +82,9 @@ class ConfirmationPage extends React.Component {
                     </Panel>
                     <Row>
                         <Col xs={6}>
-                            <Button data-e2e="submit" type="submit" block>Create Person</Button>
+                            <Button data-e2e="submit" type="submit" block>
+                                Create Person
+                            </Button>
                         </Col>
                         <Col xs={6}>
                             <Button data-e2e="add-location" onClick={this.onAddAddress} block>
@@ -115,5 +115,5 @@ export default compose(
         destroyOnUnmount: false,
         form: 'CreatePersonForm',
     }),
-    withApollo,
+    withApollo
 )(ConfirmationPage)

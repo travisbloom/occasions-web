@@ -4,11 +4,13 @@ import debug from '../utilities/debug'
 
 let cachedAuth
 
-const saveTokensToLocalStorage = (response) => {
+const saveTokensToLocalStorage = response => {
     const tokens = {
         accessToken: response.access_token,
         refreshToken: response.refresh_token,
-        expiresAt: moment().add(response.expires_in, 'seconds').toISOString(),
+        expiresAt: moment()
+            .add(response.expires_in, 'seconds')
+            .toISOString(),
     }
     localStorage.setItem('tokens', JSON.stringify(tokens))
     cachedAuth = tokens
@@ -54,13 +56,13 @@ export const signIn = (username, password) =>
             client_secret: APP_ENV.clientSecret,
             grant_type: 'password',
         }),
-    }).then((response) => {
+    }).then(response => {
         saveTokensToLocalStorage(response)
         return response.access_token
     })
 
 let currentRefreshRequest
-const refreshAccessToken = (refreshToken) => {
+const refreshAccessToken = refreshToken => {
     if (currentRefreshRequest) return currentRefreshRequest
     currentRefreshRequest = request(`${APP_ENV.appServer}/auth/token`, {
         method: 'POST',
@@ -74,13 +76,13 @@ const refreshAccessToken = (refreshToken) => {
             grant_type: 'refresh_token',
         }),
     })
-        .then((response) => {
+        .then(response => {
             debug('Tokens refreshed')
             currentRefreshRequest = null
             saveTokensToLocalStorage(response)
             return response.access_token
         })
-        .catch((err) => {
+        .catch(err => {
             currentRefreshRequest = null
             throw err
         })

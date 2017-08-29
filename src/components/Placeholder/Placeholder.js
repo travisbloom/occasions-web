@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import * as React from 'react'
 import classNames from 'classnames'
 import { random } from 'lodash'
 
@@ -8,9 +8,11 @@ import { View } from '../'
 import styles from './Placeholder.scss'
 
 type Props = {
-    width: number,
+    width?: number,
+    children?: any,
+    light?: boolean,
 }
-class Placeholder extends React.Component {
+class Placeholder extends React.Component<Props> {
     width: number
     constructor(props: Props) {
         super(props)

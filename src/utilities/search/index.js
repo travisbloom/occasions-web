@@ -1,6 +1,7 @@
 import searchPeopleGraphqlQuery from './SearchCurrentUserRelationships.graphql'
 import SearchEventTypesQuery from './SearchEventTypesQuery.graphql'
 import SearchRelationshipTypesQuery from './SearchRelationshipTypesQuery.graphql'
+
 const wrapInOptionsObject = options => ({ options })
 
 export const searchPeople = (client, additionalOptions = {}) => value =>
@@ -15,7 +16,7 @@ export const searchPeople = (client, additionalOptions = {}) => value =>
                 label: node.fullName,
                 value: node.id,
                 node,
-            })),
+            }))
         )
         .then(wrapInOptionsObject)
 
@@ -31,7 +32,7 @@ export const searchEventTypes = (client, additionalOptions = {}) => search =>
                 label: node.displayName,
                 value: node.id,
                 node,
-            })),
+            }))
         )
         .then(wrapInOptionsObject)
 
@@ -42,9 +43,8 @@ export const searchRelationshipTypes = (client, { gender } = {}) => search =>
             variables: { search },
         })
         .then(({ data: { relationshipTypes } }) => {
-            const displayField = gender === 'MALE'
-                ? 'toPersonMaleDisplayName'
-                : 'toPersonFemaleDisplayName'
+            const displayField =
+                gender === 'MALE' ? 'toPersonMaleDisplayName' : 'toPersonFemaleDisplayName'
             return relationshipTypes.edges.map(({ node }) => ({
                 label: node[displayField],
                 value: node.id,

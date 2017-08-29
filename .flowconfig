@@ -1,9 +1,6 @@
 [ignore]
 .*/node_modules/revalidate/.*
-.*/node_modules/fbjs/*
-
-[include]
-src/.*
+.*/node_modules/react-motion/*
 
 [options]
 module.file_ext=.js

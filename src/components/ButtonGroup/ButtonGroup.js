@@ -1,6 +1,6 @@
 // @flow
 import { ButtonGroup as RBButtonGroup } from 'react-bootstrap'
-import React from 'react'
+import * as React from 'react'
 import classNames from 'classnames'
 
 import styles from './ButtonGroup.scss'
@@ -20,7 +20,7 @@ const ButtonGroup = ({
         block={!!(block && direction === 'vertical') || undefined}
         className={classNames(
             className,
-            block && direction !== 'vertical' && styles.horizontalBlock,
+            block && direction !== 'vertical' && styles.horizontalBlock
         )}
         {...props}
     />

@@ -1,6 +1,7 @@
 // @flow
 import { Alert as RBAlert } from 'react-bootstrap'
-import React from 'react'
+import * as React from 'react'
+import { omit } from 'lodash'
 
 import { View } from '../'
 
@@ -17,9 +18,7 @@ type Props = {
 type State = {
     isShowing: boolean,
 }
-class Alert extends React.Component {
-    props: Props
-    state: State
+class Alert extends React.Component<Props, State> {
     static defaultProps = {
         children: null,
         style: {},
@@ -60,14 +59,14 @@ class Alert extends React.Component {
         const { isShowing } = this.state
         const { style, children, stackChildren, ...props } = this.props
 
-        delete props.unHideWithChildren
-        delete props.onDismiss
-        delete props.dismissable
-
         if (!isShowing) return null // TODO animate this
 
         return (
-            <RBAlert {...props} style={{ marginBottom: '0', ...style }} onDismiss={this.onDismiss}>
+            <RBAlert
+                {...omit(props, ['unHideWithChildren', 'onDismiss', 'dismissable', 'canBeHidden'])}
+                style={{ marginBottom: '0', ...style }}
+                onDismiss={this.onDismiss}
+            >
                 {stackChildren ? formatStackedChildren(children) : children}
             </RBAlert>
         )

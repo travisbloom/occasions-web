@@ -5,7 +5,7 @@ export const responseHasErrors = response => !!response.graphQLErrors
 
 const flattenErrorObject = (data, accum, key) => {
     if (isPlainObject(data)) {
-        Object.keys(data).forEach((nestedKey) => {
+        Object.keys(data).forEach(nestedKey => {
             flattenErrorObject(data[nestedKey], accum, nestedKey)
         })
     } else {
@@ -27,7 +27,7 @@ export const formatRemoteErrors = errors =>
         return accum
     }, [])
 
-export const formatGeneralAPIErrors = (response) => {
+export const formatGeneralAPIErrors = response => {
     if (!responseHasErrors(response)) return null
     return formatRemoteErrors(response.graphQLErrors)
 }
@@ -39,7 +39,7 @@ const generateErrorObject = (data, accum, key) => {
         if (key) {
             accum[key] = {}
         }
-        Object.keys(data).forEach((nestedKey) => {
+        Object.keys(data).forEach(nestedKey => {
             generateErrorObject(data[nestedKey], key ? accum[key] : accum, nestedKey)
         })
     } else {
@@ -50,11 +50,11 @@ const generateErrorObject = (data, accum, key) => {
     }
 }
 
-export const formatGeneralReduxFormErrors = (response) => {
+export const formatGeneralReduxFormErrors = response => {
     throw new SubmissionError({ _error: formatGeneralAPIErrors(response) })
 }
 
-export const formatReduxFormErrors = (response) => {
+export const formatReduxFormErrors = response => {
     if (!responseHasErrors(response)) return null
     const errors = response.graphQLErrors.reduce(
         (accum, { message, data }) => {
@@ -69,7 +69,7 @@ export const formatReduxFormErrors = (response) => {
             generateErrorObject(data, accum)
             return accum
         },
-        { _error: [] },
+        { _error: [] }
     )
     if (!errors._error.length) {
         delete errors._error

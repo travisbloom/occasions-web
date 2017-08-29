@@ -1,5 +1,5 @@
 import React from 'react'
-import { reduxForm, Form, formValueSelector } from 'redux-form'
+import { reduxForm, formValueSelector } from 'redux-form'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { compose } from 'react-apollo'
@@ -38,7 +38,7 @@ class CreateEventPage extends React.Component {
         }
     }
 
-    handleSelectEvent = (event) => {
+    handleSelectEvent = event => {
         const { change } = this.props
         change('eventId', event.id)
         change('event', {
@@ -75,9 +75,11 @@ class CreateEventPage extends React.Component {
                         {'Choose Holiday'}
                     </Button>
                 </ButtonGroup>
-                {isDefaultEvent
-                    ? <EventCatalog onSelectEvent={this.handleSelectEvent} />
-                    : <CreateEventForm />}
+                {isDefaultEvent ? (
+                    <EventCatalog onSelectEvent={this.handleSelectEvent} />
+                ) : (
+                    <CreateEventForm />
+                )}
             </View>
         )
     }
@@ -92,5 +94,5 @@ export default compose(
         form: 'CreateAssociatedEventForm',
         destroyOnUnmount: false,
     }),
-    withRouter,
+    withRouter
 )(CreateEventPage)

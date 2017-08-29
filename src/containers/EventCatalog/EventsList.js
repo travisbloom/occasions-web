@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import * as React from 'react'
 import { graphql, compose } from 'react-apollo'
 
 import { Panel, View, Placeholder } from '../../components'
@@ -7,7 +7,7 @@ import withApolloFetchingContainer from '../../hoc/withApolloFetchingContainer'
 
 import graphqlQuery from './EventListQuery.graphql'
 
-class EventsList extends React.Component {
+class EventsList extends React.Component<$FlowFixMeProps> {
     render() {
         const { data: { defaultEvents }, onSelectEvent } = this.props
 
@@ -46,6 +46,6 @@ export default compose(
                 ))}
             </View>
         ),
-        { fullPage: true },
-    ),
+        { fullPage: true }
+    )
 )(EventsList)
