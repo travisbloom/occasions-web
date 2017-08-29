@@ -1,2 +1,2 @@
 // @flow
-export {default as EventDate} from './EventDate/EventDate';
+export { default as EventDate } from './EventDate/EventDate'

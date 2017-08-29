@@ -1,6 +1,6 @@
 // @flow
-import {Col} from 'react-flexbox-grid';
+import { Col } from 'react-flexbox-grid'
 
-import './Col.scss';
+import './Col.scss'
 
-export default Col;
+export default Col
