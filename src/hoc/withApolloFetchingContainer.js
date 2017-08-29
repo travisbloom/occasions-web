@@ -14,12 +14,10 @@ const withApolloFetchingContainer = (
     { fullPage }: { fullPage?: boolean } = {}
 ) => (WrappedComponent: ReactComponent<*>) => {
     class WithApolloFetchingContainer extends React.Component {
-        static WrappedComponent: ReactComponent<*>
-        static propTypes = {
-            data: React.PropTypes.shape({
-                networkStatus: React.PropTypes.number,
-            }).isRequired,
+        props: {
+            data: { networkStatus: number },
         }
+        static WrappedComponent: ReactComponent<*>
 
         getRenderedContent = fn => {
             const { data: { networkStatus, error } } = this.props
