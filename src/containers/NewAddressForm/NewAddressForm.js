@@ -1,6 +1,6 @@
 // @flow
 
-import * as React from 'react';
+import * as React from 'react'
 import { reduxForm, FormSection } from 'redux-form'
 import { graphql, compose } from 'react-apollo'
 

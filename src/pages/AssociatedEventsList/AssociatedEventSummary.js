@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react';
+import * as React from 'react'
 
 import { Panel, View, Row, Col, Placeholder, LinkContainer } from '../../components'
 import { EventDate } from '../../fragmentComponents'

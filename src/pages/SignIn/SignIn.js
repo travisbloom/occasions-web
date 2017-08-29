@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react';
+import * as React from 'react'
 import DocumentTitle from 'react-document-title'
 
 import { Header, View, Row, Col, Grid } from '../../components'

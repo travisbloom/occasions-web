@@ -8,9 +8,9 @@ import * as React from 'react'
 import logo from '../../../assets/logo-white.png'
 import urls from '../../urls'
 
-type Props = ContextRouter & {|
+type Props = ContextRouter & {
     currentUser?: $PropertyType<AppQuery, 'currentUser'>,
-|}
+}
 
 class AppNav extends React.Component<Props> {
     static height = 60

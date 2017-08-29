@@ -1,6 +1,6 @@
 // @flow
 
-import * as React from 'react';
+import * as React from 'react'
 import { reduxForm, formValueSelector } from 'redux-form'
 import { connect } from 'react-redux'
 import moment from 'moment'

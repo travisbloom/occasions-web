@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react';
+import * as React from 'react'
 import classNames from 'classnames'
 
 import { View, Row, Col, Icon, LinkContainer, Grid } from '../../components'

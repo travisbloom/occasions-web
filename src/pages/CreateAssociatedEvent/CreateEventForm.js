@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react';
+import * as React from 'react'
 import { reduxForm, Form, FormSection } from 'redux-form'
 import { withRouter } from 'react-router-dom'
 import { compose, withApollo } from 'react-apollo'

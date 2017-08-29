@@ -1,6 +1,6 @@
 // @flow
 
-import * as React from 'react';
+import * as React from 'react'
 import { reduxForm, Form } from 'redux-form'
 import { graphql, compose } from 'react-apollo'
 import { withRouter } from 'react-router-dom'
@@ -26,19 +26,22 @@ import { NewAddressForm } from '../../containers'
 import createStripeUserGraphqlQuery from './CreateStripeUserMutation.graphql'
 import createTransactionGraphqlQuery from './CreateTransactionMutation.graphql'
 
-class PurchaseProductForm extends React.Component<$FlowFixMeProps, {
-    isAddingNewAddress: boolean,
-    intialAddressFormValues: ?{
-        personId: number,
-        location: {
-            streetAddressLine1: string,
-            streetAddressLine2: string,
-            city: string,
-            state: string,
-            postalCode: string,
+class PurchaseProductForm extends React.Component<
+    $FlowFixMeProps,
+    {
+        isAddingNewAddress: boolean,
+        intialAddressFormValues: ?{
+            personId: number,
+            location: {
+                streetAddressLine1: string,
+                streetAddressLine2: string,
+                city: string,
+                state: string,
+                postalCode: string,
+            },
         },
-    },
-}> {
+    }
+> {
     constructor(props) {
         super(props)
         this.state = {

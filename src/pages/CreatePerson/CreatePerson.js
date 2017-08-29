@@ -1,6 +1,6 @@
 // @flow
 
-import * as React from 'react';
+import * as React from 'react'
 import { graphql, compose } from 'react-apollo'
 import { withRouter, Redirect } from 'react-router-dom'
 import DocumentTitle from 'react-document-title'

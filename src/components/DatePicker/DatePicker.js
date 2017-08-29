@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react';
+import * as React from 'react'
 import { SingleDatePicker } from 'react-dates'
 import moment from 'moment'
 
@@ -23,9 +23,12 @@ type Props = {
     onDrop: () => void,
     onFocus: () => void,
 }
-class DatePicker extends React.Component<Props, {
-    focused: boolean,
-}> {
+class DatePicker extends React.Component<
+    Props,
+    {
+        focused: boolean,
+    }
+> {
     maxDate: moment
     minDate: moment
     isOutsideCurrentYear: (date: moment) => boolean

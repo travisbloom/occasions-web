@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react';
+import * as React from 'react'
 import { compose } from 'react-apollo'
 import { withRouter, Redirect } from 'react-router-dom'
 import DocumentTitle from 'react-document-title'

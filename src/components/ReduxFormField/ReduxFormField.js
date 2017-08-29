@@ -1,6 +1,6 @@
 // @flow
 import { Field } from 'redux-form'
-import * as React from 'react';
+import * as React from 'react'
 
 import { FormField } from '../'
 
