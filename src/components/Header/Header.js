@@ -3,9 +3,12 @@ import * as React from 'react'
 import './Header.scss'
 
 class Header extends React.Component<{
-    size?: bsSize,
+    size: 'small' | 'smaller' | 'medium' | 'large' | 'larger' | 'largest',
     children?: any,
 }> {
+    static defaultProps = {
+        size: 'medium',
+    }
     render() {
         const { size, children, ...props } = this.props
         const el = {
@@ -17,7 +20,7 @@ class Header extends React.Component<{
             smaller: 'h6',
         }
 
-        return React.createElement(el[size || 'medium'], props, children)
+        return React.createElement(el[size], props, children)
     }
 }
 

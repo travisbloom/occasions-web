@@ -9,6 +9,8 @@ import styles from './Placeholder.scss'
 
 type Props = {
     width?: number,
+    children?: any,
+    light?: boolean,
 }
 class Placeholder extends React.Component<Props> {
     width: number
