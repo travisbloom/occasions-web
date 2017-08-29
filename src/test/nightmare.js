@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import Nightmare from 'nightmare'
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 10 * 1000

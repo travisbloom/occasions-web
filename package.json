@@ -74,8 +74,6 @@
         "node-sass": "^4.5.3",
         "postcss-loader": "^2.0.6",
         "prettier": "^1.6.0",
-        "prettier-eslint": "^6.4.2",
-        "prettier-eslint-cli": "^4.2.1",
         "react": "^15.6.1",
         "react-addons-shallow-compare": "^15.6.0",
         "react-apollo": "^1.4.15",

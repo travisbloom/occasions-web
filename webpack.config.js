@@ -77,7 +77,7 @@ module.exports = {
 
     plugins: [
         new LodashModuleReplacementPlugin(),
-        new webpack.ContextReplacementPlugin(/moment[\\\/]locale$/, /^\.\/(en)$/), //eslint-disable-line
+        new webpack.ContextReplacementPlugin(/moment[\\\/]locale$/, /^\.\/(en)$/),
         // new BundleAnalyzerPlugin(),
         new webpack.DefinePlugin({
             process: { env: { NODE_ENV: JSON.stringify('development') } },
