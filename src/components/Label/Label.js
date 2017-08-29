@@ -1,12 +1,12 @@
 // @flow
-import { Label as RBLabel } from 'react-bootstrap'
-import React from 'react'
-import classNames from 'classnames'
+import {Label as RBLabel} from 'react-bootstrap';
+import React from 'react';
+import classNames from 'classnames';
 
-import styles from './Label.scss'
+import styles from './Label.scss';
 
-const Label = ({ className, ...props }: { className: string }) => (
-    <RBLabel className={classNames(styles.base, className)} {...props} />
-)
+const Label = ({className, ...props}: {className: string}) => (
+  <RBLabel className={classNames(styles.base, className)} {...props} />
+);
 
-export default Label
+export default Label;

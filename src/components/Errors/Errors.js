@@ -1,19 +1,26 @@
 // @flow
-import React from 'react'
+import React from 'react';
 
-import styleVars from '../../styles'
-import { View } from '../'
+import styleVars from '../../styles';
+import {View} from '../';
 
-const formatStackedChildren = children => React.Children.map(children, node => <View>{node}</View>)
+const formatStackedChildren = children =>
+  React.Children.map(children, node => <View>{node}</View>);
 
-const Errors = ({ children, stackChildren }: { children?: any, stackChildren?: boolean }) => (
-    <View style={{ color: styleVars.colorWarning }}>
-        {stackChildren ? formatStackedChildren(children) : children}
-    </View>
-)
+const Errors = ({
+  children,
+  stackChildren,
+}: {
+  children?: any,
+  stackChildren?: boolean,
+}) => (
+  <View style={{color: styleVars.colorWarning}}>
+    {stackChildren ? formatStackedChildren(children) : children}
+  </View>
+);
 
 Errors.defaultProps = {
-    stackChildren: false,
-}
+  stackChildren: false,
+};
 
-export default Errors
+export default Errors;
