@@ -1,6 +1,6 @@
 // @flow
 
-import React from 'react'
+import * as React from 'react';
 import { reduxForm, SubmissionError } from 'redux-form'
 import { connect } from 'react-redux'
 import { graphql, compose, withApollo } from 'react-apollo'
@@ -24,7 +24,7 @@ import { logOut } from '../../actions/user'
 
 import graphqlQuery from './CreateUserMutation.graphql'
 
-class CreateAccountForm extends React.Component {
+class CreateAccountForm extends React.Component<$FlowFixMeProps> {
     componentDidMount() {
         const { client, dispatch } = this.props
         dispatch(logOut())

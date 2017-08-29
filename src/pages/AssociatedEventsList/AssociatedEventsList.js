@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import * as React from 'react';
 import { graphql, compose } from 'react-apollo'
 import DocumentTitle from 'react-document-title'
 
@@ -11,11 +11,10 @@ import type { AssociatedEventsListQuery } from '../../types/schema'
 import AssociatedEventSummary, { AssociatedEventSummaryShell } from './AssociatedEventSummary'
 import graphqlQuery from './AssociatedEventsListQuery.graphql'
 
-class AssociatedEventsList extends React.Component {
-    props: {
-        data: AssociatedEventsListQuery,
-        renderWhenReady: () => any,
-    }
+class AssociatedEventsList extends React.Component<{
+    data: AssociatedEventsListQuery,
+    renderWhenReady: () => any,
+}> {
     renderBody = () => (
         <View marginChildren>
             {this.props.data.currentUser.person.createdEvents.edges.map(({ node }, index) => (

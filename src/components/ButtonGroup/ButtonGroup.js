@@ -1,6 +1,6 @@
 // @flow
 import { ButtonGroup as RBButtonGroup } from 'react-bootstrap'
-import React from 'react'
+import * as React from 'react';
 import classNames from 'classnames'
 
 import styles from './ButtonGroup.scss'

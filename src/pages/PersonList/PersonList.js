@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import * as React from 'react';
 import { graphql, compose } from 'react-apollo'
 import DocumentTitle from 'react-document-title'
 
@@ -10,11 +10,10 @@ import type { PersonListQuery } from '../../types/schema'
 
 import graphqlQuery from './PersonListQuery.graphql'
 
-class PersonList extends React.Component {
-    props: {
-        data: PersonListQuery,
-        renderWhenReady: () => any,
-    }
+class PersonList extends React.Component<{
+    data: PersonListQuery,
+    renderWhenReady: () => any,
+}> {
     renderBody = () => (
         <View marginChildren data-e2e="person-list-page">
             {this.props.data.currentUser.person.fromRelationships.edges.map(({ node }, index) => (

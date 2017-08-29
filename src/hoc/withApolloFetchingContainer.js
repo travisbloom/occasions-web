@@ -1,25 +1,26 @@
 // @flow
-import React from 'react'
+import * as React from 'react'
 import hoistStatics from 'hoist-non-react-statics'
 
 import { AnimatedFade, Alert, View } from '../components'
 import { formatGeneralAPIErrors } from '../utilities/errors'
 
-const getDisplayName = WrappedComponent =>
+const getDisplayName = (WrappedComponent): string =>
     WrappedComponent.displayName || WrappedComponent.name || 'Component'
 const IS_LOADING_NETWORK_STATUS = 1
 
 const withApolloFetchingContainer = (
-    PlaceholderComponent: ReactComponent<*>,
+    PlaceholderComponent: React.ComponentType<any>,
     { fullPage }: { fullPage?: boolean } = {}
-) => (WrappedComponent: ReactComponent<*>) => {
-    class WithApolloFetchingContainer extends React.Component {
-        props: {
-            data: { networkStatus: number },
-        }
-        static WrappedComponent: ReactComponent<*>
+) => <Props: {}>(
+    WrappedComponent: React.ComponentType<{ renderWhenReady?: (fn: () => any) => any } & Props>
+) => {
+    class WithApolloFetchingContainer extends React.Component<{
+        data: { networkStatus: number, error: any },
+    }> {
+        static WrappedComponent: React.ComponentType<any>
 
-        getRenderedContent = fn => {
+        getRenderedContent = (fn: () => any) => {
             const { data: { networkStatus, error } } = this.props
             if (error) {
                 const content = (

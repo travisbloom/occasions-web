@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import * as React from 'react';
 import { TransitionMotion, spring } from 'react-motion'
 
 const willEnter = () => ({

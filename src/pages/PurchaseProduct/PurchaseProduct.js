@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import * as React from 'react';
 import { graphql, compose } from 'react-apollo'
 import DocumentTitle from 'react-document-title'
 
@@ -9,7 +9,7 @@ import withApolloFetchingContainer from '../../hoc/withApolloFetchingContainer'
 import PurchaseProductForm from './PurchaseProductForm'
 import graphqlQuery from './PurchaseProductQuery.graphql'
 
-class PurchaseProduct extends React.Component {
+class PurchaseProduct extends React.Component<$FlowFixMeProps> {
     render() {
         const { data: { associatedEvent, product, currentUser, refetch } } = this.props
         return (

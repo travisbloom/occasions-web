@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import * as React from 'react';
 import { graphql, compose } from 'react-apollo'
 import DocumentTitle from 'react-document-title'
 
@@ -26,7 +26,7 @@ const LineItem = ({ label, children }) => (
     </tr>
 )
 
-class TransactionDetails extends React.Component {
+class TransactionDetails extends React.Component<$FlowFixMeProps> {
     render() {
         const { data: { transaction } } = this.props
         return (

@@ -1,6 +1,6 @@
 // @flow
 
-import React from 'react'
+import * as React from 'react';
 import { reduxForm, Form, getFormValues } from 'redux-form'
 import { connect } from 'react-redux'
 import { graphql, compose, withApollo } from 'react-apollo'
@@ -20,7 +20,7 @@ const LineItem = ({ label, children }) => (
     </tr>
 )
 
-class ConfirmationPage extends React.Component {
+class ConfirmationPage extends React.Component<$FlowFixMeProps, $FlowFixMeState> {
     getBirthday = (birthdayDate, birthdayYear) =>
         moment(birthdayDate)
             .year(birthdayYear.value)

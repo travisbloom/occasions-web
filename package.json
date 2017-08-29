@@ -13,8 +13,7 @@
         "flow-schema":
             "apollo-codegen generate src/**/*.graphql --schema .tmp/schema.json --target flow --output src/types/schema.js",
         "server-schema":
-            "apollo-codegen introspect-schema http://localhost:8000/graphql --output .tmp/schema.json",
-        "flow": "flow; test $? -eq 0 -o $? -eq 2"
+            "apollo-codegen introspect-schema http://localhost:8000/graphql --output .tmp/schema.json"
     },
     "author": "travisbloom@gmail.com",
     "license": "UNLICENSED",

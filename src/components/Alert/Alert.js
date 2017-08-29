@@ -1,6 +1,6 @@
 // @flow
 import { Alert as RBAlert } from 'react-bootstrap'
-import React from 'react'
+import * as React from 'react';
 import { omit } from 'lodash'
 
 import { View } from '../'
@@ -18,9 +18,7 @@ type Props = {
 type State = {
     isShowing: boolean,
 }
-class Alert extends React.Component {
-    props: Props
-    state: State
+class Alert extends React.Component<Props, State> {
     static defaultProps = {
         children: null,
         style: {},

@@ -2,12 +2,20 @@
 import { Navbar, Nav, NavDropdown, MenuItem } from 'react-bootstrap'
 import { compose } from 'react-apollo'
 import { Link, withRouter } from 'react-router-dom'
-import React from 'react'
+import type { ContextRouter } from 'react-router-dom'
+import type { AppQuery } from '../../types/schema'
+import * as React from 'react'
 import logo from '../../../assets/logo-white.png'
 import urls from '../../urls'
 
-class AppNav extends React.Component {
-    logOut = () => {
+type Props = ContextRouter & {|
+    currentUser?: $PropertyType<AppQuery, 'currentUser'>,
+|}
+
+class AppNav extends React.Component<Props> {
+    static height = 60
+
+    logOut = (): void => {
         const { history } = this.props
         history.push(urls.signIn())
     }
@@ -42,7 +50,5 @@ class AppNav extends React.Component {
         )
     }
 }
-
-Navbar.height = 60
 
 export default compose(withRouter)(AppNav)

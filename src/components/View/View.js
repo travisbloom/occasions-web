@@ -1,12 +1,12 @@
 // @flow
-import React from 'react'
+import * as React from 'react'
 import { isBoolean } from 'lodash'
 import classNames from 'classnames'
 
 import styles from './View.scss'
 import styleVars from '../../styles'
 
-type sizes = 'small' | 'medium' | 'large'
+type sizes = 'small' | 'medium' | 'large' | boolean
 
 const toSpacingValue = type => {
     const usedType = isBoolean(type) && type ? 'medium' : type

@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import * as React from 'react';
 import { graphql, compose } from 'react-apollo'
 import DocumentTitle from 'react-document-title'
 
@@ -11,10 +11,9 @@ import type { AssociatedEventDetailsQuery } from '../../types/schema'
 
 import graphqlQuery from './AssociatedEventDetailsQuery.graphql'
 
-class AssociatedEventDetails extends React.Component {
-    props: {
-        data: AssociatedEventDetailsQuery,
-    }
+class AssociatedEventDetails extends React.Component<{
+    data: AssociatedEventDetailsQuery,
+}> {
     render() {
         const { data: { associatedEvent } } = this.props
 

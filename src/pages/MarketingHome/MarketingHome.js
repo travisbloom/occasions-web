@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import * as React from 'react';
 import classNames from 'classnames'
 import DocumentTitle from 'react-document-title'
 
@@ -39,7 +39,7 @@ const CollapsableArrow = () => (
     </Header>
 )
 
-class MarketingHome extends React.Component {
+class MarketingHome extends React.Component<{}> {
     isLoggedIn: boolean
     constructor() {
         super()

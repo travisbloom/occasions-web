@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import * as React from 'react'
 import { graphql, compose } from 'react-apollo'
 import DocumentTitle from 'react-document-title'
 
@@ -10,11 +10,10 @@ import type { TransactionListQuery } from '../../types/schema'
 
 import graphqlQuery from './TransactionListQuery.graphql'
 
-class TransactionList extends React.Component {
-    props: {
-        data: TransactionListQuery,
-        renderWhenReady: () => any,
-    }
+class TransactionList extends React.Component<{
+    data: TransactionListQuery,
+    renderWhenReady: () => any,
+}> {
     renderBody = () => (
         <View marginChildren>
             {this.props.data.currentUser.transactions.edges.map(({ node }, index) => (

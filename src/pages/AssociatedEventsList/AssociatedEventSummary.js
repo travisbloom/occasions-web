@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import * as React from 'react';
 
 import { Panel, View, Row, Col, Placeholder, LinkContainer } from '../../components'
 import { EventDate } from '../../fragmentComponents'
@@ -31,7 +31,7 @@ export const AssociatedEventSummaryShell = () => (
     </Panel>
 )
 
-class AssociatedEventSummary extends React.Component {
+class AssociatedEventSummary extends React.Component<$FlowFixMeProps> {
     render() {
         const { associatedEvent, index } = this.props
 

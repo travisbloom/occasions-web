@@ -1,6 +1,6 @@
 // @flow
 
-import React from 'react'
+import * as React from 'react';
 import { reduxForm, FormSection, getFormValues } from 'redux-form'
 import { connect } from 'react-redux'
 import { compose } from 'react-apollo'
@@ -10,7 +10,7 @@ import urls from '../../urls'
 
 import validate from './validate'
 
-class AddAddressPage extends React.Component {
+class AddAddressPage extends React.Component<$FlowFixMeProps> {
     onSubmit = () => this.props.history.push(`${urls.createPerson()}/confirmation`)
     render() {
         const {

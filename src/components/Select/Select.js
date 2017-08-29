@@ -1,6 +1,6 @@
 // @flow
 import ReactSelect from 'react-select'
-import React from 'react'
+import * as React from 'react';
 
 import { View } from '../'
 

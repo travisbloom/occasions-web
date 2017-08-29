@@ -1,13 +1,11 @@
 // @flow
-import React from 'react'
+import * as React from 'react';
 import './Header.scss'
 
-class Header extends React.Component {
-    props: {
-        size?: bsSize,
-        children?: any,
-    }
-
+class Header extends React.Component<{
+    size?: bsSize,
+    children?: any,
+}> {
     render() {
         const { size, children, ...props } = this.props
         const el = {

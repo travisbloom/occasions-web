@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import * as React from 'react';
 import { graphql, compose, withApollo } from 'react-apollo'
 import _ from 'lodash'
 
@@ -9,11 +9,9 @@ import { searchEventTypes } from '../../utilities/search'
 import EventsList from './EventsList'
 import graphqlQuery from './EventCatalogQuery.graphql'
 
-class EventsCatalog extends React.Component {
-    props: {
-        onSelectEvent: () => void,
-    }
-
+class EventsCatalog extends React.Component<{
+    onSelectEvent: () => void,
+}, $FlowFixMeState> {
     state = {
         eventSearchValue: '',
         selectedEventTypes: [],

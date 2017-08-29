@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import * as React from 'react';
 import { graphql, compose } from 'react-apollo'
 import DocumentTitle from 'react-document-title'
 
@@ -29,10 +29,9 @@ const LineItem = ({ label, children }) => (
     </tr>
 )
 
-class PersonDetails extends React.Component {
-    props: {
-        data: PersonDetailsQuery,
-    }
+class PersonDetails extends React.Component<{
+    data: PersonDetailsQuery,
+}> {
     render() {
         const { data: { person } } = this.props
         return (

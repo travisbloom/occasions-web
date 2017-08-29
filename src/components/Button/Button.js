@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import * as React from 'react';
 import { Button as BootstrapButton } from 'react-bootstrap'
 import { Row, Col } from '../'
 
