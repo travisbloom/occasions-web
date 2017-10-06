@@ -30,16 +30,21 @@ const generateStyes = ({
     style,
     inline,
     tabsContainer,
-}) => ({
-    display: inline ? 'inline-block' : 'inherit',
-    margin: toSpacingValue(margin) || style.margin,
-    padding: toSpacingValue(padding) || style.padding,
-    marginTop: toSpacingValue(marginTop) || style.marginTop,
-    marginBottom: tabsContainer
-        ? `${55 + styleVars.spacing}px`
-        : toSpacingValue(marginBottom) || style.marginBottom,
-    ...style,
-})
+}) => {
+    const passedStyles = {
+        margin: toSpacingValue(margin) || style.margin,
+        padding: toSpacingValue(padding) || style.padding,
+        marginTop: toSpacingValue(marginTop) || style.marginTop,
+        marginBottom: tabsContainer
+            ? `${55 + styleVars.spacing}px`
+            : toSpacingValue(marginBottom) || style.marginBottom,
+        ...style,
+    }
+    if (inline) {
+        passedStyles.display = 'inline-block'
+    }
+    return passedStyles
+}
 
 const View = ({
     inline,

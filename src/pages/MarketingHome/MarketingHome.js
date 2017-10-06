@@ -21,6 +21,7 @@ import urls from '../../urls'
 import styles from './MarketingHome.scss'
 import heroImage from './heroImage.jpg'
 
+console.log({ styles, foo: styles.signInLink })
 const CollapsableArrow = () => (
     <Header size="larger">
         <MediaQuery md>
@@ -47,6 +48,7 @@ class MarketingHome extends React.Component<{}> {
     }
 
     render() {
+        console.log(styles.signInLink)
         return (
             <DocumentTitle title="Occasions | Welcome">
                 <View>
@@ -57,7 +59,7 @@ class MarketingHome extends React.Component<{}> {
                         <LinkContainer
                             to={this.isLoggedIn ? urls.associatedEventsList() : urls.signIn()}
                         >
-                            <Button className={classNames(styles.signInLink)} bsStyle="info">
+                            <Button className={styles.signInLink} bsStyle="info">
                                 {this.isLoggedIn ? 'Home' : 'Sign In'}
                             </Button>
                         </LinkContainer>
