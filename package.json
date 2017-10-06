@@ -10,10 +10,8 @@
         "lint": "eslint ./src",
         "format": "prettier --write \"src/**/*.js\"",
         "schema": "npm run server-schema && npm run flow-schema",
-        "flow-schema":
-            "apollo-codegen generate src/**/*.graphql --schema .tmp/schema.json --target flow --output src/types/schema.js",
-        "server-schema":
-            "apollo-codegen introspect-schema http://localhost:8000/graphql --output .tmp/schema.json"
+        "flow-schema": "apollo-codegen generate src/**/*.graphql --schema .tmp/schema.json --target flow --output src/types/schema.js",
+        "server-schema": "apollo-codegen introspect-schema http://localhost:8000/graphql --output .tmp/schema.json"
     },
     "author": "travisbloom@gmail.com",
     "license": "UNLICENSED",
@@ -48,6 +46,7 @@
         "css-loader": "^0.28.5",
         "css-module-flow": "^1.0.0",
         "data-driven-motion": "^0.0.11",
+        "eslint-config-prettier": "^2.6.0",
         "eslint-plugin-css-modules": "^2.7.5",
         "eslint-plugin-flowtype": "^2.35.0",
         "eslint-plugin-graphql": "^1.3.0",
@@ -107,11 +106,17 @@
         "whatwg-fetch": "^2.0.3"
     },
     "jest": {
-        "modulePaths": ["<rootDir>/node_modules"],
+        "modulePaths": [
+            "<rootDir>/node_modules"
+        ],
         "globals": {
             "APP_ENV": {}
         },
-        "roots": ["<rootDir>/src"],
-        "testMatch": ["**/?(*.)(spec|e2e).js"]
+        "roots": [
+            "<rootDir>/src"
+        ],
+        "testMatch": [
+            "**/?(*.)(spec|e2e).js"
+        ]
     }
 }
